@@ -1,0 +1,1 @@
+json.array! @scheduled_courses, partial: 'scheduled_courses/scheduled_course', as: :scheduled_course

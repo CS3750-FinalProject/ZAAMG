@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @scheduled_course.semester %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @scheduled_course.course %>
+</p>
+
+<p>
+  <strong>Professor:</strong>
+  <%= @scheduled_course.professor %>
+</p>
+
+<p>
+  <strong>Campus:</strong>
+  <%= @scheduled_course.location.campus %>
+</p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @scheduled_course.classroom %>
+</p>
+
+<p>
+  <strong>Days:</strong>
+  <%= @scheduled_course.days %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @scheduled_course.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @scheduled_course.end_time %>
+</p>
+
+<p>
+  <strong>Block:</strong>
+  <%= @scheduled_course.block %>
+</p>
+
+<%= link_to 'Edit', edit_scheduled_course_path(@scheduled_course) %> |
+<%= link_to 'Back', scheduled_courses_path %>

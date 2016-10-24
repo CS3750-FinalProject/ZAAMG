@@ -1,0 +1,54 @@
+<%= form_for(@scheduled_course) do |f| %>
+  <% if @scheduled_course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scheduled_course.errors.count, "error") %> prohibited this scheduled_course from being saved:</h2>
+
+      <ul>
+      <% @scheduled_course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :semester_id %><br>
+    <%= f.select :semester_id, options_from_collection_for_select(Semester.all, :id, :season) %>
+  </div>
+  <div class="field">
+    <%= f.label :course_id %><br>
+    <%= f.select :course_id, options_from_collection_for_select(Course.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :professor_id %><br>
+    <%= f.select :professor_id, options_from_collection_for_select(Professor.all, :id, :email) %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br>
+    <%= f.select :location_id, options_from_collection_for_select(Location.all, :id, :campus, 2) %>
+  </div>
+  <div class="field">
+    <%= f.label :classroom_id %><br>
+    <%= f.select :classroom_id, options_from_collection_for_select(Classroom.all, :id, :room_number) %>
+  </div>
+  <div class="field">
+    <%= f.label :days %><br>
+    <%= f.select(:days, [['Monday', 'M'], ['Tuesday', 'T'], ['Wednesday', 'W'], ['Thursday', 'R'],
+      ['Friday', 'F'], ['Saturday', 'S']], { :prompt => "Please select"}, { :multiple => true, :size => 6 }) %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.time_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.time_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :block %><br>
+    <%= f.select(:block, [['Full', 'full'], ['First', 'first'], ['Second', 'second']]) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

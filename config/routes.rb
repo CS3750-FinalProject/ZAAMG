@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :scheduled_courses
+  resources :courses
   resources :professors
   resources :programs
   resources :classrooms

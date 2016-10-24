@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024031540) do
+ActiveRecord::Schema.define(version: 20161024043305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20161024031540) do
   end
 
   add_index "classrooms", ["location_id"], name: "index_classrooms_on_location_id", using: :btree
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.integer  "program_id"
+    t.integer  "credit_hours"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "courses", ["program_id"], name: "index_courses_on_program_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "campus"
@@ -49,13 +60,45 @@ ActiveRecord::Schema.define(version: 20161024031540) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scheduled_courses", force: :cascade do |t|
+    t.integer  "semester_id"
+    t.integer  "course_id"
+    t.integer  "professor_id"
+    t.integer  "location_id"
+    t.integer  "classroom_id"
+    t.text     "days",         default: [],              array: true
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "block"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "scheduled_courses", ["classroom_id"], name: "index_scheduled_courses_on_classroom_id", using: :btree
+  add_index "scheduled_courses", ["course_id"], name: "index_scheduled_courses_on_course_id", using: :btree
+  add_index "scheduled_courses", ["location_id"], name: "index_scheduled_courses_on_location_id", using: :btree
+  add_index "scheduled_courses", ["professor_id"], name: "index_scheduled_courses_on_professor_id", using: :btree
+  add_index "scheduled_courses", ["semester_id"], name: "index_scheduled_courses_on_semester_id", using: :btree
+
   create_table "semesters", force: :cascade do |t|
     t.string   "year"
     t.string   "season"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.date     "first_block_start_date"
+    t.date     "first_block_end_date"
+    t.date     "second_block_start_date"
+    t.date     "second_block_end_date"
   end
 
   add_foreign_key "classrooms", "locations"
+  add_foreign_key "courses", "programs"
   add_foreign_key "professors", "programs"
+  add_foreign_key "scheduled_courses", "classrooms"
+  add_foreign_key "scheduled_courses", "courses"
+  add_foreign_key "scheduled_courses", "locations"
+  add_foreign_key "scheduled_courses", "professors"
+  add_foreign_key "scheduled_courses", "semesters"
 end
