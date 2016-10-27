@@ -19,7 +19,7 @@ class Campus {
         $this->campusName = $campusName;
     }
 
-    public function insertNewCampus(){
+    public function insertNewCampus(Campus $campus){
         try {
             $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username);
         } catch(PDOException $e){
@@ -27,7 +27,7 @@ class Campus {
             return;
         }
         $stmtInsert = $this->dbh->prepare("INSERT INTO `CAMPUS` (`campus_name`) VALUES (:campusName)");
-        $stmtInsert->bindValue(":campusName", $this->campusName);
+        $stmtInsert->bindValue(":campusName", $campus->campusName);
         $stmtInsert->execute();
     }
 }
