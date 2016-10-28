@@ -55,7 +55,7 @@ PRIMARY KEY  (`schedule_id`, `section_id`));
 
 CREATE TABLE `Course` 
 ( `course_id` INT NOT NULL AUTO_INCREMENT , 
-`course_code` CHAR(10) NOT NULL ,
+`course_code` CHAR(10) NOT NULL UNIQUE,
 `course_title` VARCHAR(50) NOT NULL ,
 `course_capacity` SMALLINT ,
 `course_credits` SMALLINT NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `Professor`
 ( `prof_id` SMALLINT NOT NULL AUTO_INCREMENT , 
 `prof_first` VARCHAR(30) NOT NULL ,
 `prof_last` VARCHAR(30) NOT NULL ,
-`prof_email` VARCHAR(50) NOT NULL ,
+`prof_email` VARCHAR(50) NOT NULL UNIQUE,
 `dept_id` INT NOT NULL,
 PRIMARY KEY (`prof_id`) );
 
@@ -90,20 +90,20 @@ PRIMARY KEY (`building_id`) );
 
 CREATE TABLE `Campus` 
 ( `campus_id` SMALLINT NOT NULL AUTO_INCREMENT , 
-`campus_name` VARCHAR(50) NOT NULL ,
+`campus_name` VARCHAR(50) NOT NULL UNIQUE,
 PRIMARY KEY (`campus_id`) );
 
 
 CREATE TABLE `Department` 
 ( `dept_id` INT NOT NULL AUTO_INCREMENT , 
-`dept_name` VARCHAR(20) NOT NULL ,
-`dept_code` CHAR(4) NOT NULL ,
+`dept_name` VARCHAR(20) NOT NULL UNIQUE,
+`dept_code` CHAR(4) NOT NULL UNIQUE,
 PRIMARY KEY (`dept_id`) );
 
 
 CREATE TABLE `User` 
 ( `user_id` INT NOT NULL AUTO_INCREMENT , 
-`user_login` VARCHAR(20) NOT NULL ,
+`user_login` VARCHAR(20) NOT NULL UNIQUE,
 `user_admin` CHAR(1) NOT NULL ,
 `dept_id` INT ,
 PRIMARY KEY (`user_id`) );
@@ -190,5 +190,3 @@ FOREIGN KEY (`campus_id`)
 REFERENCES Campus(`campus_id`)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
-
-
