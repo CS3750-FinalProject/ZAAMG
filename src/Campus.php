@@ -1,33 +1,33 @@
 <?php
+include 'Database.php';
 
 class Campus {
+    private $database;
+
     private $campusID;
     private $campusName;
 
-    private $host = "localhost";
-    private $dbname = "ZAAMG";
-    private $username = "zaamg";
 
-    private $dbh;
-
-    public function getCampusID(): int {
+    public function getCampusID(){
         return $this->campusID;
     }
 
-    public function __construct(int $campusID, string $campusName) {
+    public function getCampusName(){
+        return $this->campusName;
+    }
+
+    public function __construct($campusID, $campusName) {
+        $this->database = new Database();
+
         $this->campusID = $campusID;
         $this->campusName = $campusName;
     }
 
-    public function insertNewCampus(Campus $campus){
-        try {
-            $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username);
-        } catch(PDOException $e){
-            echo "Error creating Database Object";
-            return;
-        }
-        $stmtInsert = $this->dbh->prepare("INSERT INTO `CAMPUS` (`campus_name`) VALUES (:campusName)");
-        $stmtInsert->bindValue(":campusName", $campus->campusName);
+    public function insertNewCampus(){
+        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Campus VALUES (:id, :name)");
+        # send NULL for campus_id because the database auto-increments it
+        $stmtInsert->bindValue(":id", NULL);
+        $stmtInsert->bindValue(":name", $this->campusName);
         $stmtInsert->execute();
     }
 }
