@@ -3,8 +3,12 @@ This form tests getting Classroom info and calling
 action_insertClassroom.php with the Submit button
 -->
 
-
-
+<!--
+The user needs the Building ID to fill out the Classroom form.
+The Building Id is assigned by the database,
+so the following table will show the existing Building records
+to the user, including the correct Building IDs.
+-->
 <table>
  <tr>
   <th>Building Id</th><th>Building Code</th><th>Building Name</th><th>Campus Id</th>
@@ -13,7 +17,7 @@ action_insertClassroom.php with the Submit button
 
 
   <?php
-  include 'Building.php';
+  include 'Building.php';      # so php can make Building objects with Database results
   require_once 'Database.php';
   $database = new Database();
 
@@ -28,6 +32,7 @@ action_insertClassroom.php with the Submit button
       array('id','code', 'name', 'campID'));
 
 
+  #continuing the Building display table...
   foreach ($result as $row){
    echo "<td>".$row->building_id."</td>"
        ."<td>".$row->building_code."</td>"
@@ -43,12 +48,10 @@ action_insertClassroom.php with the Submit button
 
 
   echo "</br>";
-
   ?>
 
 
-
-
+<!--  Here is the Insert Classroom form:  -->
 
 <form action="action_insertClassroom.php" method="post">
  <p>Classroom Number: <input type="text" name="classNum" /></p>
