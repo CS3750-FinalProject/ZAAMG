@@ -6,7 +6,7 @@ Just testing php/mysql wire-up.
 
 <?php
 
-include 'Building_mod1.php';
+include 'Building.php';
 
 
 if (isset($_POST['buildCode'])) $buildCode = $_POST['buildCode'];

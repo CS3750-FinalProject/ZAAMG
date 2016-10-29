@@ -6,7 +6,7 @@ Just testing php/mysql wire-up.
 
 <?php
 
-include 'Classroom_mod1.php';
+include 'Classroom.php';
 
 
 if (isset($_POST['classNum'])) $classNum = $_POST['classNum'];

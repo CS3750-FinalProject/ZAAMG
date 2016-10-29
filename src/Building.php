@@ -1,39 +1,55 @@
 <?php
 
+include 'Database.php';
+
 class Building {
+    private $database;
+
     private $buildingID;
     private $campusID;
-    private $buildCode = "TE";
+    private $buildCode;
     private $buildName;
 
-    private $host = "localhost";
-    private $dbname = "ZAAMG";
-    private $username = "zaamg";
-    private $dbh;
-
-    public function __construct(int $buildingID, int $campusID, string $buildingCode, string $buildingName) {
+    # removed types from formal arguments, don't think they're necessary
+    public function __construct($buildingID, $buildingCode, $buildingName, $campusID) {
         $this->buildingID = $buildingID;
-        $this->campusID = $campusID;
         $this->buildCode = $buildingCode;
         $this->buildName = $buildingName;
+        $this->campusID = $campusID;
+
+        $this->database = new Database();
     }
 
     public function getBuildingID() : int {
         return $this->buildingID;
     }
 
-    public function insertNewBuilding(Building $building){
-        try {
-            $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username);
-        } catch(PDOException $e){
-            echo "Error creating Database Object";
-            return;
+    public function getBuildingName(){
+        return $this->buildName;
+    }
+
+    public function getBuildingCode(){
+        return $this->buildCode;
+    }
+
+    public function getCampusID(){
+        return $this->campusID;
+    }
+
+    public function insertNewBuilding(){
+        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Building VALUES (:id, :code, :buildName, :campusID)");
+        # send NULL for building_id because the database auto-increments it
+        $stmtInsert->bindValue("id", NULL);
+        $stmtInsert->bindValue(":code", $this->buildCode);
+        $stmtInsert->bindValue(":buildName", $this->buildName);
+        $stmtInsert->bindValue(":campusID", $this->campusID);
+
+            try {
+                $stmtInsert->execute();
+
+            echo "Success executing Insert";
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-        $stmtInsert = $this->dbh->prepare("INSERT INTO `Building` (`campus_id`, `building_code`, `building_name`)
-            VALUES (:campusID, :code, :buildName)");
-        $stmtInsert->bindValue(":campusID", $building->campusID);
-        $stmtInsert->bindValue(":code", $building->buildCode);
-        $stmtInsert->bindValue(":buildName", $building->buildName);
-        $stmtInsert->execute();
     }
 }

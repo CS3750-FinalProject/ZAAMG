@@ -1,41 +1,56 @@
 <?php
 
-class Classroom
-{
+include 'Database.php';
+
+class Classroom {
+    private $database;
+
     private $classroomID;
     private $classroomNum;
-    private $capacity;
-    private $buildingID;
+    private $classroomCapacity;
+    private $buildId;
 
-    private $host = "localhost";
-    private $dbname = "ZAAMG";
-    private $username = "zaamg";
-    private $dbh;
-
-    public function __construct(int $classID, string $classNum, int $capacity = 30, int $buildingID) {
+    # removed types from formal arguments, don't think they're necessary
+    public function __construct($classID, $classNum, $classCap, $buildId) {
         $this->classroomID = $classID;
         $this->classroomNum = $classNum;
-        $this->capacity = $capacity;
-        $this->buildingID = $buildingID;
+        $this->classroomCapacity = $classCap;
+        $this->buildId = $buildId;
+
+        $this->database = new Database();
     }
 
-    public function getClassroomID():int {
+    public function getClassroomID(){
         return $this->classroomID;
     }
 
-    public function insertNewClassroom(Classroom $classroom){
-        try {
-            $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username);
-        } catch(PDOException $e){
-            echo "Error creating Database Object";
-            return;
-        }
-        $stmtInsert = $this->dbh->prepare("INSERT INTO `Classroom` (`classroom_number`, `classroom_capacity`, " .
-            "`building_id`) VALUES (:classNum, :capacity, :buildID)");
-        $stmtInsert->bindValue(":classNum", $classroom->classroomNum); //I do it this way just in case someone is trying to hack the system.
-        $stmtInsert->bindValue(":capacity", $classroom->capacity);
-        $stmtInsert->bindValue(":buildID", $classroom->buildingID);
-        $stmtInsert->execute();
+    public function getClassroomNum(){
+        return $this->classroomNum;
     }
 
+    public function getClassroomCap(){
+        return $this->classroomCapacity;
+    }
+
+    public function getBuildingId(){
+        return $this->buildId;
+    }
+
+    public function insertNewClassroom(){
+
+        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Classroom VALUES (:id, :num, :cap, :buildId)");
+        # send NULL for classroom_id because the database auto-increments it
+        $stmtInsert->bindValue("id", NULL);
+        $stmtInsert->bindValue(":num", $this->classroomNum);
+        $stmtInsert->bindValue(":cap", $this->classroomCapacity);
+        $stmtInsert->bindValue(":buildId", $this->buildId);
+
+            try {
+                $stmtInsert->execute();
+
+            echo "Success executing Insert";
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
