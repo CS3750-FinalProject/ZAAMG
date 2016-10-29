@@ -24,7 +24,7 @@ else $courseCred = "(not entered)";
 if (isset($_POST['deptId'])) $deptId = $_POST['deptId'];
 else $deptId = "(not entered)";
 
-echo "deptId from POST is ".$deptId."<br>";
+
 
 $course = new Course(NULL, $courseCode, $courseTitle, $courseCap, $courseCred, $deptId);
 
