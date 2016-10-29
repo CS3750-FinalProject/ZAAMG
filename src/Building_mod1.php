@@ -1,17 +1,14 @@
 <?php
 
+include 'Database.php';
+
 class Building {
+    private $database;
+
     private $buildingID;
     private $campusID;
     private $buildCode;
     private $buildName;
-
-
-
-    private $host = "localhost";
-    private $dbname = "zaamg";
-    private $username = "zaamg";
-    private $dbh;
 
     # removed types from formal arguments, don't think they're necessary
     public function __construct($buildingID, $buildingCode, $buildingName, $campusID) {
@@ -19,6 +16,8 @@ class Building {
         $this->buildCode = $buildingCode;
         $this->buildName = $buildingName;
         $this->campusID = $campusID;
+
+        $this->database = new Database();
     }
 
     public function getBuildingID() : int {
@@ -38,15 +37,7 @@ class Building {
     }
 
     public function insertNewBuilding(){
-        try {
-            $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username);
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "<br>Success creating Database Object<br>";
-        } catch(PDOException $e){
-            echo "Error creating Database Object";
-            return;
-        }
-        $stmtInsert = $this->dbh->prepare("INSERT INTO ZAAMG.Building VALUES (:id, :code, :buildName, :campusID)");
+        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Building VALUES (:id, :code, :buildName, :campusID)");
         # send NULL for building_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":code", $this->buildCode);
