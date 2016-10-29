@@ -13,8 +13,7 @@ class Building {
     private $username = "zaamg";
     private $dbh;
 
-    # removed types from formal arguments,
-    # made buildingID optional (should be produced automatically by mysql)
+    # removed types from formal arguments, don't think they're necessary
     public function __construct($buildingID, $buildingCode, $buildingName, $campusID) {
         $this->buildingID = $buildingID;
         $this->buildCode = $buildingCode;
