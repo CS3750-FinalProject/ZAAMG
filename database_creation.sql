@@ -4,7 +4,7 @@
 # CS 3750
 # Final Project
 
-DROP DATABASE IF EXISTS ZAAMG;
+# DROP DATABASE IF EXISTS ZAAMG;     hmm...not sure about this now
 
 CREATE DATABASE IF NOT EXISTS ZAAMG
 
@@ -82,7 +82,7 @@ PRIMARY KEY (`classroom_id`) );
 
 CREATE TABLE `Building` 
 ( `building_id` INT NOT NULL AUTO_INCREMENT , 
-`building_code` CHAR(3) NOT NULL ,
+`building_code` TEXT NOT NULL ,
 `building_name` VARCHAR(30) NOT NULL ,
 `campus_id` SMALLINT NOT NULL,
 PRIMARY KEY (`building_id`) );
