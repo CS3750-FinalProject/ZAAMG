@@ -96,7 +96,7 @@ PRIMARY KEY (`campus_id`) );
 
 CREATE TABLE `Department` 
 ( `dept_id` INT NOT NULL AUTO_INCREMENT , 
-`dept_name` VARCHAR(20) NOT NULL UNIQUE,
+`dept_name` VARCHAR(60) NOT NULL UNIQUE,
 `dept_code` CHAR(4) NOT NULL UNIQUE,
 PRIMARY KEY (`dept_id`) );
 
