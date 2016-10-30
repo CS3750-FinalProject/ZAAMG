@@ -24,7 +24,8 @@ class Campus {
     }
 
     public function insertNewCampus(){
-        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Campus VALUES (:id, :name)");
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Campus VALUES (:id, :name)");
         # send NULL for campus_id because the database auto-increments it
         $stmtInsert->bindValue(":id", NULL);
         $stmtInsert->bindValue(":name", $this->campusName);
