@@ -59,7 +59,7 @@ to the user, including the correct Campus IDs.
   <p>Building Name: <input type="text" name="buildName" /></p>
   <!--<p>Campus ID: <input type="text" name="campusID" /></p>-->
 
-    <p>Campus ID: <select name="campusId">
+    <p>Campus ID: <select name="campusID" required>
 
             <?php
             foreach ($result as $row) {
