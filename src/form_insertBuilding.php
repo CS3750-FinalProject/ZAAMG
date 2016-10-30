@@ -12,7 +12,7 @@ to the user, including the correct Campus IDs.
 -->
 <table>
     <tr>
-        <th>Campus Id</th><th>Campus Name</th>
+        <!--<th>Campus Id</th>--><th>Campus Name</th>
     </tr>
     <tr>    <!--open <tr> tag which will continue with a php echo-->
 
@@ -22,7 +22,7 @@ to the user, including the correct Campus IDs.
         require_once 'Database.php';
         $database = new Database();
 
-        $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Campus');
+        $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Campus ORDER BY ZAAMG.Campus.campus_name ASC');
         $selectAll->execute();
 
         /* This line takes the query result and makes an array of Campus objects,
@@ -35,8 +35,8 @@ to the user, including the correct Campus IDs.
 
         #continuing the Campus display table...
         foreach ($result as $row){
-            echo "<td>".$row->campus_id."</td>"
-                ."<td>".$row->campus_name."</td>"
+            echo #"<td>".$row->campus_id."</td>".
+                "<td>".$row->campus_name."</td>"
                 ."</tr>";  #close table row
         }
         #close table tag
@@ -57,6 +57,17 @@ to the user, including the correct Campus IDs.
 <form action="action_insertBuilding.php" method="post">
   <p>Building Code: <input type="text" name="buildCode" /></p>
   <p>Building Name: <input type="text" name="buildName" /></p>
-  <p>Campus ID: <input type="text" name="campusID" /></p>
+  <!--<p>Campus ID: <input type="text" name="campusID" /></p>-->
+
+    <p>Campus ID: <select name="campusId">
+
+            <?php
+            foreach ($result as $row) {
+                echo "<option value=\"" . $row->campus_id . "\">" .$row->campus_name."</option>";
+            }
+            ?>
+
+        </select></p>
+
   <p><input type="submit" /></p>
 </form>
