@@ -7,7 +7,7 @@ to the user, including the correct Department IDs.
 -->
 <table>
  <tr>
-  <th>Department Id</th><th>Department Code</th><th>Department Name</th>
+  <!--<th>Department Id</th>--><th>Department Code</th><th>Department Name</th>
  </tr>
  <tr>    <!--open <tr> tag which will continue with a php echo-->
 
@@ -17,7 +17,7 @@ to the user, including the correct Department IDs.
   require_once 'Database.php';
   $database = new Database();
 
-  $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Department');
+  $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Department ORDER BY dept_code ASC');
   $selectAll->execute();
 
   /* This line takes the query result and makes an array of Department objects,
@@ -30,8 +30,8 @@ to the user, including the correct Department IDs.
 
   #continuing the Department display table...
   foreach ($result as $row){
-   echo "<td>".$row->dept_id."</td>"
-       ."<td>".$row->dept_code."</td>"
+   echo #"<td>".$row->dept_id."</td>".
+       "<td>".$row->dept_code."</td>"
        ."<td>".$row->dept_name."</td>"
        ."</tr>";  #close table row
   }
@@ -55,6 +55,17 @@ to the user, including the correct Department IDs.
  <p>Course Title: <input type="text" name="courseTitle" /></p>
  <p>Course Capacity: <input type="text" name="courseCap" /></p>
  <p>Course Credits: <input type="text" name="courseCred" /></p>
- <p>Department Id: <input type="text" name="deptId" /></p>
+ <!--<p>Department Id: <input type="text" name="deptId" /></p>-->
+
+    <p>Department: <select name="deptId" required>
+
+            <?php
+            foreach ($result as $row) {
+                echo "<option value=\"" . $row->dept_id . "\">" .$row->dept_code."</option>";
+            }
+            ?>
+
+        </select></p>
+
  <p><input type="submit" /></p>
 </form>
