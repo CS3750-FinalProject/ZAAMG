@@ -41,8 +41,6 @@ class Building {
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Building VALUES (:id, :code, :buildName, :campusID)");
         # send NULL for building_id because the database auto-increments it
-        //this will create an error, we are now attempting to put a null value into an enforced non-null datafield. 
-        //Why did this get changed? The way I had it before was the best way.
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":code", $this->buildCode);
         $stmtInsert->bindValue(":buildName", $this->buildName);
