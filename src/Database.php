@@ -6,7 +6,7 @@ class Database
     private $host = "localhost";
     private $dbname  = "zaamg";
     private $username = "zaamg";
-    public $dbh;
+    private $dbh; //let's not expose the database
 
     public function __construct() {
 
@@ -19,7 +19,8 @@ class Database
             return;
         }
     }
-
-
-
+    
+    public function getdbh(){
+        return $this->dbh;
+    }
 }
