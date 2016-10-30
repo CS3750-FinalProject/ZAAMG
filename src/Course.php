@@ -49,7 +49,7 @@ class Course {
     }
 
     public function insertNewCourse(){
-
+        $dbh = $this->database->getdbh();
         $stmtInsert = $this->database->dbh->prepare(
             "INSERT INTO ZAAMG.Course VALUES (
               :id, :code, :title, :cap, :cred, :deptId)");
