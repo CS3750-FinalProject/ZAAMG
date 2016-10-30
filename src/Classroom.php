@@ -37,8 +37,8 @@ class Classroom {
     }
 
     public function insertNewClassroom(){
-
-        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Classroom VALUES (:id, :num, :cap, :buildId)");
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Classroom VALUES (:id, :num, :cap, :buildId)");
         # send NULL for classroom_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":num", $this->classroomNum);
