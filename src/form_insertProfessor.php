@@ -53,7 +53,7 @@ to the user, including the correct Department IDs.
 <form action="action_insertProfessor.php" method="post">
  <p>Professor First: <input type="text" name="profFirst" /></p>
  <p>Professor Last: <input type="text" name="profLast" /></p>
- <p>Professor Email: <input type="text" name="profEmail" /></p>
+ <p>Professor Email: <input type="email" name="profEmail" required="required"/></p>
  <p>Department Id: <input type="text" name="deptId" /></p>
  <p><input type="submit" /></p>
 </form>
