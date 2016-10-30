@@ -9,6 +9,8 @@ Editing to add:  another way is to provide a drop-down menu,
 so that the user can select a department code without having
 to know the id number used in the database.
 -->
+<script src="validateProfessor.js"></script>
+
 <table>
  <tr>
   <!--<th>Department Id</th>--><th>Department Code</th><th>Department Name</th>
@@ -54,7 +56,8 @@ to know the id number used in the database.
 
 
 
-<form action="action_insertProfessor.php" method="post">
+<form name="form_insertProf" action="action_insertProfessor.php" method="post"
+      onsubmit="return(validate());">
  <p>Professor First: <input type="text" name="profFirst" /></p>
  <p>Professor Last: <input type="text" name="profLast" /></p>
  <p>Professor Email: <input type="email" name="profEmail" required="required"/></p>
