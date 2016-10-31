@@ -1,2 +1,0 @@
-json.extract! scheduled_course, :id, :semester_id, :course_id, :professor_id, :location_id, :classroom_id, :days, :start_time, :end_time, :block, :created_at, :updated_at
-json.url scheduled_course_url(scheduled_course, format: :json)

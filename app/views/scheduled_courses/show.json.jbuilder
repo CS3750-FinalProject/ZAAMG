@@ -1,1 +1,0 @@
-json.partial! "scheduled_courses/scheduled_course", scheduled_course: @scheduled_course
