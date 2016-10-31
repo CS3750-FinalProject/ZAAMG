@@ -52,8 +52,8 @@ class Semester {
     }
 */
     public function insertNewSemester(){
-
-        $stmtInsert = $this->database->dbh->prepare(
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Semester VALUES (
               :id, :year, :season, :weeks, :start, :first_block, :second_block)");
         # send NULL for course_id because the database auto-increments it

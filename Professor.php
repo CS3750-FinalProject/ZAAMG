@@ -43,8 +43,8 @@ class Professor{
     }
 
     public function insertNewProfessor(){
-
-        $stmtInsert = $this->database->dbh->prepare(
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Professor VALUES (
               :id, :first, :last, :email, :deptId)");
         # send NULL for course_id because the database auto-increments it
