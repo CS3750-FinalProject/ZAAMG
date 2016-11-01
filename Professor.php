@@ -13,6 +13,11 @@ class Professor{
 
 
     public function __construct($profId, $profFirst, $profLast, $profEmail, $deptId) {
+
+        /*$index_atSymbol = strpos($profEmail, "@");
+        $fixed_profEmail = substr_replace($profEmail, "\\@", $index_atSymbol, 1);
+        echo $fixed_profEmail;*/
+
         $this->profId = $profId;
         $this->profFirst = $profFirst;
         $this->profLast = $profLast;
@@ -43,17 +48,16 @@ class Professor{
     }
 
     public function insertNewProfessor(){
-
-        $stmtInsert = $this->database->dbh->prepare(
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Professor VALUES (
               :id, :first, :last, :email, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":first", $this->profFirst);
         $stmtInsert->bindValue(":last", $this->profLast);
-        $stmtInsert->bindValue(":email", $this->profEmail);
+        $stmtInsert->bindValue(":email", strtolower($this->profEmail));
         $stmtInsert->bindValue(":deptId", $this->deptId);
-
         try {
             $stmtInsert->execute();
             echo "Success executing Insert";
@@ -61,4 +65,25 @@ class Professor{
             echo $e->getMessage();
         }
     }
+
+
+    public function professorExists($profEmail){
+        $profEmail_lower = strtolower($profEmail);
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT prof_id FROM ZAAMG.Professor
+              WHERE prof_email = '$profEmail_lower'");
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+        }
+    }
+
 }

@@ -40,11 +40,15 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Create New <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#" data-toggle="modal" data-target="#newCourseModal" id="newCourseLink">Course</a></li>
-                <li><a href="#">Professor</a></li>
-                <li><a href="#">Classroom</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newCourseModal"
+                       class="newResourceLink" id="newCourseLink">Course</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newProfessorModal"
+                       class="newResourceLink"id="newProfLink">Professor</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newClassroomModal"
+                       class="newResourceLink" id="newClassroomLink">Classroom</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Semester</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newSemesterModal"
+                       class="newResourceLink" id="newSemesterLink">Semester</a></li>
               </ul>
             </li>
           </ul>
@@ -141,7 +145,13 @@
       </div>
     </div>
 
-  <?php include 'modal_newCourse.php' ?>
+
+  <?php
+  include 'modal_newCourse.php';
+  include 'modal_newProfessor.php';
+  include 'modal_newClassroom.php';
+  include 'modal_newSemester.php';
+  ?>
 
   </body>
 </html>

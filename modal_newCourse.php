@@ -54,9 +54,9 @@
 
             </div>
             <div class="modal-footer">
-                <span class="error-message" id="error-message"></span>
+                <span class="error-message"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" >Save changes</button>
+                <button type="button" class="btn btn-primary" id="btn_insertCourse">Save</button>
             </div>
         </div>
     </div>
