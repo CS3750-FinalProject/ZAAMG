@@ -199,7 +199,7 @@
           <div class="modal-footer">
             <span class="error-message" id="error-message"></span>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            <button type="button" class="btn btn-primary" >Save changes</button>
           </div>
         </div>
       </div>

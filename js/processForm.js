@@ -7,14 +7,13 @@
 $(function() {
     $(".btn.btn-primary").click(function() {
         // validate and process form here
-        var courseExists = false;
-
         var courseCode = $("input#courseCode").val();
         var courseTitle = $("input#courseTitle").val();
         var courseCapacity = $("input#courseCapacity").val();
         var courseCredits = $("input#courseCredits").val();
         var deptId = $("#courseDepartment").val()
         var insertId = -1;  //
+            courseExists = false;
 
         var dataString = 'courseCode='+ courseCode + '&courseTitle=' + courseTitle
             + '&courseCap=' + courseCapacity + '&courseCred=' + courseCredits
@@ -25,25 +24,26 @@ $(function() {
             url: "action_insertCourse.php",
             data: dataString,
             success: function(msg) {
-
                 if (msg.indexOf("does exist") != -1){
-                    $("span#error-message").text("This Course already exists.");
-                    courseExists = true;
+                    window.courseExists = true;
+                    $("span#error-message").text("This Course already exists.")
                 }
+                if (!window.courseExists)
+                    $('#newCourseModal').modal('hide');
 
             }
         });
-        if (!courseExists){//course didn't already exist, got inserted
-            return true;
-        }else {
-            return false;
-        }
+
 
     });
 
-    $("input#courseCode").click(function(){
-        $("span#error-message").text(""); //clear error message when user enters Course Code field
-    });
+    var clearErrorMessage = function() {
+        $("span#error-message").text("");
+    };
+
+    $("input#courseCode").click(clearErrorMessage);
+    $("#courseDepartment").click(clearErrorMessage);
+
     $("#newCourseButton").click(function() {
         $("span#error-message").text("");  //start out with no error message
         $("input#courseCode").val("");
