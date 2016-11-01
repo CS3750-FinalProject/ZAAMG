@@ -35,3 +35,8 @@
 tr:nth-child(even) {
   background-color: #ededed;
 }
+
+.error-message{
+  float:left;
+  margin-left: 16px;
+}

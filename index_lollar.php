@@ -1,3 +1,4 @@
+<?php require_once 'Database.php';?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,6 +6,7 @@
     <link href="css/application.css" rel="stylesheet">
     <script src="js/jquery-3.1.1.min.js" charset="utf-8"></script>
     <script src="js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="js/processForm.js" charset="utf-8"></script>
     <title>Project ZAAMG</title>
   </head>
   <body>
@@ -38,7 +40,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Create New <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#" data-toggle="modal" data-target="#newCourseModal">Course</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newCourseModal" id="newCourseButton">Course</a></li>
                 <li><a href="#">Professor</a></li>
                 <li><a href="#">Classroom</a></li>
                 <li role="separator" class="divider"></li>
@@ -147,16 +149,18 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="course-label">Create New Course</h4>
           </div>
-          <div class="modal-body" style="margin-bottom: 150px;">
-            <div class="form-group">
+          <div class="modal-body" id="id_form-group" style="margin-bottom: 150px;">
+
+            <div class="form-group" >
               <div class="col-xs-4">
                 <label for="courseCode">Code</label>
                 <input type="number" class="form-control" id="courseCode" placeholder="1000" >
               </div>
               <div class="col-xs-8">
                 <label for="courseTitle">Title</label>
-                <input type="text" class="form-control" id="courseCode" placeholder="Course Title Here..." >
+                <input type="text" class="form-control" id="courseTitle" placeholder="Course Title Here..." >
               </div>
+
             </div>
             <div class="form-group">
               <div class="col-xs-2">
@@ -171,16 +175,31 @@
                 <label for="courseDepartment">Department</label>
                 <select class="form-control" id="courseDepartment" >
                   <option value="''">Please Select...</option>
-                  <option value="cs">Computer Science</option>
-                  <option value="nmt">Network, Multimedia and Technology</option>
-                  <option value="web">Web Development</option>
+
+                  <?php
+                  $database = new Database();
+                  $selectDepts = $database->getdbh()->prepare(
+                      'SELECT dept_id, dept_name FROM ZAAMG.Department
+                        ORDER BY dept_name ASC');
+                  $selectDepts->execute();
+                  $result = $selectDepts->fetchAll();
+
+                  foreach($result as $row){
+                    echo "<option value=\"".$row['dept_id']."\">".$row['dept_name']."</option>";
+                  }
+                  ?>
+                  <!--<option value="0">Computer Science</option>
+                  <option value="1">Network, Multimedia and Technology</option>
+                  <option value="2">Web Development</option>-->
                 </select>
               </div>
             </div>
+
           </div>
           <div class="modal-footer">
+            <span class="error-message" id="error-message"></span>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>

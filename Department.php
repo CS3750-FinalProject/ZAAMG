@@ -30,7 +30,7 @@ class Department {
     }
 
     public function insertNewDepartment(){
-        $stmtInsert = $this->database->dbh->prepare("INSERT INTO ZAAMG.Department VALUES (:id, :deptName, :code)");
+        $stmtInsert = $this->database->getdbh()->prepare("INSERT INTO ZAAMG.Department VALUES (:id, :deptName, :code)");
         # send NULL for Department_id because the database auto-increments it
         $stmtInsert->bindValue(":id", NULL);
         $stmtInsert->bindValue(":deptName", $this->deptName);

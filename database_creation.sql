@@ -55,7 +55,7 @@ PRIMARY KEY  (`schedule_id`, `section_id`));
 
 CREATE TABLE `Course` 
 ( `course_id` INT NOT NULL AUTO_INCREMENT , 
-`course_code` CHAR(10) NOT NULL UNIQUE,
+`course_code` CHAR(10) NOT NULL ,
 `course_title` VARCHAR(50) NOT NULL ,
 `course_capacity` SMALLINT ,
 `course_credits` SMALLINT NOT NULL,

@@ -27,7 +27,7 @@ to the user, including the correct Building IDs.
 
 
 
-  $selectAll_1 = $database->dbh->prepare('SELECT building_id, building_code, building_name, campus_name
+  $selectAll_1 = $database->getdbh()->prepare('SELECT building_id, building_code, building_name, campus_name
       FROM ZAAMG.Building JOIN ZAAMG.Campus ON ZAAMG.Building.campus_id = ZAAMG.Campus.campus_id
       ORDER BY building_name ASC');
   $selectAll_1->execute();

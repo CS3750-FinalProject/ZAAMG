@@ -1,29 +1,14 @@
-<!--
-
-Just testing php/mysql wire-up.
-
--->
-
 <?php
 
 include 'Course.php';
 
 
-if (isset($_POST['courseCode'])) $courseCode = $_POST['courseCode'];
-else $courseCode = "(not entered)";
 
-if (isset($_POST['courseTitle'])) $courseTitle = $_POST['courseTitle'];
-else $courseTitle = "(not entered)";
-
-if (isset($_POST['courseCap'])) $courseCap = $_POST['courseCap'];
-else $courseCap = "(not entered)";
-
-if (isset($_POST['courseCred'])) $courseCred = $_POST['courseCred'];
-else $courseCred = "(not entered)";
-
-if (isset($_POST['deptId'])) $deptId = $_POST['deptId'];
-else $deptId = "(not entered)";
-
+$courseCode = isset($_POST['courseCode']) ? $_POST['courseCode'] : "not entered";
+$courseTitle = isset($_POST['courseTitle']) ? $_POST['courseTitle'] : "not entered";
+$courseCap = isset($_POST['courseCap']) ? $_POST['courseCap'] : "not entered";
+$courseCred = isset($_POST['courseCred']) ? $_POST['courseCred'] : "not entered";
+$deptId = isset($_POST['deptId']) ? $_POST['deptId'] : "not entered";
 
 
 $course = new Course(NULL, $courseCode, $courseTitle, $courseCap, $courseCred, $deptId);
@@ -37,9 +22,14 @@ Course Credits: $courseCred <br>
 Department Id: $deptId <br>
 YO;
 
-$course->insertNewCourse();
+$result = $course->courseExists($courseCode, $deptId);
+echo $result;
 
+//echo "Last Insert Id =".$course->insertNewCourse();
 
+if ($result == "does not exist"){
+    $course->insertNewCourse();
+}
 
 
 
