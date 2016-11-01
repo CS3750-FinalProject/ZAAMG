@@ -39,10 +39,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Create New <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#" data-toggle="modal" data-target="#newCourseModal">Course</a></li>
-                <li><a href="#">Professor</a></li>
-                <li><a href="#">Classroom</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newProfessorModal">Professor</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newClassroomModal">Classroom</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newSemesterModal">Semester</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Semester</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newSectionModal">Section</a></li>
               </ul>
             </li>
           </ul>
@@ -175,6 +176,124 @@
                   <option value="nmt">Network, Multimedia and Technology</option>
                   <option value="web">Web Development</option>
                 </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="newProfessorModal" tabindex="-1" role="dialog" aria-labelledby="professor-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="professor-label">Create New Professor</h4>
+          </div>
+          <div class="modal-body" style="margin-bottom: 150px;">
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="profFirst">First Name</label>
+                <input type="text" class="form-control" id="profFirst" placeholder="First Name" >
+              </div>
+              <div class="col-xs-6">
+                <label for="profLast">Last Name</label>
+                <input type="text" class="form-control" id="profLast" placeholder="Last Name" >
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="profEmail">Email</label>
+                <input type="text" class="form-control" id="profEmail" placeholder="example@email.com" >
+              </div>
+              <div class="col-xs-6">
+                <label for="profDepartment">Department</label>
+                <select class="form-control" id="profDepartment" >
+                  <option value="''">Please Select...</option>
+                  <option value="cs">Computer Science</option>
+                  <option value="nmt">Network, Multimedia and Technology</option>
+                  <option value="web">Web Development</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="newClassroomModal" tabindex="-1" role="dialog" aria-labelledby="classroom-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="classroom-label">Create New Classroom</h4>
+          </div>
+          <div class="modal-body" style="margin-bottom: 50px;">
+            <div class="form-group">
+              <div class="col-xs-2">
+                <label for="classroomCapacity">Capacity</label>
+                <input type="number" class="form-control" id="courseCapacity" value=30 >
+              </div>
+              <div class="col-xs-4">
+                <label for="classroomNumber">Classroom Number</label>
+                <input type="number" class="form-control" id="classroomNumber" value=100 >
+              </div>
+              <div class="col-xs-6">
+                <label for="classroomBuilding">Building</label>
+                <select class="form-control" id="classroomBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="cs">Technology Education</option>
+                  <option value="nmt">Blah</option>
+                  <option value="web">Bleh</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="newSemesterModal" tabindex="-1" role="dialog" aria-labelledby="semester-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="semester-label">Create New Semester</h4>
+          </div>
+          <div class="modal-body" style="margin-bottom: 125px;">
+            <div class="form-group">
+              <div class="col-xs-4">
+                <label for="semesterYear">Year</label>
+                <input type="number" class="form-control" id="semesterYear" value=2017 >
+              </div>
+              <div class="col-xs-8">
+                <label for="semesterSeason">Season</label>
+                <select class="form-control" id="semesterSeason" >
+                  <option value="''">Please Select...</option>
+                  <option value="spring">Spring</option>
+                  <option value="summer">Summer</option>
+                  <option value="fall">Fall</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" >
+              <div class="col-xs-8">
+                <label for="semesterStartDate">Start Date</label>
+                <input type="date" class="form-control" id="semesterStartDate" >
+              </div>
+              <div class="col-xs-4">
+                <label for="semesterNumberWeeks">Number of Weeks</label>
+                <input type="number" class="form-control" id="semesterNumberWeeks" value=14 >
               </div>
             </div>
           </div>
