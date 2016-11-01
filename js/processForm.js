@@ -25,7 +25,7 @@ $(function() {
             success: function(msg) {
                 if (msg.indexOf("does exist") != -1){
                     window.courseExists = true;
-                    $("span#error-message").text("This Course already exists.")
+                    $("span.error-message").text("This Course already exists.")
                 }
                 if (!window.courseExists)
                     $('#newCourseModal').modal('hide');
@@ -42,6 +42,11 @@ $(function() {
         var profLast = $("input#profLast").val();
         var profEmail = $("input#profEmail").val();
         var deptId = $("#profDepartment").val()
+
+        if (profEmail.length == 0){
+            $("span.error-message").text("An email address is required.")
+            return false;
+        }
 
         profExists = false;
 
@@ -71,8 +76,11 @@ $(function() {
         $("span.error-message").text("");
     };
 
-    $("input#courseCode").click(clearErrorMessage);
-    $("#courseDepartment").click(clearErrorMessage);
+    $("input.form-control").click(clearErrorMessage);
+    $("select.form-control").click(clearErrorMessage);
+    
+    /*$("input#courseCode").click(clearErrorMessage);
+    $("#courseDepartment").click(clearErrorMessage);*/
 
     $(".newResourceLink").click(function() {
         $("span.error-message").text("");  //start out with no error message
