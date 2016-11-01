@@ -1,33 +1,27 @@
-<!--
-
-Just testing php/mysql wire-up.
-
--->
-
 <?php
 
 include 'Classroom.php';
 
+$classNum = isset($_POST['classNum']) ? $_POST['classNum'] : "not entered";
+$classCapacity = isset($_POST['classCapacity']) ? $_POST['classCapacity'] : "not entered";
+$buildId = isset($_POST['buildId']) ? $_POST['buildId'] : "not entered";
 
-if (isset($_POST['classNum'])) $classNum = $_POST['classNum'];
-else $classNum = "(not entered)";
 
-if (isset($_POST['classCapacity'])) $classCap = $_POST['classCapacity'];
-else $classCap = "(not entered)";
-
-if (isset($_POST['buildId'])) $buildId = $_POST['buildId'];
-else $buildId = "(not entered)";
-
-$classroom = new Classroom(NULL, $classNum, $classCap, $buildId);
+$classroom = new Classroom(NULL, $classNum, $classCapacity, $buildId);
 
 
 echo<<<YO
 Classroom Number: $classNum <br>
-Classroom Capacity: $classCap <br>
+Classroom Capacity: $classCapacity <br>
 Building Id: $buildId <br>
 YO;
 
-$classroom->insertNewClassroom();
+$result = $classroom->classroomExists($classNum, $buildId);
+echo $result;
+
+if ($result == "does not exist"){
+    $classroom->insertNewClassroom();
+}
 
 
 

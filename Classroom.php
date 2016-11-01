@@ -53,4 +53,22 @@ class Classroom {
             echo $e->getMessage();
         }
     }
+
+    public function classroomExists($classNum, $buildId){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT classroom_id FROM ZAAMG.Classroom
+              WHERE classroom_number = $classNum AND building_id = $buildId");
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+        }
+    }
 }

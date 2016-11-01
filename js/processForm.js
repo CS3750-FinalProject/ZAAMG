@@ -70,6 +70,39 @@ $(function() {
     }); //end of function for btn_insertProfessor
 
 
+    $("#btn_insertClassroom").click(function() {
+        // validate and process form here
+        var classCap = $("input#courseCapacity").val();
+        var classNum = $("input#classroomNumber").val();
+        var buildId = $("select#classroomBuilding").val();
+
+       /* if (profEmail.length == 0){
+            $("span.error-message").text("An email address is required.")
+            return false;
+        }*/
+
+        classroomExists = false;
+
+        var dataString = 'classNum='+ classNum + '&classCapacity=' + classCap
+            + '&buildId=' + buildId;
+        //alert (dataString);return false;
+        $.ajax({
+            type: "POST",
+            url: "action_insertClassroom.php",
+            data: dataString,
+            success: function(msg) {
+                if (msg.indexOf("does exist") != -1){
+                    window.classroomExists = true;
+                    $("span.error-message").text("This Classroom already exists.")
+                }
+                if (!window.classroomExists)
+                    $('#newClassroomModal').modal('hide');
+
+            }
+        });
+    }); //end of function for btn_insertClassroom
+
+
 
 
     var clearErrorMessage = function() {
@@ -78,7 +111,7 @@ $(function() {
 
     $("input.form-control").click(clearErrorMessage);
     $("select.form-control").click(clearErrorMessage);
-    
+
     /*$("input#courseCode").click(clearErrorMessage);
     $("#courseDepartment").click(clearErrorMessage);*/
 

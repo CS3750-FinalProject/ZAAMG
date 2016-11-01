@@ -21,8 +21,8 @@ to the user, including the correct Campus IDs.
         include 'Campus.php';      # so php can make Campus objects with Database results
         require_once 'Database.php';
         $database = new Database();
-
-        $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Campus ORDER BY ZAAMG.Campus.campus_name ASC');
+        $dbh = $database->getdbh();
+        $selectAll = $dbh->prepare('SELECT * FROM ZAAMG.Campus ORDER BY ZAAMG.Campus.campus_name ASC');
         $selectAll->execute();
 
         /* This line takes the query result and makes an array of Campus objects,

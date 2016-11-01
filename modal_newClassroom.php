@@ -13,22 +13,23 @@
                     </div>
                     <div class="col-xs-4">
                         <label for="classroomNumber">Classroom Number</label>
-                        <input type="number" class="form-control" id="classroomNumber" value=100 >
+                        <input type="text" class="form-control" id="classroomNumber" >
                     </div>
                     <div class="col-xs-6">
                         <label for="classroomBuilding">Building</label>
                         <select class="form-control" id="classroomBuilding" >
                             <option value="''">Please Select...</option>
-                            <option value="cs">Technology Education</option>
-                            <option value="nmt">Blah</option>
-                            <option value="web">Bleh</option>
+                            <option value="1">Technology Education</option>
+                            <option value="2">Blah</option>
+                            <option value="3">Bleh</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <span class="error-message"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" id="btn_insertClassroom">Save</button>
             </div>
         </div>
     </div>
