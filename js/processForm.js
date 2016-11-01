@@ -44,9 +44,11 @@ $(function() {
     $("input#courseCode").click(clearErrorMessage);
     $("#courseDepartment").click(clearErrorMessage);
 
-    $("#newCourseButton").click(function() {
+    $("#newCourseLink").click(function() {
         $("span#error-message").text("");  //start out with no error message
         $("input#courseCode").val("");
         $("input#courseTitle").val("");
+        $("#courseDepartment").prop('selectedIndex', 0);
+        return true;
     });
 });
