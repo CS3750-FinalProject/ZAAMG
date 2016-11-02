@@ -27,7 +27,7 @@
             <div class="modal-footer">
                 <span class="error-message"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btn_insertSemester">Save</button>
+                <button type="button" class="btn btn-primary" id="btn_insertBuilding">Save</button>
             </div>
         </div>
     </div>
