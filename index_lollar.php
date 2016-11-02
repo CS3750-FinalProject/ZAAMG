@@ -51,6 +51,12 @@
                        class="newResourceLink" id="newSemesterLink">Semester</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#newBuildingModal"
                        class="newResourceLink" id="newBuildingLink">Building</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newCampusModal"
+                       class="newResourceLink" id="newCampusLink">Campus</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" data-toggle="modal" data-target="#newDepartmentModal"
+                       class="newResourceLink" id="newDepartmentLink">Department</a></li>
+
               </ul>
             </li>
           </ul>
@@ -154,6 +160,8 @@
   include 'modal_newClassroom.php';
   include 'modal_newSemester.php';
   include 'modal_newBuilding.php';
+  include 'modal_newCampus.php';
+  include 'modal_newDepartment.php';
 
   ?>
 
