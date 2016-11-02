@@ -13,7 +13,26 @@
                     </div>
                     <div class="col-xs-6">
                         <label for="buildingCampus">Campus</label>
-                        <input type="text" class="form-control" id="buildingCampus" >
+                        <select type="text" class="form-control" id="buildingCampus" >
+
+                            <option value="''">Please Select...</option>
+
+                            <?php
+                            $database = new Database();
+                            $selectCampi = $database->getdbh()->prepare(
+                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
+                                  ORDER BY campus_name ASC');
+                            $selectCampi->execute();
+                            $result = $selectCampi->fetchAll();
+
+                            foreach($result as $row){
+                                echo "<option value=\"".$row['campus_id']."\">".$row['campus_name']."</option>";
+                            }
+                            ?>
+
+                        </select>
+
+
                     </div>
 
                 </div>

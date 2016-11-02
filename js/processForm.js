@@ -76,11 +76,6 @@ $(function() {
         var classNum = $("input#classroomNumber").val();
         var buildId = $("select#classroomBuilding").val();
 
-       /* if (profEmail.length == 0){
-            $("span.error-message").text("An email address is required.")
-            return false;
-        }*/
-
         classroomExists = false;
 
         var dataString = 'classNum='+ classNum + '&classCapacity=' + classCap
@@ -133,7 +128,48 @@ $(function() {
 
             }
         });
-    }); //end of function for btn_insertClassroom
+    }); //end of function for btn_insertSemester
+
+
+
+
+    $("#btn_insertBuilding").click(function() {
+        // validate and process form here
+        var buildCode = $("input#buildingCode").val();
+        var buildCampus = $("select#buildingCampus").val();
+        var buildName = $("input#buildingName").val();
+
+        if (buildCode.length == 0){
+         $("span.error-message").text("A building code is required.")
+         return false;
+         }
+        if (buildName.length == 0){
+            $("span.error-message").text("A building name is required.")
+            return false;
+        }
+
+        buildingExists = false;
+
+        var dataString = 'buildCode='+ buildCode + '&buildName=' + buildName
+            + '&campusId=' + buildCampus;
+        //alert (dataString); return false;
+        $.ajax({
+            type: "POST",
+            url: "action_insertBuilding.php",
+            data: dataString,
+            success: function(msg) {
+                if (msg.indexOf("does exist") != -1){
+                    window.buildingExists = true;
+                    $("span.error-message").text("This Building already exists.")
+                }
+                if (!window.buildingExists)
+                    $('#newBuildingModal').modal('hide');
+
+            }
+        });
+    }); //end of function for btn_insertBuilding
+
+
 
 
     var clearErrorMessage = function() {

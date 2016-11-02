@@ -54,4 +54,25 @@ class Building {
             echo $e->getMessage();
         }
     }
+
+
+    public function buildingExists($buildName, $buildCode, $campusId){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT building_id FROM ZAAMG.Building
+              WHERE campus_id = $campusId
+              AND (building_code = ".$dbh->quote($buildCode)." OR building_name = ".$dbh->quote($buildName).")");
+
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else {
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+        }
+    }
 }
