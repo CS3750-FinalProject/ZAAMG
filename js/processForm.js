@@ -110,11 +110,14 @@ $(function() {
         var semSeason = $("select#semesterSeason").val();
         var semStartDate = $("input#semesterStartDate").val();
         var semNumWeeks = $("input#semesterNumberWeeks").val();
+        var firstBlockStart = $("input#firstBlockStart").val();
+        var secondBlockStart = $("input#secondBlockStart").val();
 
         semesterExists = false;
 
         var dataString = 'semYear='+ semYear + '&semSeason=' + semSeason
-            + '&semStart=' + semStartDate + '&semNumWeeks=' + semNumWeeks;
+            + '&semStart=' + semStartDate + '&semNumWeeks=' + semNumWeeks
+            + '&firstBlockStart=' + firstBlockStart + '&secondBlockStart=' + secondBlockStart;
         //alert (dataString); return false;
         $.ajax({
             type: "POST",

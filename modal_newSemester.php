@@ -5,8 +5,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="semester-label">Create New Semester</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 125px; ">
-                <div class="form-group">
+            <div class="modal-body" style="margin-bottom: 275px; ">
+                <div class="form-group" >
                     <div class="col-xs-4">
                         <label for="semesterYear">Year</label>
                         <input type="number" class="form-control" id="semesterYear" value=2017 >
@@ -29,6 +29,19 @@
                     <div class="col-xs-4">
                         <label for="semesterNumberWeeks">Number of Weeks</label>
                         <input type="number" class="form-control" id="semesterNumberWeeks" value=14 >
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <hr style="border-width: 2px">
+                </div>
+                <div class="form-group" >
+                    <div class="col-xs-8">
+                        <label for="firstBlockStart">First Block Start Date</label>
+                        <input type="date" class="form-control" id="firstBlockStart" >
+                    </div>
+                    <div class="col-xs-8">
+                        <label for="secondBlockStart">Second Block Start Date</label>
+                        <input type="date" class="form-control" id="secondBlockStart" >
                     </div>
                 </div>
             </div>
