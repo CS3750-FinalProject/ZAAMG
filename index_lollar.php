@@ -49,6 +49,8 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="#" data-toggle="modal" data-target="#newSemesterModal"
                        class="newResourceLink" id="newSemesterLink">Semester</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#newBuildingModal"
+                       class="newResourceLink" id="newBuildingLink">Building</a></li>
               </ul>
             </li>
           </ul>
@@ -151,6 +153,8 @@
   include 'modal_newProfessor.php';
   include 'modal_newClassroom.php';
   include 'modal_newSemester.php';
+  include 'modal_newBuilding.php';
+
   ?>
 
   </body>
