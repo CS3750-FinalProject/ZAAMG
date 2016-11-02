@@ -12,11 +12,12 @@ class Section
     private $days = array();
     private $startTime;
     private $endTime;
+    private $capacity;
 
     private $database;
 
     public function __construct($sectionID, $courseID, $profID, $classroomID,
-                                $block = 0, $days, $startTime, $endTime) {
+                                $block = 0, $days = array(), $startTime = "", $endTime = "", $capacity = 30) {
         $this->sectionID = $sectionID;
         $this->courseID = $courseID;
         $this->profID = $profID;
@@ -25,6 +26,7 @@ class Section
         $this->days[] = $days;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
+        $this->capacity = $capacity;
 
         $this->database = new Database();
     }
@@ -93,6 +95,11 @@ class Section
     {
         return $this->endTime;
     }
+    
+    public function getCapacity(): int
+    {
+        return $this->capacity;
+    }
 
     /*setters auto-generated for block, days, start time, and end time
     setters for the others would be done before with the
@@ -116,5 +123,10 @@ class Section
     public function setEndTime(DateTime $endTime)
     {
         $this->endTime = $endTime;
+    }
+    
+    public function setCapacity(int $capacity)
+    {
+        $this->capacity = $capacity;
     }
 }
