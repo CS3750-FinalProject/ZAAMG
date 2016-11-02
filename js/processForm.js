@@ -72,7 +72,7 @@ $(function() {
 
     $("#btn_insertClassroom").click(function() {
         // validate and process form here
-        var classCap = $("input#courseCapacity").val();
+        var classCap = $("input#roomCapacity").val();
         var classNum = $("input#classroomNumber").val();
         var buildId = $("select#classroomBuilding").val();
 

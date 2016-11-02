@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd7d6492-d87e-4a03-99db-a0e1090ad96a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Building.php" afterPath="$PROJECT_DIR$/Building.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/action_insertBuilding.php" afterPath="$PROJECT_DIR$/action_insertBuilding.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/form_insertBuilding.php" afterPath="$PROJECT_DIR$/form_insertBuilding.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/processForm.js" afterPath="$PROJECT_DIR$/js/processForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modal_newBuilding.php" afterPath="$PROJECT_DIR$/modal_newBuilding.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modal_newClassroom.php" afterPath="$PROJECT_DIR$/modal_newClassroom.php" />
     </list>
     <ignored path="ZAAMG.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,40 +30,33 @@
       <file leaf-file-name="action_insertClassroom.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/action_insertClassroom.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3793104">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state vertical-scroll-proportion="-13.793103">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="processForm.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Classroom.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classroom.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.4827585">
+              <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+              <folding>
+                <marker date="1478028697252" expanded="true" signature="987:1049" placeholder="INSERT INTO ZAAMG.Classroom... " />
+                <marker date="1478028697252" expanded="true" signature="1701:1809" placeholder="SELECT class... Classroom" />
+                <marker date="1478028697252" expanded="true" signature="1701:1810" placeholder="SELECT class... Classroom" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="processForm.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/processForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="142" column="69" selection-start-line="142" selection-start-column="69" selection-end-line="142" selection-end-column="69" />
+            <state vertical-scroll-proportion="0.4800693">
+              <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Building.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Building.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13344887">
-              <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
-              <folding>
-                <marker date="1478059146827" expanded="true" signature="1055:1124" placeholder="INSERT INTO ZAAMG.Building... " />
-                <marker date="1478059146827" expanded="true" signature="1787:1845" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1858" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1859" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1902" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1903" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1949" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1950" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1978" placeholder="SELECT build... Building" />
-                <marker date="1478059146827" expanded="true" signature="1787:1980" placeholder="SELECT build... Building" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -76,19 +67,6 @@
             <state vertical-scroll-proportion="-9.551724">
               <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modal_newSemester.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modal_newSemester.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.5172415">
-              <caret line="43" column="84" selection-start-line="43" selection-start-column="84" selection-end-line="43" selection-end-column="84" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#hr#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -116,8 +94,8 @@
       <file leaf-file-name="modal_newBuilding.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modal_newBuilding.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5172414">
-              <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+            <state vertical-scroll-proportion="-2.275862">
+              <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
               <folding>
                 <marker date="1478056011792" expanded="true" signature="1279:1385" placeholder="SELECT campu... Campus" />
               </folding>
@@ -125,13 +103,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_newProfessor.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
+      <file leaf-file-name="modal_newClassroom.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modal_newClassroom.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.931034">
-              <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
+            <state vertical-scroll-proportion="-7.586207">
+              <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
               <folding>
-                <marker date="1478019279630" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1478064765866" expanded="true" signature="1539:1829" placeholder="SELECT ZAAMG... Campus" />
+                <marker date="1478064765866" expanded="true" signature="2393:2663" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -222,7 +202,6 @@
         <option value="$PROJECT_DIR$/action_insertProfessor.php" />
         <option value="$PROJECT_DIR$/Professor.php" />
         <option value="$PROJECT_DIR$/Classroom.php" />
-        <option value="$PROJECT_DIR$/modal_newClassroom.php" />
         <option value="$PROJECT_DIR$/action_insertClassroom.php" />
         <option value="$PROJECT_DIR$/action_insertSemester.php" />
         <option value="$PROJECT_DIR$/Semester.php" />
@@ -234,8 +213,9 @@
         <option value="$PROJECT_DIR$/modal_newBuilding.php" />
         <option value="$PROJECT_DIR$/action_insertBuilding.php" />
         <option value="$PROJECT_DIR$/form_insertBuilding.php" />
-        <option value="$PROJECT_DIR$/js/processForm.js" />
         <option value="$PROJECT_DIR$/Building.php" />
+        <option value="$PROJECT_DIR$/modal_newClassroom.php" />
+        <option value="$PROJECT_DIR$/js/processForm.js" />
       </list>
     </option>
   </component>
@@ -804,12 +784,12 @@
       <workItem from="1477930030157" duration="57000" />
       <workItem from="1477930117725" duration="35190000" />
       <workItem from="1478017589861" duration="7367000" />
-      <workItem from="1478026316419" duration="15576000" />
+      <workItem from="1478026316419" duration="20723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105999000" />
+    <option name="totallyTimeSpent" value="111146000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1111,22 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/form_insertClassroom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="38.37931">
-          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newClassroom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.655172">
-          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap.css.map">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30710173">
@@ -1214,36 +1178,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newBuilding.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5172414">
-          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-          <folding>
-            <marker date="1478056011792" expanded="true" signature="1279:1385" placeholder="SELECT campu... Campus" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/action_insertClassroom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3793104">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classroom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.093587525">
-          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
-          <folding>
-            <marker date="1478028697252" expanded="true" signature="987:1049" placeholder="INSERT INTO ZAAMG.Classroom... " />
-            <marker date="1478028697252" expanded="true" signature="1701:1809" placeholder="SELECT class... Classroom" />
-            <marker date="1478028697252" expanded="true" signature="1701:1810" placeholder="SELECT class... Classroom" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/form_insertBuilding.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41074523">
@@ -1277,25 +1211,8 @@
         <state vertical-scroll-proportion="-12.5172415">
           <caret line="43" column="84" selection-start-line="43" selection-start-column="84" selection-end-line="43" selection-end-column="84" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/processForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="69" selection-start-line="142" selection-start-column="69" selection-end-line="142" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/action_insertBuilding.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.551724">
-          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1315,6 +1232,72 @@
             <marker date="1478059146827" expanded="true" signature="1787:1978" placeholder="SELECT build... Building" />
             <marker date="1478059146827" expanded="true" signature="1787:1980" placeholder="SELECT build... Building" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/form_insertClassroom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.08665511">
+          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modal_newBuilding.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.275862">
+          <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+          <folding>
+            <marker date="1478056011792" expanded="true" signature="1279:1385" placeholder="SELECT campu... Campus" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/action_insertBuilding.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.551724">
+          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classroom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.4827585">
+          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding>
+            <marker date="1478028697252" expanded="true" signature="987:1049" placeholder="INSERT INTO ZAAMG.Classroom... " />
+            <marker date="1478028697252" expanded="true" signature="1701:1809" placeholder="SELECT class... Classroom" />
+            <marker date="1478028697252" expanded="true" signature="1701:1810" placeholder="SELECT class... Classroom" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/action_insertClassroom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.793103">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modal_newClassroom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.586207">
+          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1478064765866" expanded="true" signature="1539:1829" placeholder="SELECT ZAAMG... Campus" />
+            <marker date="1478064765866" expanded="true" signature="2393:2663" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/processForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4800693">
+          <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -5,26 +5,42 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="classroom-label">Create New Classroom</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 50px;">
+            <div class="modal-body" style="margin-bottom: 75px;">
                 <div class="form-group">
                     <div class="col-xs-2">
                         <label for="classroomCapacity">Capacity</label>
-                        <input type="number" class="form-control" id="courseCapacity" value=30 >
+                        <input type="number" class="form-control" id="roomCapacity" value=30 >
                     </div>
-                    <div class="col-xs-4">
-                        <label for="classroomNumber">Classroom Number</label>
+                    <div class="col-xs-3">
+                        <label for="classroomNumber">Room Number</label>
                         <input type="text" class="form-control" id="classroomNumber" >
                     </div>
-                    <div class="col-xs-6">
-                        <label for="classroomBuilding">Building</label>
-                        <select class="form-control" id="classroomBuilding" >
+                    <div class="col-xs-7">
+                        <label for="classroomBuilding">Building/Campus</label>
+                        <select type="text" class="form-control" id="classroomBuilding" >
+
                             <option value="''">Please Select...</option>
-                            <option value="1">Technology Education</option>
-                            <option value="2">Blah</option>
-                            <option value="3">Bleh</option>
+
+                            <?php
+                            $database = new Database();
+                            $selectBuilding = $database->getdbh()->prepare(
+                                'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
+                                  FROM ZAAMG.Campus JOIN ZAAMG.Building
+                                  ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
+                                  ORDER BY building_name ASC');
+                            $selectBuilding->execute();
+                            $result = $selectBuilding->fetchAll();
+
+                            foreach($result as $row){
+                                echo "<option value=\"".$row['building_id']."\">"
+                                    .$row['building_name'].", ".$row['campus_name']."</option>";
+                            }
+                            ?>
                         </select>
                     </div>
+
                 </div>
+
             </div>
             <div class="modal-footer">
                 <span class="error-message"></span>
