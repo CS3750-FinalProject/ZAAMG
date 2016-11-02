@@ -5,7 +5,7 @@ class Section {
     private $database;
 
     private $sectionID;
-    private $courseID$;
+    private $courseID;
     private $classroomID;
     private $professorID;
 
