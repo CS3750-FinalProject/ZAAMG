@@ -4,12 +4,7 @@
 
 include 'Campus.php';
 
-
-if (isset($_POST['campusName'])) $campusName = $_POST['campusName'];
-else $campusName = "(not entered)";
-
-
-
+$campusName = isset($_POST['campusName']) ? $_POST['campusName'] : "not entered";
 
 
 $campus = new Campus(NULL, $campusName);
@@ -19,7 +14,13 @@ echo<<<YO
 Campus Name: $campusName <br>
 YO;
 
-$campus->insertNewCampus();
+$result = $campus->campusExists($campusName);
+echo $result;
+
+if ($result == "does not exist"){
+    $campus->insertNewCampus();
+}
+
 
 
 

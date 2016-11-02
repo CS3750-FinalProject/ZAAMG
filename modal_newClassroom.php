@@ -19,7 +19,7 @@
                         <label for="classroomBuilding">Building/Campus</label>
                         <select type="text" class="form-control" id="classroomBuilding" >
 
-                            <option value="''">Please Select...</option>
+                            <option value="0">Please Select...</option>
 
                             <?php
                             $database = new Database();

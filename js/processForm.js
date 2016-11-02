@@ -11,7 +11,12 @@ $(function() {
         var courseCapacity = $("input#courseCapacity").val();
         var courseCredits = $("input#courseCredits").val();
         var deptId = $("#courseDepartment").val()
-        //var insertId = -1;  //??
+
+        if (courseCode.length == 0){
+            $("span.error-message").text("A course code is required.")
+            return false;
+        }
+
         courseExists = false;  //global variable
 
         var dataString = 'courseCode='+ courseCode + '&courseTitle=' + courseTitle
@@ -76,6 +81,15 @@ $(function() {
         var classNum = $("input#classroomNumber").val();
         var buildId = $("select#classroomBuilding").val();
 
+        if (classNum.length == 0){
+            $("span.error-message").text("A room number is required.")
+            return false;
+        }
+        if (buildId == 0){
+            $("span.error-message").text("Please select a building.")
+            return false;
+        }
+
         classroomExists = false;
 
         var dataString = 'classNum='+ classNum + '&classCapacity=' + classCap
@@ -107,6 +121,11 @@ $(function() {
         var semNumWeeks = $("input#semesterNumberWeeks").val();
         var firstBlockStart = $("input#firstBlockStart").val();
         var secondBlockStart = $("input#secondBlockStart").val();
+
+        if (semSeason == 0){
+            $("span.error-message").text("Please select a season.")
+            return false;
+        }
 
         semesterExists = false;
 
@@ -170,6 +189,61 @@ $(function() {
     }); //end of function for btn_insertBuilding
 
 
+    $("#btn_insertCampus").click(function() {
+        // validate and process form here
+        var campusName = $("input#campusName").val();
+
+        if (campusName.length == 0){
+            $("span.error-message").text("A campus name is required.")
+            return false;
+        }
+
+        campusExists = false;
+
+        var dataString = 'campusName='+ campusName;
+        //alert (dataString); return false;
+        $.ajax({
+            type: "POST",
+            url: "action_insertCampus.php",
+            data: dataString,
+            success: function(msg) {
+                if (msg.indexOf("does exist") != -1){
+                    window.campusExists = true;
+                    $("span.error-message").text("This Campus already exists.")
+                }
+                if (!window.campusExists)
+                    $('#newCampusModal').modal('hide');
+
+            }
+        });
+    }); //end of function for btn_insertCampus
+
+
+    $("#btn_insertDepartment").click(function() {
+        // validate and process form here
+        var deptCode = $("input#departmentCode").val();
+        var deptName = $("input#departmentName").val();
+
+        departmentExists = false;
+
+        var dataString = 'deptCode=' + deptCode + '&deptName=' + deptName;
+        //alert (dataString); return false;
+        $.ajax({
+            type: "POST",
+            url: "action_insertDepartment.php",
+            data: dataString,
+            success: function(msg) {
+                if (msg.indexOf("does exist") != -1){
+                    window.departmentExists = true;
+                    $("span.error-message").text("This Department already exists.")
+                }
+                if (!window.departmentExists) {
+                    $('#newDepartmentModal').modal('hide');
+                }
+
+            }
+        });
+    }); //end of function for btn_insertDepartment
 
 
     var clearErrorMessage = function() {
@@ -187,6 +261,8 @@ $(function() {
         $("input.form-control").val("");
         $("select.form-control").prop('selectedIndex', 0);
         $("input#semesterYear").val(new Date().getFullYear()+1);
+        $("input#semesterNumberWeeks").val(15);
+
         return true;
     });
 });

@@ -36,13 +36,14 @@
                             <?php
                             $database = new Database();
                             $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM ZAAMG.Department
-                        ORDER BY dept_name ASC');
+                                'SELECT dept_id, dept_name, dept_code FROM ZAAMG.Department
+                            ORDER BY dept_code ASC');
                             $selectDepts->execute();
                             $result = $selectDepts->fetchAll();
 
                             foreach($result as $row){
-                                echo "<option value=\"".$row['dept_id']."\">".$row['dept_name']."</option>";
+                                echo "<option value=\"".$row['dept_id']."\">"
+                                    .$row['dept_name']." (".$row['dept_code'].")"."</option>";
                             }
                             ?>
                             <!--<option value="0">Computer Science</option>

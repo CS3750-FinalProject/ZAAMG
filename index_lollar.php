@@ -1,4 +1,4 @@
-<?php require_once 'Database.php';?>
+<?php include 'Database.php';?>
 <!DOCTYPE html>
 <html>
   <head>
