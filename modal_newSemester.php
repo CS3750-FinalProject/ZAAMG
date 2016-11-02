@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="semester-label">Create New Semester</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 125px;">
+            <div class="modal-body" style="margin-bottom: 125px; ">
                 <div class="form-group">
                     <div class="col-xs-4">
                         <label for="semesterYear">Year</label>
@@ -33,8 +33,9 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <span class="error-message"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" id="btn_insertSemester">Save</button>
             </div>
         </div>
     </div>

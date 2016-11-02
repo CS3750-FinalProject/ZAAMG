@@ -10,7 +10,7 @@
         <option value="Summer">Summer</option>
     </select></p>
 
-    <p>Number Weeks:  <select name="semWeeks">
+    <p>Number Weeks:  <select name="semNumWeeks">
             <option value="14">14</option>
             <option value="15">15</option>
             <option value="16">16</option>

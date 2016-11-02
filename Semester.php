@@ -52,8 +52,8 @@ class Semester {
     }
 */
     public function insertNewSemester(){
-
-        $stmtInsert = $this->database->dbh->prepare(
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Semester VALUES (
               :id, :year, :season, :weeks, :start, :first_block, :second_block)");
         # send NULL for course_id because the database auto-increments it
@@ -70,6 +70,24 @@ class Semester {
             echo "Success executing Insert";
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function semesterExists($semYear, $semSeason){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT sem_id FROM ZAAMG.Semester
+              WHERE sem_year = $semYear AND sem_season = '".$semSeason."'");
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
         }
     }
 }

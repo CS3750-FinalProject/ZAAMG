@@ -104,6 +104,34 @@ $(function() {
 
 
 
+    $("#btn_insertSemester").click(function() {
+        // validate and process form here
+        var semYear = $("input#semesterYear").val();
+        var semSeason = $("select#semesterSeason").val();
+        var semStartDate = $("input#semesterStartDate").val();
+        var semNumWeeks = $("input#semesterNumberWeeks").val();
+
+        semesterExists = false;
+
+        var dataString = 'semYear='+ semYear + '&semSeason=' + semSeason
+            + '&semStart=' + semStartDate + '&semNumWeeks=' + semNumWeeks;
+        //alert (dataString); return false;
+        $.ajax({
+            type: "POST",
+            url: "action_insertSemester.php",
+            data: dataString,
+            success: function(msg) {
+                if (msg.indexOf("does exist") != -1){
+                    window.semesterExists = true;
+                    $("span.error-message").text("This Semester already exists.")
+                }
+                if (!window.semesterExists)
+                    $('#newSemesterModal').modal('hide');
+
+            }
+        });
+    }); //end of function for btn_insertClassroom
+
 
     var clearErrorMessage = function() {
         $("span.error-message").text("");
@@ -119,6 +147,7 @@ $(function() {
         $("span.error-message").text("");  //start out with no error message
         $("input.form-control").val("");
         $("select.form-control").prop('selectedIndex', 0);
+        $("input#semesterYear").val(new Date().getFullYear()+1);
         return true;
     });
 });
