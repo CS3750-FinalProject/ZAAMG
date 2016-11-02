@@ -34,8 +34,7 @@ class Section
     public function createSection(Classroom $classroom, Professor $professor,
                                   Course $course){
         $section = new Section(NULL, $course->getCourseId(),
-            $professor->getProfId(), $classroom->getClassroomID(), 0, "", "",
-            "");
+            $professor->getProfId(), $classroom->getClassroomID());
         return $section;
     }
 
@@ -95,7 +94,7 @@ class Section
     {
         return $this->endTime;
     }
-    
+
     public function getCapacity(): int
     {
         return $this->capacity;
@@ -124,9 +123,10 @@ class Section
     {
         $this->endTime = $endTime;
     }
-    
+
     public function setCapacity(int $capacity)
     {
         $this->capacity = $capacity;
     }
+
 }
