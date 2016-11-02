@@ -1,4 +1,13 @@
-<?php include 'Database.php';?>
+<?php 
+  require_once 'Database.php';
+  require_once 'modal_newCourse.php';
+  require_once 'modal_newProfessor.php';
+  require_once 'modal_newClassroom.php';
+  require_once 'modal_newSemester.php';
+  require_once 'modal_newBuilding.php';
+  require_once 'modal_newCampus.php';
+  require_once 'modal_newDepartment.php';
+echo "
 <!DOCTYPE html>
 <html>
   <head>
@@ -152,18 +161,6 @@
           </tr>
       </div>
     </div>
-
-
-  <?php
-  include 'modal_newCourse.php';
-  include 'modal_newProfessor.php';
-  include 'modal_newClassroom.php';
-  include 'modal_newSemester.php';
-  include 'modal_newBuilding.php';
-  include 'modal_newCampus.php';
-  include 'modal_newDepartment.php';
-
-  ?>
-
   </body>
 </html>
+"
