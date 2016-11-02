@@ -52,6 +52,7 @@ class Section
         $stmtInsert->bindValue(":startTime", $this->startTime);
         $stmtInsert->bindValue(":endTime", $this->endTime);
         $stmtInsert->execute();
+        $this->sectionID = (int) $dbh->lastInsertId();
     }
 
     #adding getters, most of them auto-generated, so fix things as needed.
