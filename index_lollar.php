@@ -1,5 +1,6 @@
 <?php
 require_once 'Database.php';
+require_once 'modal_newSection.php';
 require_once 'modal_newCourse.php';
 require_once 'modal_newProfessor.php';
 require_once 'modal_newClassroom.php';
@@ -49,6 +50,9 @@ echo "
             <li class='dropdown'>
               <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='true'>Create New <span class='caret'></span></a>
               <ul class='dropdown-menu'>
+                <li><a href='#' data-toggle='modal' data-target='#newSectionModal'
+                       class='newResourceLink' id='newSectionLink'>Section</a></li>
+                        <li role='separator' class='divider'></li>
                 <li><a href='#' data-toggle='modal' data-target='#newCourseModal'
                        class='newResourceLink' id='newCourseLink'>Course</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newProfessorModal'

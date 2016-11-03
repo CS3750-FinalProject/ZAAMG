@@ -239,6 +239,7 @@ $(function() {
                 }
                 if (!window.departmentExists) {
                     $('#newDepartmentModal').modal('hide');
+                    location.reload();//reloads window so that new Database is refreshed
                 }
 
             }

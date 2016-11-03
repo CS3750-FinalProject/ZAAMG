@@ -46,9 +46,7 @@
                                     .$row['dept_name']." (".$row['dept_code'].")"."</option>";
                             }
                             ?>
-                            <!--<option value="0">Computer Science</option>
-                            <option value="1">Network, Multimedia and Technology</option>
-                            <option value="2">Web Development</option>-->
+
                         </select>
                     </div>
                 </div>
