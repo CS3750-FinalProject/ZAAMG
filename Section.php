@@ -10,22 +10,27 @@ class Section
     private $classroomID;
     private $block;
     private $days = array();
+    private $daysInt;
     private $startTime;
     private $endTime;
+    private $semester;
     private $capacity;
 
     private $database;
 
     public function __construct($sectionID, $courseID, $profID, $classroomID,
-                                $block = 0, $days = array(), $startTime = "", $endTime = "", $capacity = 30) {
+                                $block = 0, /*$days = array(),*/ $daysInt = 0, $startTime = "", $endTime = "",
+                                $semester, $capacity = 30) {
         $this->sectionID = $sectionID;
         $this->courseID = $courseID;
         $this->profID = $profID;
         $this->classroomID = $classroomID;
         $this->block = $block;
-        $this->days[] = $days;
+        //$this->days[] = $days;
+        $this->daysInt = $daysInt;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
+        $this->semester = $semester;
         $this->capacity = $capacity;
 
         $this->database = new Database();
@@ -40,20 +45,47 @@ class Section
 
     public function insertNewSection(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO zaamg.Course VALUES 
-        (:secID, :courseID, :profID, :classID, :block, :days, :startTime, 
-        :endTime)");
+        $stmtInsert = $dbh->prepare("INSERT INTO zaamg.Section VALUES
+        (:secID, :courseID, :profID, :classID, :semester, :days, :startTime,
+        :endTime, :block, :capacity)");
         $stmtInsert->bindValue(":secID", NULL);
         $stmtInsert->bindValue(":courseID", $this->courseID);
         $stmtInsert->bindValue(":profID", $this->profID);
         $stmtInsert->bindValue(":classID", $this->classroomID);
         $stmtInsert->bindValue(":block", $this->block);
-        $stmtInsert->bindValue(":days", $this->days);
+        //$stmtInsert->bindValue(":days", $this->days);
+        $stmtInsert->bindValue(":days", $this->daysInt);
         $stmtInsert->bindValue(":startTime", $this->startTime);
         $stmtInsert->bindValue(":endTime", $this->endTime);
+        $stmtInsert->bindValue(":capacity", $this->capacity);
+        $stmtInsert->bindValue(":semester", $this->semester);
         $stmtInsert->execute();
         $this->sectionID = (int) $dbh->lastInsertId();
     }
+
+    public function sectionExists($courseID, $profID, $roomID, $semID, $daysInt, $startTime){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT section_id FROM ZAAMG.Section
+              WHERE course_id = ".$dbh->quote($courseID)."
+              AND prof_id = ".$dbh->quote($profID)."
+              AND classroom_id = ".$dbh->quote($roomID)."
+              AND sem_id = ".$dbh->quote($semID)."
+              AND section_days = ".$dbh->quote($daysInt)."
+              AND section_start_time = ".$dbh->quote($startTime));
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+        }
+    }
+
 
     #adding getters, most of them auto-generated, so fix things as needed.
     public function getSectionID(): int

@@ -87,14 +87,13 @@
                     <div class="col-xs-4">
                         <label for="sectionDays">Days</label>
                         <select multiple  class="form-control" id="sectionDays"  >
-                        <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                            <option value="Sunday">Sunday</option>
-
+                        <option value="1">Monday</option>
+                            <option value=2>Tuesday</option>
+                            <option value=4>Wednesday</option>
+                            <option value=8>Thursday</option>
+                            <option value=16>Friday</option>
+                            <option value=32>Saturday</option>
+                            <option value=64>Sunday</option> //are there ever Sunday classes?
                         </select>
                     </div>
                     <div class="col-xs-4">
@@ -102,18 +101,51 @@
                         <input type="time" class="form-control" id="sectionStartTime"  >
                     </div>
                     <div class="col-xs-4">
+                        <label for="sectionSemester">Semester</label>
+                        <select class="form-control" id="sectionSemester"  >
+                            <option value="0">Please Select...</option>
+
+                            <?php
+                            $selectSem = $database->getdbh()->prepare(
+                                'SELECT sem_id, sem_season, sem_year, sem_start_date
+                                  FROM ZAAMG.Semester
+                                  ORDER BY sem_start_date DESC');
+                            $selectSem->execute();
+                            $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result as $row){
+                                echo "<option value=\"".$row['sem_id']."\">"
+                                    .$row['sem_year']." "
+                                    .$row['sem_season']
+                                    ."</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-xs-4">
                         <label for="sectionEndTime">End Time</label>
-                        <input type="time" class="form-control" id="sectionStartTime"  >
+                        <input type="time" class="form-control" id="sectionEndTime"  >
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="sectionBlock">Block</label>
+                        <select class="form-control" id="sectionBlock">
+                            <option value="0">Full</option>
+                            <option value="1">First</option>
+                            <option value="2">Second</option>
+                        </select>
                     </div>
 
-
+                    <div class="col-xs-2">
+                        <label for="sectionCapacity">Capacity</label>
+                        <input type="number" class="form-control" id="sectionCapacity"  >
+                    </div>
 
                 </div>
             </div>
             <div class="modal-footer">
                 <span class="error-message"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btn_insertBuilding">Save</button>
+                <button type="button" class="btn btn-primary" id="btn_insertSection">Save</button>
             </div>
         </div>
     </div>

@@ -247,6 +247,51 @@ $(function() {
     }); //end of function for btn_insertDepartment
 
 
+    $("#btn_insertSection").click(function() {
+        // validate and process form here
+        var sectionCourse = $("#sectionCourse").val();
+        var sectionProfessor = $("#sectionProfessor").val();
+        var sectionClassroom = $("#sectionClassroom").val();
+        var sectionDays = $("select#sectionDays").val();
+        var daysInt = 0;
+        $.each(sectionDays, function(index, value){
+            daysInt += parseInt(value);
+        });
+        //alert(daysInt);
+        var sectionStartTime = $("#sectionStartTime").val();
+        var sectionEndTime = $("#sectionEndTime").val();
+        var sectionBlock = $("#sectionBlock").val();
+        var sectionSemester = $("#sectionSemester").val();
+        var sectionCapacity = $("#sectionCapacity").val();
+
+
+        sectionExists = false;
+
+        var dataString = 'sectionCourse=' + sectionCourse + '&sectionProfessor=' + sectionProfessor
+            + '&sectionClassroom=' + sectionClassroom + '&sectionDays=' + daysInt
+            + '&sectionStartTime=' + sectionStartTime + '&sectionEndTime=' + sectionEndTime
+            + '&sectionBlock=' + sectionBlock + '&sectionCapacity=' + sectionCapacity
+            + '&sectionSemester=' + sectionSemester;
+        //alert (dataString); return false;
+        $.ajax({
+            type: "POST",
+            url: "action_insertSection.php",
+            data: dataString,
+            success: function(msg) {
+                alert(msg);
+                if (msg.indexOf("does exist") != -1){
+                    window.sectionExists = true;
+                    $("span.error-message").text("This Section already exists.")
+                }
+                if (!window.sectionExists) {
+                    $('#newSectionModal').modal('hide');
+                    location.reload();//reloads window so that new Database is refreshed
+                }
+
+            }
+        });
+    }); //end of function for btn_insertSection
+
     var clearErrorMessage = function() {
         $("span.error-message").text("");
     };
