@@ -9,8 +9,8 @@ class Section
     private $profID;
     private $classroomID;
     private $block;
-    private $days = array();
-    private $daysInt;
+    //private $days = array();
+    private $days;
     private $startTime;
     private $endTime;
     private $semester;
@@ -19,7 +19,7 @@ class Section
     private $database;
 
     public function __construct($sectionID, $courseID, $profID, $classroomID,
-                                $block = 0, /*$days = array(),*/ $daysInt = 0, $startTime = "", $endTime = "",
+                                $block = 0, /*$days = array(),*/ $days, $startTime = "", $endTime = "",
                                 $semester, $capacity = 30) {
         $this->sectionID = $sectionID;
         $this->courseID = $courseID;
@@ -27,7 +27,7 @@ class Section
         $this->classroomID = $classroomID;
         $this->block = $block;
         //$this->days[] = $days;
-        $this->daysInt = $daysInt;
+        $this->days = $days;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
         $this->semester = $semester;
@@ -53,8 +53,7 @@ class Section
         $stmtInsert->bindValue(":profID", $this->profID);
         $stmtInsert->bindValue(":classID", $this->classroomID);
         $stmtInsert->bindValue(":block", $this->block);
-        //$stmtInsert->bindValue(":days", $this->days);
-        $stmtInsert->bindValue(":days", $this->daysInt);
+        $stmtInsert->bindValue(":days", $this->days);
         $stmtInsert->bindValue(":startTime", $this->startTime);
         $stmtInsert->bindValue(":endTime", $this->endTime);
         $stmtInsert->bindValue(":capacity", $this->capacity);
@@ -63,7 +62,7 @@ class Section
         $this->sectionID = (int) $dbh->lastInsertId();
     }
 
-    public function sectionExists($courseID, $profID, $roomID, $semID, $daysInt, $startTime){
+    public function sectionExists($courseID, $profID, $roomID, $semID, $days, $startTime){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT section_id FROM ZAAMG.Section
@@ -71,7 +70,7 @@ class Section
               AND prof_id = ".$dbh->quote($profID)."
               AND classroom_id = ".$dbh->quote($roomID)."
               AND sem_id = ".$dbh->quote($semID)."
-              AND section_days = ".$dbh->quote($daysInt)."
+              AND section_days = ".$dbh->quote($days)."
               AND section_start_time = ".$dbh->quote($startTime));
         try {
             $stmtSelect->execute();

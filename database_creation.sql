@@ -24,7 +24,7 @@ CREATE TABLE `Section`
 `prof_id` SMALLINT NOT NULL ,
 `classroom_id` INT NOT NULL ,
 `sem_id` INT NOT NULL,
-`section_days` INT NOT NULL ,
+`section_days` VARCHAR(40) NOT NULL ,
 `section_start_time` TIME NOT NULL ,
 `section_end_time` TIME NOT NULL,
 `section_block` INT NOT NULL, 

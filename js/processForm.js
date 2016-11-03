@@ -253,9 +253,9 @@ $(function() {
         var sectionProfessor = $("#sectionProfessor").val();
         var sectionClassroom = $("#sectionClassroom").val();
         var sectionDays = $("select#sectionDays").val();
-        var daysInt = 0;
+        var daysString = "";
         $.each(sectionDays, function(index, value){
-            daysInt += parseInt(value);
+            daysString += value;
         });
         //alert(daysInt);
         var sectionStartTime = $("#sectionStartTime").val();
@@ -268,7 +268,7 @@ $(function() {
         sectionExists = false;
 
         var dataString = 'sectionCourse=' + sectionCourse + '&sectionProfessor=' + sectionProfessor
-            + '&sectionClassroom=' + sectionClassroom + '&sectionDays=' + daysInt
+            + '&sectionClassroom=' + sectionClassroom + '&sectionDays=' + daysString
             + '&sectionStartTime=' + sectionStartTime + '&sectionEndTime=' + sectionEndTime
             + '&sectionBlock=' + sectionBlock + '&sectionCapacity=' + sectionCapacity
             + '&sectionSemester=' + sectionSemester;
@@ -278,7 +278,7 @@ $(function() {
             url: "action_insertSection.php",
             data: dataString,
             success: function(msg) {
-                alert(msg);
+                //alert(msg);  //use this to debug
                 if (msg.indexOf("does exist") != -1){
                     window.sectionExists = true;
                     $("span.error-message").text("This Section already exists.")
