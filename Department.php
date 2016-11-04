@@ -38,6 +38,7 @@ class Department {
         $stmtInsert->bindValue(":code", $this->deptCode);
         $stmtInsert->execute();
     }
+<<<<<<< HEAD
 
     public function departmentExists($deptCode, $deptName){
         $dbh = $this->database->getdbh();
@@ -58,3 +59,6 @@ class Department {
         }
     }
 }
+=======
+}
+>>>>>>> refs/remotes/origin/master
