@@ -13,7 +13,7 @@
 /tmp
 
 # Ignore all this stuff
-.idea/ZAAMG.iml
+ZAAMG.iml
 .idea/copyright/
 .idea/deployment.xml
 .idea/modules.xml
@@ -24,3 +24,4 @@
 .idea/compiler.xml
 .idea/uiDesigner.xml
 .idea/encodings.xml
+*.xml
