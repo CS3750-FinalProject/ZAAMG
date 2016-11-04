@@ -77,8 +77,7 @@ class Course {
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT course_id FROM ZAAMG.Course
-              WHERE course_code = $courseCode
-              AND dept_id = $deptId");
+              WHERE course_code = ".$dbh->quote($courseCode));
         try {
             $stmtSelect->execute();
             $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
