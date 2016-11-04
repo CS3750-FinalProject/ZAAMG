@@ -15,6 +15,10 @@ class Section
     private $endTime;
     private $semester;
     private $capacity;
+    //adding block definitions
+    public static $FULL_BLOCK = 0;
+    public static $FIRST_BLOCK = 1;
+    public static $SECOND_BLOCK = 2;
 
     private $database;
 
