@@ -20,6 +20,7 @@
                         <select type="text" class="form-control" id="classroomBuilding" >
 
                             <option value="0">Please Select...</option>
+                            <option value="-1">None</option>
 
                             <?php
                             $database = new Database();

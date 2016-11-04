@@ -85,6 +85,101 @@ class Section
         }
     }
 
+    /*public function getSectionCourseName(){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT course_title FROM ZAAMG.Course
+              WHERE course_id = ".$dbh->quote($this->courseID));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionCourseName: ".$e->getMessage();
+        }
+    }*/
+
+    public function getSectionProperty($sql_property, $table, $id, $object_property){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT {$sql_property} FROM ZAAMG.{$table}
+              WHERE {$id} = ".$dbh->quote($this->{$object_property}));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionProperty: ".$e->getMessage();
+        }
+    }
+
+    public function getSectionProperty_Join_3($sql_property, $table1, $table2, $id1, $id2, $object_property){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT {$sql_property} FROM ZAAMG.Section S
+              JOIN ZAAMG.{$table1} A
+              ON S.{$id1} = A.{$id1}
+              JOIN ZAAMG.{$table2} B
+              ON A.{$id2} = B.{$id2}
+              WHERE S.{$id1} = ".$dbh->quote($this->{$object_property}));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionProperty: ".$e->getMessage();
+        }
+    }
+
+    public function getSectionProperty_Join_4($sql_property, $table1, $table2, $table3, $id1, $id2, $id3, $object_property){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT {$sql_property} FROM ZAAMG.Section S
+              JOIN ZAAMG.{$table1} A
+              ON S.{$id1} = A.{$id1}
+              JOIN ZAAMG.{$table2} B
+              ON A.{$id2} = B.{$id2}
+              JOIN ZAAMG.{$table3} C
+              ON B.{$id3} = C.{$id3}
+              WHERE S.{$id1} = ".$dbh->quote($this->{$object_property}));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionProperty: ".$e->getMessage();
+        }
+    }
+
+
+    /*public function getBuildingCode(){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT building_code FROM ZAAMG.Section s
+              JOIN ZAAMG.Classroom c
+              ON s.classroom_id = c.classroom_id
+              JOIN ZAAMG.Building b
+              ON c.building_id = b.building_id
+              WHERE s.classroom_id = ".$dbh->quote($this->classroomID));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionProperty: ".$e->getMessage();
+        }
+    }*/
+
+    public function getDayString(){
+        $theDays = explode( "day", $this->days);
+        $theLetters = "";
+
+        foreach($theDays as $day){
+            $theLetters .= $day != "Thurs" ? substr($day,0,1) : substr($day,0,2);
+        }
+
+        return $theLetters;
+    }
 
     #adding getters, most of them auto-generated, so fix things as needed.
     public function getSectionID(): int
@@ -107,9 +202,14 @@ class Section
         return $this->classroomID;
     }
 
-    public function getBlock(): int
+    public function getBlock(): string
     {
-        return $this->block;
+        if ($this->block == 0)
+            return "Full Semester";
+        elseif ($this->block == 1)
+            return "First Block";
+        else
+            return "Second Block";
     }
 
     public function getDays(): array
@@ -119,12 +219,14 @@ class Section
 
     public function getStartTime(): string
     {
-        return $this->startTime;
+        $theTime = strtotime($this->startTime);
+        return date("h:i A", $theTime);
     }
 
     public function getEndTime(): string
     {
-        return $this->endTime;
+        $theTime = strtotime($this->endTime);
+        return date("h:i A", $theTime);
     }
 
     public function getCapacity(): int
