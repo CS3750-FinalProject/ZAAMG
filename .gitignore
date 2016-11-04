@@ -12,5 +12,15 @@
 !/log/.keep
 /tmp
 
-# Ignore .idea, which is user specific
-.idea/
+# Ignore all this stuff
+.idea/ZAAMG.iml
+.idea/copyright/
+.idea/deployment.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/php.xml
+.idea/compiler.xml
+.idea/uiDesigner.xml
+.idea/encodings.xml
