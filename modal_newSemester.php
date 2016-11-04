@@ -15,9 +15,9 @@
                         <label for="semesterSeason">Season</label>
                         <select class="form-control" id="semesterSeason" >
                             <option value="0">Please Select...</option>
-                            <option value="spring">Spring</option>
-                            <option value="summer">Summer</option>
-                            <option value="fall">Fall</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Summer">Summer</option>
+                            <option value="Fall">Fall</option>
                         </select>
                     </div>
                 </div>
