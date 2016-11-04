@@ -218,7 +218,7 @@ class Section
 
     public function getDays(): array
     {
-        //there is also a getDayString() method 
+        //there is also a getDayString() method
         //which returns strings like MW, TTh
         return $this->days;
     }
