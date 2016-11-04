@@ -1,7 +1,5 @@
 <?php
 
-#NOTE: I wrote this at work without a ide, so if there are typos or it is otherwise weird, please fix it. Thanks!
-
 require_once "Database.php";
 
 class User {
@@ -15,13 +13,13 @@ class User {
     can see everything, but can't change it.*/
     private $userType;
     
-    public static __construct($username, $password, $userType = $this->$VIEWER_FLAG) {
+    public function __construct($username, $password, $userType = 2) {
         $this->username = $username;
         $this->password = $password;
-        if($userType < 0 || $usertype > 3) {
-            echo "Error. Invalid User Type entered, user will be a viewer."
-            $userType = $this->VIEWER_FLAG;
+        if($userType < 0 || $userType > 3) {
+            echo "Error. Invalid User Type entered, user will be a viewer.";
+            $userType = User::$VIEWER_FLAG;
         }
-        else $this->userType = $userType;
+        $this->userType = $userType;
     }
 }
