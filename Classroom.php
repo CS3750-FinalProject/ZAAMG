@@ -58,7 +58,7 @@ class Classroom {
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT classroom_id FROM ZAAMG.Classroom
-              WHERE classroom_number = $classNum AND building_id = $buildId");
+              WHERE classroom_number = {$dbh->quote($classNum)} AND building_id = {$dbh->quote($buildId)}");
         try {
             $stmtSelect->execute();
             $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);

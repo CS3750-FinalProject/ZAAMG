@@ -11,7 +11,7 @@
                 <div class="form-group" >
                     <div class="col-xs-4">
                         <label for="courseCode">Code</label>
-                        <input type="number" class="form-control" id="courseCode" placeholder="1000" >
+                        <input type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
                     </div>
                     <div class="col-xs-8">
                         <label for="courseTitle">Title</label>
@@ -31,7 +31,7 @@
                     <div class="col-xs-8">
                         <label for="courseDepartment">Department</label>
                         <select class="form-control" id="courseDepartment" >
-                            <option value="''" >Please Select...</option>
+                            <option value="0" >Please Select...</option>
 
                             <?php
                             $database = new Database();

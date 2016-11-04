@@ -10,10 +10,10 @@ $(function() {
         var courseTitle = $("input#courseTitle").val();
         var courseCapacity = $("input#courseCapacity").val();
         var courseCredits = $("input#courseCredits").val();
-        var deptId = $("#courseDepartment").val()
+        var deptId = $("#courseDepartment").val();
 
         if (courseCode.length == 0){
-            $("span.error-message").text("A course code is required.")
+            $("span.error-message").text("A course code is required.");
             return false;
         }
 
@@ -22,18 +22,21 @@ $(function() {
         var dataString = 'courseCode='+ courseCode + '&courseTitle=' + courseTitle
             + '&courseCap=' + courseCapacity + '&courseCred=' + courseCredits
             + '&deptId=' + deptId;
-        //alert (dataString);return false;
+        //alert(dataString); return false;
         $.ajax({
             type: "POST",
             url: "action_insertCourse.php",
             data: dataString,
             success: function(msg) {
+                //alert(msg); return false;
                 if (msg.indexOf("does exist") != -1){
                     window.courseExists = true;
                     $("span.error-message").text("This Course already exists.")
                 }
-                if (!window.courseExists)
+                if (!window.courseExists) {
                     $('#newCourseModal').modal('hide');
+                    location.reload();//reloads window so that new Database is refreshed
+                }
 
             }
         });
@@ -63,13 +66,14 @@ $(function() {
             url: "action_insertProfessor.php",
             data: dataString,
             success: function(msg) {
-                if (msg.indexOf("does exist") != -1){
+                if (msg.indexOf("does exist") != -1) {
                     window.profExists = true;
                     $("span.error-message").text("A Professor with this email address already exists.")
                 }
-                if (!window.profExists)
+                if (!window.profExists){
                     $('#newProfessorModal').modal('hide');
-
+                    location.reload();//reloads window so that new Database is refreshed
+                }
             }
         });
     }); //end of function for btn_insertProfessor
@@ -104,8 +108,10 @@ $(function() {
                     window.classroomExists = true;
                     $("span.error-message").text("This Classroom already exists.")
                 }
-                if (!window.classroomExists)
+                if (!window.classroomExists) {
+                    location.reload();//reloads window so that new Database is refreshed
                     $('#newClassroomModal').modal('hide');
+                }
 
             }
         });
@@ -142,9 +148,10 @@ $(function() {
                     window.semesterExists = true;
                     $("span.error-message").text("This Semester already exists.")
                 }
-                if (!window.semesterExists)
+                if (!window.semesterExists) {
                     $('#newSemesterModal').modal('hide');
-
+                    location.reload();//reloads window so that new Database is refreshed
+                }
             }
         });
     }); //end of function for btn_insertSemester
@@ -181,9 +188,10 @@ $(function() {
                     window.buildingExists = true;
                     $("span.error-message").text("This Building already exists.")
                 }
-                if (!window.buildingExists)
+                if (!window.buildingExists) {
                     $('#newBuildingModal').modal('hide');
-
+                    location.reload();//reloads window so that new Database is refreshed
+                }
             }
         });
     }); //end of function for btn_insertBuilding
@@ -211,9 +219,10 @@ $(function() {
                     window.campusExists = true;
                     $("span.error-message").text("This Campus already exists.")
                 }
-                if (!window.campusExists)
+                if (!window.campusExists) {
                     $('#newCampusModal').modal('hide');
-
+                    location.reload();//reloads window so that new Database is refreshed
+                }
             }
         });
     }); //end of function for btn_insertCampus

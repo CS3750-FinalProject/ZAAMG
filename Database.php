@@ -1,5 +1,5 @@
 <?php
-include 'Section.php';
+require_once 'Section.php';
 
 class Database
 {
