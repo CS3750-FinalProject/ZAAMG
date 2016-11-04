@@ -10,7 +10,7 @@ class Section
     private $classroomID;
     private $block;
     //private $days = array();
-    private $days;
+    private $days; //storing days as a string, eg. "MondayWednesday"
     private $startTime;
     private $endTime;
     private $semester;
@@ -31,7 +31,7 @@ class Section
         $this->classroomID = $classroomID;
         $this->block = $block;
         //$this->days[] = $days;
-        $this->days = $days;
+        $this->days = $days;  //storing days as a string, eg. "MondayWednesday"
         $this->startTime = $startTime;
         $this->endTime = $endTime;
         $this->semester = $semester;
@@ -70,7 +70,7 @@ class Section
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT section_id FROM ZAAMG.Section
-              WHERE course_id = ".$dbh->quote($courseID)."
+              WHERE course_id = ".$dbh->quote($courseID)."    /* MySQL complains unless we use $dbh->quote()  */
               AND prof_id = ".$dbh->quote($profID)."
               AND classroom_id = ".$dbh->quote($roomID)."
               AND sem_id = ".$dbh->quote($semID)."
@@ -85,24 +85,23 @@ class Section
                 return "does not exist";
             }
         } catch (Exception $e) {
-            echo "Here's what went wrong: ".$e->getMessage();
+            echo "sectionExists(): ".$e->getMessage();
         }
     }
 
-    /*public function getSectionCourseName(){
-        $dbh = $this->database->getdbh();
-        $stmtSelect = $dbh->prepare(
-            "SELECT course_title FROM ZAAMG.Course
-              WHERE course_id = ".$dbh->quote($this->courseID));
-        try{
-            $stmtSelect->execute();
-            $result = $stmtSelect->fetch();
-            return $result[0];
-        }catch (Exception $e){
-            echo "getSectionCourseName: ".$e->getMessage();
-        }
-    }*/
 
+
+    /*  Returns:    A Section property that has to be looked up in another table.
+     *  Ex:         A Section table record contains a classroom_id, but the classroom_name
+     *              must be looked up in the Classroom table.
+     *  Args:
+     *          $sql_property:      the database column name of the desired property,
+     *                              eg, classroom_name
+     *          $table:             the database table to get the property from, eg. Classroom
+     *          $id:                the foreign key id number, eg. classroom_id stored in Section record
+     *          $object_property:   the php Section object attribute used as foreign key id,
+     *                              eg "classroomID" if using $section->classroomID
+     */
     public function getSectionProperty($sql_property, $table, $id, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
@@ -117,6 +116,22 @@ class Section
         }
     }
 
+    /*  Returns:    A Section property that has to be looked up in the Section table
+     *              joined to two other tables.
+     *  Ex:         A Section table record contains a classroom_id, but the building_code
+     *              must be looked up in the Building table.  Section joins to Classroom
+     *              joins to Building.
+     *  Args:
+     *          $sql_property:      the database column name of the desired property,
+     *                              eg, building_code
+     *          $table1:            the first database table to join to
+     *          $table2:            the second database table to join to
+     *                              (contains the desired property)
+     *          $id1:               the foreign key id for the first join, eg. classroom_id
+     *          $id2:               the foreign key id for the second join, eg. building_id
+     *          $object_property:   the php Section object attribute used as first foreign key id,
+     *                              eg "classroomID" if using $section->classroomID
+     */
     public function getSectionProperty_Join_3($sql_property, $table1, $table2, $id1, $id2, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
@@ -135,6 +150,25 @@ class Section
         }
     }
 
+
+    /*  Returns:    A Section property that has to be looked up in the Section table
+     *              joined to three other tables.
+     *  Ex:         A Section table record contains a classroom_id, but the campus_name
+     *              must be looked up in the Campus table.  Section joins to Classroom
+     *              joins to Building joins to Campus.
+     *  Args:
+     *          $sql_property:      the database column name of the desired property,
+     *                              eg, building_code
+     *          $table1:            the first database table to join to
+     *          $table2:            the second database table to join to
+     *          $table3:            the third database table to join to
+     *                              (contains the desired property)
+     *          $id1:               the foreign key id for the first join, eg. classroom_id
+     *          $id2:               the foreign key id for the second join, eg. building_id
+     *          $id3:               the foreign key id for the third join, eg. campus_id
+     *          $object_property:   the php Section object attribute used as first foreign key id,
+     *                              eg "classroomID" if using $section->classroomID
+     */
     public function getSectionProperty_Join_4($sql_property, $table1, $table2, $table3, $id1, $id2, $id3, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
@@ -156,32 +190,18 @@ class Section
     }
 
 
-    /*public function getBuildingCode(){
-        $dbh = $this->database->getdbh();
-        $stmtSelect = $dbh->prepare(
-            "SELECT building_code FROM ZAAMG.Section s
-              JOIN ZAAMG.Classroom c
-              ON s.classroom_id = c.classroom_id
-              JOIN ZAAMG.Building b
-              ON c.building_id = b.building_id
-              WHERE s.classroom_id = ".$dbh->quote($this->classroomID));
-        try{
-            $stmtSelect->execute();
-            $result = $stmtSelect->fetch();
-            return $result[0];
-        }catch (Exception $e){
-            echo "getSectionProperty: ".$e->getMessage();
-        }
-    }*/
-
+/*
+ *   Returns:    A string of Day First Initials, eg. MWF
+ */
     public function getDayString(){
-        $theDays = explode( "day", $this->days);
+        $theDays = explode( "day", $this->days);    //Split a string MondayTuesdayWednesdayThurs
+                                                    //into an array {'Mon', 'Tues', 'Wednes', 'Thurs'}
         $theLetters = "";
 
         foreach($theDays as $day){
+            // build a string made of day first letters, with exception of 'Th' for Thursday
             $theLetters .= $day != "Thurs" ? substr($day,0,1) : substr($day,0,2);
         }
-
         return $theLetters;
     }
 
@@ -223,12 +243,14 @@ class Section
         return $this->days;
     }
 
+    //maybe make a separate method for getting this particular format
     public function getStartTime(): string
     {
         $theTime = strtotime($this->startTime);
         return date("h:i A", $theTime);
     }
 
+    //maybe make a separate method for getting this particular format
     public function getEndTime(): string
     {
         $theTime = strtotime($this->endTime);
@@ -239,6 +261,8 @@ class Section
     {
         return $this->capacity;
     }
+
+
 
     /*setters auto-generated for block, days, start time, and end time
     setters for the others would be done before with the
@@ -270,3 +294,40 @@ class Section
     }
 
 }
+
+
+
+//old code...
+
+
+/*public function getSectionCourseName(){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT course_title FROM ZAAMG.Course
+              WHERE course_id = ".$dbh->quote($this->courseID));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionCourseName: ".$e->getMessage();
+        }
+    }*/
+
+/*public function getBuildingCode(){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT building_code FROM ZAAMG.Section s
+              JOIN ZAAMG.Classroom c
+              ON s.classroom_id = c.classroom_id
+              JOIN ZAAMG.Building b
+              ON c.building_id = b.building_id
+              WHERE s.classroom_id = ".$dbh->quote($this->classroomID));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getSectionProperty: ".$e->getMessage();
+        }
+    }*/

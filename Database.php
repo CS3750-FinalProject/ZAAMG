@@ -20,6 +20,11 @@ class Database
         }
     }
 
+
+    /*  Returns:        an array of Section objects, one per Section record in database
+     *  Args:
+     *      $orderBy:   might need this for sorting the Sections different ways
+     */
     public function getAllSections($orderBy){
         $allSections = [];
         $dbh = $this->getdbh();
@@ -27,15 +32,15 @@ class Database
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();
-            foreach($result as $index=>$section){
-                $allSections[$index] = new Section(
-                    $section['section_id'], $section['course_id'], $section['prof_id'], $section['classroom_id'],
-                    $section['sem_id'],$section['section_days'], $section['section_start_time'], $section['section_end_time'],
-                    $section['section_block'], $section['section_capacity']);
+            foreach($result as $index=>$sectionRecord){
+                $allSections[] = new Section(  //don't need to put an index number between those brackets, awesome
+                    $sectionRecord['section_id'], $sectionRecord['course_id'], $sectionRecord['prof_id'], $sectionRecord['classroom_id'],
+                    $sectionRecord['sem_id'],$sectionRecord['section_days'], $sectionRecord['section_start_time'], $sectionRecord['section_end_time'],
+                    $sectionRecord['section_block'], $sectionRecord['section_capacity']);
             }
             return $allSections;
         }catch(Exception $e){
-            echo "Here's what went wrong this time: ".$e->getMessage();
+            echo "getAllSections: ".$e->getMessage();
         }
     }
 
