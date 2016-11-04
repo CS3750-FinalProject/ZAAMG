@@ -77,7 +77,7 @@ class Semester {
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT sem_id FROM ZAAMG.Semester
-              WHERE sem_year = $semYear AND sem_season = '".$semSeason."'");
+              WHERE sem_year = {$dbh->quote($semYear)} AND sem_season = {$dbh->quote($semSeason)}");
         try {
             $stmtSelect->execute();
             $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
