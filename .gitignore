@@ -12,5 +12,5 @@
 !/log/.keep
 /tmp
 
-# Inore .idea, which is user specific
+# Ignore .idea, which is user specific
 .idea/
