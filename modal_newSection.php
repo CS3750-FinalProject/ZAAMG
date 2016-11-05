@@ -138,7 +138,7 @@
 
                     <div class="col-xs-2">
                         <label for="sectionCapacity">Capacity</label>
-                        <input type="number" class="form-control" id="sectionCapacity"  >
+                        <input type="number" class="form-control" id="sectionCapacity" min="1" >
                     </div>
 
                 </div>

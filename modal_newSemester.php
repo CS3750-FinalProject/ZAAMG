@@ -29,7 +29,7 @@
                     <div class="col-xs-3"></div>
                     <div class="col-xs-3">
                         <label for="semesterNumberWeeks">Number Weeks</label>
-                        <input type="number" class="form-control" id="semesterNumberWeeks" value=14 >
+                        <input type="number" class="form-control" id="semesterNumberWeeks" value=14 min=14 max=16>
                     </div>
                 </div>
                 <div class="col-xs-12">

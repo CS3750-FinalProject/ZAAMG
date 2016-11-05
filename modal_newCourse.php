@@ -22,11 +22,11 @@
                 <div class="form-group">
                     <div class="col-xs-2">
                         <label for="courseCapacity">Capacity</label>
-                        <input type="number" class="form-control" id="courseCapacity" value=30 >
+                        <input type="number" class="form-control" id="courseCapacity" value=30 min=1>
                     </div>
                     <div class="col-xs-2">
                         <label for="courseCredits">Credits</label>
-                        <input type="number" class="form-control" id="courseCredits" value=4 >
+                        <input type="number" class="form-control" id="courseCredits" value=4 min=1>
                     </div>
                     <div class="col-xs-8">
                         <label for="courseDepartment">Department</label>

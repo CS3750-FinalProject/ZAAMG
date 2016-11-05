@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <div class="col-xs-2">
                         <label for="classroomCapacity">Capacity</label>
-                        <input type="number" class="form-control" id="roomCapacity" value=30 >
+                        <input type="number" class="form-control" id="roomCapacity" value=30 min=1>
                     </div>
                     <div class="col-xs-3">
                         <label for="classroomNumber">Room Number</label>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-xs-3">
                         <label for="classroomWorkstations">Workstations</label>
-                        <input type="number" class="form-control" id="roomWorkstations" value=0 >
+                        <input type="number" class="form-control" id="roomWorkstations" value=0 min=0 placeholder="0">
                     </div>
                 </div>
 
