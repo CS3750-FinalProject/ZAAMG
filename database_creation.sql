@@ -77,6 +77,7 @@ CREATE TABLE `Classroom`
 ( `classroom_id` INT NOT NULL AUTO_INCREMENT , 
 `classroom_number` CHAR(10) NOT NULL ,
 `classroom_capacity` SMALLINT NOT NULL ,
+`classroom_workstations` SMALLINT,
 `building_id` INT NOT NULL,
 PRIMARY KEY (`classroom_id`) );
 

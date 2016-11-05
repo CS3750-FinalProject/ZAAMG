@@ -83,6 +83,7 @@ $(function() {
         // validate and process form here
         var classCap = $("input#roomCapacity").val();
         var classNum = $("input#classroomNumber").val();
+        var workstations = $("input#roomWorkstations").val();
         var buildId = $("select#classroomBuilding").val();
 
         if (classNum.length == 0){
@@ -97,13 +98,14 @@ $(function() {
         classroomExists = false;
 
         var dataString = 'classNum='+ classNum + '&classCapacity=' + classCap
-            + '&buildId=' + buildId;
+            + '&roomWorkstations=' + workstations + '&buildId=' + buildId;
         //alert (dataString);return false;
         $.ajax({
             type: "POST",
             url: "action_insertClassroom.php",
             data: dataString,
             success: function(msg) {
+                //alert(msg); return false; use for debugging
                 if (msg.indexOf("does exist") != -1){
                     window.classroomExists = true;
                     $("span.error-message").text("This Classroom already exists.")

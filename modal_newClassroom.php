@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="classroom-label">Create New Classroom</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 75px;">
+            <div class="modal-body" style="margin-bottom: 110px;">
                 <div class="form-group">
                     <div class="col-xs-2">
                         <label for="classroomCapacity">Capacity</label>
@@ -39,7 +39,10 @@
                             ?>
                         </select>
                     </div>
-
+                    <div class="col-xs-3">
+                        <label for="classroomWorkstations">Workstations</label>
+                        <input type="number" class="form-control" id="roomWorkstations" value=0 >
+                    </div>
                 </div>
 
             </div>
