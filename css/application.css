@@ -19,11 +19,19 @@
 .action-edit{
   max-width: 20px;
   margin-right: 2px;
+  cursor: pointer;
 }
 
 .action-delete{
   max-width: 15px;
   margin-left: 2px;
+  cursor: pointer;
+}
+
+.action-save{
+  max-width: 16px;
+  margin-left: 2px;
+  cursor: pointer;
 }
 
 .list-data, td, th {
@@ -32,6 +40,18 @@
   padding: 8px;
 }
 
-tr:nth-child(even) {
+tr:nth-child(4n+0) {
   background-color: #ededed;
+}
+
+.hide {
+  display: none;
+}
+
+.update-input-width {
+  max-width: 200px;
+}
+
+.update-inline {
+  display: inline;
 }

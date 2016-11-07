@@ -5,6 +5,7 @@
     <link href="css/application.css" rel="stylesheet">
     <script src="js/jquery-3.1.1.min.js" charset="utf-8"></script>
     <script src="js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="js/section-updates.js" charset="utf-8"></script>
     <title>Project ZAAMG</title>
   </head>
   <body>
@@ -67,75 +68,675 @@
             <th>Location</th>
             <th>Actions</th>
           </tr>
-          <tr>
+          <tr id="section_1">
             <td>CS 1030 <em>Foundations of Computer Science</em></td>
             <td>Spencer Hilton<br><small><em>spencerhilton@weber.edu</em></small></td>
             <td><strong>MW: </strong>10:00-11:50<br /><small><em>Full Block</em></small></td>
             <td><strong>TE 107</strong><br /><small>Ogden Campus</small>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_1"/>
+              <img src="img/close.png" class="action-delete" id="destroy_1"/>
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_1">
+            <td>
+              <p><strong> Editing: </strong>CS 1030 <em>Foundations of Computer Science</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_1"/></td>
+          </tr>
+          <tr id="section_2">
             <td>CS 1400 <em>Fundamentals of Programming</em></td>
             <td>Spencer Hilton<br><small><em>spencerhilton@weber.edu</em></small></td>
             <td><strong>TR: </strong>10:00-11:50<br /><small><em>First Block</em></small></td>
             <td><strong>TE 109E</strong><br /><small>Ogden Campus</small>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_2"/>
+              <img src="img/close.png" class="action-delete" id="destroy_2"/>
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_2">
+            <td>
+              <p><strong> Editing: </strong>CS 1400 <em>Fundamentals of Programming</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_2"/></td>
+          </tr>
+          <tr id="section_3">
             <td>CS 1410 <em>Object-Oriented Programming</em></td>
             <td>Brian Rague<br><small><em>brianrague@weber.edu</em></small></td>
             <td><strong>Online</strong><br /><small><em>Second Block</em></small></td>
             <td><strong>Online</strong><br />&nbsp;</td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_3"/>
+              <img src="img/close.png" class="action-delete" id="destroy_3"/>
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_3">
+            <td>
+              <p><strong> Editing: </strong>CS 1410 <em>Object-Oriented Programming</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_3"/></td>
+          </tr>
+          <tr id="section_4">
             <td>CS 2130 <em>Computational Structures</em></td>
             <td>Brian Rague<br><small><em>brianrague@weber.edu</em></small></td>
             <td><strong>MW: </strong>12:00-1:50<br /><small><em>Full Block</em></small></td>
             <td><strong>D-207</strong><br /><small>Davis Campus</small></td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_4"/>
+              <img src="img/close.png" class="action-delete" id="destroy_4"/>
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_4">
+            <td>
+              <p><strong> Editing: </strong>CS 2130 <em>Computational Structures</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_4"/></td>
+          </tr>
+          <tr id="section_5">
             <td>CS 2350 <em>Web Development</em></td>
             <td>Garth Tuck<br><small><em>garthtuck@weber.edu</em></small></td>
             <td><strong>S </strong>10:00-1:50<br /><small><em>First Block</em></small></td>
             <td><strong>TE 104</strong><br /><small>Ogden Campus</small></td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_5"/>
+              <img src="img/close.png" class="action-delete" id="destroy_5">
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_5">
+            <td>
+              <p><strong> Editing: </strong>CS 2350 <em>Web Development</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_5"/></td>
+          </tr>
+          <tr id="section_6">
             <td>CS 2420 <em>Introduction to Data Structures and Algorithms</em></td>
             <td>Brad Peterson<br><small><em>bradpeterson@weber.edu</em></small></td>
             <td><strong>TR: </strong>5:00-6:50<br /><small><em>Second Block</em></small></td>
             <td><strong>209</strong><br /><small>Davis Campus</small></td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_6"/>
+              <img src="img/close.png" class="action-delete" id="destroy_6"/>
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_6">
+            <td>
+              <p><strong> Editing: </strong>CS 2420 <em>Introduction to Data Structures and Algorithms</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_6"/></td>
+          </tr>
+          <tr id="section_7">
             <td>CS 2450 <em>Software Engineering I</em></td>
             <td>Joshua Jensen<br><small><em>joshuajensen@weber.edu</em></small></td>
             <td><strong>Online</strong><br /><small><em>Full Block</em></small></td>
             <td><strong>Online</strong><br> &nbsp;</td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_7"/>
+              <img src="img/close.png" class="action-delete" id="destroy_7">
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_7">
+            <td>
+              <p><strong> Editing: </strong>CS 2450 <em>Software Engineering I</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_7"/></td>
+          </tr>
+          <tr id="section_8">
             <td>CS 2550 <em>Database Design and Application Development</em></td>
             <td>Roberth Hilton<br><small><em>roberthhilton@weber.edu</em></small></td>
             <td><strong>MW: </strong>8:00-9:50<br /><small><em>Second Block</em></small></td>
             <td><strong>TE 104</strong><br /><small>Ogden Campus</small></td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_8"/>
+              <img src="img/close.png" class="action-delete" id="destroy_8"/>
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_8">
+            <td>
+              <p><strong> Editing: </strong>CS 2550 <em>Database Design and Application Development</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_8"/></td>
+          </tr>
+          <tr id="section_9">
             <td>CS 2705 <em>Network Fundamentals and Design</em></td>
             <td>Drew Weidman<br><small><em>drewweidman@weber.edu</em></small></td>
             <td><strong>Online</strong><br /><small><em>First Block</em></small></td>
             <td><strong>Online</strong><br /><small>&nbsp;</small></td>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_9"/>
+              <img src="img/close.png" class="action-delete" id="destroy_9">
+            </td>
           </tr>
-          <tr>
+          <tr class="hide" id="edit_section_9">
+            <td>
+              <p><strong> Editing: </strong>CS 2705 <em>Network Fundamentals and Design</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_9"/></td>
+          </tr>
+          <tr id="section_10">
             <td>CS 2810 <em>Computer Architecture/Organization</em></td>
             <td>Joshua Jensen<br><small><em>joshuajensen@weber.edu</em></small></td>
             <td><strong>TR: </strong>7:00-8:50<br /><small><em>Full Block</em></small></td>
             <td><strong>TE 102</strong><br /><small>Ogden Campus</small>
-            <td><img src="img/pencil.png" class="action-edit"/><img src="img/close.png" class="action-delete"></td>
+            <td>
+              <img src="img/pencil.png" class="action-edit" id="edit_10"/>
+              <img src="img/close.png" class="action-delete" id="destroy_10"/>
+            </td>
+          </tr>
+          <tr class="hide" id="edit_section_10">
+            <td>
+              <p><strong> Editing: </strong>CS 2810 <em>Computer Architecture/Organization</em></p>
+              <label for="sectionProfessor">Professor</label>
+              <select class="form-control" id="sectionProfessor" >
+                <option value="''">Please Select...</option>
+                <option value="1">Spencer Hilton</option>
+                <option value="2">Garth Tuck</option>
+                <option value="3">Joshua Jensen</option>
+                <option value="4">Brian Rague</option>
+              </select>
+            </td>
+            <td>
+              <label class="checkbox-inline"><input type="checkbox" value="m">M</label>
+              <label class="checkbox-inline"><input type="checkbox" value="t">T</label>
+              <label class="checkbox-inline"><input type="checkbox" value="w">W</label>
+              <label class="checkbox-inline"><input type="checkbox" value="r">R</label>
+              <label class="checkbox-inline"><input type="checkbox" value="f">F</label>
+              <label class="checkbox-inline"><input type="checkbox" value="s">S</label>
+              <br>
+              <br>
+              <label for="startTime">Start Time<input type="time" id="startTime"  class="form-control"></label>
+              <label for="endTime">End Time<input type="time" id="endTime"  class="form-control"></label>
+              <br />
+              <label for="block">Block:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="full">Full</label>
+              <label class="radio-inline"><input type="radio" name="first">First</label>
+              <label class="radio-inline"><input type="radio" name="second">Second</label>
+            </td>
+            <td colspan="2">
+              <div class="col-xs-12">
+                <label class="radio-inline"><input type="radio" name="ogden">Ogden</label>
+                <label class="radio-inline"><input type="radio" name="davis">Davis</label>
+                <label class="radio-inline"><input type="radio" name="slcc">SLCC</label>
+                <label class="radio-inline"><input type="radio" name="online">Online</label>
+                <br />
+                <label for="sectionBuilding">Building</label>
+                <select class="form-control" id="sectionBuilding" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+                <label for="sectionClassroom">Classroom</label>
+                <select class="form-control" id="sectionClassroom" >
+                  <option value="''">Please Select...</option>
+                  <option value="1">Blah</option>
+                  <option value="2">Bleh</option>
+                  <option value="3">Yo!</option>
+                  <option value="4">No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src="img/save.png" class="action-save hide" id="save_10"/></td>
           </tr>
       </div>
     </div>
