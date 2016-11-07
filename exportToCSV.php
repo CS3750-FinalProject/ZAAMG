@@ -2,7 +2,7 @@
 $host = "localhost";
 $dbname  = "zaamg";
 $username = "zaamg";
-$password = "zaamg";
+$password = "";
 $sql = "SELECT * FROM Section";
 
 
