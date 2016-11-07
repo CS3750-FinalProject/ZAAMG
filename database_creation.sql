@@ -69,6 +69,8 @@ CREATE TABLE `Professor`
 `prof_first` VARCHAR(30) NOT NULL ,
 `prof_last` VARCHAR(30) NOT NULL ,
 `prof_email` VARCHAR(50) NOT NULL UNIQUE,
+`prof_hours` SMALLINT,
+`prof_release` SMALLINT,
 `dept_id` INT NOT NULL,
 PRIMARY KEY (`prof_id`) );
 

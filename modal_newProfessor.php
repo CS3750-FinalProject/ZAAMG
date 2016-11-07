@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="professor-label">Create New Professor</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 150px;">
+            <div class="modal-body" style="margin-bottom: 170px;">
                 <div class="form-group">
                     <div class="col-xs-6">
                         <label for="profFirst">First Name</label>
@@ -43,6 +43,14 @@
                             <option value="nmt">Network, Multimedia and Technology</option>
                             <option value="web">Web Development</option>-->
                         </select>
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="profHours">Hours</label>
+                        <input type="number" class="form-control" id="profHours" placeholder=12 >
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="profRelease">Release</label>
+                        <input type="number" class="form-control" id="profRelease" placeholder=4 >
                     </div>
                 </div>
             </div>

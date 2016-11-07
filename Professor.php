@@ -9,10 +9,12 @@ class Professor{
     private $profFirst;
     private $profLast;
     private $profEmail;
+    private $profHours;
+    private $profRelease;
     private $deptId;
 
 
-    public function __construct($profId, $profFirst, $profLast, $profEmail, $deptId) {
+    public function __construct($profId, $profFirst, $profLast, $profEmail, $profHours, $profRelease, $deptId) {
 
         /*$index_atSymbol = strpos($profEmail, "@");
         $fixed_profEmail = substr_replace($profEmail, "\\@", $index_atSymbol, 1);
@@ -22,6 +24,8 @@ class Professor{
         $this->profFirst = $profFirst;
         $this->profLast = $profLast;
         $this->profEmail = $profEmail;
+        $this->profHours = $profHours;
+        $this->profRelease = $profRelease;
         $this->deptId = $deptId;
 
         $this->database = new Database();
@@ -43,6 +47,19 @@ class Professor{
         return $this->profEmail;
     }
 
+
+    public function getProfHours()
+    {
+        return $this->profHours;
+    }
+
+
+    public function getProfRelease()
+    {
+        return $this->profRelease;
+    }
+
+
     public function getDeptId(){
         return $this->deptId;
     }
@@ -51,12 +68,14 @@ class Professor{
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Professor VALUES (
-              :id, :first, :last, :email, :deptId)");
+              :id, :first, :last, :email, :hours, :release, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":first", $this->profFirst);
         $stmtInsert->bindValue(":last", $this->profLast);
         $stmtInsert->bindValue(":email", strtolower($this->profEmail));
+        $stmtInsert->bindValue(":hours", $this->profHours);
+        $stmtInsert->bindValue(":release", $this->profRelease);
         $stmtInsert->bindValue(":deptId", $this->deptId);
         try {
             $stmtInsert->execute();

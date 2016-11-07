@@ -49,6 +49,8 @@ $(function() {
         var profFirst = $("input#profFirst").val();
         var profLast = $("input#profLast").val();
         var profEmail = $("input#profEmail").val();
+        var profHours = $("input#profHours").val();
+        var profRelease = $("input#profRelease").val();
         var deptId = $("#profDepartment").val()
 
         if (profEmail.length == 0){
@@ -59,13 +61,15 @@ $(function() {
         profExists = false;
 
         var dataString = 'profFirst='+ profFirst + '&profLast=' + profLast
-            + '&profEmail=' + profEmail + '&deptId=' + deptId;
+            + '&profEmail=' + profEmail + '&profHours=' + profHours + '&profRelease='
+            + profRelease + '&deptId=' + deptId;
         //alert (dataString);return false;
         $.ajax({
             type: "POST",
             url: "action_insertProfessor.php",
             data: dataString,
             success: function(msg) {
+                //alert(msg); return false;
                 if (msg.indexOf("does exist") != -1) {
                     window.profExists = true;
                     $("span.error-message").text("A Professor with this email address already exists.")
