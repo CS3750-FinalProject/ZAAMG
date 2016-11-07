@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd7d6492-d87e-4a03-99db-a0e1090ad96a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Section.php" afterPath="$PROJECT_DIR$/Section.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/application.css" afterPath="$PROJECT_DIR$/css/application.css" />
     </list>
     <ignored path="ZAAMG.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="processForm.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/processForm.js">
+      <file leaf-file-name="application.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/application.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+            <state vertical-scroll-proportion="-5.464286">
+              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -39,63 +40,90 @@
       <file leaf-file-name="Classroom.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classroom.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1034484">
-              <caret line="60" column="105" selection-start-line="60" selection-start-column="105" selection-end-line="60" selection-end-column="105" />
+            <state vertical-scroll-proportion="-5.413793">
+              <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
               <folding>
-                <marker date="1478237164530" expanded="true" signature="987:1049" placeholder="INSERT INTO ZAAMG.Classroom... " />
-                <marker date="1478237164530" expanded="true" signature="1701:1781" placeholder="SELECT class... Classroom" />
-                <marker date="1478237164530" expanded="true" signature="1701:1824" placeholder="SELECT class... Classroom" />
-                <marker date="1478237164530" expanded="true" signature="1701:1838" placeholder="SELECT class... Classroom" />
+                <marker date="1478498178684" expanded="true" signature="1184:1257" placeholder="INSERT INTO ZAAMG.Classroom... " />
+                <marker date="1478498178684" expanded="true" signature="1978:2101" placeholder="SELECT class... Classroom" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index_lollar.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="modal_newProfessor.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.24138">
+              <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+              <folding>
+                <marker date="1478534924585" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_lollar.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index_lollar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.206897">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9306759">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
-                <marker date="1478234695485" expanded="true" signature="396:4396" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="405:753" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="762:4396" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="796:864" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="904:3924" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="940:3913" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="976:1394" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="1130:1326" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="1475:3900" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="1513:1723" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="1772:1996" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="1809:1904" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2047:3885" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2081:3869" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2294:3851" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2315:2461" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2378:2456" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2549:2692" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2611:2687" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2713:2859" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2778:2854" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2880:3032" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="2945:3027" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3112:3261" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3176:3256" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3282:3431" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3346:3426" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3452:3595" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3514:3590" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3675:3830" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3741:3825" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3952:4114" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="3982:4103" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="4016:4090" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="4142:4396" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="4172:4396" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="4206:4396" placeholder="..." />
-                <marker date="1478234695485" expanded="true" signature="4221:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="396:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="405:753" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="762:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="796:864" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="904:3924" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="940:3913" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="976:1394" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="1130:1326" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="1475:3900" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="1513:1723" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="1772:1996" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="1809:1904" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2047:3885" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2081:3869" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2294:3851" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2315:2461" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2378:2456" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2549:2692" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2611:2687" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2713:2859" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2778:2854" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2880:3032" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="2945:3027" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3112:3261" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3176:3256" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3282:3431" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3346:3426" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3452:3595" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3514:3590" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3675:3830" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3741:3825" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3952:4114" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="3982:4103" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4016:4090" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4142:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4172:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4206:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4221:4396" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4552:6001" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="4776:5096" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="5113:5299" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="5316:5864" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="5324:5626" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="5655:5859" placeholder="..." />
+                <marker date="1478498179111" expanded="true" signature="6041:10655" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.137931">
+              <caret line="2322" column="12" selection-start-line="2322" selection-start-column="1" selection-end-line="2322" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,11 +131,9 @@
       <file leaf-file-name="Database.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7586207">
+            <state vertical-scroll-proportion="0.0">
               <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-              <folding>
-                <marker date="1478237407095" expanded="true" signature="759:786" placeholder="SELECT * FRO... Section" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,45 +141,9 @@
       <file leaf-file-name="form_insertSemester.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/form_insertSemester.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.275862">
-              <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modal_newSemester.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modal_newSemester.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.206897">
-              <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="form_insertSection.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/form_insertSection.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.344828">
-              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Section.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Section.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33275563">
-              <caret line="246" column="29" selection-start-line="246" selection-start-column="29" selection-end-line="246" selection-end-column="29" />
-              <folding>
-                <marker date="1478273865772" expanded="true" signature="1568:1714" placeholder="INSERT INTO zaamg.Section... " />
-                <marker date="1478273865772" expanded="true" signature="2585:2938" placeholder="SELECT secti... Section" />
-                <marker date="1478273865772" expanded="true" signature="3987:4058" placeholder="SELECT ${{$s... " />
-                <marker date="1478273865772" expanded="true" signature="4533:4756" placeholder="SELECT ${{$s... " />
-                <marker date="1478273865772" expanded="true" signature="5246:5543" placeholder="SELECT ${{$s... " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -161,14 +151,9 @@
       <file leaf-file-name="Course.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Course.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.034483">
-              <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
-              <folding>
-                <marker date="1478236652121" expanded="true" signature="1228:1317" placeholder="INSERT INTO ZAAMG.Course... " />
-                <marker date="1478236652121" expanded="true" signature="2150:2218" placeholder="SELECT cours... Course" />
-                <marker date="1478236652121" expanded="true" signature="2150:2219" placeholder="SELECT cours... Course" />
-                <marker date="1478236652121" expanded="true" signature="2150:2245" placeholder="SELECT cours... Course" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -176,16 +161,9 @@
       <file leaf-file-name="Semester.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Semester.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.724138">
-              <caret line="76" column="41" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
-              <folding>
-                <marker date="1478238252277" expanded="true" signature="1459:1574" placeholder="INSERT INTO ZAAMG.Semester... " />
-                <marker date="1478238252277" expanded="true" signature="2430:2495" placeholder="SELECT sem_i... Semester" />
-                <marker date="1478238252277" expanded="true" signature="2430:2535" placeholder="SELECT sem_i... Semester" />
-                <marker date="1478238252277" expanded="true" signature="2430:2536" placeholder="SELECT sem_i... Semester" />
-                <marker date="1478238252277" expanded="true" signature="2430:2550" placeholder="SELECT sem_i... Semester" />
-                <marker date="1478238252277" expanded="true" signature="2430:2559" placeholder="SELECT sem_i... Semester" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="92" column="1" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -204,7 +182,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="lollar" />
       </map>
     </option>
   </component>
@@ -234,10 +212,8 @@
         <option value="$PROJECT_DIR$/form_insertCourse.php" />
         <option value="$PROJECT_DIR$/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/index_lollar.html" />
-        <option value="$PROJECT_DIR$/css/application.css" />
         <option value="$PROJECT_DIR$/form_insertClassroom.php" />
         <option value="$PROJECT_DIR$/action_insertCourse.php" />
-        <option value="$PROJECT_DIR$/modal_newProfessor.php" />
         <option value="$PROJECT_DIR$/form_insertProfessor.php" />
         <option value="$PROJECT_DIR$/action_insertProfessor.php" />
         <option value="$PROJECT_DIR$/Professor.php" />
@@ -261,12 +237,14 @@
         <option value="$PROJECT_DIR$/modal_newSection.php" />
         <option value="$PROJECT_DIR$/modal_newCourse.php" />
         <option value="$PROJECT_DIR$/Course.php" />
-        <option value="$PROJECT_DIR$/Classroom.php" />
         <option value="$PROJECT_DIR$/js/processForm.js" />
         <option value="$PROJECT_DIR$/Database.php" />
         <option value="$PROJECT_DIR$/modal_newSemester.php" />
         <option value="$PROJECT_DIR$/Semester.php" />
         <option value="$PROJECT_DIR$/Section.php" />
+        <option value="$PROJECT_DIR$/Classroom.php" />
+        <option value="$PROJECT_DIR$/modal_newProfessor.php" />
+        <option value="$PROJECT_DIR$/css/application.css" />
       </list>
     </option>
   </component>
@@ -310,6 +288,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Production" />
+        <subPane subId="Project Files" />
+        <subPane subId="Default" />
+      </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -343,15 +330,6 @@
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Production" />
-        <subPane subId="Project Files" />
-        <subPane subId="Default" />
-      </pane>
-      <pane id="PackagesPane">
-        <subPane />
       </pane>
     </panes>
   </component>
@@ -838,15 +816,16 @@
       <workItem from="1478017589861" duration="7367000" />
       <workItem from="1478026316419" duration="45321000" />
       <workItem from="1478235128815" duration="4487000" />
+      <workItem from="1478498188948" duration="2871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140231000" />
+    <option name="totallyTimeSpent" value="143102000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -854,7 +833,6 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16764276" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -863,13 +841,14 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -892,16 +871,54 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Classroom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1478498178684" expanded="true" signature="1184:1257" placeholder="INSERT INTO ZAAMG.Classroom... " />
+            <marker date="1478498178684" expanded="true" signature="1978:2101" placeholder="SELECT class... Classroom" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/form_insertSemester.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Course.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Semester.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Course.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
-          <folding>
-            <marker date="1478236652121" expanded="true" signature="1228:1317" placeholder="INSERT INTO ZAAMG.Course... " />
-            <marker date="1478236652121" expanded="true" signature="2150:2218" placeholder="SELECT cours... Course" />
-            <marker date="1478236652121" expanded="true" signature="2150:2219" placeholder="SELECT cours... Course" />
-            <marker date="1478236652121" expanded="true" signature="2150:2245" placeholder="SELECT cours... Course" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -916,73 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
-          <folding>
-            <marker date="1478019848316" expanded="true" signature="841:911" placeholder="SELECT * FRO... Department" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index_lollar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="99" selection-start-line="42" selection-start-column="99" selection-end-line="42" selection-end-column="99" />
-          <folding>
-            <marker date="1478234695485" expanded="true" signature="396:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="405:753" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="762:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="796:864" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="904:3924" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="940:3913" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="976:1394" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1130:1326" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1475:3900" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1513:1723" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1772:1996" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1809:1904" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2047:3885" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2081:3869" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2294:3851" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2315:2461" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2378:2456" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2549:2692" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2611:2687" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2713:2859" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2778:2854" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2880:3032" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2945:3027" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3112:3261" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3176:3256" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3282:3431" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3346:3426" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3452:3595" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3514:3590" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3675:3830" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3741:3825" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3952:4114" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3982:4103" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4016:4090" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4142:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4172:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4206:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4221:4396" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newCourse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-          <folding>
-            <marker date="1478236150131" expanded="true" signature="2093:2202" placeholder="SELECT dept_... Department" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/processForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1022,13 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.178218">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/bootstrap.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.66071427">
@@ -1054,9 +997,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16811092">
           <caret line="60" column="63" selection-start-line="60" selection-start-column="63" selection-end-line="60" selection-end-column="63" />
-          <folding>
-            <marker date="1478019848316" expanded="true" signature="841:911" placeholder="SELECT * FRO... Department" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,25 +1011,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/application.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.275862">
-          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap-theme.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33211678">
           <caret line="313" column="19" selection-start-line="313" selection-start-column="17" selection-end-line="313" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33211678">
-          <caret line="1470" column="23" selection-start-line="1470" selection-start-column="21" selection-end-line="1470" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1103,9 +1029,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41074523">
           <caret line="61" column="40" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
-          <folding>
-            <marker date="1478057332193" expanded="true" signature="731:795" placeholder="SELECT * FRO... Campus" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1113,18 +1037,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13344887">
           <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
-          <folding>
-            <marker date="1478059146827" expanded="true" signature="1055:1124" placeholder="INSERT INTO ZAAMG.Building... " />
-            <marker date="1478059146827" expanded="true" signature="1787:1845" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1858" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1859" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1902" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1903" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1949" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1950" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1978" placeholder="SELECT build... Building" />
-            <marker date="1478059146827" expanded="true" signature="1787:1980" placeholder="SELECT build... Building" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,29 +1066,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09878683">
           <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding>
-            <marker date="1478098043577" expanded="true" signature="576:620" placeholder="INSERT INTO ZAAMG.Campus... " />
-            <marker date="1478098043577" expanded="true" signature="982:1050" placeholder="SELECT campu... Campus" />
-            <marker date="1478098043577" expanded="true" signature="982:1051" placeholder="SELECT campu... Campus" />
-            <marker date="1478098043577" expanded="true" signature="982:1076" placeholder="SELECT sem_i... Semester" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newCampus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.172414">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
-          <folding>
-            <marker date="1478019279630" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1187,25 +1078,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newClassroom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3812825">
-          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Professor.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3916811">
           <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-          <folding>
-            <marker date="1478025889444" expanded="true" signature="1176:1263" placeholder="INSERT INTO ZAAMG.Professor... " />
-            <marker date="1478025889444" expanded="true" signature="2006:2073" placeholder="SELECT prof_... Professor" />
-            <marker date="1478025889444" expanded="true" signature="2006:2076" placeholder="SELECT prof_... Professor" />
-            <marker date="1478025889444" expanded="true" signature="2006:2086" placeholder="SELECT prof_... Professor" />
-            <marker date="1478025889444" expanded="true" signature="2006:2093" placeholder="SELECT prof_... Professor" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1216,28 +1093,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newBuilding.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45060658">
-          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
-          <folding>
-            <marker date="1478056011792" expanded="true" signature="1279:1385" placeholder="SELECT campu... Campus" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Department.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="58" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newDepartment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1257,177 +1116,133 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/action_insertSection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newSection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="26" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
-          <folding>
-            <marker date="1478205618339" expanded="true" signature="1016:1136" placeholder="SELECT cours... Course" />
-            <marker date="1478205618339" expanded="true" signature="2107:2222" placeholder="SELECT prof_... Professor" />
-            <marker date="1478205618339" expanded="true" signature="3130:3517" placeholder="SELECT class... Course" />
-            <marker date="1478205618339" expanded="true" signature="5952:6120" placeholder="SELECT sem_i... Semester" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newCourse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2758621">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-          <folding>
-            <marker date="1478236150131" expanded="true" signature="2093:2202" placeholder="SELECT dept_... Department" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/form_insertSection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.344828">
-          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Course.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.034483">
-          <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
-          <folding>
-            <marker date="1478236652121" expanded="true" signature="1228:1317" placeholder="INSERT INTO ZAAMG.Course... " />
-            <marker date="1478236652121" expanded="true" signature="2150:2218" placeholder="SELECT cours... Course" />
-            <marker date="1478236652121" expanded="true" signature="2150:2219" placeholder="SELECT cours... Course" />
-            <marker date="1478236652121" expanded="true" signature="2150:2245" placeholder="SELECT cours... Course" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classroom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1034484">
-          <caret line="60" column="105" selection-start-line="60" selection-start-column="105" selection-end-line="60" selection-end-column="105" />
-          <folding>
-            <marker date="1478237164530" expanded="true" signature="987:1049" placeholder="INSERT INTO ZAAMG.Classroom... " />
-            <marker date="1478237164530" expanded="true" signature="1701:1781" placeholder="SELECT class... Classroom" />
-            <marker date="1478237164530" expanded="true" signature="1701:1824" placeholder="SELECT class... Classroom" />
-            <marker date="1478237164530" expanded="true" signature="1701:1838" placeholder="SELECT class... Classroom" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Database.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7586207">
+        <state vertical-scroll-proportion="0.0">
           <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding>
-            <marker date="1478237407095" expanded="true" signature="759:786" placeholder="SELECT * FRO... Section" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/form_insertSemester.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.275862">
-          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newSemester.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.206897">
-          <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Semester.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.724138">
-          <caret line="76" column="41" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="1" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9339934">
+          <caret line="54" column="3" selection-start-line="54" selection-start-column="3" selection-end-line="54" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classroom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.413793">
+          <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
           <folding>
-            <marker date="1478238252277" expanded="true" signature="1459:1574" placeholder="INSERT INTO ZAAMG.Semester... " />
-            <marker date="1478238252277" expanded="true" signature="2430:2495" placeholder="SELECT sem_i... Semester" />
-            <marker date="1478238252277" expanded="true" signature="2430:2535" placeholder="SELECT sem_i... Semester" />
-            <marker date="1478238252277" expanded="true" signature="2430:2536" placeholder="SELECT sem_i... Semester" />
-            <marker date="1478238252277" expanded="true" signature="2430:2550" placeholder="SELECT sem_i... Semester" />
-            <marker date="1478238252277" expanded="true" signature="2430:2559" placeholder="SELECT sem_i... Semester" />
+            <marker date="1478498178684" expanded="true" signature="1184:1257" placeholder="INSERT INTO ZAAMG.Classroom... " />
+            <marker date="1478498178684" expanded="true" signature="1978:2101" placeholder="SELECT class... Classroom" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/processForm.js">
+    <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        <state vertical-scroll-proportion="-10.24138">
+          <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+          <folding>
+            <marker date="1478534924585" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/application.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.464286">
+          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.137931">
+          <caret line="2322" column="12" selection-start-line="2322" selection-start-column="1" selection-end-line="2322" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index_lollar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.206897">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9306759">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
-            <marker date="1478234695485" expanded="true" signature="396:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="405:753" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="762:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="796:864" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="904:3924" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="940:3913" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="976:1394" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1130:1326" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1475:3900" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1513:1723" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1772:1996" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="1809:1904" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2047:3885" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2081:3869" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2294:3851" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2315:2461" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2378:2456" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2549:2692" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2611:2687" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2713:2859" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2778:2854" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2880:3032" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="2945:3027" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3112:3261" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3176:3256" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3282:3431" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3346:3426" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3452:3595" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3514:3590" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3675:3830" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3741:3825" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3952:4114" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="3982:4103" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4016:4090" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4142:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4172:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4206:4396" placeholder="..." />
-            <marker date="1478234695485" expanded="true" signature="4221:4396" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Section.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33275563">
-          <caret line="246" column="29" selection-start-line="246" selection-start-column="29" selection-end-line="246" selection-end-column="29" />
-          <folding>
-            <marker date="1478273865772" expanded="true" signature="1568:1714" placeholder="INSERT INTO zaamg.Section... " />
-            <marker date="1478273865772" expanded="true" signature="2585:2938" placeholder="SELECT secti... Section" />
-            <marker date="1478273865772" expanded="true" signature="3987:4058" placeholder="SELECT ${{$s... " />
-            <marker date="1478273865772" expanded="true" signature="4533:4756" placeholder="SELECT ${{$s... " />
-            <marker date="1478273865772" expanded="true" signature="5246:5543" placeholder="SELECT ${{$s... " />
+            <marker date="1478498179111" expanded="true" signature="396:4396" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="405:753" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="762:4396" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="796:864" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="904:3924" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="940:3913" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="976:1394" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="1130:1326" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="1475:3900" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="1513:1723" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="1772:1996" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="1809:1904" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2047:3885" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2081:3869" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2294:3851" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2315:2461" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2378:2456" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2549:2692" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2611:2687" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2713:2859" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2778:2854" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2880:3032" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="2945:3027" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3112:3261" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3176:3256" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3282:3431" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3346:3426" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3452:3595" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3514:3590" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3675:3830" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3741:3825" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3952:4114" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="3982:4103" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4016:4090" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4142:4396" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4172:4396" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4206:4396" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4221:4396" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4552:6001" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="4776:5096" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="5113:5299" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="5316:5864" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="5324:5626" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="5655:5859" placeholder="..." />
+            <marker date="1478498179111" expanded="true" signature="6041:10655" placeholder="..." />
           </folding>
         </state>
       </provider>
