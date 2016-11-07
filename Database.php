@@ -16,7 +16,7 @@ class Database
             #echo "<br>Success creating Database Object<br>";
         } catch (PDOException $e) {
             echo "Error creating Database Object";
-            return;
+            die(); //if the database fails, don't go on.
         }
     }
 
