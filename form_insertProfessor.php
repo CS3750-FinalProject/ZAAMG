@@ -22,8 +22,8 @@ to know the id number used in the database.
   include 'Department.php';      # so php can make Department objects with Database results
   require_once 'Database.php';
   $database = new Database();
-
-  $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Department ORDER BY ZAAMG.Department.dept_code ASC');
+  $dbh = $database->getdbh();
+  $selectAll = $dbh->prepare('SELECT * FROM ZAAMG.Department ORDER BY ZAAMG.Department.dept_code ASC');
   $selectAll->execute();
 
   /* This line takes the query result and makes an array of Department objects,
@@ -60,7 +60,7 @@ to know the id number used in the database.
       onsubmit="return(validate());">
  <p>Professor First: <input type="text" name="profFirst" /></p>
  <p>Professor Last: <input type="text" name="profLast" /></p>
- <p>Professor Email: <input type="email" name="profEmail" required="required"/></p>
+ <p>Professor Email: <input type="text" name="profEmail" required="required"/></p>
  <!--<p>Department Id: <input type="text" name="deptId" /></p>-->
 
 <!-- changed from a simple input field, (commented line above) to a dropdown menu -->

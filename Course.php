@@ -24,6 +24,8 @@ class Course {
         $this->database = new Database();
     }
 
+
+
     public function getCourseId(){
         return $this->courseId;
     }
@@ -50,7 +52,7 @@ class Course {
 
     public function insertNewCourse(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $this->database->dbh->prepare(
+        $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Course VALUES (
               :id, :code, :title, :cap, :cred, :deptId)");
         # send NULL for course_id because the database auto-increments it
@@ -63,9 +65,31 @@ class Course {
 
         try {
             $stmtInsert->execute();
-            echo "Success executing Insert";
+            //echo "Success executing Insert";
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return $e->getMessage();
+        }
+        return $dbh->lastInsertId();
+    }
+
+    public function courseExists($courseCode, $deptId){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT course_id FROM ZAAMG.Course
+              WHERE course_code = ".$dbh->quote($courseCode));
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
+
+
 }

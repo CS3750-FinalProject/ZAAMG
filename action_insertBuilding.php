@@ -8,31 +8,25 @@ Just testing php/mysql wire-up.
 
 include 'Building.php';
 
+$buildCode = isset($_POST['buildCode']) ? $_POST['buildCode'] : "not entered";
+$buildName = isset($_POST['buildName']) ? $_POST['buildName'] : "not entered";
+$campusId = isset($_POST['campusId']) ? $_POST['campusId'] : "not entered";
 
-if (isset($_POST['buildCode'])) $buildCode = $_POST['buildCode'];
-else $buildCode = "(not entered)";
-
-if (isset($_POST['buildName'])) $buildName = $_POST['buildName'];
-else $buildName = "(not entered)";
-
-if (isset($_POST['campusID'])) $campusID = $_POST['campusID'];
-else $campusID = "(not entered)";
-
-$building = new Building(NULL, $buildCode, $buildName, $campusID);
+$building = new Building(NULL, $buildCode, $buildName, $campusId);
 
 
 echo<<<YO
 Building Code: $buildCode <br>
 Building Name: $buildName <br>
-Campus Id: $campusID <br>
+Campus Id: $campusId <br>
 YO;
 
-$building->insertNewBuilding();
+$result = $building->buildingExists($buildName, $buildCode, $campusId);
+echo $result;
 
-
-
-
-# echo $building->getBuildingName();  (just testing syntax)
+if ($result == "does not exist"){
+    $building->insertNewBuilding();
+}
 
 
 

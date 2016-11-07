@@ -24,10 +24,11 @@ CREATE TABLE `Section`
 `prof_id` SMALLINT NOT NULL ,
 `classroom_id` INT NOT NULL ,
 `sem_id` INT NOT NULL,
-`section_days` CHAR(5) NOT NULL ,
-`section_start_time` DATETIME NOT NULL ,
-`section_end_time` DATETIME NOT NULL,
-`section_block` VARCHAR(6) NOT NULL, 
+`section_days` VARCHAR(40) NOT NULL ,
+`section_start_time` TIME NOT NULL ,
+`section_end_time` TIME NOT NULL,
+`section_block` INT NOT NULL, 
+`section_capacity` INT NOT NULL,
 PRIMARY KEY (`section_id`) );
 
 
@@ -55,7 +56,7 @@ PRIMARY KEY  (`schedule_id`, `section_id`));
 
 CREATE TABLE `Course` 
 ( `course_id` INT NOT NULL AUTO_INCREMENT , 
-`course_code` CHAR(10) NOT NULL UNIQUE,
+`course_code` CHAR(10) NOT NULL ,
 `course_title` VARCHAR(50) NOT NULL ,
 `course_capacity` SMALLINT ,
 `course_credits` SMALLINT NOT NULL,
@@ -68,6 +69,8 @@ CREATE TABLE `Professor`
 `prof_first` VARCHAR(30) NOT NULL ,
 `prof_last` VARCHAR(30) NOT NULL ,
 `prof_email` VARCHAR(50) NOT NULL UNIQUE,
+`prof_hours` SMALLINT,
+`prof_release` SMALLINT,
 `dept_id` INT NOT NULL,
 PRIMARY KEY (`prof_id`) );
 
@@ -76,6 +79,7 @@ CREATE TABLE `Classroom`
 ( `classroom_id` INT NOT NULL AUTO_INCREMENT , 
 `classroom_number` CHAR(10) NOT NULL ,
 `classroom_capacity` SMALLINT NOT NULL ,
+`classroom_workstations` SMALLINT,
 `building_id` INT NOT NULL,
 PRIMARY KEY (`classroom_id`) );
 

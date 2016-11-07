@@ -17,7 +17,7 @@ to the user, including the correct Department IDs.
   require_once 'Database.php';
   $database = new Database();
 
-  $selectAll = $database->dbh->prepare('SELECT * FROM ZAAMG.Department ORDER BY dept_code ASC');
+  $selectAll = $database->getDbh()->prepare('SELECT * FROM ZAAMG.Department ORDER BY dept_code ASC');
   $selectAll->execute();
 
   /* This line takes the query result and makes an array of Department objects,
@@ -57,7 +57,7 @@ to the user, including the correct Department IDs.
  <p>Course Credits: <input type="text" name="courseCred" /></p>
  <!--<p>Department Id: <input type="text" name="deptId" /></p>-->
 
-    <p>Department: <select name="deptId" required>
+    <p>Department: <select name="deptId" >
 
             <?php
             foreach ($result as $row) {

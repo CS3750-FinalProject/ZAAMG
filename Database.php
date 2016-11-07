@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Section.php';
 
 class Database
 {
@@ -19,6 +19,32 @@ class Database
             return;
         }
     }
+
+
+    /*  Returns:        an array of Section objects, one per Section record in database
+     *  Args:
+     *      $orderBy:   might need this for sorting the Sections different ways
+     */
+    public function getAllSections($orderBy){
+        $allSections = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$sectionRecord){
+                $allSections[] = new Section(  //don't need to put an index number between those brackets, awesome
+                    $sectionRecord['section_id'], $sectionRecord['course_id'], $sectionRecord['prof_id'], $sectionRecord['classroom_id'],
+                    $sectionRecord['sem_id'],$sectionRecord['section_days'], $sectionRecord['section_start_time'], $sectionRecord['section_end_time'],
+                    $sectionRecord['section_block'], $sectionRecord['section_capacity']);
+            }
+            return $allSections;
+        }catch(Exception $e){
+            echo "getAllSections: ".$e->getMessage();
+        }
+    }
+
+
     
     public function getdbh(){
         return $this->dbh;

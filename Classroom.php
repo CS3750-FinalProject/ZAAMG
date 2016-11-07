@@ -8,13 +8,16 @@ class Classroom {
     private $classroomID;
     private $classroomNum;
     private $classroomCapacity;
+    private $numWorkstations;
     private $buildId;
 
+
     # removed types from formal arguments, don't think they're necessary
-    public function __construct($classID, $classNum, $classCap, $buildId) {
+    public function __construct($classID, $classNum, $classCap, $numWorkstations=0, $buildId) {
         $this->classroomID = $classID;
         $this->classroomNum = $classNum;
         $this->classroomCapacity = $classCap;
+        $this->numWorkstations = $numWorkstations;
         $this->buildId = $buildId;
 
         $this->database = new Database();
@@ -32,17 +35,25 @@ class Classroom {
         return $this->classroomCapacity;
     }
 
+
+    public function getNumWorkstations()
+    {
+        return $this->numWorkstations;
+    }
+
+
     public function getBuildingId(){
         return $this->buildId;
     }
 
     public function insertNewClassroom(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Classroom VALUES (:id, :num, :cap, :buildId)");
+        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Classroom VALUES (:id, :num, :cap, :stations, :buildId)");
         # send NULL for classroom_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":num", $this->classroomNum);
         $stmtInsert->bindValue(":cap", $this->classroomCapacity);
+        $stmtInsert->bindValue(":stations", $this->numWorkstations);
         $stmtInsert->bindValue(":buildId", $this->buildId);
 
             try {
@@ -53,4 +64,55 @@ class Classroom {
             echo $e->getMessage();
         }
     }
+
+    public function classroomExists($classNum, $buildId){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT classroom_id FROM ZAAMG.Classroom
+              WHERE classroom_number = {$dbh->quote($classNum)} AND building_id = {$dbh->quote($buildId)}");
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "classroomExists(): ".$e->getMessage();
+        }
+    }
+
+
+    public function setClassroomID($classroomID)
+    {
+        $this->classroomID = $classroomID;
+    }
+
+
+    public function setClassroomNum($classroomNum)
+    {
+        $this->classroomNum = $classroomNum;
+    }
+
+
+    public function setClassroomCapacity($classroomCapacity)
+    {
+        $this->classroomCapacity = $classroomCapacity;
+    }
+
+
+    public function setNumWorkstations($numWorkstations)
+    {
+        $this->numWorkstations = $numWorkstations;
+    }
+
+
+    public function setBuildId($buildId)
+    {
+        $this->buildId = $buildId;
+    }
+
+
+
 }

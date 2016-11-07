@@ -31,4 +31,25 @@ class Campus {
         $stmtInsert->bindValue(":name", $this->campusName);
         $stmtInsert->execute();
     }
+
+
+    public function campusExists($campusName){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT campus_id FROM ZAAMG.Campus
+              WHERE campus_name = ".$dbh->quote($campusName));
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+        }
+    }
+
+
 }

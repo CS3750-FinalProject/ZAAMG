@@ -5,42 +5,31 @@
 include 'Semester.php';
 
 
-if (isset($_POST['semYear'])) $semYear = $_POST['semYear'];
-else $semYear = "(not entered)";
+$semYear = isset($_POST['semYear']) ? $_POST['semYear'] : "not entered";
+$semSeason = isset($_POST['semSeason']) ? $_POST['semSeason'] : "not entered";
+$semNumWeeks = isset($_POST['semNumWeeks']) ? $_POST['semNumWeeks'] : "not entered";
+$semStart = isset($_POST['semStart']) ? $_POST['semStart'] : "not entered";
+$firstBlockStart = isset($_POST['firstBlockStart']) ? $_POST['firstBlockStart'] : null;
+$secondBlockStart = isset($_POST['secondBlockStart']) ? $_POST['secondBlockStart'] : null;
 
-if (isset($_POST['semSeason'])) $semSeason = $_POST['semSeason'];
-else $semSeason = "(not entered)";
-
-if (isset($_POST['semWeeks'])) $semWeeks = $_POST['semWeeks'];
-else $semWeeks = "(not entered)";
-
-if (isset($_POST['semStart'])) $semStart = $_POST['semStart'];
-else $semStart = "(not entered)";
-
-if (isset($_POST['firstBlockStart'])) $firstBlockStart = $_POST['firstBlockStart'];
-#else $firstBlockStart = NULL;
-if ($firstBlockStart=="") {
-    $firstBlockStart = NULL;
-}
-
-if (isset($_POST['secondBlockStart'])) $secondBlockStart = $_POST['secondBlockStart'];
-if ($secondBlockStart=="") {
-    $secondBlockStart = NULL;
-}
-
-$semester = new Semester(NULL, $semYear, $semSeason, $semWeeks, $semStart, $firstBlockStart, $secondBlockStart);
+$semester = new Semester(NULL, $semYear, $semSeason, $semNumWeeks, $semStart, $firstBlockStart, $secondBlockStart);
 
 
 echo<<<YO
 Year: $semYear <br>
 Season: $semSeason <br>
-Number Weeks: $semWeeks <br>
+Number Weeks: $semNumWeeks <br>
 Start Date: $semStart <br>
 First Block Start Date: $firstBlockStart <br>
 Second Block Start Date: $secondBlockStart <br>
 YO;
 
-$semester->insertNewSemester();
+$result = $semester->semesterExists($semYear, $semSeason);
+echo $result;
+
+if ($result == "does not exist"){
+    $semester->insertNewSemester();
+}
 
 
 
