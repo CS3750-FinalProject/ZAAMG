@@ -44,18 +44,22 @@
                             <option value="web">Web Development</option>-->
                         </select>
                     </div>
+                    <span class="col-xs-3" style="font-weight:bold; padding-left:12%; display:block; padding-top:20px">
+                        Hours:  <!-- just one way to do it, tweak as desired -->
+                    </span>
                     <div class="col-xs-3">
-                        <label for="profRequiredHours">Required Hours</label>
+                        <label for="profRequiredHours">Required</label>
                         <input type="number" class="form-control" id="profRequiredHours" placeholder=4 >
                     </div>
                     <div class="col-xs-3">
-                        <label for="profOverloadHours">Overload Hours</label>
+                        <label for="profOverloadHours">Overload</label>
                         <input type="number" class="form-control" id="profOverloadHours" placeholder=12 >
                     </div>
                     <div class="col-xs-3">
-                        <label for="profReleaseHours">Release Hours</label>
+                        <label for="profReleaseHours">Release</label>
                         <input type="number" class="form-control" id="profReleaseHours" placeholder=4 >
                     </div>
+
                 </div>
             </div>
             <div class="modal-footer">
