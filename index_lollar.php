@@ -87,7 +87,7 @@ $body = "
       <div class='col-xs-12'>
         <table class='list-data'>
           <tr>
-            <th>Course Name</th>
+            <th colspan='3'>Course</th>
             <th>Professor</th>
             <th>Scheduled Time</th>
             <th>Location</th>
@@ -175,9 +175,9 @@ $body .= "
 ";
 function addSection(Section $section){
     $row = "<tr class='{$section->getSectionID()}'>
-            <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}"
-        ."{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}"
-        ." <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
+            <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}</td>"
+        ."<td>{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}</td>"
+        ."<td> <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
             <td>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"."
                 {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>
                 <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}</em></small>
