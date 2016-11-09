@@ -25,7 +25,7 @@ $body = "
                             $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
 
                             foreach($result as $row){
-                                echo '<option value=\''.$row['course_id']
+                                $body .= '<option value=\''.$row['course_id']
                                     .'\'>'.$row['course_code']
                                     .' '.$row['course_title']
                                     .'</option>';
