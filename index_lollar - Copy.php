@@ -90,7 +90,7 @@ echo "
       <div class='col-xs-12'>
         <table class='list-data'>
           <tr>
-            <th colspan='3'>Course</th>
+            <th colspan='3'>Course Name</th>
             <th>Professor</th>
             <th>Scheduled Time</th>
             <th>Location</th>

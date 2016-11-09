@@ -15,7 +15,8 @@ class Course {
     private $deptId;
 
 
-    public function __construct($courseId, $courseCode, $coursePrefix, $courseNumber, $courseTitle, $courseCap, $courseCred, $deptId) {
+    public function __construct($courseId, $coursePrefix, $courseNumber,
+                                $courseTitle, $courseCap, $courseCred, $deptId) {
         $this->courseId = $courseId;
         //$this->courseCode = $courseCode;
         $this->coursePrefix = $coursePrefix;
@@ -69,7 +70,6 @@ class Course {
               :id, :prefix, :num, :title, :cap, :cred, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
-        //$stmtInsert->bindValue(":code", $this->courseCode);
         $stmtInsert->bindValue(":prefix", $this->coursePrefix);
         $stmtInsert->bindValue(":num", $this->courseNumber);
         $stmtInsert->bindValue(":title", $this->courseTitle);
@@ -81,7 +81,8 @@ class Course {
             $stmtInsert->execute();
             //echo "Success executing Insert";
         } catch (Exception $e) {
-            echo $e->getMessage();
+            echo "deptId: ".$this->deptId;
+            echo "insertNewCourse: ".$e->getMessage();
             return $e->getMessage();
         }
         return $dbh->lastInsertId();

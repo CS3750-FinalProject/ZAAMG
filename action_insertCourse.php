@@ -4,7 +4,7 @@ include 'Course.php';
 
 
 
-$courseCode = isset($_POST['courseCode']) ? $_POST['courseCode'] : "not entered";
+//$courseCode = isset($_POST['courseCode']) ? $_POST['courseCode'] : "not entered";
 $coursePrefix = isset($_POST['coursePrefix']) ? $_POST['coursePrefix'] : "not entered";
 $courseNumber = isset($_POST['courseNumber']) ? $_POST['courseNumber'] : "not entered";
 $courseTitle = isset($_POST['courseTitle']) ? $_POST['courseTitle'] : "not entered";
@@ -15,14 +15,7 @@ $deptId = isset($_POST['deptId']) ? $_POST['deptId'] : "not entered";
 
 $course = new Course(NULL, $coursePrefix, $courseNumber, $courseTitle, $courseCap, $courseCred, $deptId);
 
-
-echo<<<YO
-Course Code: $courseCode <br>
-Course Title: $courseTitle <br>
-Course Capacity: $courseCap <br>
-Course Credits: $courseCred <br>
-Department Id: $deptId <br>
-YO;
+echo "deptId = ".$deptId;
 
 $result = $course->courseExists($coursePrefix, $courseNumber, $deptId);
 echo $result;
@@ -35,3 +28,16 @@ if ($result == "does not exist"){
 
 
 
+
+
+
+
+
+/*
+echo<<<YO
+
+Course Title: $courseTitle <br>
+Course Capacity: $courseCap <br>
+Course Credits: $courseCred <br>
+Department Id: $deptId <br>
+YO;*/

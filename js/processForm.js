@@ -14,10 +14,10 @@ $(function() {
         var courseCredits = $("input#courseCredits").val();
         var deptId = $("#courseDepartment").val();
 
-        if (courseCode.length == 0){
+        /*if (courseCode.length == 0){
             $("span.error-message").text("A course code is required.");
             return false;
-        }
+        }*/
 
         courseExists = false;  //global variable
 

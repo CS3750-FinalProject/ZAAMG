@@ -35,7 +35,7 @@
                     <div class="col-xs-8">
                         <label for="courseDepartment">Department</label>
                         <select class="form-control" id="courseDepartment" >
-                            <option value="0" >Please Select...</option>
+                            <option value=0 >Please Select...</option>
 
                             <?php
                             $database = new Database();
@@ -46,7 +46,7 @@
                             $result = $selectDepts->fetchAll();
 
                             foreach($result as $row){
-                                echo "<option value=\"".$row['dept_id']."\">"
+                                echo "<option value=".$row['dept_id'].">"
                                     .$row['dept_name']." (".$row['dept_code'].")"."</option>";
                             }
                             ?>
