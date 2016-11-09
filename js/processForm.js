@@ -50,7 +50,6 @@ $(function() {
         var profLast = $("input#profLast").val();
         var profEmail = $("input#profEmail").val();
         var profReqHours = $("input#profRequiredHours").val();
-        var profOverHours = $("input#profOverloadHours").val();
         var profRelHours = $("input#profReleaseHours").val();
         var deptId = $("#profDepartment").val()
 
@@ -62,7 +61,7 @@ $(function() {
         profExists = false;
 
         var dataString = 'profFirst='+ profFirst + '&profLast=' + profLast
-            + '&profEmail=' + profEmail + '&profReqHours=' + profReqHours + '&profOverHours=' + profOverHours
+            + '&profEmail=' + profEmail + '&profReqHours=' + profReqHours
             + '&profRelHours=' + profRelHours  + '&deptId=' + deptId;
         //alert (dataString);return false;
         $.ajax({

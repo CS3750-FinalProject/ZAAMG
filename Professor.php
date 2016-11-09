@@ -10,13 +10,12 @@ class Professor{
     private $profLast;
     private $profEmail;
     private $profRequiredHours;
-    private $profOverloadHours;
     private $profRelease;
     private $deptId;
 
 
     public function __construct($profId, $profFirst, $profLast, $profEmail, $profRequiredHours,
-                                $profOverloadHours, $profRelease, $deptId) {
+                                 $profRelease, $deptId) {
 
         /*$index_atSymbol = strpos($profEmail, "@");
         $fixed_profEmail = substr_replace($profEmail, "\\@", $index_atSymbol, 1);
@@ -27,7 +26,6 @@ class Professor{
         $this->profLast = $profLast;
         $this->profEmail = $profEmail;
         $this->profRequiredHours = $profRequiredHours;
-        $this->profOverloadHours = $profOverloadHours;
         $this->profRelease = $profRelease;
         $this->deptId = $deptId;
 
@@ -56,10 +54,6 @@ class Professor{
         return $this->profRequiredHours;
     }
 
-    public function getProfOverloadHours()
-    {
-        return $this->profOverloadHours;
-    }
 
 
     public function getProfRelease()
@@ -76,14 +70,13 @@ class Professor{
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Professor VALUES (
-              :id, :first, :last, :email, :reqhours, :overload, :release, :deptId)");
+              :id, :first, :last, :email, :reqhours,  :release, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":first", $this->profFirst);
         $stmtInsert->bindValue(":last", $this->profLast);
         $stmtInsert->bindValue(":email", strtolower($this->profEmail));
         $stmtInsert->bindValue(":reqhours", $this->profRequiredHours);
-        $stmtInsert->bindValue(":overload", $this->profOverloadHours);
         $stmtInsert->bindValue(":release", $this->profRelease);
         $stmtInsert->bindValue(":deptId", $this->deptId);
         try {

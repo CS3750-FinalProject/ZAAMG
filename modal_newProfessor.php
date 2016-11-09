@@ -51,10 +51,7 @@
                         <label for="profRequiredHours">Required</label>
                         <input type="number" class="form-control" id="profRequiredHours" placeholder=4 >
                     </div>
-                    <div class="col-xs-3">
-                        <label for="profOverloadHours">Overload</label>
-                        <input type="number" class="form-control" id="profOverloadHours" placeholder=12 >
-                    </div>
+
                     <div class="col-xs-3">
                         <label for="profReleaseHours">Release</label>
                         <input type="number" class="form-control" id="profReleaseHours" placeholder=4 >
