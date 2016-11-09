@@ -49,8 +49,9 @@ $(function() {
         var profFirst = $("input#profFirst").val();
         var profLast = $("input#profLast").val();
         var profEmail = $("input#profEmail").val();
-        var profHours = $("input#profHours").val();
-        var profRelease = $("input#profRelease").val();
+        var profReqHours = $("input#profRequiredHours").val();
+        var profOverHours = $("input#profOverloadHours").val();
+        var profRelHours = $("input#profReleaseHours").val();
         var deptId = $("#profDepartment").val()
 
         if (profEmail.length == 0){
@@ -61,8 +62,8 @@ $(function() {
         profExists = false;
 
         var dataString = 'profFirst='+ profFirst + '&profLast=' + profLast
-            + '&profEmail=' + profEmail + '&profHours=' + profHours + '&profRelease='
-            + profRelease + '&deptId=' + deptId;
+            + '&profEmail=' + profEmail + '&profReqHours=' + profReqHours + '&profOverHours=' + profOverHours
+            + '&profRelHours=' + profRelHours  + '&deptId=' + deptId;
         //alert (dataString);return false;
         $.ajax({
             type: "POST",

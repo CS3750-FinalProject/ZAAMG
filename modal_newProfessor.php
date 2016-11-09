@@ -45,12 +45,16 @@
                         </select>
                     </div>
                     <div class="col-xs-3">
-                        <label for="profHours">Hours</label>
-                        <input type="number" class="form-control" id="profHours" placeholder=12 >
+                        <label for="profRequiredHours">Required Hours</label>
+                        <input type="number" class="form-control" id="profRequiredHours" placeholder=4 >
                     </div>
                     <div class="col-xs-3">
-                        <label for="profRelease">Release</label>
-                        <input type="number" class="form-control" id="profRelease" placeholder=4 >
+                        <label for="profOverloadHours">Overload Hours</label>
+                        <input type="number" class="form-control" id="profOverloadHours" placeholder=12 >
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="profReleaseHours">Release Hours</label>
+                        <input type="number" class="form-control" id="profReleaseHours" placeholder=4 >
                     </div>
                 </div>
             </div>
