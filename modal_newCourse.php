@@ -24,7 +24,7 @@
 
                 </div>
                 <div class="form-group">
-                    
+
                     <div class="col-xs-2">
                         <label for="courseCredits">Credits</label>
                         <input type="number" class="form-control" id="courseCredits" value=4 min=1>
