@@ -56,9 +56,10 @@ PRIMARY KEY  (`schedule_id`, `section_id`));
 
 CREATE TABLE `Course` 
 ( `course_id` INT NOT NULL AUTO_INCREMENT , 
-`course_code` CHAR(10) NOT NULL ,
+#`course_code` CHAR(10) NOT NULL ,
+`course_prefix` VARCHAR(5) NOT NULL ,
+`course_number` VARCHAR(10) NOT NULL ,
 `course_title` VARCHAR(50) NOT NULL ,
-`course_capacity` SMALLINT ,
 `course_credits` SMALLINT NOT NULL,
 `dept_id` INT NOT NULL, 
 PRIMARY KEY (`course_id`) );
@@ -70,7 +71,6 @@ CREATE TABLE `Professor`
 `prof_last` VARCHAR(30) NOT NULL ,
 `prof_email` VARCHAR(50) NOT NULL UNIQUE,
 `prof_req_hours` SMALLINT,
-`prof_ovrl_hours` SMALLINT,
 `prof_rel_hours` SMALLINT,
 `dept_id` INT NOT NULL,
 PRIMARY KEY (`prof_id`) );

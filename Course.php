@@ -6,23 +6,20 @@ class Course {
     private $database;
 
     private $courseId;
-    //private $courseCode;
     private $coursePrefix;
     private $courseNumber;
     private $courseTitle;
-    private $courseCapacity;
     private $courseCredits;
     private $deptId;
 
 
     public function __construct($courseId, $coursePrefix, $courseNumber,
-                                $courseTitle, $courseCap, $courseCred, $deptId) {
+                                $courseTitle,  $courseCred, $deptId) {
         $this->courseId = $courseId;
         //$this->courseCode = $courseCode;
         $this->coursePrefix = $coursePrefix;
         $this->courseNumber = $courseNumber;
         $this->courseTitle = $courseTitle;
-        $this->courseCapacity = $courseCap;
         $this->courseCredits = $courseCred;
         $this->deptId = $deptId;
 
@@ -51,9 +48,7 @@ class Course {
         return $this->courseTitle;
     }
 
-    public function getCourseCapacity(){
-        return $this->courseCapacity;
-    }
+
 
     public function getCourseCredits(){
         return $this->courseCredits;
@@ -67,13 +62,12 @@ class Course {
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(
             "INSERT INTO ZAAMG.Course VALUES (
-              :id, :prefix, :num, :title, :cap, :cred, :deptId)");
+              :id, :prefix, :num, :title,  :cred, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":prefix", $this->coursePrefix);
         $stmtInsert->bindValue(":num", $this->courseNumber);
         $stmtInsert->bindValue(":title", $this->courseTitle);
-        $stmtInsert->bindValue(":cap", $this->courseCapacity);
         $stmtInsert->bindValue(":cred", $this->courseCredits);
         $stmtInsert->bindValue(":deptId", $this->deptId);
 

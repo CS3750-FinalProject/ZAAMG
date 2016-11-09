@@ -10,7 +10,6 @@ $(function() {
         var coursePrefix = $("input#coursePrefix").val();
         var courseNumber = $("input#courseNumber").val();
         var courseTitle = $("input#courseTitle").val();
-        var courseCapacity = $("input#courseCapacity").val();
         var courseCredits = $("input#courseCredits").val();
         var deptId = $("#courseDepartment").val();
 
@@ -22,7 +21,7 @@ $(function() {
         courseExists = false;  //global variable
 
         var dataString = 'coursePrefix='+ coursePrefix + '&courseNumber=' + courseNumber + '&courseTitle=' + courseTitle
-            + '&courseCap=' + courseCapacity + '&courseCred=' + courseCredits
+             + '&courseCred=' + courseCredits
             + '&deptId=' + deptId;
         //alert(dataString); return false;
         $.ajax({
