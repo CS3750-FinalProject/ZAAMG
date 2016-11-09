@@ -153,3 +153,5 @@ $body = "
     </div>
 </div>
 ";
+
+echo $body;
