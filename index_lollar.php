@@ -101,7 +101,8 @@ foreach ($allSections as $section){
 
             echo "
           <tr class='{$section->getSectionID()}'>
-            <td>{$section->getSectionProperty('course_code', 'Course', 'course_id', 'courseID')}"
+            <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}"
+                ."{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')} "
             ." <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
             <td>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"." "."
                 {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>

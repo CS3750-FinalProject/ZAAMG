@@ -6,7 +6,9 @@ $(function() {
 
     $("#btn_insertCourse").click(function() {
         // validate and process form here
-        var courseCode = $("input#courseCode").val();
+        //var courseCode = $("input#courseCode").val();
+        var coursePrefix = $("input#coursePrefix").val();
+        var courseNumber = $("input#courseNumber").val();
         var courseTitle = $("input#courseTitle").val();
         var courseCapacity = $("input#courseCapacity").val();
         var courseCredits = $("input#courseCredits").val();
@@ -19,7 +21,7 @@ $(function() {
 
         courseExists = false;  //global variable
 
-        var dataString = 'courseCode='+ courseCode + '&courseTitle=' + courseTitle
+        var dataString = 'coursePrefix='+ coursePrefix + '&courseNumber=' + courseNumber + '&courseTitle=' + courseTitle
             + '&courseCap=' + courseCapacity + '&courseCred=' + courseCredits
             + '&deptId=' + deptId;
         //alert(dataString); return false;

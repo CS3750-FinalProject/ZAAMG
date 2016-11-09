@@ -6,12 +6,16 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="course-label">Create New Course</h4>
             </div>
-            <div class="modal-body" id="id_form-group" style="margin-bottom: 150px;">
+            <div class="modal-body" id="id_form-group" style="margin-bottom: 175px;">
 
                 <div class="form-group" >
+                    <div class="col-xs-3">
+                        <label for="coursePrefix">Prefix</label>
+                        <input type="text" class="form-control" id="coursePrefix" placeholder="CS" >
+                    </div>
                     <div class="col-xs-4">
-                        <label for="courseCode">Code</label>
-                        <input type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
+                        <label for="courseNumber">Number</label>
+                        <input type="text" class="form-control" id="courseNumber" placeholder="1010" >
                     </div>
                     <div class="col-xs-8">
                         <label for="courseTitle">Title</label>

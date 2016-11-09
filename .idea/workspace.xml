@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd7d6492-d87e-4a03-99db-a0e1090ad96a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Professor.php" afterPath="$PROJECT_DIR$/Professor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/action_insertProfessor.php" afterPath="$PROJECT_DIR$/action_insertProfessor.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Course.php" afterPath="$PROJECT_DIR$/Course.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/action_insertCourse.php" afterPath="$PROJECT_DIR$/action_insertCourse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index_lollar.php" afterPath="$PROJECT_DIR$/index_lollar.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/processForm.js" afterPath="$PROJECT_DIR$/js/processForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modal_newProfessor.php" afterPath="$PROJECT_DIR$/modal_newProfessor.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modal_newCourse.php" afterPath="$PROJECT_DIR$/modal_newCourse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modal_newSection.php" afterPath="$PROJECT_DIR$/modal_newSection.php" />
     </list>
     <ignored path="ZAAMG.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,19 +34,129 @@
       <file leaf-file-name="action_insertProfessor.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/action_insertProfessor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.344828">
+            <state vertical-scroll-proportion="0.0">
               <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="processForm.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="processForm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/processForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.4620462">
-              <caret line="70" column="36" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="91" selection-start-line="23" selection-start-column="91" selection-end-line="23" selection-end-column="91" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_lollar.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index_lollar.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.5172415">
+              <caret line="99" column="35" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="35" />
+              <folding>
+                <marker date="1478713501398" expanded="true" signature="396:4396" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="405:753" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="762:4396" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="796:864" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="904:3924" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="940:3913" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="976:1394" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="1130:1326" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="1475:3900" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="1513:1723" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="1772:1996" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="1809:1904" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2047:3885" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2081:3869" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2294:3851" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2315:2461" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2378:2456" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2549:2692" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2611:2687" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2713:2859" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2778:2854" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2880:3032" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="2945:3027" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3112:3261" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3176:3256" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3282:3431" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3346:3426" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3452:3595" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3514:3590" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3675:3830" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3741:3825" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3952:4114" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="3982:4103" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4016:4090" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4142:4396" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4172:4396" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4206:4396" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4221:4396" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4552:4570" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4552:6106" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="4881:5201" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="5218:5404" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="5421:5969" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="5429:5731" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="5760:5964" placeholder="..." />
+                <marker date="1478713501398" expanded="true" signature="6146:10760" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal_newSection.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modal_newSection.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.34662044">
+              <caret line="22" column="56" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
+              <folding>
+                <marker date="1478713641635" expanded="true" signature="179:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="226:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="262:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="301:544" placeholder="..." />
+                <marker date="1478713641635" expanded="false" signature="589:611" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="612:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="653:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="696:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="835:909" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="1021:1160" placeholder="SELECT cours... Course" />
+                <marker date="1478713641635" expanded="true" signature="1814:2037" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="1963:2037" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="2147:2262" placeholder="SELECT prof_... Professor" />
+                <marker date="1478713641635" expanded="true" signature="2827:3049" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="2975:3049" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="3159:3546" placeholder="SELECT class... Campus" />
+                <marker date="1478713641635" expanded="true" signature="4266:4340" placeholder="..." />
+                <marker date="1478713641635" expanded="false" signature="4299:4316" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="4381:5866" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="4425:5145" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="4568:5118" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="5188:5377" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="5420:5603" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="5646:5866" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="5791:5866" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="5975:6143" placeholder="SELECT sem_i... Semester" />
+                <marker date="1478713641635" expanded="true" signature="6736:7116" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="6872:7089" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="7160:7354" placeholder="..." />
+                <marker date="1478713641635" expanded="true" signature="7436:7704" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal_newCourse.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modal_newCourse.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.6896552">
+              <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+              <folding>
+                <marker date="1478712521416" expanded="true" signature="2342:2451" placeholder="SELECT dept_... Department" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,7 +164,7 @@
       <file leaf-file-name="modal_newProfessor.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-36.551723">
+            <state vertical-scroll-proportion="0.0">
               <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding>
                 <marker date="1478712009640" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
@@ -60,20 +173,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index_lollar.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index_lollar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Professor.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Professor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-54.482758">
+            <state vertical-scroll-proportion="0.0">
               <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding>
                 <marker date="1478711900522" expanded="true" signature="1585:1694" placeholder="INSERT INTO ZAAMG.Professor... " />
@@ -83,48 +186,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_newSemester.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modal_newSemester.php">
+      <file leaf-file-name="Course.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Course.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="form_insertSection.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/form_insertSection.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Section.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Section.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="246" column="29" selection-start-line="246" selection-start-column="29" selection-end-line="246" selection-end-column="29" />
+            <state vertical-scroll-proportion="8.965517">
+              <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
               <folding>
-                <marker date="1478539274256" expanded="true" signature="1669:1815" placeholder="INSERT INTO zaamg.Section... " />
-                <marker date="1478539274256" expanded="true" signature="2686:3093" placeholder="SELECT secti... Section" />
-                <marker date="1478539274256" expanded="true" signature="2785:2835" placeholder="/* MySQL com... " />
-                <marker date="1478539274256" expanded="true" signature="4437:4508" placeholder="SELECT ${{$s... " />
-                <marker date="1478539274256" expanded="true" signature="6076:6299" placeholder="SELECT ${{$s... " />
-                <marker date="1478539274256" expanded="true" signature="8058:8355" placeholder="SELECT ${{$s... " />
+                <marker date="1478713201558" expanded="true" signature="1574:1637" placeholder="INSERT INTO ZAAMG.Course... " />
+                <marker date="1478713201558" expanded="true" signature="1574:1671" placeholder="INSERT INTO ZAAMG.Course... " />
+                <marker date="1478713201558" expanded="true" signature="2648:2721" placeholder="SELECT cours... Course" />
+                <marker date="1478713201558" expanded="true" signature="2648:2751" placeholder="SELECT cours... Course" />
+                <marker date="1478713201558" expanded="true" signature="2648:2788" placeholder="SELECT cours... Course" />
+                <marker date="1478713201558" expanded="true" signature="2648:2817" placeholder="SELECT cours... Course" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Course.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Course.php">
+      <file leaf-file-name="action_insertCourse.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/action_insertCourse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
+            <state vertical-scroll-proportion="-12.310345">
+              <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -186,7 +269,6 @@
         <option value="$PROJECT_DIR$/index_lollar.html" />
         <option value="$PROJECT_DIR$/css/application.css" />
         <option value="$PROJECT_DIR$/form_insertClassroom.php" />
-        <option value="$PROJECT_DIR$/action_insertCourse.php" />
         <option value="$PROJECT_DIR$/form_insertProfessor.php" />
         <option value="$PROJECT_DIR$/action_insertClassroom.php" />
         <option value="$PROJECT_DIR$/action_insertSemester.php" />
@@ -202,12 +284,8 @@
         <option value="$PROJECT_DIR$/Department.php" />
         <option value="$PROJECT_DIR$/action_insertDepartment.php" />
         <option value="$PROJECT_DIR$/modal_newClassroom.php" />
-        <option value="$PROJECT_DIR$/index_lollar.php" />
         <option value="$PROJECT_DIR$/action_insertSection.php" />
         <option value="$PROJECT_DIR$/form_insertSection.php" />
-        <option value="$PROJECT_DIR$/modal_newSection.php" />
-        <option value="$PROJECT_DIR$/modal_newCourse.php" />
-        <option value="$PROJECT_DIR$/Course.php" />
         <option value="$PROJECT_DIR$/Classroom.php" />
         <option value="$PROJECT_DIR$/Database.php" />
         <option value="$PROJECT_DIR$/modal_newSemester.php" />
@@ -216,7 +294,12 @@
         <option value="$PROJECT_DIR$/Professor.php" />
         <option value="$PROJECT_DIR$/modal_newProfessor.php" />
         <option value="$PROJECT_DIR$/action_insertProfessor.php" />
+        <option value="$PROJECT_DIR$/modal_newCourse.php" />
+        <option value="$PROJECT_DIR$/action_insertCourse.php" />
+        <option value="$PROJECT_DIR$/Course.php" />
         <option value="$PROJECT_DIR$/js/processForm.js" />
+        <option value="$PROJECT_DIR$/index_lollar.php" />
+        <option value="$PROJECT_DIR$/modal_newSection.php" />
       </list>
     </option>
   </component>
@@ -260,6 +343,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Production" />
+        <subPane subId="Project Files" />
+        <subPane subId="Default" />
+      </pane>
       <pane id="PackagesPane">
         <subPane />
       </pane>
@@ -297,12 +386,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Production" />
-        <subPane subId="Project Files" />
-        <subPane subId="Default" />
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -789,12 +872,13 @@
       <workItem from="1478026316419" duration="45321000" />
       <workItem from="1478235128815" duration="4487000" />
       <workItem from="1478624698588" duration="2242000" />
-      <workItem from="1478711581077" duration="574000" />
+      <workItem from="1478711581077" duration="1324000" />
+      <workItem from="1478713053769" duration="587000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143047000" />
+    <option name="totallyTimeSpent" value="144384000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -848,7 +932,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
-          <folding />
+          <folding>
+            <marker date="1478713201558" expanded="true" signature="1574:1637" placeholder="INSERT INTO ZAAMG.Course... " />
+            <marker date="1478713201558" expanded="true" signature="1574:1671" placeholder="INSERT INTO ZAAMG.Course... " />
+            <marker date="1478713201558" expanded="true" signature="2648:2721" placeholder="SELECT cours... Course" />
+            <marker date="1478713201558" expanded="true" signature="2648:2751" placeholder="SELECT cours... Course" />
+            <marker date="1478713201558" expanded="true" signature="2648:2788" placeholder="SELECT cours... Course" />
+            <marker date="1478713201558" expanded="true" signature="2648:2817" placeholder="SELECT cours... Course" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -871,7 +962,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="99" selection-start-line="42" selection-start-column="99" selection-end-line="42" selection-end-column="99" />
-          <folding />
+          <folding>
+            <marker date="1478713501398" expanded="true" signature="396:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="405:753" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="762:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="796:864" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="904:3924" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="940:3913" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="976:1394" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1130:1326" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1475:3900" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1513:1723" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1772:1996" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1809:1904" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2047:3885" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2081:3869" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2294:3851" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2315:2461" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2378:2456" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2549:2692" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2611:2687" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2713:2859" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2778:2854" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2880:3032" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2945:3027" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3112:3261" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3176:3256" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3282:3431" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3346:3426" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3452:3595" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3514:3590" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3675:3830" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3741:3825" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3952:4114" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3982:4103" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4016:4090" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4142:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4172:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4206:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4221:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4552:4570" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4552:6106" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4881:5201" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5218:5404" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5421:5969" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5429:5731" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5760:5964" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="6146:10760" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -946,13 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/action_insertCourse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.344828">
-          <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/form_insertProfessor.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16811092">
@@ -975,7 +1106,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-28.275862">
           <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,7 +1142,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13344887">
           <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,7 +1170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09878683">
           <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,7 +1184,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1085,7 +1212,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="58" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,25 +1237,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newSection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="26" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modal_newCourse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2758621">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classroom.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1145,7 +1256,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,15 +1263,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index_lollar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,14 +1289,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Course.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Semester.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1206,7 +1299,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Professor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-54.482758">
+        <state vertical-scroll-proportion="0.0">
           <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding>
             <marker date="1478711900522" expanded="true" signature="1585:1694" placeholder="INSERT INTO ZAAMG.Professor... " />
@@ -1217,7 +1310,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-36.551723">
+        <state vertical-scroll-proportion="0.0">
           <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
             <marker date="1478712009640" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
@@ -1227,17 +1320,144 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/action_insertProfessor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.344828">
+        <state vertical-scroll-proportion="0.0">
           <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/action_insertCourse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.310345">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Course.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.965517">
+          <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+          <folding>
+            <marker date="1478713201558" expanded="true" signature="1574:1637" placeholder="INSERT INTO ZAAMG.Course... " />
+            <marker date="1478713201558" expanded="true" signature="1574:1671" placeholder="INSERT INTO ZAAMG.Course... " />
+            <marker date="1478713201558" expanded="true" signature="2648:2721" placeholder="SELECT cours... Course" />
+            <marker date="1478713201558" expanded="true" signature="2648:2751" placeholder="SELECT cours... Course" />
+            <marker date="1478713201558" expanded="true" signature="2648:2788" placeholder="SELECT cours... Course" />
+            <marker date="1478713201558" expanded="true" signature="2648:2817" placeholder="SELECT cours... Course" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modal_newCourse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6896552">
+          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+          <folding>
+            <marker date="1478712521416" expanded="true" signature="2342:2451" placeholder="SELECT dept_... Department" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/processForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4620462">
-          <caret line="70" column="36" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="91" selection-start-line="23" selection-start-column="91" selection-end-line="23" selection-end-column="91" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index_lollar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.5172415">
+          <caret line="99" column="35" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="35" />
+          <folding>
+            <marker date="1478713501398" expanded="true" signature="396:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="405:753" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="762:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="796:864" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="904:3924" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="940:3913" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="976:1394" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1130:1326" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1475:3900" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1513:1723" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1772:1996" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="1809:1904" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2047:3885" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2081:3869" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2294:3851" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2315:2461" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2378:2456" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2549:2692" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2611:2687" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2713:2859" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2778:2854" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2880:3032" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="2945:3027" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3112:3261" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3176:3256" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3282:3431" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3346:3426" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3452:3595" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3514:3590" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3675:3830" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3741:3825" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3952:4114" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="3982:4103" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4016:4090" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4142:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4172:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4206:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4221:4396" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4552:4570" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4552:6106" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="4881:5201" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5218:5404" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5421:5969" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5429:5731" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="5760:5964" placeholder="..." />
+            <marker date="1478713501398" expanded="true" signature="6146:10760" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modal_newSection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34662044">
+          <caret line="22" column="56" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
+          <folding>
+            <marker date="1478713641635" expanded="true" signature="179:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="226:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="262:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="301:544" placeholder="..." />
+            <marker date="1478713641635" expanded="false" signature="589:611" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="612:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="653:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="696:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="835:909" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="1021:1160" placeholder="SELECT cours... Course" />
+            <marker date="1478713641635" expanded="true" signature="1814:2037" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="1963:2037" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="2147:2262" placeholder="SELECT prof_... Professor" />
+            <marker date="1478713641635" expanded="true" signature="2827:3049" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="2975:3049" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="3159:3546" placeholder="SELECT class... Campus" />
+            <marker date="1478713641635" expanded="true" signature="4266:4340" placeholder="..." />
+            <marker date="1478713641635" expanded="false" signature="4299:4316" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="4381:5866" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="4425:5145" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="4568:5118" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="5188:5377" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="5420:5603" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="5646:5866" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="5791:5866" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="5975:6143" placeholder="SELECT sem_i... Semester" />
+            <marker date="1478713641635" expanded="true" signature="6736:7116" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="6872:7089" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="7160:7354" placeholder="..." />
+            <marker date="1478713641635" expanded="true" signature="7436:7704" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

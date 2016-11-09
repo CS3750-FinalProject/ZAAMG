@@ -19,14 +19,15 @@ $body = "
                             <option value='0'>Please Select...</option>";
 
                             $selectCourse = $database->getdbh()->prepare(
-                                'SELECT course_id, course_code, course_title FROM ZAAMG.Course
-                                  ORDER BY course_code ASC');
+                                'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
+                                  ORDER BY course_prefix ASC');
                             $selectCourse->execute();
                             $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
 
                             foreach($result as $row){
                                 $body .= '<option value=\''.$row['course_id']
-                                    .'\'>'.$row['course_code']
+                                    .'\'>'.$row['course_prefix']
+                                    .' '.$row['course_number']
                                     .' '.$row['course_title']
                                     .'</option>';
                             }
