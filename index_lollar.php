@@ -11,7 +11,7 @@ require_once 'modal_newDepartment.php';
 
 
 $database = new Database();
-echo "
+$body = "
 <!DOCTYPE html>
 <html>
   <head>
@@ -98,33 +98,10 @@ echo "
           </tr>";
 $allSections = $database->getAllSections(null);
 foreach ($allSections as $section){
+    $body .= addSection($section);
+}
 
-            echo "
-          <tr class='{$section->getSectionID()}'>
-            <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}"
-                ."{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')} "
-            ." <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
-            <td>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"." "."
-                {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>
-                <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}</em></small>
-            </td>
-            <td><strong>{$section->getDayString()}:</strong>"." "."
-            {$section->getStartTime()} - {$section->getEndTime()}<br/>
-            <small><em>{$section->getBlock()}</em></small></td>
-            <td><strong>
-                {$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
-                'classroom_id', 'building_id', 'classroomID')}"." "."
-                {$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID')}
-                </strong><br/>
-                <small>
-                {$section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
-                'classroom_id', 'building_id', 'campus_id', 'classroomID')}
-                </small></td>
-                <td><img src='img/pencil.png' class='action-edit'/><img src='img/close.png' class='action-delete'></td>
-           </tr>";
-           }
-
- echo "
+ $body .= "
           <!--<tr>
             <td>CS 1030 <em>Foundations of Computer Science</em></td>
             <td>Spencer Hilton<br><small><em>spencerhilton@weber.edu</em></small></td>
@@ -200,3 +177,31 @@ foreach ($allSections as $section){
   </body>
 </html>
 ";
+
+function addSection(Section $section){
+    $row = "<tr class='{$section->getSectionID()}'>
+            <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}"
+                ."{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}"
+            ." <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
+            <td>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"."
+                {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>
+                <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}</em></small>
+            </td>
+            <td><strong>{$section->getDayString()}:</strong>"."
+            {$section->getStartTime()} - {$section->getEndTime()}<br/>
+            <small><em>{$section->getBlock()}</em></small></td>
+            <td><strong>
+                {$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
+                'classroom_id', 'building_id', 'classroomID')}"."
+                {$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID')}
+                </strong><br/>
+                <small>
+                {$section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
+                'classroom_id', 'building_id', 'campus_id', 'classroomID')}
+                </small></td>
+                <td><img src='img/pencil.png' class='action-edit'/><img src='img/close.png' class='action-delete'></td>
+           </tr>";
+    return $row;
+}
+
+echo $body;
