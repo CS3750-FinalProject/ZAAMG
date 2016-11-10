@@ -107,4 +107,20 @@ class Professor{
         }
     }
 
+
+
+    public function getProfessorProperty($sql_property, $table, $id, $object_property){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT {$sql_property} FROM ZAAMG.{$table}
+              WHERE {$id} = ".$dbh->quote($this->{$object_property}));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch();
+            return $result[0];
+        }catch (Exception $e){
+            echo "getProfessorProperty: ".$e->getMessage();
+        }
+    }
+
 }

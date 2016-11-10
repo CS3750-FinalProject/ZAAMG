@@ -45,6 +45,29 @@ class Database
     }
 
 
+
+    public function getAllProfessors($orderBy){
+        $allProfessors = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Professor");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$profRecord){
+                $allProfessors[] = new Professor(  //don't need to put an index number between those brackets, awesome
+                    $profRecord['prof_id'], $profRecord['prof_first'], $profRecord['prof_last'],
+                    $profRecord['prof_email'],
+                    $profRecord['prof_req_hours'],$profRecord['prof_rel_hours'],
+                    $profRecord['dept_id']);
+            }
+            return $allProfessors;
+        }catch(Exception $e){
+            echo "getAllProfessors: ".$e->getMessage();
+        }
+    }
+
+
+
     
     public function getdbh(){
         return $this->dbh;
