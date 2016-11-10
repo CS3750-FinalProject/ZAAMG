@@ -4,8 +4,8 @@ require_once 'Professor.php';
 $database = new Database();
 
 $body = "
-<script src='js/calendar.js' charset='utf-8'></script>
-<script src='js/section-updates.js' charset='utf-8'></script>";
+<script src='js/calendar.js' charset='utf-8'></script>";
+#<script src='js/section-updates.js' charset='utf-8'></script>";
 
 $body .= "
 <div class='col-xs-12' >
