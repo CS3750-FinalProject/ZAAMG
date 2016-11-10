@@ -67,6 +67,26 @@ class Database
     }
 
 
+    public function getAllClassrooms($orderBy){
+        $allClassrooms = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Classroom");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$classroomRecord){
+                $allClassrooms[] = new Classroom(  //don't need to put an index number between those brackets, awesome
+                    $classroomRecord['classroom_id'], $classroomRecord['classroom_number'],
+                    $classroomRecord['classroom_capacity'],
+                    $classroomRecord['classroom_workstations'],
+                    $classroomRecord['building_id']);
+            }
+            return $allClassrooms;
+        }catch(Exception $e){
+            echo "getAllClassrooms: ".$e->getMessage();
+        }
+    }
+
 
     
     public function getdbh(){

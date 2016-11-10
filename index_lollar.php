@@ -52,8 +52,8 @@ $body = "
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
           <ul class='nav navbar-nav'>
             <li id='sec' class='active'><a href='#' onclick='loadPhpPage(\"section_page.php\")'>Section <span class='sr-only'>(current)</span></a></li>
-            <li id='prof'><a href='#'onclick='loadPhpPage(\"prof_page.php\")'>Professor</a></li>
-            <li id='room'><a href='#'>Classroom</a></li>
+            <li id='prof'><a href='#' onclick='loadPhpPage(\"prof_page.php\")'>Professor</a></li>
+            <li id='room'><a href='#' onclick='loadPhpPage(\"classroom_page.php\")'>Classroom</a></li>
           </ul>
           <form class='navbar-form navbar-left'>
             <div class='form-group'>

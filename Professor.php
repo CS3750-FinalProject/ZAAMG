@@ -108,7 +108,17 @@ class Professor{
     }
 
 
-
+    /*  Returns:    A Professor property that has to be looked up in another table.
+         *  Ex:         A Professor table record contains a department name, but the department name
+         *              must be looked up in the Department table.
+         *  Args:
+         *          $sql_property:      the database column name of the desired property,
+         *                              eg, classroom_name
+         *          $table:             the database table to get the property from, eg. Department
+         *          $id:                the foreign key id number, eg. dept_id stored in Professor record
+         *          $object_property:   the php Professor object attribute used as foreign key id,
+         *                              eg "deptId" if using $professor->deptId
+         */
     public function getProfessorProperty($sql_property, $table, $id, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
