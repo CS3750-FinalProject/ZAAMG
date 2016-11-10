@@ -20,9 +20,15 @@ $body = "
     <script src='js/processForm.js' charset='utf-8'></script>
 
     <script>
+
     $(document).ready(function() {
     $(\"#main_container\").load(\"section_page.php\");
     });
+
+    function loadPhpPage(page){
+        $(\"#main_container\").load(page);
+    }
+
     </script>
 
     <title>Project ZAAMG</title>
@@ -45,8 +51,8 @@ $body = "
         </div>
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
           <ul class='nav navbar-nav'>
-            <li class='active'><a href='#'>Semester <span class='sr-only'>(current)</span></a></li>
-            <li><a href='#'>Professor</a></li>
+            <li class='active'><a href='#' onclick='loadPhpPage(\"section_page.php\")'>Semester <span class='sr-only'>(current)</span></a></li>
+            <li><a href='#'onclick='loadPhpPage(\"prof_page.php\")'>Professor</a></li>
             <li><a href='#'>Classroom</a></li>
           </ul>
           <form class='navbar-form navbar-left'>

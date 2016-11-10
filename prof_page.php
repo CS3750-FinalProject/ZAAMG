@@ -15,11 +15,11 @@ $body = "
       <div class='col-xs-12'>
         <table class='list-data'>
           <tr>
-            <th colspan='3'>Course</th>
-            <th>Professor</th>
-            <th>Scheduled Time</th>
-            <th>Location</th>
-            <th>Actions</th>
+            <th colspan='3'>This</th>
+            <th>is</th>
+            <th>Yet</th>
+            <th>Another</th>
+            <th>Page</th>
           </tr>";
 
 
@@ -32,8 +32,13 @@ foreach ($allSections as $section){
 $body .= "</div>";
 
 
-
 echo $body;
+
+
+
+
+
+
 
 
 
@@ -63,3 +68,5 @@ function addSection(Section $section){
            </tr>";
     return $row;
 }
+
+
