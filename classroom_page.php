@@ -31,6 +31,8 @@ $allClassrooms = $database->getAllClassrooms(null);
 foreach ($allClassrooms as $classroom){
     $body .= addClassroom($classroom);
 }
+
+$body .= "</table>";
 $body .= "</div>";
 
 

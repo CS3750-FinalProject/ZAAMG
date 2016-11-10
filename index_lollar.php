@@ -1,4 +1,6 @@
 <?php
+
+#http://stackoverflow.com/questions/27139963/bootstrap-multiple-pages-divs-and-navbar
 require_once 'Database.php';
 require_once 'modal_newSection.php';
 require_once 'modal_newCourse.php';
@@ -13,11 +15,19 @@ $body = "
 <!DOCTYPE html>
 <html>
   <head>
-    <link href='css/bootstrap.min.css' rel='stylesheet'>
-    <link href='css/application.css' rel='stylesheet'>
+    <link href='css/bootstrap.min.css' rel='stylesheet' />
+    <link href='css/application.css' rel='stylesheet' />
+    <link href='css/fullcalendar.css' rel='stylesheet' />
+
+    <script src='js/jquery.min.js' charset='utf-8'></script>
     <script src='js/jquery-3.1.1.min.js' charset='utf-8'></script>
     <script src='js/bootstrap.min.js' charset='utf-8'></script>
+    <script src='js/moment.min.js' charset='utf-8'></script>
+    <script src='js/fullcalendar.min.js' charset='utf-8'></script>
+
     <script src='js/processForm.js' charset='utf-8'></script>
+    <script src='js/calendar.js' charset='utf-8'></script>
+
 
     <script>
 
@@ -103,7 +113,7 @@ echo $body;
 
 
 
-$body = "</div>";
+$body = "</div>";  //should close div#main_container
 
 
 

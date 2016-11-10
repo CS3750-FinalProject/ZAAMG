@@ -29,6 +29,8 @@ $allSections = $database->getAllSections(null);
 foreach ($allSections as $section){
     $body .= addSection($section);
 }
+
+$body .= "</table>";
 $body .= "</div>";
 
 
