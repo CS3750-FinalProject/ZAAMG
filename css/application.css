@@ -36,9 +36,27 @@ tr:nth-child(even) {
   background-color: #ededed;
 }
 
+#table_allProfsSchedule tr:nth-child(even){
+  background-color: white;
+}
+
 .error-message{
   float:left;
   margin-left: 16px;
   color: #8a6d3b;
 }
 
+#table_allProfsSchedule tr:first-child, .td_days{
+  background-color: #492365;
+  color: white;
+  font-weight: normal;
+}
+
+.td_colorBlock{
+  background-color: #bfbfbf;
+}
+
+#table_allProfsSchedule tr.tr_divider td{
+  background-color: #492365;
+  padding: 1px;
+}

@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 var displayCalendar = function(){
     $('#calendar').fullCalendar({
-        height: 300,
+        height: 250,
         header: false,
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday
         //allDaySlot: false,  // online courses can show here
@@ -37,7 +37,7 @@ var displayCalendar = function(){
             {
                 title: 'CS 1410 Online',
                 start: '2016-11-07',
-                backgroundColor: '#bf42f4'
+                backgroundColor: '#6526a5'
             },
             {
                 title: 'CS 3230 Online',
@@ -48,25 +48,25 @@ var displayCalendar = function(){
                 title: 'CS 1410',
                 start: '2016-11-07T09:30:00',
                 end: '2016-11-07T11:20:00',
-                backgroundColor: '#bf42f4'
+                backgroundColor: '#6526a5'
             },
             {
                 title: 'CS 1410',
                 start: '2016-11-09T09:30:00',
                 end: '2016-11-09T11:20:00',
-                backgroundColor: '#bf42f4'
+                backgroundColor: '#6526a5'
             },
             {
                 title: 'CS 1410',
                 start: '2016-11-08T11:30:00',
                 end: '2016-11-08T13:20:00',
-                backgroundColor: '#FF33F6'
+                backgroundColor: '#6526a5'
             },
             {
                 title: 'CS 1410',
                 start: '2016-11-10T11:30:00',
-                end: '2016-11-10T013:20:00',
-                backgroundColor: '#FF33F6'
+                end: '2016-11-10T13:20:00',
+                backgroundColor: '#6526a5'
             }
         ]
     });
