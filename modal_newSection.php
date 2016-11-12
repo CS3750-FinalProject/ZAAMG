@@ -11,7 +11,7 @@ $body = "
                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
                 <h4 class='modal-title' id='section-label'>Create New Section</h4>
             </div>
-            <div class='modal-body' style='margin-bottom: 325px; '>
+            <div class='modal-body' style='margin-bottom: 350px; '>
                 <div class='form-group'>
                     <div class='col-xs-7'>
                         <label for='sectionCourse'>Course</label>
@@ -141,6 +141,10 @@ $body = "
                     <div class='col-xs-2'>
                         <label for='sectionCapacity'>Capacity</label>
                         <input type='number' class='form-control' id='sectionCapacity' min='1' >
+                    </div>
+                    <div class='col-xs-3'>
+                        <label class='checkbox-inline'>
+                        <input type='checkbox' value='1'>Online</label>
                     </div>
 
                 </div>

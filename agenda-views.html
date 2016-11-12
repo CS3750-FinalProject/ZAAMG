@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='css/fullcalendar_custom.css' rel='stylesheet' />
+
+<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='js/moment.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/fullcalendar.js'></script>
+<script>
+
+	$(document).ready(function() {
+
+		$(window).resize(function() {
+			$('#Calendar').fullCalendar('rerenderEvents');
+		});
+
+		var startMoment = moment({ years:2016, months:10, date:6, hours:8, minutes:00});
+		var endMoment = moment({ years:2016, months:10, date:6, hours:8, minutes:10});
+
+		var event1 = {
+			title: 'My Event',
+			start: '2016-11-12T06:00:00', // date 2016-11-09 is 11:30 AM
+			end: '2016-11-12T06:10:00',
+			className: 'classEvent'
+		}
+
+		var event2 = {
+			title: 'My Event 2',
+			start: startMoment,
+			end: endMoment,
+			className: 'classEvent'
+		}
+
+		$('#Calendar').fullCalendar({
+			header: false,
+			defaultDate: '2016-09-12',
+			defaultView: 'agendaWeek',
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			dayNames: ['Professor', '7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM',  '5:30 PM', '7:30 PM'],
+			columnFormat: 'dddd',
+			allDaySlot: false,
+			defaultDate: '2016-11-07',  // 11/7/16 is a Monday
+			firstDay: '0', //Monday
+			slotLabelFormat: ' ', //the space makes the slots blank.  First time is 6 AM.
+			slotDuration: '00:5:00',
+			minTime: '06:00:00',
+			eventAfterRender: function(event, element, view) {
+				var width = $(element).width();
+
+				// Check which class the event has so you know whether it's half or quarter width
+				if($(element).hasClass("days")){
+					width = width / 3;
+					$(element).css('margin-left', '34%');
+					$(element).css('background-color', '#137c33');
+					$(element).css('border-color', '#137c33');
+				}
+				if($(element).hasClass("classEvent")){
+					$(element).css('background-color', '#583372');
+					$(element).css('border-color', '#583372');
+				}
+				if($(element).hasClass("profName")){
+					$(element).css('background-color', '#194d96');
+					$(element).css('border-color', '#194d96');
+				}
+				if($(element).hasClass("event_placeholder")){
+					$(element).css('margin-top', '5%');
+					$(element).css('margin-bottom', '5%');
+					$(element).css('background-color', '#fff');
+					$(element).css('border', 'none');
+				}
+				// Set the new width
+				$(element).css('width', width + 'px');
+
+			},
+			events: [
+				event2,
+				{
+					title: 'Brinkerhoff, Delroy',
+					start: '2016-11-06T06:00:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:10:00',
+					className: 'profName'
+				},
+				{
+					title: 'MW',
+					start: '2016-11-06T06:00:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:10:00',
+					className: 'days'
+				},
+				{
+					title: '',
+					start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:20:00',
+					className: 'event_placeholder'
+				},
+				{
+					title: 'TTH',
+					start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:20:00',
+					className: 'days'
+				},
+				{
+					title: 'CS 1410',
+					start: '2016-11-09T06:00:00', // date 2016-11-09 is 11:30 AM
+					end: '2016-11-09T06:10:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 1410',
+					start: '2016-11-08T06:10:00', // date 2016-11-08 is 9:30 AM
+					end: '2016-11-08T06:20:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 1410 [Online]',
+					start: '2016-11-06T06:20:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:25:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 3230 [Online]',
+					start: '2016-11-06T06:25:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:30:00',
+					className: 'classEvent'
+				},
+				{
+					title:"",
+					start: '06:30', // a start time (10am in this example)
+					end: '06:35', // an end time (2pm in this example)
+					dow: [ 0,1,2,3,4,5,6 ],// Repeat monday and thursday
+					color: '#e5deea'  //light purple-gray
+				},
+				{
+					title: 'Ball, Bob',
+					start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:45:00',
+					className: 'profName'
+				},
+				{
+					title: 'MW',
+					start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:45:00',
+					className: 'days'
+				},
+				{
+					title: '',
+					start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:55:00',
+					className: 'event_placeholder'
+				},
+				{
+					title: 'TTH',
+					start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T06:55:00',
+					className: 'days'
+				},
+				{
+					title: 'CS 3100',
+					start: '2016-11-07T06:45:00',  // date 2016-11-07 is 7:30 AM
+					end: '2016-11-07T06:55:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 1400',
+					start: '2016-11-08T06:35:00',  // date 2016-11-08 is 9:30 AM
+					end: '2016-11-08T06:45:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 2350',
+					start: '2016-11-09T06:35:00',  // date 2016-11-09 is11:30 AM
+					end: '2016-11-09T06:45:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 1400 [Online]',
+					start: '2016-11-06T06:55:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T07:00:00',
+					className: 'classEvent'
+				},
+				{
+					title:"",
+					start: '07:00', // a start time (10am in this example)
+					end: '07:05', // an end time (2pm in this example)
+					dow: [ 0,1,2,3,4,5,6 ],// Repeat monday and thursday
+					color: '#e5deea'  //light purple-gray
+				},
+				{
+					title: 'Cowan, Ted',
+					start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T07:15:00',
+					className: 'profName'
+				},
+				{
+					title: 'MW',
+					start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T07:15:00',
+					className: 'days'
+				},
+				{
+					title: '',
+					start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T07:25:00',
+					className: 'event_placeholder'
+				},
+				{
+					title: 'TTH',
+					start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T07:25:00',
+					className: 'days'
+				},
+				{
+					title: 'CS 4750',
+					start: '2016-11-11T07:05:00',  // date 2016-11-11 is 5:30 PM
+					end: '2016-11-11T07:15:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 3100',
+					start: '2016-11-12T07:05:00',  // date 2016-11-12 is 7:30 PM
+					end: '2016-11-12T07:15:00',
+					className: 'classEvent'
+				},
+				{
+					title: 'CS 3030 [Online]',
+					start: '2016-11-06T07:25:00',  // date 2016-11-06 is the first column
+					end: '2016-11-06T07:30:00',
+					className: 'classEvent'
+				},
+				{
+					title:"",
+					start: '07:30', // a start time (10am in this example)
+					end: '07:35', // an end time (2pm in this example)
+					dow: [ 0,1,2,3,4,5,6 ],// Repeat monday and thursday
+					color: '#e5deea'  //light purple-gray
+				}
+
+			]
+		});
+		
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 1800px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+
+	<div id='Calendar'></div>
+
+</body>
+</html>

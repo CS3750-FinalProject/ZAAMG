@@ -136,7 +136,7 @@ class Section
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT {$sql_property} FROM ZAAMG.Section S
-              JOIN ZAAMG.{$table1} A
+              JOIN ZAAMG.{$table1}
               ON S.{$id1} = A.{$id1}
               JOIN ZAAMG.{$table2} B
               ON A.{$id2} = B.{$id2}

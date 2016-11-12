@@ -17,7 +17,8 @@ $body = "
   <head>
     <link href='css/bootstrap.min.css' rel='stylesheet' />
     <link href='css/application.css' rel='stylesheet' />
-    <link href='css/fullcalendar.css' rel='stylesheet' />
+   <!-- <link href='css/fullcalendar.css' rel='stylesheet' />-->
+    <link href='css/fullcalendar_custom.css' rel='stylesheet' />
 
     <script src='js/jquery.min.js' charset='utf-8'></script>
     <script src='js/jquery-3.1.1.min.js' charset='utf-8'></script>
@@ -27,6 +28,7 @@ $body = "
 
     <script src='js/processForm.js' charset='utf-8'></script>
     <script src='js/calendar.js' charset='utf-8'></script>
+    <script src='js/professorSet.js' charset='utf-8'></script>
 
 
     <script>

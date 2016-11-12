@@ -50,7 +50,6 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 .fc-unthemed .fc-today {
-	/*background: #fcf8e3;*/
 }
 
 .fc-highlight { /* when user is selecting cells */
@@ -985,6 +984,13 @@ a.fc-more:hover {
 	white-space: nowrap;
 }
 
+#profOverviewSchedule .fc-axis{
+	display:none;
+}
+
+
+
+
 .fc-ltr .fc-axis {
 	text-align: right;
 }
@@ -1078,7 +1084,7 @@ a.fc-more:hover {
 }
 
 .fc-time-grid .fc-slats .fc-minor td {
-	border-top-style: dotted;
+	/*border-top-style: dotted;*/
 }
 
 .fc-time-grid .fc-slats .ui-widget-content { /* for jqui theme */
@@ -1156,6 +1162,8 @@ be a descendant of the grid when it is being dragged.
 */
 
 .fc-time-grid-event {
+	margin-left: -1.5%;
+	margin-right: -3%;
 	overflow: hidden; /* don't let the bg flow over rounded corners */
 }
 
@@ -1175,12 +1183,17 @@ be a descendant of the grid when it is being dragged.
 
 .fc-time-grid-event .fc-time,
 .fc-time-grid-event .fc-title {
-	padding: 0 1px;
+	padding-top: 4px;
+	padding-left: 5px !important;
+	font-size: 1.1em !important;
+	font-weight: bold;
 }
 
+
 .fc-time-grid-event .fc-time {
-	font-size: .85em;
-	white-space: nowrap;
+	display: none !important;
+	/*font-size: .85em;
+	white-space: nowrap;*/
 }
 
 /* short mode, where time and title are on the same line */
@@ -1227,6 +1240,13 @@ be a descendant of the grid when it is being dragged.
 	font-family: monospace;
 	text-align: center;
 	cursor: s-resize;
+}
+
+
+#profOverviewSchedule th.fc-day-header.fc-widget-header{
+	font-size: 1.2em;
+	padding: 1%;
+	color: #492365 !important;
 }
 
 .fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after {

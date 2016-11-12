@@ -24,9 +24,10 @@ CREATE TABLE `Section`
 `prof_id` SMALLINT NOT NULL ,
 `classroom_id` INT NOT NULL ,
 `sem_id` INT NOT NULL,
-`section_days` VARCHAR(40) NOT NULL ,
-`section_start_time` TIME NOT NULL ,
-`section_end_time` TIME NOT NULL,
+`section_days` VARCHAR(40) ,
+`section_start_time` TIME,
+`section_end_time` TIME,
+`section_is_online` SMALLINT,
 `section_block` INT NOT NULL, 
 `section_capacity` INT NOT NULL,
 PRIMARY KEY (`section_id`) );

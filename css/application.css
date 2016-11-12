@@ -32,7 +32,7 @@
   padding: 8px;
 }
 
-tr:nth-child(even) {
+.list-data tr:nth-child(even) {
   background-color: #ededed;
 }
 
@@ -59,4 +59,8 @@ tr:nth-child(even) {
 #table_allProfsSchedule tr.tr_divider td{
   background-color: #492365;
   padding: 1px;
+}
+
+td.profDivider {
+  background-color: #e5deea;
 }

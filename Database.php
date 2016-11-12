@@ -67,6 +67,8 @@ class Database
     }
 
 
+
+
     public function getAllClassrooms($orderBy){
         $allClassrooms = [];
         $dbh = $this->getdbh();
@@ -84,6 +86,58 @@ class Database
             return $allClassrooms;
         }catch(Exception $e){
             echo "getAllClassrooms: ".$e->getMessage();
+        }
+    }
+
+    public function getProfSections($prof, $orderBy){
+        $profSections = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section
+                                      WHERE prof_id = {$prof->getProfId()}");
+        try{
+            $stmtSelect->execute();
+
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$sectionRecord){
+                $profSections[] = new Section(  //don't need to put an index number between those brackets, awesome
+                    $sectionRecord['section_id'],
+                    $sectionRecord['course_id'],
+                    $sectionRecord['prof_id'],
+                    $sectionRecord['classroom_id'],
+                    $sectionRecord['sem_id'],
+                    $sectionRecord['section_days'],
+                    $sectionRecord['section_start_time'],
+                    $sectionRecord['section_end_time'],
+                    $sectionRecord['section_block'],
+                    $sectionRecord['section_capacity']);
+            }
+            return $profSections;
+        }catch(Exception $e){
+            echo "getProfSections: ".$e->getMessage();
+        }
+    }
+
+    public function getCourse($section){
+        $theCourse = null;
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Course
+                                      WHERE course_id = {$section->getCourseID()}");
+        try{
+            $stmtSelect->execute();
+
+            $courseRecord = $stmtSelect->fetchAll()[0];
+
+                $theCourse = new Course(  //don't need to put an index number between those brackets, awesome
+                    $courseRecord['course_id'],
+                    $courseRecord['course_prefix'],
+                    $courseRecord['course_number'],
+                    $courseRecord['course_title'],
+                    $courseRecord['course_credits'],
+                    $courseRecord['dept_id']);
+
+            return $theCourse;
+        }catch(Exception $e){
+            echo "getProfSections: ".$e->getMessage();
         }
     }
 
