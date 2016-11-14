@@ -8,6 +8,7 @@ $(document).ready(function() {
             '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372');
         addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
             '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372');
+        console.log(getMinTime(hardcoded_events));
         displayCalendar();
         if ($(this).attr('class').includes("menu-up")){
             $('#profCalendar_1').hide();
@@ -39,6 +40,16 @@ function addNewEvent(title, eventstart, eventend, location, professor, color) {
                 location: location,
                 professor: professor
             });
+}
+
+function getMinTime(eventsArray){
+    var minTime = '01/01/2017 23:59:00';
+    eventsArray.forEach(function(event, i){
+        var eventTime = '01/01/2017 ' + event.start.substr(event.start.indexOf('T')+1);
+        if (Date.parse(eventTime) < Date.parse(minTime) )
+            minTime = eventTime;
+    });
+    return minTime.substr(minTime.indexOf(' ')+1);
 }
 
 
@@ -89,7 +100,7 @@ var displayCalendar = function(){
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday
         //allDaySlot: false,  // online courses can show here
         defaultView: 'agendaWeek',
-        hiddenDays: [0],
+        dayNames: [ 'Online','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         columnFormat: 'dddd',
         firstDay: '1', //Monday
         navLinks: true, // can click day/week names to navigate views
@@ -100,6 +111,7 @@ var displayCalendar = function(){
         slotLabelInterval: '00:30',
         slotDuration: '00:60:00',
         events: hardcoded_events,
+        scrollTime: getMinTime(hardcoded_events),
         eventRender: function (event, element) {
             element.popover(
                 {
