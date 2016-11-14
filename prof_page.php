@@ -37,7 +37,7 @@ $body .= "
 
 
 
-$allProfessors = $database->getAllProfessors(null);
+$allProfessors = $database->getAllProfessors('prof_last');
 foreach ($allProfessors as $professor){
     $body .= addProfessor($professor);
 }

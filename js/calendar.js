@@ -101,7 +101,16 @@ var displayCalendar = function(){
         slotDuration: '00:60:00',
         events: hardcoded_events,
         eventRender: function (event, element) {
-            element.tooltip({title: event.title + "\n" + event.location + "\n" + event.professor});
+            element.popover(
+                {
+                    title: event.title,
+                    content: event.location + "\n" + event.professor,
+                    trigger: 'hover click',
+                    placement: "right",
+                    selector: event,
+                    container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
+                }
+            );
             //element.attr('title', event.professor);
         },
     });
@@ -177,7 +186,6 @@ function createEventsSet(theSet){
         });
         prof.nonStandardCourses.forEach(function(course, m){
             theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone());
-
             events.push(
                 {
                     title: course.courseTitle + '\n' +

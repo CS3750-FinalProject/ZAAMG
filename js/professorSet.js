@@ -13,13 +13,20 @@ function add_toProfSet(profFirst, profLast, timedCourseObjects, onlineCourseObje
 
         var startTimeMoment = moment(course.startTime, "hh:mm A");
         var endTimeMoment = moment(course.endTime, "hh:mm A");
+        console.log(startTimeMoment.hour());
 
-        var formatted_startTime = startTimeMoment.hour() + ":"
-            + startTimeMoment.minute() + " "
+
+
+        var formatted_startTime =
+            startTimeMoment.hour() > 12 ?  startTimeMoment.hour() - 12 : startTimeMoment.hour();
+        formatted_startTime += ":"  + startTimeMoment.minute() + " "
             + course.startTime.substr(course.startTime.length - 2, course.startTime.length);
-        var formatted_endTime = endTimeMoment.hour() + ":"
-            + endTimeMoment.minute() + " "
+        var formatted_endTime =
+            endTimeMoment.hour() > 12 ?  endTimeMoment.hour() - 12 : endTimeMoment.hour();
+        formatted_endTime += ":"  + endTimeMoment.minute() + " "
             + course.endTime.substr(course.endTime.length - 2, course.endTime.length);
+        console.log(formatted_startTime);
+        console.log(formatted_endTime);
 
         var standardTimes = ['7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'];
 
@@ -64,12 +71,22 @@ function add_toProfSet(profFirst, profLast, timedCourseObjects, onlineCourseObje
 }
 
 function momentGenerator(time, days, startMoment){
-    var standardTimes = ['7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'];
     var newTime = time;
+    console.log("time" + time);
+    /*var theHour = parseInt(newTime.substr(0, newTime.indexOf(':')));
+    if (theHour > 12){
+        theHour = theHour-12;
+        newTime = theHour + newTime.substr(newTime.indexOf(':') );
+    }*/
+    var standardTimes = ['7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'];
+
     if (standardTimes.indexOf(newTime) == -1){
-        var newHour = parseInt(newTime.substr(0, newTime.indexOf(':'))) - 1;
-        newTime = newHour + newTime.substr(newTime.indexOf(':'));
-        //alert(time);
+        var oddHour = parseInt(newTime.substr(0, newTime.indexOf(':')));
+        while(standardTimes.indexOf(newTime) == -1){
+            oddHour --;
+            newTime = oddHour + newTime.substr(newTime.indexOf(':'));
+        }
+        //var newHour = parseInt(newTime.substr(0, newTime.indexOf(':'))) - 1;
     }
     var theMoment;
     switch(newTime) {
