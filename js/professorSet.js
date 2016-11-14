@@ -6,20 +6,42 @@ function add_toProfSet(profFirst, profLast, timedCourseObjects, onlineCourseObje
 
     var t_courseObjects = [];
     var o_courseObjects = [];
+    var nonStandard_courseObjects = [];
 
     timedCourseObjects.forEach(function(course, i){
         var courseTitle = course.pref + " " + course.num;
-        var courseTimeMoment = moment(course.time, "hh:mm A");
-        var formatted_courseTime = courseTimeMoment.hour() + ":"
-            + courseTimeMoment.minute() + " "
-            + course.time.substr(course.time.length - 2, course.time.length);
-        t_courseObjects.push(
-            {
-                courseTitle: courseTitle,
-                courseDays: course.days,
-                courseTime: formatted_courseTime
-            }
-        );
+
+        var startTimeMoment = moment(course.startTime, "hh:mm A");
+        var endTimeMoment = moment(course.endTime, "hh:mm A");
+
+        var formatted_startTime = startTimeMoment.hour() + ":"
+            + startTimeMoment.minute() + " "
+            + course.startTime.substr(course.startTime.length - 2, course.startTime.length);
+        var formatted_endTime = endTimeMoment.hour() + ":"
+            + endTimeMoment.minute() + " "
+            + course.endTime.substr(course.endTime.length - 2, course.endTime.length);
+
+        var standardTimes = ['7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'];
+
+        if (standardTimes.indexOf(formatted_startTime) == -1){
+            nonStandard_courseObjects.push(
+                {
+                    courseTitle: courseTitle,
+                    courseDays: course.days,
+                    startTime: formatted_startTime,
+                    endTime: formatted_endTime
+                }
+            );
+        }else{
+            t_courseObjects.push(
+                {
+                    courseTitle: courseTitle,
+                    courseDays: course.days,
+                    startTime: formatted_startTime,
+                    endTime: formatted_endTime
+                }
+            );
+        }
     });
     onlineCourseObjects.forEach(function(course, k){
         var courseTitle = course.pref + " " + course.num;
@@ -34,13 +56,14 @@ function add_toProfSet(profFirst, profLast, timedCourseObjects, onlineCourseObje
         {
             name: profName,
             timedCourses: t_courseObjects,
-            onlineCourses: o_courseObjects
+            onlineCourses: o_courseObjects,
+            nonStandardCourses: nonStandard_courseObjects
         }
     );
 
 }
 
-function momentGenerator(time, days, startMoment){ //offset is number of professors above in the table
+function momentGenerator(time, days, startMoment){
     //var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
     var theMoment;
     switch(time) {
@@ -63,7 +86,7 @@ function momentGenerator(time, days, startMoment){ //offset is number of profess
             theMoment = startMoment.clone().add(6, 'd');
             break;
     }
-    if (days == "TTH")
+    if (days.toUpperCase() == "TTH")
         theMoment = theMoment.clone().add(10, 'm');
     return theMoment;
 };

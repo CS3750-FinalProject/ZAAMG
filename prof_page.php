@@ -79,7 +79,8 @@ function load_ProfSet($allTheProfs, $db){
                     { pref:  '.'"'.$course->getCoursePrefix().'"'.',
                       num:   '.'"'.$course->getCourseNumber().'"'.',
                       days:  '.'"'.$oneSection->getDayString().'"'.',
-                      time:  '.'"'.$oneSection->getStartTime().'"'.'
+                      startTime:  '.'"'.$oneSection->getStartTime().'"'.',
+                      endTime:  '.'"'.$oneSection->getEndTime().'"'.',
                     },';
             } else{
                 array_push($onlineCourses, $course);

@@ -155,7 +155,7 @@ function createEventsSet(theSet){
         var theCourseStart;
         prof.timedCourses.forEach(function(course, j){
             theCourseTitle = course.courseTitle;
-            theCourseStart = momentGenerator(course.courseTime, course.courseDays, theStart.clone())
+            theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone())
             events.push(
                 {
                     title: theCourseTitle,
@@ -168,14 +168,23 @@ function createEventsSet(theSet){
         prof.onlineCourses.forEach(function(course, k){
             events.push(
                 {
-                    title: course.courseTitle + ' [Online]',
+                    title: course.courseTitle + '   -- Online --',
                     start: theStart.clone().add((10*2)+(5*k),'m'),
                     end: theStart.clone().add((10*2)+(5*k)+5,'m'),
                     className: 'classEvent'
                 });
         });
+        prof.nonStandardCourses.forEach(function(course, m){
+            events.push(
+                {
+                    title: course.courseTitle + '\n' + course.startTime + ' - ' + course.endTime,
+                    start: theStart.clone().add((10*2)+(5*prof.onlineCourses.length) + (10*m),'m'),
+                    end: theStart.clone().add((10*2)+(5*prof.onlineCourses.length) + (10*m) + 10,'m'),
+                    color: '#840b38'
+                });
+        });
         prevDividerStart = theStart.clone()
-            .add((10 * 2) + (5 * prof.onlineCourses.length), 'm');
+            .add((10 * 2) + (5 * prof.onlineCourses.length) + (10 * prof.nonStandardCourses.length), 'm');
 
         for (i=0; i < 7; i++) {
             events.push(
