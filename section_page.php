@@ -48,9 +48,14 @@ function addSection(Section $section){
             <td>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"."
                 {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>
                 <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}</em></small>
-            </td>
-            <td><strong>{$section->getDayString()}:</strong>"."
-            {$section->getStartTime()} - {$section->getEndTime()}<br/>
+            </td>";
+                if ($section->getDayString() == ''){
+                    $row .= "<td><strong>Online</strong><br/>";
+                }else{
+                    $row .= "<td><strong>{$section->getDayString()}:</strong>"."
+                    {$section->getStartTime()} - {$section->getEndTime()}<br/>";
+                }
+        $row .= "
             <small><em>{$section->getBlock()}</em></small></td>
             <td><strong>
                 {$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',

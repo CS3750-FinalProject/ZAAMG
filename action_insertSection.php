@@ -8,13 +8,17 @@ $sectionClassroom = isset($_POST['sectionClassroom']) ? $_POST['sectionClassroom
 $sectionDays = isset($_POST['sectionDays']) ? $_POST['sectionDays'] : "not entered";
 $sectionStartTime = isset($_POST['sectionStartTime']) ? $_POST['sectionStartTime'] : "not entered";
 $sectionEndTime = isset($_POST['sectionEndTime']) ? $_POST['sectionEndTime'] : "not entered";
+$sectionIsOnline = isset($_POST['sectionIsOnline']) ? $_POST['sectionIsOnline'] : "not entered";
 $sectionBlock = isset($_POST['sectionBlock']) ? $_POST['sectionBlock'] : "not entered";
 $sectionCapacity = isset($_POST['sectionCapacity']) ? $_POST['sectionCapacity'] : "not entered";
 $sectionSemester = isset($_POST['sectionSemester']) ? $_POST['sectionSemester'] : "not entered";
 
 
+
 $section = new Section(NULL, $sectionCourse, $sectionProfessor, $sectionClassroom,
-    $sectionBlock, $sectionDays, $sectionStartTime, $sectionEndTime, $sectionSemester, $sectionCapacity);
+    $sectionBlock, $sectionDays, $sectionStartTime, $sectionEndTime, $sectionIsOnline,
+    $sectionSemester, $sectionCapacity);
+
 
 
 

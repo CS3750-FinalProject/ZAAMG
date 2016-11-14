@@ -1,5 +1,6 @@
 <?php
 require_once 'Section.php';
+require_once 'Course.php';
 
 class Database
 {
@@ -34,9 +35,17 @@ class Database
             $result = $stmtSelect->fetchAll();
             foreach($result as $index=>$sectionRecord){
                 $allSections[] = new Section(  //don't need to put an index number between those brackets, awesome
-                    $sectionRecord['section_id'], $sectionRecord['course_id'], $sectionRecord['prof_id'], $sectionRecord['classroom_id'],
-                    $sectionRecord['sem_id'],$sectionRecord['section_days'], $sectionRecord['section_start_time'], $sectionRecord['section_end_time'],
-                    $sectionRecord['section_block'], $sectionRecord['section_capacity']);
+                    $sectionRecord['section_id'],
+                    $sectionRecord['course_id'],
+                    $sectionRecord['prof_id'],
+                    $sectionRecord['classroom_id'],
+                    $sectionRecord['section_block'],
+                    $sectionRecord['section_days'],
+                    $sectionRecord['section_start_time'],
+                    $sectionRecord['section_end_time'],
+                    $sectionRecord['section_is_online'],
+                    $sectionRecord['sem_id'],
+                    $sectionRecord['section_capacity']);
             }
             return $allSections;
         }catch(Exception $e){
@@ -108,6 +117,7 @@ class Database
                     $sectionRecord['section_days'],
                     $sectionRecord['section_start_time'],
                     $sectionRecord['section_end_time'],
+                    $sectionRecord['section_is_online'],
                     $sectionRecord['section_block'],
                     $sectionRecord['section_capacity']);
             }

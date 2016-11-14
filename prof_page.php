@@ -6,6 +6,7 @@ $database = new Database();
 $body = "
 
 <script src='js/calendar.js' charset='utf-8'></script>
+
 ";
 
 
@@ -42,53 +43,54 @@ foreach ($allProfessors as $professor){
 }
 
 
-
 $body .= "</table>";
 
 
-$body .= "
-
-<div id='profOverviewSchedule'>
-
-
-
-</div>     <!-- end of profOverviewSchedules div -->
-";
-
-
+$body .= "<div id='profOverviewSchedule'></div>";
 
 $body .= "</div>";
 $body .= "</div>";
 
-load_ProfSet($allProfessors, $database);
+echo "<script> var theProfSet = []; console.log(theProfSet);</script>";
 
+echo load_ProfSet($allProfessors, $database);
+echo "<script> console.log('theProfSet:' + theProfSet); </script>";
 
-$body .= "
-<script>displayProfOverviewSchedule()</script>
-";
-
-
+$body .= "<script>displayProfOverviewSchedule(theProfSet)</script>";
 
 echo $body;
+
 
 
 function load_ProfSet($allTheProfs, $db){
     $body = '<script> ';
     foreach($allTheProfs as $professor){
+        $onlineCourses = [];
         $body.='
-            add_toProfSet(
-                {$professor->getProfFirst()},
-                {$professor->getProfLast()},
+            add_toProfSet('
+            .'"'.$professor->getProfFirst().'"'.','
+            .'"'.$professor->getProfLast().'"'.','.'
                 [ ';
-        $sections = $db->getProfSections($professor);
+        $sections = $db->getProfSections($professor, null);
         foreach($sections as $oneSection){
             $course = $db->getCourse($oneSection);
+            if (!$oneSection->getIsOnline()){
+                $body .= '
+                    { pref:  '.'"'.$course->getCoursePrefix().'"'.',
+                      num:   '.'"'.$course->getCourseNumber().'"'.',
+                      days:  '.'"'.$oneSection->getDayString().'"'.',
+                      time:  '.'"'.$oneSection->getStartTime().'"'.'
+                    },';
+            } else{
+                array_push($onlineCourses, $course);
+            }
+        }
+        $body .= " ],[ ";
+        foreach($onlineCourses as $onlineCourse){
             $body .= '
-                { pref:  '.$course->getCoursePrefix().'},
-                  num:   '.$course->getCourseNumber().'},
-                  days:  '.$oneSection->getDayString().'},
-                  time:  '.$oneSection->getStartTime().'}
-                },';
+            { pref:  '.'"'.$onlineCourse->getCoursePrefix().'"'.',
+              num:   '.'"'.$onlineCourse->getCourseNumber().'"'.'
+            },';
         }
         $body.= ' ]);';
     }
@@ -118,9 +120,9 @@ function addProfessor(Professor $professor){
      *      the calendar displays.
      *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
      */
-    $row .= "<tr style='display:none' id='{$professor->getProfId()}'>
+    $row .= "<tr style='display:none' id='profRow_{$professor->getProfId()}'>
                 <td colspan='8' style='padding:0'>
-                <div id='calendar'></div>
+                <div class='indProfCal' id='profCalendar_{$professor->getProfId()}'></div>
                 </td>
             </tr>
             <tr style='display:none'></tr>

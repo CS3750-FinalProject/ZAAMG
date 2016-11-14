@@ -1,6 +1,6 @@
 <?php
 
-include 'Database.php';
+//include 'Database.php';
 
 class Course {
     private $database;

@@ -26,9 +26,10 @@ $body = "
     <script src='js/moment.min.js' charset='utf-8'></script>
     <script src='js/fullcalendar.min.js' charset='utf-8'></script>
 
+    <script src='js/professorSet.js' charset='utf-8'></script>
     <script src='js/processForm.js' charset='utf-8'></script>
     <script src='js/calendar.js' charset='utf-8'></script>
-    <script src='js/professorSet.js' charset='utf-8'></script>
+
 
 
     <script>

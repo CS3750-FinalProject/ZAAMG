@@ -15,6 +15,7 @@ class Section
     private $endTime;
     private $semester;
     private $capacity;
+    private $isOnline; // 1 is online, 0 is not online
     //adding block definitions
     public static $FULL_BLOCK = 0;
     public static $FIRST_BLOCK = 1;
@@ -23,17 +24,18 @@ class Section
     private $database;
 
     public function __construct($sectionID, $courseID, $profID, $classroomID,
-                                $block = 0, /*$days = array(),*/ $days, $startTime = "", $endTime = "",
-                                $semester, $capacity = 30) {
+                                $block = 0, /*$days = array(),*/ $days, $startTime = "00:00:AM",
+                                $endTime = "00:00:AM",
+                                $isOnline, $semester, $capacity = 30) {
         $this->sectionID = $sectionID;
         $this->courseID = $courseID;
         $this->profID = $profID;
         $this->classroomID = $classroomID;
         $this->block = $block;
-        //$this->days[] = $days;
         $this->days = $days;  //storing days as a string, eg. "MondayWednesday"
         $this->startTime = $startTime;
         $this->endTime = $endTime;
+        $this->isOnline = $isOnline;
         $this->semester = $semester;
         $this->capacity = $capacity;
 
@@ -51,7 +53,7 @@ class Section
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare("INSERT INTO zaamg.Section VALUES
         (:secID, :courseID, :profID, :classID, :semester, :days, :startTime,
-        :endTime, :block, :capacity)");
+        :endTime, :online, :block, :capacity)");
         $stmtInsert->bindValue(":secID", NULL);
         $stmtInsert->bindValue(":courseID", $this->courseID);
         $stmtInsert->bindValue(":profID", $this->profID);
@@ -60,17 +62,19 @@ class Section
         $stmtInsert->bindValue(":days", $this->days);
         $stmtInsert->bindValue(":startTime", $this->startTime);
         $stmtInsert->bindValue(":endTime", $this->endTime);
+        $stmtInsert->bindValue(":online", $this->isOnline);
         $stmtInsert->bindValue(":capacity", $this->capacity);
         $stmtInsert->bindValue(":semester", $this->semester);
         $stmtInsert->execute();
         $this->sectionID = (int) $dbh->lastInsertId();
     }
 
+    //TODO: update this function to look for online also?
     public function sectionExists($courseID, $profID, $roomID, $semID, $days, $startTime){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT section_id FROM ZAAMG.Section
-              WHERE course_id = ".$dbh->quote($courseID)."    /* MySQL complains unless we use $dbh->quote()  */
+              WHERE course_id = ".$dbh->quote($courseID)."
               AND prof_id = ".$dbh->quote($profID)."
               AND classroom_id = ".$dbh->quote($roomID)."
               AND sem_id = ".$dbh->quote($semID)."
@@ -136,7 +140,7 @@ class Section
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
             "SELECT {$sql_property} FROM ZAAMG.Section S
-              JOIN ZAAMG.{$table1}
+              JOIN ZAAMG.{$table1} A
               ON S.{$id1} = A.{$id1}
               JOIN ZAAMG.{$table2} B
               ON A.{$id2} = B.{$id2}
@@ -194,13 +198,16 @@ class Section
  *   Returns:    A string of Day First Initials, eg. MWF
  */
     public function getDayString(){
-        $theDays = explode( "day", $this->days);    //Split a string MondayTuesdayWednesdayThurs
-                                                    //into an array {'Mon', 'Tues', 'Wednes', 'Thurs'}
         $theLetters = "";
+        if ($this->days != "online"){
+            $theDays = explode( "day", $this->days);    //Split a string MondayTuesdayWednesdayThurs
+            //into an array {'Mon', 'Tues', 'Wednes', 'Thurs'}
 
-        foreach($theDays as $day){
-            // build a string made of day first letters, with exception of 'Th' for Thursday
-            $theLetters .= $day != "Thurs" ? substr($day,0,1) : substr($day,0,2);
+
+            foreach($theDays as $day){
+                // build a string made of day first letters, with exception of 'Th' for Thursday
+                $theLetters .= $day != "Thurs" ? substr($day,0,1) : substr($day,0,2);
+            }
         }
         return $theLetters;
     }
@@ -228,12 +235,20 @@ class Section
 
     public function getBlock(): string
     {
-        if ($this->block == 0)
-            return "Full Semester";
-        elseif ($this->block == 1)
-            return "First Block";
-        else
-            return "Second Block";
+        $theBlock = "";
+
+        switch ($this->block){
+            case 0:
+                $theBlock = "Full Semester";
+                break;
+            case 1:
+                $theBlock =  "First Block";
+            break;
+            case 2:
+                $theBlock =  "Second Block";
+            break;
+        }
+        return $theBlock;
     }
 
     public function getDays(): array
@@ -243,19 +258,30 @@ class Section
         return $this->days;
     }
 
-    //maybe make a separate method for getting this particular format
+    //TODO: maybe make a separate method for getting this particular format
     public function getStartTime(): string
     {
         $theTime = strtotime($this->startTime);
         return date("h:i A", $theTime);
     }
 
-    //maybe make a separate method for getting this particular format
+    //TODO: maybe make a separate method for getting this particular format
     public function getEndTime(): string
     {
         $theTime = strtotime($this->endTime);
         return date("h:i A", $theTime);
     }
+
+
+    public function getIsOnline()
+    {
+        if ($this->isOnline == 0)
+            return false;
+        else
+            return true;
+    }
+
+
 
     public function getCapacity(): int
     {

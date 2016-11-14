@@ -134,7 +134,6 @@ $(function() {
         var semNumWeeks = $("input#semesterNumberWeeks").val();
         var firstBlockStart = $("input#firstBlockStart").val();
         var secondBlockStart = $("input#secondBlockStart").val();
-
         if (semSeason == 0){
             $("span.error-message").text("Please select a season.")
             return false;
@@ -270,12 +269,21 @@ $(function() {
         var sectionClassroom = $("#sectionClassroom").val();
         var sectionDays = $("select#sectionDays").val();
         var daysString = "";
-        $.each(sectionDays, function(index, value){
-            daysString += value;
-        });
+        if (sectionDays != "online"){
+            $.each(sectionDays, function(index, value){
+                daysString += value;
+            });
+        }else
+            daysString = "online";
         //alert(daysInt);
+        //alert( $("#sectionStartTime").val());
         var sectionStartTime = $("#sectionStartTime").val();
         var sectionEndTime = $("#sectionEndTime").val();
+        if (sectionStartTime == '')
+            sectionStartTime = '00:00:00';
+        if (sectionEndTime == "")
+            sectionEndTime = '00:00:00';
+        var sectionIsOnline = $("#sectionOnline:checkbox:checked").length > 0 ? 1 : 0;
         var sectionBlock = $("#sectionBlock").val();
         var sectionSemester = $("#sectionSemester").val();
         var sectionCapacity = $("#sectionCapacity").val();
@@ -286,15 +294,17 @@ $(function() {
         var dataString = 'sectionCourse=' + sectionCourse + '&sectionProfessor=' + sectionProfessor
             + '&sectionClassroom=' + sectionClassroom + '&sectionDays=' + daysString
             + '&sectionStartTime=' + sectionStartTime + '&sectionEndTime=' + sectionEndTime
+            + '&sectionIsOnline=' + sectionIsOnline
             + '&sectionBlock=' + sectionBlock + '&sectionCapacity=' + sectionCapacity
             + '&sectionSemester=' + sectionSemester;
-        //alert (dataString); return false;
+        //console.log (dataString); return false;
         $.ajax({
             type: "POST",
             url: "action_insertSection.php",
             data: dataString,
             success: function(msg) {
-                //alert(msg);  //use this to debug
+                //console.log(msg); return false;
+                //alert(msg.substr(0, msg.length/3));  //use this to debug
                 if (msg.indexOf("does exist") != -1){
                     window.sectionExists = true;
                     $("span.error-message").text("This Section already exists.")

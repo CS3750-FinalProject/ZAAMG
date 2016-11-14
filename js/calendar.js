@@ -2,18 +2,21 @@ $(document).ready(function() {
     //createEventsSet(profSet);
 
     $("#seeCal_1").click ( function(){
-        $('#1').toggle();
+        $('#profRow_1').toggle();
 
+        addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
+            '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372');
+        addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
+            '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372');
         displayCalendar();
         if ($(this).attr('class').includes("menu-up")){
-            $('#calendar').hide();
+            $('#profCalendar_1').hide();
         }else{
-            $('#calendar').show();
+            $('#profCalendar_1').show();
         }
 
         $(this).toggleClass('glyphicon-menu-down glyphicon-menu-up');
     });
-
 
     //displayProfOverviewSchedule();
 
@@ -21,16 +24,66 @@ $(document).ready(function() {
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
 
+
+
+
 });
 
 
+function addNewEvent(title, eventstart, eventend, location, professor, color) {
+    hardcoded_events.push({
+                title: title,
+                start: eventstart,
+                end: eventend,
+                color: color,
+                location: location,
+                professor: professor
+            });
+}
 
+
+var hardcoded_events = [
+    {
+        title: 'CS 1410 Online',
+        start: '2016-11-07',
+        color: '#583372'
+    },
+    {
+        title: 'CS 3230 Online',
+        start: '2016-11-07',
+        color: '#137c33'
+    },
+    {
+        title: 'CS 1410',
+        start: '2016-11-07T09:30:00',
+        end: '2016-11-07T11:20:00',
+        color: '#583372'
+    },
+    {
+        title: 'CS 1410',
+        start: '2016-11-09T09:30:00',
+        end: '2016-11-09T11:20:00',
+        color: '#583372'
+    },
+    {
+        title: 'CS 1410',
+        start: '2016-11-08T11:30:00',
+        end: '2016-11-08T13:20:00',
+        color: '#583372'
+    },
+    {
+        title: 'CS 1410',
+        start: '2016-11-10T11:30:00',
+        end: '2016-11-10T13:20:00',
+        color: '#583372'
+    }
+];
 
 
 
 
 var displayCalendar = function(){
-    $('#calendar').fullCalendar({
+    $('#profCalendar_1').fullCalendar({
         height: 250,
         header: false,
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday
@@ -46,92 +99,63 @@ var displayCalendar = function(){
         slotLabelFormat: 'h(:mm) a',
         slotLabelInterval: '00:30',
         slotDuration: '00:60:00',
-        events: [
-            {
-                title: 'CS 1410 Online',
-                start: '2016-11-07',
-                backgroundColor: '#583372'
-            },
-            {
-                title: 'CS 3230 Online',
-                start: '2016-11-07',
-                backgroundColor: '#137c33'
-            },
-            {
-                title: 'CS 1410',
-                start: '2016-11-07T09:30:00',
-                end: '2016-11-07T11:20:00',
-                backgroundColor: '#583372'
-            },
-            {
-                title: 'CS 1410',
-                start: '2016-11-09T09:30:00',
-                end: '2016-11-09T11:20:00',
-                backgroundColor: '#583372'
-            },
-            {
-                title: 'CS 1410',
-                start: '2016-11-08T11:30:00',
-                end: '2016-11-08T13:20:00',
-                backgroundColor: '#583372'
-            },
-            {
-                title: 'CS 1410',
-                start: '2016-11-10T11:30:00',
-                end: '2016-11-10T13:20:00',
-                backgroundColor: '#583372'
-            }
-        ]
+        events: hardcoded_events,
+        eventRender: function (event, element) {
+            element.tooltip({title: event.title + "\n" + event.location + "\n" + event.professor});
+            //element.attr('title', event.professor);
+        },
     });
 
 }
 
 
 function createEventsSet(theSet){
+        console.log(theSet);
     var events = [];
     var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
     var prevDividerStart = rowZeroColumnZero;
     theSet.forEach(function(prof, i){
-        var theTitle = prof.name;
-        var prevNumCourses;
-        if (i == 0)
-            prevNumCourses = 0;
-        else
-            prevNumCourses = theSet[i-1].onlineCourses.length;
-
-        var theStart = prevDividerStart.clone().add(5, 'm');
+        var profName = prof.name;
+        console.log("prof.name: " + profName);
+        var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(5, 'm');
         var theEnd = theStart.clone().add(10, 'm');
-
+        //document.getElementsByClassName('profName')[1]
         events.push(
             {
-                title: theTitle,
+                title: profName,
                 start: theStart,
                 end: theEnd,
-                className: 'profName'
+                className: 'profName',
+                order_by: 'A',
+                color: '#194d96'
             },
             {
                 title: 'MW',
                 start: theStart,
                 end: theEnd,
-                className: 'days'
+                className: 'days',
+                order_by: 'B'
             },
             {
                 title: " ",
                 start: theStart.clone().add(10, 'm'),
                 end: theEnd.clone().add(10,'m'),
-                className: 'event_placeholder'
+                className: 'event_placeholder',
+                order_by: 'A'
             },
             {
                 title: 'TTH',
                 start: theStart.clone().add(10, 'm'),
                 end: theEnd.clone().add(10,'m'),
-                className: 'days'
+                className: 'days',
+                order_by: 'B'
             }
         );
-        var theCourseTitle, theCourseStart;
+        var theCourseTitle;
+        var theCourseStart;
         prof.timedCourses.forEach(function(course, j){
             theCourseTitle = course.courseTitle;
-            theCourseStart = momentGenerator(course.courseTime, course.courseDays, theStart);
+            theCourseStart = momentGenerator(course.courseTime, course.courseDays, theStart.clone())
             events.push(
                 {
                     title: theCourseTitle,
@@ -170,8 +194,7 @@ function createEventsSet(theSet){
 
 
 
-function displayProfOverviewSchedule() {
-    var theProfSet = createProfSet();
+function displayProfOverviewSchedule(theProfSet) {
     var theEvents = createEventsSet(theProfSet);
 
     $('#profOverviewSchedule').fullCalendar({
@@ -188,12 +211,15 @@ function displayProfOverviewSchedule() {
         slotLabelFormat: ' ', //the space makes the slots blank.  First time is 6 AM.
         slotDuration: '00:5:00',
         minTime: '06:00:00',
+        eventOrder: 'order_by',
         eventAfterRender: function (event, element, view) {
-            var width = $(element).width();
-
-            // Check which class the event has so you know whether it's half or quarter width
+            if ($(element).hasClass("profName")) {
+                $(element).css('width', $(element).width() *.90 + 'px');
+                $(element).css('background-color', '#194d96');
+                $(element).css('border-color', '#194d96');
+            }
             if ($(element).hasClass("days")) {
-                width = width / 2;
+                $(element).css('width', $(element).width() / 2 + 'px');
                 $(element).css('margin-left', '25%');
                 $(element).css('background-color', '#137c33');
                 $(element).css('border-color', '#137c33');
@@ -201,12 +227,6 @@ function displayProfOverviewSchedule() {
             if ($(element).hasClass("classEvent")) {
                 $(element).css('background-color', '#583372');
                 $(element).css('border-color', '#583372');
-            }
-            if ($(element).hasClass("profName")) {
-                width = width * .90;
-                $(element).css('background-color', '#194d96');
-                $(element).css('border-color', '#194d96');
-                $(element).css('width', width + 'px');
             }
             if ($(element).hasClass("event_placeholder")) {
                 $(element).css('margin-top', '5%');
@@ -219,171 +239,195 @@ function displayProfOverviewSchedule() {
                 $(element).css('border-color', '#e5deea');
             }
 
-            // Set the new width
-            $(element).css('width', width + 'px');
+
 
         },
-        events: theEvents/*[
-            {
-                title: 'Brinkerhoff, Delroy',
-                start: rowZeroColumnZero,  // date 2016-11-06 is the first column
-                end: rowZeroColumnZero.clone().add(10, 'm'),
-                className: 'profName'
-            },
-            {
-                title: 'MW',
-                start: '2016-11-06T06:00:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:10:00',
-                className: 'days'
-            },
-            {
-                title: '',
-                start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:20:00',
-                className: 'event_placeholder'
-            },
-            {
-                title: 'TTH',
-                start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:20:00',
-                className: 'days'
-            },
-            {
-                title: 'CS 1410',
-                start: '2016-11-09T06:00:00', // date 2016-11-09 is 11:30 AM
-                end: '2016-11-09T06:10:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 1410',
-                start: '2016-11-08T06:10:00', // date 2016-11-08 is 9:30 AM
-                end: '2016-11-08T06:20:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 1410 [Online]',
-                start: '2016-11-06T06:20:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:25:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 3230 [Online]',
-                start: '2016-11-06T06:25:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:30:00',
-                className: 'classEvent'
-            },
-            {
-                title: "",
-                start: '06:30', // a start time (10am in this example)
-                end: '06:35', // an end time (2pm in this example)
-                dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
-                color: '#e5deea'  //light purple-gray
-            },
-            {
-                title: 'Ball, Bob',
-                start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:45:00',
-                className: 'profName'
-            },
-            {
-                title: 'MW',
-                start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:45:00',
-                className: 'days'
-            },
-            {
-                title: '',
-                start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:55:00',
-                className: 'event_placeholder'
-            },
-            {
-                title: 'TTH',
-                start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T06:55:00',
-                className: 'days'
-            },
-            {
-                title: 'CS 3100',
-                start: '2016-11-07T06:45:00',  // date 2016-11-07 is 7:30 AM
-                end: '2016-11-07T06:55:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 1400',
-                start: '2016-11-08T06:35:00',  // date 2016-11-08 is 9:30 AM
-                end: '2016-11-08T06:45:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 2350',
-                start: '2016-11-09T06:35:00',  // date 2016-11-09 is11:30 AM
-                end: '2016-11-09T06:45:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 1400 [Online]',
-                start: '2016-11-06T06:55:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T07:00:00',
-                className: 'classEvent'
-            },
-            {
-                title: "",
-                start: '07:00', // a start time (10am in this example)
-                end: '07:05', // an end time (2pm in this example)
-                dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
-                color: '#e5deea'  //light purple-gray
-            },
-            {
-                title: 'Cowan, Ted',
-                start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T07:15:00',
-                className: 'profName'
-            },
-            {
-                title: 'MW',
-                start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T07:15:00',
-                className: 'days'
-            },
-            {
-                title: '',
-                start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T07:25:00',
-                className: 'event_placeholder'
-            },
-            {
-                title: 'TTH',
-                start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T07:25:00',
-                className: 'days'
-            },
-            {
-                title: 'CS 4750',
-                start: '2016-11-11T07:05:00',  // date 2016-11-11 is 5:30 PM
-                end: '2016-11-11T07:15:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 3100',
-                start: '2016-11-12T07:05:00',  // date 2016-11-12 is 7:30 PM
-                end: '2016-11-12T07:15:00',
-                className: 'classEvent'
-            },
-            {
-                title: 'CS 3030 [Online]',
-                start: '2016-11-06T07:25:00',  // date 2016-11-06 is the first column
-                end: '2016-11-06T07:30:00',
-                className: 'classEvent'
-            },
-            {
-                title: "",
-                start: '07:30', // a start time (10am in this example)
-                end: '07:35', // an end time (2pm in this example)
-                dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
-                color: '#e5deea'  //light purple-gray
-            }
-
-        ]*/
+        events: theEvents
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*[
+ {
+ title: 'Brinkerhoff, Delroy',
+ start: rowZeroColumnZero,  // date 2016-11-06 is the first column
+ end: rowZeroColumnZero.clone().add(10, 'm'),
+ className: 'profName'
+ },
+ {
+ title: 'MW',
+ start: '2016-11-06T06:00:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:10:00',
+ className: 'days'
+ },
+ {
+ title: '',
+ start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:20:00',
+ className: 'event_placeholder'
+ },
+ {
+ title: 'TTH',
+ start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:20:00',
+ className: 'days'
+ },
+ {
+ title: 'CS 1410',
+ start: '2016-11-09T06:00:00', // date 2016-11-09 is 11:30 AM
+ end: '2016-11-09T06:10:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 1410',
+ start: '2016-11-08T06:10:00', // date 2016-11-08 is 9:30 AM
+ end: '2016-11-08T06:20:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 1410 [Online]',
+ start: '2016-11-06T06:20:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:25:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 3230 [Online]',
+ start: '2016-11-06T06:25:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:30:00',
+ className: 'classEvent'
+ },
+ {
+ title: "",
+ start: '06:30', // a start time (10am in this example)
+ end: '06:35', // an end time (2pm in this example)
+ dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
+ color: '#e5deea'  //light purple-gray
+ },
+ {
+ title: 'Ball, Bob',
+ start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:45:00',
+ className: 'profName'
+ },
+ {
+ title: 'MW',
+ start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:45:00',
+ className: 'days'
+ },
+ {
+ title: '',
+ start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:55:00',
+ className: 'event_placeholder'
+ },
+ {
+ title: 'TTH',
+ start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T06:55:00',
+ className: 'days'
+ },
+ {
+ title: 'CS 3100',
+ start: '2016-11-07T06:45:00',  // date 2016-11-07 is 7:30 AM
+ end: '2016-11-07T06:55:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 1400',
+ start: '2016-11-08T06:35:00',  // date 2016-11-08 is 9:30 AM
+ end: '2016-11-08T06:45:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 2350',
+ start: '2016-11-09T06:35:00',  // date 2016-11-09 is11:30 AM
+ end: '2016-11-09T06:45:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 1400 [Online]',
+ start: '2016-11-06T06:55:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T07:00:00',
+ className: 'classEvent'
+ },
+ {
+ title: "",
+ start: '07:00', // a start time (10am in this example)
+ end: '07:05', // an end time (2pm in this example)
+ dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
+ color: '#e5deea'  //light purple-gray
+ },
+ {
+ title: 'Cowan, Ted',
+ start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T07:15:00',
+ className: 'profName'
+ },
+ {
+ title: 'MW',
+ start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T07:15:00',
+ className: 'days'
+ },
+ {
+ title: '',
+ start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T07:25:00',
+ className: 'event_placeholder'
+ },
+ {
+ title: 'TTH',
+ start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T07:25:00',
+ className: 'days'
+ },
+ {
+ title: 'CS 4750',
+ start: '2016-11-11T07:05:00',  // date 2016-11-11 is 5:30 PM
+ end: '2016-11-11T07:15:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 3100',
+ start: '2016-11-12T07:05:00',  // date 2016-11-12 is 7:30 PM
+ end: '2016-11-12T07:15:00',
+ className: 'classEvent'
+ },
+ {
+ title: 'CS 3030 [Online]',
+ start: '2016-11-06T07:25:00',  // date 2016-11-06 is the first column
+ end: '2016-11-06T07:30:00',
+ className: 'classEvent'
+ },
+ {
+ title: "",
+ start: '07:30', // a start time (10am in this example)
+ end: '07:35', // an end time (2pm in this example)
+ dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
+ color: '#e5deea'  //light purple-gray
+ }
+
+ ]*/

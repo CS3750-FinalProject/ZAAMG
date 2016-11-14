@@ -57,8 +57,8 @@ $body = "
                     <div class='col-xs-7'>
                         <label for='sectionClassroom'>Classroom</label>
                         <select class='form-control' id='sectionClassroom'  >
-                            <option value='0'>Please Select...</option>";
-
+                            <option value='-1'>Please Select...</option>
+                            <option value='0'>Online</option>";
                             $selectRoom = $database->getdbh()->prepare(
                                 "SELECT classroom_id, campus_name, building_name, classroom_number
                                   FROM ZAAMG.Campus c JOIN ZAAMG.Building b
@@ -89,7 +89,8 @@ $body = "
                     <div class='col-xs-4'>
                         <label for='sectionDays'>Days</label>
                         <select multiple  class='form-control' id='sectionDays'  >
-                        <option value='Monday'>Monday</option>
+                            <option value='online'>Online</option>
+                            <option value='Monday'>Monday</option>
                             <option value='Tuesday'>Tuesday</option>
                             <option value='Wednesday'>Wednesday</option>
                             <option value='Thursday'>Thursday</option>
@@ -100,11 +101,11 @@ $body = "
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionStartTime'>Start Time</label>
-                        <input type='time' class='form-control' id='sectionStartTime'  >
+                        <input type='time' class='form-control' id='sectionStartTime' value='00:00:00' >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionEndTime'>End Time</label>
-                        <input type='time' class='form-control' id='sectionEndTime'  >
+                        <input type='time' class='form-control' id='sectionEndTime' value='00:00:00'  >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionSemester'>Semester</label>
@@ -143,8 +144,8 @@ $body = "
                         <input type='number' class='form-control' id='sectionCapacity' min='1' >
                     </div>
                     <div class='col-xs-3'>
-                        <label class='checkbox-inline'>
-                        <input type='checkbox' value='1'>Online</label>
+                        <label class='checkbox-inline' for='sectionOnline'>
+                        <input type='checkbox' id='sectionOnline' value='1'>Online</label>
                     </div>
 
                 </div>

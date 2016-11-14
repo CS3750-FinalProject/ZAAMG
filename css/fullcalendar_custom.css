@@ -385,6 +385,23 @@ hr.fc-divider {
 	vertical-align: top;
 }
 
+.indProfCal td.fc-axis span{
+	color: #492365;
+}
+
+#profOverviewSchedule th a, .indProfCal th a{
+	color: #492365;
+}
+
+#profOverviewSchedule th{
+	font-size: 1.2em;
+	padding: 1%;
+}
+
+.indProfCal th{
+	padding: 0.5%;
+}
+
 .fc td.fc-today {
 	border-style: double; /* overcome neighboring borders */
 }
@@ -1243,11 +1260,11 @@ be a descendant of the grid when it is being dragged.
 }
 
 
-#profOverviewSchedule th.fc-day-header.fc-widget-header{
+/*#profOverviewSchedule th.fc-day-head.fc-widget-header{
 	font-size: 1.2em;
 	padding: 1%;
 	color: #492365 !important;
-}
+}*/
 
 .fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after {
 	content: "=";
