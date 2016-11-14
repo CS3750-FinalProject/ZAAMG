@@ -155,7 +155,8 @@ function createEventsSet(theSet){
         var theCourseStart;
         prof.timedCourses.forEach(function(course, j){
             theCourseTitle = course.courseTitle;
-            theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone())
+            theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone());
+
             events.push(
                 {
                     title: theCourseTitle,
@@ -175,16 +176,28 @@ function createEventsSet(theSet){
                 });
         });
         prof.nonStandardCourses.forEach(function(course, m){
+            theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone());
+
             events.push(
                 {
-                    title: course.courseTitle + '\n' + course.startTime + ' - ' + course.endTime,
+                    title: course.courseTitle + '\n' +
+                        course.startTime.substring(0,course.startTime.indexOf(' ')) +
+                        '-' + course.endTime.substring(0,course.endTime.indexOf(' ')),
+                    start: theCourseStart,
+                    end: theCourseStart.clone().add(10, 'm'),
+                    color: '#840b38'
+                }
+                /*{
+                    title: course.courseTitle + '  --  ' + course.courseDays.toUpperCase() + '   --  ' +
+                    '\n' + course.startTime + ' - ' + course.endTime,
                     start: theStart.clone().add((10*2)+(5*prof.onlineCourses.length) + (10*m),'m'),
                     end: theStart.clone().add((10*2)+(5*prof.onlineCourses.length) + (10*m) + 10,'m'),
                     color: '#840b38'
-                });
+                }*/
+            );
         });
         prevDividerStart = theStart.clone()
-            .add((10 * 2) + (5 * prof.onlineCourses.length) + (10 * prof.nonStandardCourses.length), 'm');
+            .add((10 * 2) + (5 * prof.onlineCourses.length)  /*(10 * prof.nonStandardCourses.length)*/, 'm');
 
         for (i=0; i < 7; i++) {
             events.push(

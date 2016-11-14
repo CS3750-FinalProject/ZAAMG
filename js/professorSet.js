@@ -64,9 +64,15 @@ function add_toProfSet(profFirst, profLast, timedCourseObjects, onlineCourseObje
 }
 
 function momentGenerator(time, days, startMoment){
-    //var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
+    var standardTimes = ['7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'];
+    var newTime = time;
+    if (standardTimes.indexOf(newTime) == -1){
+        var newHour = parseInt(newTime.substr(0, newTime.indexOf(':'))) - 1;
+        newTime = newHour + newTime.substr(newTime.indexOf(':'));
+        //alert(time);
+    }
     var theMoment;
-    switch(time) {
+    switch(newTime) {
         case "7:30 AM":
             theMoment = startMoment.clone().add(1, 'd');
             break;
