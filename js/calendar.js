@@ -5,9 +5,13 @@ $(document).ready(function() {
         $('#profRow_1').toggle();
 
         addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
-            '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372');
+            '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
         addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
-            '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372');
+            '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
+        addNewEvent('OnlineEvent(1)', '2016-11-11T00:00:00',
+            '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
+        addNewEvent('OnlineEvent(2)', '2016-11-11T00:00:00',
+            '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
         console.log(getMinTime(hardcoded_events));
         displayCalendar();
         if ($(this).attr('class').includes("menu-up")){
@@ -31,16 +35,52 @@ $(document).ready(function() {
 });
 
 
-function addNewEvent(title, eventstart, eventend, location, professor, color) {
-    hardcoded_events.push({
-                title: title,
-                start: eventstart,
-                end: eventend,
-                color: color,
-                location: location,
-                professor: professor
-            });
+function addNewEvent(title, eventstart, eventend, location, professor, color, isOnline) {
+    var numOnline = 0;
+    hardcoded_events.forEach(function(event, i){
+       if (event.online == true){
+           numOnline ++;
+       }
+    });
+    console.log("numOnline: " + numOnline);
+    var minCourseTime = getMinTime(hardcoded_events);
+    var minHour = parseInt(minCourseTime.substr(0, minCourseTime.indexOf(':')));
+    console.log("minHour: " + minHour);
+    if (!isOnline){
+        hardcoded_events.push({
+            title: title,
+            start: eventstart,
+            end: eventend,
+            color: color,
+            location: location,
+            professor: professor,
+            online: isOnline
+        });
+    }else{
+        var adj_minHour = minHour + (numOnline);
+        var starttime = '2016-11-13T';
+        if (adj_minHour < 10) starttime += '0';
+        starttime += adj_minHour + minCourseTime.substr(minCourseTime.indexOf(':'));
+        console.log("starttime:", starttime);
+
+        var endtime = '2016-11-13T';
+        if (adj_minHour + 1 < 10) endtime += '0';
+        endtime += (adj_minHour + 1) + minCourseTime.substr(minCourseTime.indexOf(':'));
+        console.log("endtime:", endtime);
+
+        hardcoded_events.push({
+            title: title,
+            start: starttime,
+            end: endtime,
+            color: color,
+            location: location,
+            professor: professor,
+            online: isOnline
+        });
+    }
 }
+
+
 
 function getMinTime(eventsArray){
     var minTime = '01/01/2017 23:59:00';
@@ -54,16 +94,18 @@ function getMinTime(eventsArray){
 
 
 var hardcoded_events = [
-    {
+    /*{
         title: 'CS 1410 Online',
         start: '2016-11-07',
-        color: '#583372'
+        color: '#583372',
+        online: true
     },
     {
         title: 'CS 3230 Online',
         start: '2016-11-07',
-        color: '#137c33'
-    },
+        color: '#137c33',
+        online: true
+    },*/
     {
         title: 'CS 1410',
         start: '2016-11-07T09:30:00',
