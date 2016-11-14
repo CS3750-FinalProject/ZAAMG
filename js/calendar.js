@@ -8,9 +8,9 @@ $(document).ready(function() {
             '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
         addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
             '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
-        addNewEvent('OnlineEvent(1)', '2016-11-11T00:00:00',
+        addNewEvent('Online (1)', '2016-11-11T00:00:00',
             '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
-        addNewEvent('OnlineEvent(2)', '2016-11-11T00:00:00',
+        addNewEvent('Online (2)', '2016-11-11T00:00:00',
             '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
         console.log(getMinTime(hardcoded_events));
         displayCalendar();
@@ -140,7 +140,7 @@ var displayCalendar = function(){
         height: 250,
         header: false,
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday
-        //allDaySlot: false,  // online courses can show here
+        allDaySlot: false,  // online courses can show here
         defaultView: 'agendaWeek',
         dayNames: [ 'Online','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         columnFormat: 'dddd',
