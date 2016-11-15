@@ -1,3 +1,8 @@
+<?php
+
+$database = new Database();
+
+echo '
 <div class="modal fade" id="newClassroomModal" tabindex="-1" role="dialog" aria-labelledby="classroom-label">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -20,10 +25,8 @@
                         <select type="text" class="form-control" id="classroomBuilding" >
 
                             <option value="0">Please Select...</option>
-                            <option value="-1">None</option>
+                            <option value="-1">None</option>';
 
-                            <?php
-                            $database = new Database();
                             $selectBuilding = $database->getdbh()->prepare(
                                 'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
                                   FROM ZAAMG.Campus JOIN ZAAMG.Building
@@ -36,7 +39,7 @@
                                 echo "<option value=\"".$row['building_id']."\">"
                                     .$row['building_name'].", ".$row['campus_name']."</option>";
                             }
-                            ?>
+echo '
                         </select>
                     </div>
                     <div class="col-xs-3">
@@ -53,4 +56,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>';
