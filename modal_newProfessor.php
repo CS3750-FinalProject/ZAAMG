@@ -1,3 +1,8 @@
+<?php
+
+$database = new Database();
+
+echo '
 <div class="modal fade" id="newProfessorModal" tabindex="-1" role="dialog" aria-labelledby="professor-label">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -24,10 +29,8 @@
                     <div class="col-xs-6">
                         <label for="profDepartment">Department</label>
                         <select class="form-control" id="profDepartment" >
-                            <option value="''">Please Select...</option>
+                            <option value="">Please Select...</option>';
 
-                            <?php
-                            $database = new Database();
                             $selectDepts = $database->getdbh()->prepare(
                                 'SELECT dept_id, dept_name FROM ZAAMG.Department
                                   ORDER BY dept_name ASC');
@@ -37,26 +40,20 @@
                             foreach($result as $row){
                                 echo "<option value=\"".$row['dept_id']."\">".$row['dept_name']."</option>";
                             }
-                            ?>
-
+echo '
                             <!--<option value="cs">Computer Science</option>
                             <option value="nmt">Network, Multimedia and Technology</option>
                             <option value="web">Web Development</option>-->
                         </select>
                     </div>
-                    <span class="col-xs-3" style="font-weight:bold; padding-left:12%; display:block; padding-top:20px">
-                        Hours:  <!-- just one way to do it, tweak as desired -->
-                    </span>
                     <div class="col-xs-3">
-                        <label for="profRequiredHours">Required</label>
-                        <input type="number" class="form-control" id="profRequiredHours" placeholder=4 >
+                        <label for="profHours">Hours</label>
+                        <input type="number" class="form-control" id="profHours" placeholder=12 >
                     </div>
-
                     <div class="col-xs-3">
-                        <label for="profReleaseHours">Release</label>
-                        <input type="number" class="form-control" id="profReleaseHours" placeholder=4 >
+                        <label for="profRelease">Release</label>
+                        <input type="number" class="form-control" id="profRelease" placeholder=4 >
                     </div>
-
                 </div>
             </div>
             <div class="modal-footer">
@@ -66,5 +63,4 @@
             </div>
         </div>
     </div>
-</div>
-
+</div>';
