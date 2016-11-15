@@ -1,4 +1,5 @@
-<div class="modal fade" id="newSemesterModal" tabindex="-1" role="dialog" aria-labelledby="semester-label">
+<?php
+echo '<div class="modal fade" id="newSemesterModal" tabindex="-1" role="dialog" aria-labelledby="semester-label">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -54,4 +55,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>';
