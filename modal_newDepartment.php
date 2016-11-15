@@ -1,3 +1,5 @@
+<?php
+echo '
 <div class="modal fade" id="newDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="department-label">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -25,4 +27,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>';
