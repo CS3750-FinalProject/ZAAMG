@@ -147,7 +147,7 @@ var displayCalendar = function(profRowId, eventsArray){
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         eventLimit: true, // allow "more" link when too many events
-        minTime: '07:30:00',
+        minTime: '06:30:00',
         slotLabelFormat: 'h(:mm) a',
         slotLabelInterval: '00:30',
         slotDuration: '00:60:00',
