@@ -1,7 +1,4 @@
 $(document).ready(function() {
-    //createEventsSet(profSet);
-    //var numProfRows = document.getElementsByClassName('indProfCal').length
-    //displayProfOverviewSchedule();
 
     $(window).resize(function() {
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
