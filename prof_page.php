@@ -21,7 +21,7 @@ $body .= "
 
 
     <div class='container' >
-      <div class='col-xs-12' >
+      <div class='col-xs-12' id='profIndex'>
         <table class='list-data'>
           <tr>
             <th>First Name</th>
@@ -39,7 +39,7 @@ $body .= "
 
 $allProfessors = $database->getAllProfessors('prof_last');
 foreach ($allProfessors as $professor){
-    $body .= addProfessor($professor);
+    $body .= addProfessor($professor, $database);
 }
 
 
@@ -61,7 +61,7 @@ $body .= "<script>displayProfOverviewSchedule(theProfSet)</script>";
 echo $body;
 
 
-
+//TODO:  use json_encode to do this!  I did it by scratch here out of ignorance.  :-(
 function load_ProfSet($allTheProfs, $db){
     $body = '<script> ';
     foreach($allTheProfs as $professor){
@@ -99,7 +99,54 @@ function load_ProfSet($allTheProfs, $db){
     return $body;
 }
 
-function addProfessor(Professor $professor){
+function addProfessor(Professor $professor, Database $db){
+    $eventObjects = array();
+    $daysToDates = array("Mon"=>"2016-11-07", "Tues" => "2016-11-08", "Wednes" => "2016-11-09",
+        "Thurs" => "2016-11-10", "Fri" => "2016-11-11", "Satur" => "2016-11-12" , "online"=> "2016-11-13");
+    echo "<script>console.log(\"day\" + {$daysToDates['Mon']});</script>";
+    $profSections = $db->getProfSections($professor, null);
+    foreach($profSections as $section){
+        $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
+        $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
+        $title = $prefix . " " . $number;
+        $dayString = $section->getDayString();
+        if ($dayString != "online"){
+            $days = explode('day', $section->getDays());
+            array_pop($days); // last element is useless
+        }
+        else
+            $days = array("online" => "online");
+
+        $eventStart = $section->getStartTime();
+        $eventEnd = $section->getEndTime();
+        $location = $section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
+            'classroom_id', 'building_id', 'campus_id', 'classroomID');
+        $classroom = $section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID');
+        $profFirst = $section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID');
+        $profLast = $section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID');
+        $prof = $profFirst . " " . $profLast;
+        $isOnline = $section->getIsOnline();
+
+        foreach($days as $day){
+            array_push($eventObjects, json_encode(array(
+                "title" => $title,
+                "start" => $daysToDates[$day]."T".$eventStart,
+                "end" => $daysToDates[$day]."T".$eventEnd,
+                "location" => $location,
+                "classroom" => $classroom,
+                "professor" => $prof,
+                "online" => $isOnline
+            )));
+        }
+    }
+
+/*
+    $eventObjects = array(
+        json_encode(array("name" => "Gisela", "gender" => "female")),
+        json_encode(array("name" => "Leon", "gender" => "male"))
+    );*/
+
+
     $row = "<tr class='{$professor->getProfId()}' >
 			<td>{$professor->getProfFirst()}</td>
 			<td>{$professor->getProfLast()}</td>
@@ -111,8 +158,11 @@ function addProfessor(Professor $professor){
 			<td>
 			    <img src='img/pencil.png' class='action-edit' />
 			    <img src='img/close.png' class='action-delete'>
-			    <span id='seeCal_{$professor->getProfId()}'
-			          class=' glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+			    <span id='seeProfCal_{$professor->getProfId()}'
+			    onclick='on_profRowClick({$professor->getProfId()}, [";
+    foreach($eventObjects as $eventObj){$row .= $eventObj . ",";}
+
+    $row .= "])' class=' glyphicon glyphicon-menu-down' aria-hidden='true'></span>
 			</td>
 		  </tr>";
 

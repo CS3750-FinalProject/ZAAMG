@@ -208,7 +208,7 @@ class Section
                 // build a string made of day first letters, with exception of 'Th' for Thursday
                 $theLetters .= $day != "Thurs" ? substr($day,0,1) : substr($day,0,2);
             }
-        }
+        }else $theLetters = "online";
         return $theLetters;
     }
 
@@ -251,7 +251,7 @@ class Section
         return $theBlock;
     }
 
-    public function getDays(): array
+    public function getDays(): string
     {
         //there is also a getDayString() method
         //which returns strings like MW, TTh

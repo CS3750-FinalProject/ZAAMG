@@ -12,7 +12,7 @@ $body = "
 </div>
 
     <div class='container'>
-      <div class='col-xs-12'>
+      <div class='col-xs-12' id='sectionIndex'>
         <table class='list-data'>
           <tr>
             <th colspan='3'>Course</th>

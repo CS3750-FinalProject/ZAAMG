@@ -36,8 +36,15 @@
   background-color: #ededed;
 }
 
+/*
+.list-data tr:nth-child(odd) {
+  background-color: #F8F8F8;
+}
+*/
+
+
 #table_allProfsSchedule tr:nth-child(even){
-  background-color: white;
+  background-color: ededed;
 }
 
 .error-message{
@@ -63,5 +70,16 @@
 
 td.profDivider {
   background-color: #e5deea;
+}
+
+body{
+  /*background-image: url('../img/sayagata-400px.png');
+  background-image: url('../img/pw_maze_white_@2X.png');
+  background-image: url('../img/dimension.png');*/
+);
+}
+
+div#profOverviewSchedule, div#sectionIndex table, div#profIndex table{
+  background-color: #f8f8f8
 }
 

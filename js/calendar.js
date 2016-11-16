@@ -1,58 +1,94 @@
 $(document).ready(function() {
     //createEventsSet(profSet);
-
-    $("#seeCal_1").click ( function(){
-        $('#profRow_1').toggle();
-
-        addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
-            '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
-        addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
-            '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
-        addNewEvent('Online (1)', '2016-11-11T00:00:00',
-            '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
-        addNewEvent('Online (2)', '2016-11-11T00:00:00',
-            '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
-        console.log(getMinTime(hardcoded_events));
-        displayCalendar();
-        if ($(this).attr('class').includes("menu-up")){
-            $('#profCalendar_1').hide();
-        }else{
-            $('#profCalendar_1').show();
-        }
-
-        $(this).toggleClass('glyphicon-menu-down glyphicon-menu-up');
-    });
-
+    //var numProfRows = document.getElementsByClassName('indProfCal').length
     //displayProfOverviewSchedule();
 
     $(window).resize(function() {
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
 
-
-
-
 });
 
 
-function addNewEvent(title, eventstart, eventend, location, professor, color, isOnline) {
+function on_profRowClick(profRowId, eventObjects){
+    $('tr#' + 'profRow_'+ profRowId).toggle();
+
+    var theEvents = load_indProfRowEvents(eventObjects);
+    displayCalendar(profRowId, theEvents);
+
+    if ($('span#' + 'seeProfCal_' + profRowId).attr('class').includes("menu-up")){
+        $('div#' + 'profCalendar_'+ profRowId).hide();
+    }else{
+        $('div#'+'profCalendar_'+ profRowId).show();
+    }
+    $('span#' + 'seeProfCal_' + profRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+}
+
+function load_indProfRowEvents(eventObjects){
+    events = [];
+    eventObjects.forEach(function(event, i){
+        addNewEvent(event.title, event.start, event.end, event.location, event.classroom, event.professor,
+            event.online ? '#137c33' : '#583372', event.online, events)
+    })
+
+    return events;
+}
+
+// formats a time like '2016-11-07T09:30:00'
+function formatTime_fullCalendar(time){
+    var timePattern = /[0-9-]{10}T[0-9:]{5} [APM]{2}/;
+    if (timePattern.test(time)){
+        var timePart = time.substr(time.indexOf('T')+1);
+        var hourPart = timePart.substr(0, 2);
+        var hour = parseInt(hourPart);
+        var minutePart = timePart.substr(timePart.indexOf(':')+1, 2);
+        if (timePart.indexOf('PM') != -1){
+            if (hour < 12){
+                timePart = (hour + 12) + ':' + minutePart + ':00';
+            }else{ //hourPart is 12 and it's PM
+                timePart = hourPart + ':' + minutePart + ':00';
+            }
+        }else { // time is AM
+            timePart = hourPart + ':' + minutePart + ':00';
+        }
+        return time.substr(0, time.indexOf('T')+1) + timePart;
+    }else
+        return time;
+}
+
+function formatTime_prettyPrint(time){
+    time = new Date(time);
+    var hour = time.getUTCHours();
+    var minute = time.getUTCMinutes();
+    var meridian = 'AM';
+    if (hour >= 12){
+        meridian = 'PM';
+        if (hour > 12) hour -= 12;
+    }
+    return hour + ':' + minute + ' ' + meridian;
+}
+
+function addNewEvent(title, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
+    var timedEvents = [];
     var numOnline = 0;
-    hardcoded_events.forEach(function(event, i){
+    eventsArray.forEach(function(event, i){
        if (event.online == true){
            numOnline ++;
+       }else{
+           timedEvents.push(event);
        }
+
     });
-    console.log("numOnline: " + numOnline);
-    var minCourseTime = getMinTime(hardcoded_events);
+    var minCourseTime = getMinTime(timedEvents, 0);
     var minHour = parseInt(minCourseTime.substr(0, minCourseTime.indexOf(':')));
-    console.log("minHour: " + minHour);
     if (!isOnline){
-        hardcoded_events.push({
+        eventsArray.push({
             title: title,
-            start: eventstart,
-            end: eventend,
+            start: formatTime_fullCalendar(eventstart),
+            end: formatTime_fullCalendar(eventend),
             color: color,
             location: location,
+            classroom: classroom,
             professor: professor,
             online: isOnline
         });
@@ -61,19 +97,19 @@ function addNewEvent(title, eventstart, eventend, location, professor, color, is
         var starttime = '2016-11-13T';
         if (adj_minHour < 10) starttime += '0';
         starttime += adj_minHour + minCourseTime.substr(minCourseTime.indexOf(':'));
-        console.log("starttime:", starttime);
 
         var endtime = '2016-11-13T';
         if (adj_minHour + 1 < 10) endtime += '0';
-        endtime += (adj_minHour + 1) + minCourseTime.substr(minCourseTime.indexOf(':'));
-        console.log("endtime:", endtime);
+        var minutesMinus2 = parseInt(minCourseTime.substr(minCourseTime.indexOf(':')+1, 2)) - 2;
+        endtime += (adj_minHour + 1) + ':' + minutesMinus2  + minCourseTime.substr(minCourseTime.lastIndexOf(':'));
+        console.log(starttime + ' ' + endtime);
 
-        hardcoded_events.push({
+        eventsArray.push({
             title: title,
-            start: starttime,
-            end: endtime,
+            start: formatTime_fullCalendar(starttime),
+            end: formatTime_fullCalendar(endtime),
             color: color,
-            location: location,
+            location: "Online",
             professor: professor,
             online: isOnline
         });
@@ -82,61 +118,24 @@ function addNewEvent(title, eventstart, eventend, location, professor, color, is
 
 
 
-function getMinTime(eventsArray){
+function getMinTime(eventsArray, hourChange){  //times come in looking like 2016-11-08T09:30 AM
     var minTime = '01/01/2017 23:59:00';
     eventsArray.forEach(function(event, i){
         var eventTime = '01/01/2017 ' + event.start.substr(event.start.indexOf('T')+1);
         if (Date.parse(eventTime) < Date.parse(minTime) )
             minTime = eventTime;
     });
-    return minTime.substr(minTime.indexOf(' ')+1);
+    if (minTime == '01/01/2017 23:59:00') minTime = '01/01/2017 07:30:00'
+    var hour = parseInt(minTime.substr(minTime.indexOf(' ')+1,2)) + hourChange;
+    if (hour < 10) hour = '0' + hour;
+    return hour + minTime.substr(minTime.indexOf(':'));
 }
 
 
-var hardcoded_events = [
-    /*{
-        title: 'CS 1410 Online',
-        start: '2016-11-07',
-        color: '#583372',
-        online: true
-    },
-    {
-        title: 'CS 3230 Online',
-        start: '2016-11-07',
-        color: '#137c33',
-        online: true
-    },*/
-    {
-        title: 'CS 1410',
-        start: '2016-11-07T09:30:00',
-        end: '2016-11-07T11:20:00',
-        color: '#583372'
-    },
-    {
-        title: 'CS 1410',
-        start: '2016-11-09T09:30:00',
-        end: '2016-11-09T11:20:00',
-        color: '#583372'
-    },
-    {
-        title: 'CS 1410',
-        start: '2016-11-08T11:30:00',
-        end: '2016-11-08T13:20:00',
-        color: '#583372'
-    },
-    {
-        title: 'CS 1410',
-        start: '2016-11-10T11:30:00',
-        end: '2016-11-10T13:20:00',
-        color: '#583372'
-    }
-];
 
 
-
-
-var displayCalendar = function(){
-    $('#profCalendar_1').fullCalendar({
+var displayCalendar = function(profRowId, eventsArray){
+    $('#' + 'profCalendar_' + profRowId).fullCalendar({
         height: 250,
         header: false,
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday
@@ -152,34 +151,36 @@ var displayCalendar = function(){
         slotLabelFormat: 'h(:mm) a',
         slotLabelInterval: '00:30',
         slotDuration: '00:60:00',
-        events: hardcoded_events,
-        scrollTime: getMinTime(hardcoded_events),
+        events: eventsArray,
+        scrollTime: formatTime_fullCalendar(getMinTime(eventsArray, -1)),
         eventRender: function (event, element) {
+            var timeString = event.online ? "" :
+                (formatTime_prettyPrint(event.start) + ' - ' + formatTime_prettyPrint(event.end));
+            var room = event.classroom != undefined ? event.classroom : "";
             element.popover(
                 {
-                    title: event.title,
-                    content: event.location + "\n" + event.professor,
+                    html: true,
+                    title: "<strong>" + event.title + "</strong>",  //some html has to be in the title or it won't work
+                    content: event.professor + "<br>" + event.location + " " + room + "<br>" + timeString,
                     trigger: 'hover click',
                     placement: "right",
                     selector: event,
                     container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
                 }
             );
-            //element.attr('title', event.professor);
         },
     });
 
 }
 
 
+
 function createEventsSet(theSet){
-        console.log(theSet);
     var events = [];
     var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
     var prevDividerStart = rowZeroColumnZero;
     theSet.forEach(function(prof, i){
         var profName = prof.name;
-        console.log("prof.name: " + profName);
         var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(5, 'm');
         var theEnd = theStart.clone().add(10, 'm');
         //document.getElementsByClassName('profName')[1]
@@ -249,13 +250,6 @@ function createEventsSet(theSet){
                     end: theCourseStart.clone().add(10, 'm'),
                     color: '#840b38'
                 }
-                /*{
-                    title: course.courseTitle + '  --  ' + course.courseDays.toUpperCase() + '   --  ' +
-                    '\n' + course.startTime + ' - ' + course.endTime,
-                    start: theStart.clone().add((10*2)+(5*prof.onlineCourses.length) + (10*m),'m'),
-                    end: theStart.clone().add((10*2)+(5*prof.onlineCourses.length) + (10*m) + 10,'m'),
-                    color: '#840b38'
-                }*/
             );
         });
         prevDividerStart = theStart.clone()
@@ -340,7 +334,17 @@ function displayProfOverviewSchedule(theProfSet) {
 
 
 
+/*
 
+ addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
+ '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
+ addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
+ '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
+ addNewEvent('Online (1)', '2016-11-11T00:00:00',
+ '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
+ addNewEvent('Online (2)', '2016-11-11T00:00:00',
+ '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
+ */
 
 
 
@@ -515,3 +519,25 @@ function displayProfOverviewSchedule(theProfSet) {
  }
 
  ]*/
+
+
+
+/* $('#'+ 'seeProfCal_'+i).click ( function(){
+ $('#' + 'profRow_'+i).toggle();
+ addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
+ '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
+ addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
+ '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
+ addNewEvent('Online (1)', '2016-11-11T00:00:00',
+ '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
+ addNewEvent('Online (2)', '2016-11-11T00:00:00',
+ '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
+ displayCalendar();
+
+ if ($(this).attr('class').includes("menu-up")){
+ $('#' + 'profCalendar_'+i).hide();
+ }else{
+ $('#'+'profCalendar_'+i).show();
+ }
+ $(this).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+ });*/
