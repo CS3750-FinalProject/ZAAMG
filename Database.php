@@ -154,7 +154,30 @@ class Database
     }
 
 
-    
+    public function getClassroomsWithAll($orderBy = null){
+        $allClassrooms = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Classroom` JOIN `ZAAMG`.`Building` ON `building_id`
+            JOIN `ZAAMG`.`Campus` ON `campus_id`");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$classroomRecord){
+                $allClassrooms[] = new Classroom(  //don't need to put an index number between those brackets, awesome
+                    $classroomRecord['classroom_id'], $classroomRecord['classroom_number'],
+                    $classroomRecord['building_name'], $classroomRecord['campus_name'],
+                    $classroomRecord['classroom_capacity'],
+                    $classroomRecord['classroom_workstations'],
+                    $classroomRecord['building_id']);
+            }
+            return $allClassrooms;
+        }catch(Exception $e){
+            return "getAllClassrooms: ".$e->getMessage();
+        }
+    }
+
+
+
     public function getdbh(){
         return $this->dbh;
     }
