@@ -8,6 +8,25 @@ $(document).ready(function() {
 
 
 
+/*
+ * FUNCTIONS IN THIS FILE:  (no particular order)
+ *
+ * on_profRowClick(profRowId, sectionObjects)
+ * load_indProfRowEvents(sectionObjects)
+ * formatTime_fullCalendar(time)
+ * addNewEvent(title, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray)
+ * getMinTime(eventsArray, hourChange)
+ * displayCalendar = function(profRowId, eventsArray)
+ * createEventsSet_test(theSet)         ------  rename this one! -------
+ * displayTest(theProfSet)              -----  rename this one! ------   It's the Overview ------
+ * fixButtons()
+ * fixHeaders
+ */
+
+
+
+
+/*******************************************************************************************/
 
 /*  function for handling show/hide of an individual professor schedule
  *
@@ -39,7 +58,7 @@ function on_profRowClick(profRowId, sectionObjects){
 
 }
 
-
+/*******************************************************************************************/
 
 /*
  * takes array of section JSON objects and returns array of events to be passed to
@@ -55,12 +74,13 @@ function load_indProfRowEvents(sectionObjects){
     return events;
 }
 
-
+/*******************************************************************************************/
 
 
 /*  takes a string like '2016-11-07T08:00 AM' and returns
- *  '2016-11-07T08:00:00'.
- *  if the string is like '07:00:00', that's what gets returned.
+ *  '2016-11-07T08:00:00' because fullCalendar likes it like that.
+ *
+ *  If the string is like '07:00:00', that's what gets returned.
  *
  *  This function is called in addNewEvent()
  */
@@ -86,6 +106,8 @@ function formatTime_fullCalendar(time){
     }
 
 }
+
+/*******************************************************************************************/
 
 /*
  * pushes an event to the events array read by fullCalendar for an individual professor
@@ -141,6 +163,8 @@ function addNewEvent(title, eventstart, eventend, location, classroom, professor
 }
 
 
+/*******************************************************************************************/
+//used for scrolling a calendar to just below the earliest section
 
 function getMinTime(eventsArray, hourChange){  //times come in looking like 2016-11-08T09:30 AM
     var minTime = '01/01/2017 23:59:00';
@@ -155,7 +179,7 @@ function getMinTime(eventsArray, hourChange){  //times come in looking like 2016
     return hour + minTime.substr(minTime.indexOf(':'));
 }
 
-
+/*******************************************************************************************/
 
 // display an individual professor's schedule
 var displayCalendar = function(profRowId, eventsArray){
@@ -198,6 +222,9 @@ var displayCalendar = function(profRowId, eventsArray){
 }
 
 
+
+
+
 /*  This function takes the "set" of professors and their section objects, and forms them into
  *  event blocks to be displayed by fullCalendar.  The events have starting and ending times which
  *  do NOT correlate to class time -- these times are for positioning the professors vertically in
@@ -206,7 +233,7 @@ var displayCalendar = function(profRowId, eventsArray){
  *  To add to a moment object, call .clone() and then .add or .subtract (number, 'option').
  *  Ex:  momentObject.clone().add(5,'m') adds 5 minutes.  'd' is for days.  'h' is for hours.
  */
-function createEventsSet(theSet){
+function createEventsSet_test(theSet){
     var singleRow = 5;   //row "height" is 5 minutes
     var doubleRow = 10;  //two rows is 10 minutes
     var events = [];
@@ -214,35 +241,42 @@ function createEventsSet(theSet){
     var prevDividerStart = rowZeroColumnZero;
     theSet.forEach(function(prof, i){
         var profName = prof.name;
+        var profId = 'prof_' + prof.id;
+        var mwId = 'mw_' + prof.id;
         var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(5, 'm');
         var theEnd = theStart.clone().add(10, 'm');
         events.push(
             {
-                title: profName,
-                start: theStart,
-                end: theEnd,
+                title: profName.substr(0, profName.indexOf(',')+1) + '\n'
+                + profName.substr(profName.indexOf(' ')),
+                start: theStart.toString().slice(16,24),
+                end: theEnd.toString().slice(16,24),
+                dow: [0],                           //dow means day of week  -- this is a recurring event
                 className: 'profName',
                 order_by: 'A',
                 color: '#194d96'
             },
             {
                 title: 'MW',
-                start: theStart,
-                end: theEnd,
+                start: theStart.toString().slice(16,24),
+                end: theEnd.toString().slice(16,24),
+                dow: [0],
                 className: 'days',
                 order_by: 'B'
             },
             {
                 title: " ",
-                start: theStart.clone().add(10, 'm'),
-                end: theEnd.clone().add(10,'m'),
+                start: theStart.clone().add(10, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(10,'m').toString().slice(16,24),
+                dow: [0],
                 className: 'event_placeholder',
                 order_by: 'A'
             },
             {
                 title: 'TTH',
-                start: theStart.clone().add(10, 'm'),
-                end: theEnd.clone().add(10,'m'),
+                start: theStart.clone().add(10, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(10,'m').toString().slice(16,24),
+                dow: [0],
                 className: 'days',
                 order_by: 'B'
             }
@@ -251,13 +285,15 @@ function createEventsSet(theSet){
         var theCourseStart;
         prof.timedCourses.forEach(function(course, j){
             theCourseTitle = course.courseTitle;
-            theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone());
+            theCourseStart = momentGenerator_test(course.startTime, course.courseDays, theStart.clone());
 
             events.push(
                 {
-                    title: theCourseTitle,
+                    title: theCourseTitle + '\n' +
+                    moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                    moment(course.endTime, 'h:mm A').format('h:mm A'),
                     start: theCourseStart,
-                    end: theCourseStart.clone().add(10,'m'),
+                    end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
                     className: 'classEvent'
                 }
             );
@@ -266,22 +302,23 @@ function createEventsSet(theSet){
             events.push(
                 {
                     title: course.courseTitle + '   -- Online --',
-                    start: theStart.clone().add((doubleRow * 2)+(singleRow * k),'m'),
-                    end: theStart.clone().add((doubleRow * 2)+(singleRow * k) + singleRow,'m'),
-                    className: 'classEvent'
+                    start: theStart.clone().add((doubleRow * 2)+(singleRow * k),'m').toString().slice(16,24),
+                    end: theStart.clone().add((doubleRow * 2)+(singleRow * k)+ 4.8,'m').toString().slice(16,24),
+                    color: '#583372',
+                    //className: 'online',
+                    dow: [0]
                 });
         });
         prof.nonStandardCourses.forEach(function(course, m){
-            theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone());
-
+            theCourseStart = momentGenerator_test(course.startTime, course.courseDays, theStart.clone());
             events.push(
                 {
                     title: course.courseTitle + '\n' +
-                        course.startTime.substring(0,course.startTime.indexOf(' ')) +
-                        '-' + course.endTime.substring(0,course.endTime.indexOf(' ')),
+                    moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                    moment(course.endTime, 'h:mm A').format('h:mm A'),
                     start: theCourseStart,
-                    end: theCourseStart.clone().add(10, 'm'),
-                    color: '#840b38'
+                    end: theCourseStart.clone().add(9.8, 'm'),
+                    className: 'onHour'
                 }
             );
         });
@@ -292,10 +329,11 @@ function createEventsSet(theSet){
             events.push(
                 {
                     title: "",
-                    start: prevDividerStart.clone().add(i, 'd'),
+                    start: prevDividerStart.clone().add(i, 'd').toString().slice(16,24),
                     end: prevDividerStart.clone()
                         .add(5, 'm')
-                        .add(i,'d'),
+                        .add(i,'d').toString().slice(16,24),
+                    dow: [i],
                     className: 'profDivider'
                 });
         }
@@ -304,20 +342,27 @@ function createEventsSet(theSet){
 };
 
 
+/*******************************************************************************************/
 
-function displayProfOverviewSchedule(theProfSet) {
-    var theEvents = createEventsSet(theProfSet);
+function displayTest(theProfSet) {
+    var theEvents = createEventsSet_test(theProfSet);
+
 
     $('#profOverviewSchedule').fullCalendar({
-        header: false,
+        header: {
+            left:   '',
+            center: '',
+            right:  'prev,next'
+        },
+        //titleFormat: '[7:30 AM - 12:30 PM]',
         defaultView: 'agendaWeek',
         navLinks: true, // can click day/week names to navigate views
-        editable: true,
+        editable: false,
         eventLimit: true, // allow "more" link when too many events
-        dayNames: ['Professor', '7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'],
+        dayNames: ['Professor', '7:30 AM', '8:30 AM', '9:30 AM', '10:30 AM', '11:30 AM', '12:30 PM'],
         columnFormat: 'dddd',
         allDaySlot: false,
-        defaultDate: '2016-11-07',  // 11/7/16 is a Monday
+        defaultDate: '2016-11-06',  // 11/7/16 is a Monday
         firstDay: '0', //Monday
         slotLabelFormat: ' ', //the space makes the slots blank.  First time is 6 AM.
         slotDuration: '00:5:00',
@@ -325,17 +370,19 @@ function displayProfOverviewSchedule(theProfSet) {
         eventOrder: 'order_by',
         eventAfterRender: function (event, element, view) {
             if ($(element).hasClass("profName")) {
-                $(element).css('width', $(element).width() *.90 + 'px');
                 $(element).css('background-color', '#194d96');
                 $(element).css('border-color', '#194d96');
             }
             if ($(element).hasClass("days")) {
-                $(element).css('width', $(element).width() / 2 + 'px');
+                $(element).css('width', $(element).width() /2 + 'px');
                 $(element).css('margin-left', '25%');
                 $(element).css('background-color', '#137c33');
                 $(element).css('border-color', '#137c33');
             }
             if ($(element).hasClass("classEvent")) {
+                $(element).css('width', $(element).width() * 2 + 'px');
+                //$(element).css('margin-left', '50%');
+                $(element).css('margin-right', '-50%');
                 $(element).css('background-color', '#583372');
                 $(element).css('border-color', '#583372');
             }
@@ -349,9 +396,18 @@ function displayProfOverviewSchedule(theProfSet) {
                 $(element).css('background-color', '#e5deea');//  e5deea light purple-gray
                 $(element).css('border-color', '#e5deea');
             }
+            if ($(element).hasClass("onHour")) {
+                $(element).css('width', $(element).width() * 2 + 'px');
+                $(element).css('margin-left', '50%');
+                $(element).css('margin-right', '-50%');
+                $(element).css('background-color', '#840b38');
+                $(element).css('border-color', '#840b38');
+            }
 
-
-
+        },
+        eventAfterAllRender: function(event, element, view){
+            fixHeaders(); //this function changes the innerHTML of the weekday headers when we switch weeks
+            //no need for button listeners
         },
         events: theEvents
     });
@@ -359,219 +415,75 @@ function displayProfOverviewSchedule(theProfSet) {
 }
 
 
+/*******************************************************************************************/
 
-
-
-
-
-
-
-
-
-/*
-
- addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
- '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
- addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
- '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
- addNewEvent('Online (1)', '2016-11-11T00:00:00',
- '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
- addNewEvent('Online (2)', '2016-11-11T00:00:00',
- '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
+/*  disables prev/next buttons when there's no further to go in
+ *  that direction.
  */
+function fixButtons(){
+
+    var currentDate = $('#profOverviewSchedule').fullCalendar('getDate').date();
+
+    if(currentDate == 13){
+        if ($(".fc-prev-button").hasClass('fc-state-disabled')){
+            $(".fc-prev-button").removeClass('fc-state-disabled');
+        }
+        if ($(".fc-next-button").hasClass('fc-state-disabled')){
+            $(".fc-next-button").removeClass('fc-state-disabled');
+        }
+    }else if (currentDate == 20){
+        $(".fc-next-button").addClass('fc-state-disabled');
+    }else if (currentDate == 6){
+        $(".fc-prev-button").addClass('fc-state-disabled');
+        if ($(".fc-next-button").hasClass('fc-state-disabled')){
+            $(".fc-next-button").removeClass('fc-state-disabled');
+        }
+    }
+}
+
+
+/*******************************************************************************************/
+
+
+var fixHeaders = function(){
+    fixButtons();
+    var dayHeaders = [ $('#profOverviewSchedule .fc-mon')[0], $('#profOverviewSchedule .fc-tue')[0], $('#profOverviewSchedule .fc-wed')[0],
+        $('#profOverviewSchedule .fc-thu')[0], $('#profOverviewSchedule .fc-fri')[0], $('#profOverviewSchedule .fc-sat')[0],
+        $('#profOverviewSchedule .fc-sun')[0] ];
 
 
 
+    dayHeaders.forEach(function(header, i){
+        header.getElementsByTagName('a')[0].setAttribute('id', 'header_' + i);
+        header.getElementsByTagName('a')[0].setAttribute('style', 'float: left; text-decoration: none');
+        header.setAttribute('style', 'padding-left: 4px');
+    });
 
+    switch ($('#profOverviewSchedule').fullCalendar('getDate').date()){  // "current date" is the visible Sunday
+        case 6:
+            dayHeaders[0].getElementsByTagName('a')[0].innerHTML = '7:30 AM';
+            dayHeaders[1].getElementsByTagName('a')[0].innerHTML = '8:30 AM';
+            dayHeaders[2].getElementsByTagName('a')[0].innerHTML = '9:30 AM';
+            dayHeaders[3].getElementsByTagName('a')[0].innerHTML = '10:30 AM';
+            dayHeaders[4].getElementsByTagName('a')[0].innerHTML = '11:30 AM';
+            dayHeaders[5].getElementsByTagName('a')[0].innerHTML = '12:30 PM';
+            break;
+        case 13:
+            dayHeaders[0].getElementsByTagName('a')[0].innerHTML = '1:30 PM';
+            dayHeaders[1].getElementsByTagName('a')[0].innerHTML = '2:30 PM';
+            dayHeaders[2].getElementsByTagName('a')[0].innerHTML = '3:30 PM';
+            dayHeaders[3].getElementsByTagName('a')[0].innerHTML = '4:30 PM';
+            dayHeaders[4].getElementsByTagName('a')[0].innerHTML = '5:30 PM';
+            dayHeaders[5].getElementsByTagName('a')[0].innerHTML = '6:30 PM';
+            break;
+        case 20:
+            dayHeaders[0].getElementsByTagName('a')[0].innerHTML = '7:30 PM';
+            dayHeaders[1].getElementsByTagName('a')[0].innerHTML = '8:30 PM';
+            dayHeaders[2].getElementsByTagName('a')[0].innerHTML = '9:30 PM';
+            dayHeaders[3].getElementsByTagName('a')[0].innerHTML = '10:30 PM';
+            dayHeaders[4].getElementsByTagName('a')[0].innerHTML = '11:30 PM';
+            dayHeaders[5].getElementsByTagName('a')[0].innerHTML = '';
+            break;
+    }
 
-
-
-
-
-
-
-
-/*[
- {
- title: 'Brinkerhoff, Delroy',
- start: rowZeroColumnZero,  // date 2016-11-06 is the first column
- end: rowZeroColumnZero.clone().add(10, 'm'),
- className: 'profName'
- },
- {
- title: 'MW',
- start: '2016-11-06T06:00:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:10:00',
- className: 'days'
- },
- {
- title: '',
- start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:20:00',
- className: 'event_placeholder'
- },
- {
- title: 'TTH',
- start: '2016-11-06T06:10:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:20:00',
- className: 'days'
- },
- {
- title: 'CS 1410',
- start: '2016-11-09T06:00:00', // date 2016-11-09 is 11:30 AM
- end: '2016-11-09T06:10:00',
- className: 'classEvent'
- },
- {
- title: 'CS 1410',
- start: '2016-11-08T06:10:00', // date 2016-11-08 is 9:30 AM
- end: '2016-11-08T06:20:00',
- className: 'classEvent'
- },
- {
- title: 'CS 1410 [Online]',
- start: '2016-11-06T06:20:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:25:00',
- className: 'classEvent'
- },
- {
- title: 'CS 3230 [Online]',
- start: '2016-11-06T06:25:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:30:00',
- className: 'classEvent'
- },
- {
- title: "",
- start: '06:30', // a start time (10am in this example)
- end: '06:35', // an end time (2pm in this example)
- dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
- color: '#e5deea'  //light purple-gray
- },
- {
- title: 'Ball, Bob',
- start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:45:00',
- className: 'profName'
- },
- {
- title: 'MW',
- start: '2016-11-06T06:35:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:45:00',
- className: 'days'
- },
- {
- title: '',
- start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:55:00',
- className: 'event_placeholder'
- },
- {
- title: 'TTH',
- start: '2016-11-06T06:45:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T06:55:00',
- className: 'days'
- },
- {
- title: 'CS 3100',
- start: '2016-11-07T06:45:00',  // date 2016-11-07 is 7:30 AM
- end: '2016-11-07T06:55:00',
- className: 'classEvent'
- },
- {
- title: 'CS 1400',
- start: '2016-11-08T06:35:00',  // date 2016-11-08 is 9:30 AM
- end: '2016-11-08T06:45:00',
- className: 'classEvent'
- },
- {
- title: 'CS 2350',
- start: '2016-11-09T06:35:00',  // date 2016-11-09 is11:30 AM
- end: '2016-11-09T06:45:00',
- className: 'classEvent'
- },
- {
- title: 'CS 1400 [Online]',
- start: '2016-11-06T06:55:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T07:00:00',
- className: 'classEvent'
- },
- {
- title: "",
- start: '07:00', // a start time (10am in this example)
- end: '07:05', // an end time (2pm in this example)
- dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
- color: '#e5deea'  //light purple-gray
- },
- {
- title: 'Cowan, Ted',
- start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T07:15:00',
- className: 'profName'
- },
- {
- title: 'MW',
- start: '2016-11-06T07:05:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T07:15:00',
- className: 'days'
- },
- {
- title: '',
- start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T07:25:00',
- className: 'event_placeholder'
- },
- {
- title: 'TTH',
- start: '2016-11-06T07:15:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T07:25:00',
- className: 'days'
- },
- {
- title: 'CS 4750',
- start: '2016-11-11T07:05:00',  // date 2016-11-11 is 5:30 PM
- end: '2016-11-11T07:15:00',
- className: 'classEvent'
- },
- {
- title: 'CS 3100',
- start: '2016-11-12T07:05:00',  // date 2016-11-12 is 7:30 PM
- end: '2016-11-12T07:15:00',
- className: 'classEvent'
- },
- {
- title: 'CS 3030 [Online]',
- start: '2016-11-06T07:25:00',  // date 2016-11-06 is the first column
- end: '2016-11-06T07:30:00',
- className: 'classEvent'
- },
- {
- title: "",
- start: '07:30', // a start time (10am in this example)
- end: '07:35', // an end time (2pm in this example)
- dow: [0, 1, 2, 3, 4, 5, 6],// Repeat monday and thursday
- color: '#e5deea'  //light purple-gray
- }
-
- ]*/
-
-
-
-/* $('#'+ 'seeProfCal_'+i).click ( function(){
- $('#' + 'profRow_'+i).toggle();
- addNewEvent('addNewEvent(1)', '2016-11-11T07:30:00',
- '2016-11-11T09:20:00', 'Main 103C', 'Valle, Hugo','#583372', false);
- addNewEvent('addNewEvent(2)', '2016-11-11T09:30:00',
- '2016-11-11T11:20:00', 'Main 103C', 'Fry, Richard','#583372', false);
- addNewEvent('Online (1)', '2016-11-11T00:00:00',
- '2016-11-11T00:00:00', '', 'Fry, Richard','#137c33', true);
- addNewEvent('Online (2)', '2016-11-11T00:00:00',
- '2016-11-11T00:00:00', '', 'Rague, Brian','#137c33', true);
- displayCalendar();
-
- if ($(this).attr('class').includes("menu-up")){
- $('#' + 'profCalendar_'+i).hide();
- }else{
- $('#'+'profCalendar_'+i).show();
- }
- $(this).toggleClass('glyphicon-menu-down glyphicon-menu-up');
- });*/
+}

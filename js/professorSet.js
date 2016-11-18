@@ -1,3 +1,11 @@
+/**
+ *   FUNCTIONS IN THIS FILE:
+ *
+ *   add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCourseObjects)
+ *   momentGenerator_test(time, days, startMoment)
+ *
+ */
+
 
 function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCourseObjects){
     var profName = profLast + ", " + profFirst;
@@ -72,67 +80,80 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
 }
 
 
+/**************************************************************************************************************/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-function momentGenerator(time, days, startMoment){
+/*  produces the moment time objects that place course event blocks in the correct positions
+*   in profOverviewSchedule.
+ */
+function momentGenerator_test(time, days, startMoment){
     var newTime = time;
-    /!*var theHour = parseInt(newTime.substr(0, newTime.indexOf(':')));
-    if (theHour > 12){
-        theHour = theHour-12;
-        newTime = theHour + newTime.substr(newTime.indexOf(':') );
-    }*!/
-    var standardTimes = ['7:30 AM', '9:30 AM', '11:30 AM', '1:30 PM', '5:30 PM', '7:30 PM'];
 
+    var standardTimes = ['7:30 AM', '8:30 AM', '9:30 AM', '10:30 AM', '11:30 AM',
+        '12:30 PM', '1:30 PM', '2:30 PM', '3:30 PM', '4:30 PM', '5:30 PM', '6:30 PM', '7:30 PM',
+        '8:30 PM', '9:30 PM', '10:30 PM'
+    ];
+
+    // if it's on the hour, treat it like half an hour earlier.  for ex: treat 8:00 am like 7:30 am.
     if (standardTimes.indexOf(newTime) == -1){
-        var oddHour = parseInt(newTime.substr(0, newTime.indexOf(':')));
-        while(standardTimes.indexOf(newTime) == -1){
-            oddHour --;
-            newTime = oddHour + newTime.substr(newTime.indexOf(':'));
-        }
-        //var newHour = parseInt(newTime.substr(0, newTime.indexOf(':'))) - 1;
+        newTime = moment('2016-01-01 ' + newTime, 'YYYY-MM-DD hh:mm A').clone().subtract(30,'m').format('h:mm A');
     }
     var theMoment;
     switch(newTime) {
         case "7:30 AM":
             theMoment = startMoment.clone().add(1, 'd');
             break;
-        case "9:30 AM":
+        case "8:30 AM":
             theMoment = startMoment.clone().add(2, 'd');
             break;
-        case "11:30 AM":
+        case "9:30 AM":
             theMoment = startMoment.clone().add(3, 'd');
             break;
-        case "1:30 PM":
+        case "10:30 AM":
             theMoment = startMoment.clone().add(4, 'd');
             break;
-        case "5:30 PM":
+        case "11:30 AM":
             theMoment = startMoment.clone().add(5, 'd');
             break;
-        case "7:30 PM":
+        case "12:30 PM":
             theMoment = startMoment.clone().add(6, 'd');
+            break;
+
+        case "1:30 PM":
+            theMoment = startMoment.clone().add(8, 'd');
+            break;
+        case "2:30 PM":
+            theMoment = startMoment.clone().add(9, 'd');
+            break;
+        case "3:30 PM":
+            theMoment = startMoment.clone().add(10, 'd');
+            break;
+        case "4:30 PM":
+            theMoment = startMoment.clone().add(11, 'd');
+            break;
+        case "5:30 PM":
+            theMoment = startMoment.clone().add(12, 'd');
+            break;
+        case "6:30 PM":
+            theMoment = startMoment.clone().add(13, 'd');
+            break;
+        case "7:30 PM":
+            theMoment = startMoment.clone().add(15, 'd');
+            break;
+        case "8:30 PM":
+            theMoment = startMoment.clone().add(16, 'd');
+            break;
+        case "9:30 PM":
+            theMoment = startMoment.clone().add(17, 'd');
+            break;
+        case "10:30 PM":
+            theMoment = startMoment.clone().add(18, 'd');
             break;
     }
     if (days.toUpperCase() == "TTH")
         theMoment = theMoment.clone().add(10, 'm');
     return theMoment;
 };
-*/
 
 
 
@@ -142,110 +163,3 @@ function momentGenerator(time, days, startMoment){
 
 
 
-
-
-
-
-
-/*
-
-
-
- function createProfSet(){
- var profSet = [
- {
- name: "Brinkerhoff, Delroy",
- timedCourses: [
- {
- courseTitle: "CS 1410",
- courseDays: "MW",
- courseTime: "11:30 AM",
- },
- {
- courseTitle: "CS 1410",
- courseDays: "TTH",
- courseTime: "9:30 AM",
- }
- ],
- onlineCourses: [
- {
- courseTitle: "CS 1410"
- },
- {
- courseTitle: "CS 3230"
- }
- ]
- },
- {
- name: "Ball, Bob",
- timedCourses: [
- {
- courseTitle: "CS 1400",
- courseDays: "MW",
- courseTime: "9:30 AM",
- },
- {
- courseTitle: "CS 2350",
- courseDays: "MW",
- courseTime: "11:30 AM",
- },
- {
- courseTitle: "CS 3100",
- courseDays: "TTH",
- courseTime: "7:30 AM",
- }
- ],
- onlineCourses: [
- {
- courseTitle: "CS 1400"
- }
- ]
- },
- {
- name: "Cowan, Ted",
- timedCourses: [
- {
- courseTitle: "CS 4750",
- courseDays: "MW",
- courseTime: "5:30 PM",
- },
- {
- courseTitle: "CS 3100",
- courseDays: "MW",
- courseTime: "7:30 PM",
- }
- ],
- onlineCourses: [
- {
- courseTitle: "CS 3030"
- }
- ]
- },
- {
- name: "Hilton, Rob",
- timedCourses: [
- {
- courseTitle: "CS 2550",
- courseDays: "MW",
- courseTime: "9:30 AM",
- },
- {
- courseTitle: "CS 4790",
- courseDays: "MW",
- courseTime: "11:30 AM",
- }
- ],
- onlineCourses: [
- {
- courseTitle: "CS 2550"
- },
- {
- courseTitle: "CS 3270"
- }
- ]
- }
- ]
- return profSet;
- };
-
- */

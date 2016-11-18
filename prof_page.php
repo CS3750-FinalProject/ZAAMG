@@ -71,7 +71,7 @@ $body .= load_ProfSet($allProfessors, $database);
 
 /*
  *  javascript function displayTest is defined in
- *  newCalendar.js
+ *  Calendar.js   (was called test when I was retooling the whole thing)
  */
 $body .= "<script>displayTest(theProfSet)
 //init_ProfOverviewSchedule(); // probably don't need this
