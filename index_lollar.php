@@ -2,14 +2,14 @@
 
 #http://stackoverflow.com/questions/27139963/bootstrap-multiple-pages-divs-and-navbar
 require_once 'Database.php';
-require_once 'modal_newSection.php';
-require_once 'modal_newCourse.php';
-require_once 'modal_newProfessor.php';
-require_once 'modal_newClassroom.php';
-require_once 'modal_newSemester.php';
-require_once 'modal_newBuilding.php';
-require_once 'modal_newCampus.php';
-require_once 'modal_newDepartment.php';
+require_once 'modals/modal_newSection.php';
+require_once 'modals/modal_newCourse.php';
+require_once 'modals/modal_newProfessor.php';
+require_once 'modals/modal_newClassroom.php';
+require_once 'modals/modal_newSemester.php';
+require_once 'modals/modal_newBuilding.php';
+require_once 'modals/modal_newCampus.php';
+require_once 'modals/modal_newDepartment.php';
 $database = new Database();
 $body = "
 <!DOCTYPE html>

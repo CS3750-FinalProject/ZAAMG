@@ -20,7 +20,7 @@ $body = "
 
                             $selectCourse = $database->getdbh()->prepare(
                                 'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
-                                  ORDER BY course_prefix ASC');
+                                  ORDER BY course_prefix, course_number');
                             $selectCourse->execute();
                             $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
 

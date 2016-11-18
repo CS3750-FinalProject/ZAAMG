@@ -2,7 +2,7 @@
 
 <?php
 
-include 'Professor.php';
+include '../Professor.php';
 
 $profFirst = isset($_POST['profFirst']) ? $_POST['profFirst'] : "not entered";
 $profLast = isset($_POST['profLast']) ? $_POST['profLast'] : "not entered";
@@ -15,13 +15,6 @@ $deptId = isset($_POST['deptId']) ? $_POST['deptId'] : "not entered";
 $professor = new Professor(NULL, $profFirst, $profLast, $profEmail,
     $profReqHours, $profRelHours, $deptId);
 
-
-echo<<<YO
-Professor First: $profFirst <br>
-Professor Last: $profLast <br>
-Professor Email: $profEmail <br>
-Department Id: $deptId <br>
-YO;
 
 
 

@@ -26,7 +26,7 @@ $(function() {
         //alert(dataString); return false;
         $.ajax({
             type: "POST",
-            url: "action_insertCourse.php",
+            url: "action/action_insertCourse.php",
             data: dataString,
             success: function(msg) {
                 //alert(msg); return false;
@@ -50,8 +50,8 @@ $(function() {
         var profFirst = $("input#profFirst").val();
         var profLast = $("input#profLast").val();
         var profEmail = $("input#profEmail").val();
-        var profReqHours = $("input#profRequiredHours").val();
-        var profRelHours = $("input#profReleaseHours").val();
+        var profReqHours = $("input#profHours").val();
+        var profRelHours = $("input#profRelease").val();
         var deptId = $("#profDepartment").val()
 
         if (profEmail.length == 0){
@@ -64,13 +64,13 @@ $(function() {
         var dataString = 'profFirst='+ profFirst + '&profLast=' + profLast
             + '&profEmail=' + profEmail + '&profReqHours=' + profReqHours
             + '&profRelHours=' + profRelHours  + '&deptId=' + deptId;
-        //alert (dataString);return false;
+        //console.log(dataString);return false;
         $.ajax({
             type: "POST",
-            url: "action_insertProfessor.php",
+            url: "action/action_insertProfessor.php",
             data: dataString,
             success: function(msg) {
-                //alert(msg); return false;
+                //console.log(msg); return false;
                 if (msg.indexOf("does exist") != -1) {
                     window.profExists = true;
                     $("span.error-message").text("A Professor with this email address already exists.")
@@ -107,7 +107,7 @@ $(function() {
         //alert (dataString);return false;
         $.ajax({
             type: "POST",
-            url: "action_insertClassroom.php",
+            url: "action/action_insertClassroom.php",
             data: dataString,
             success: function(msg) {
                 //alert(msg); return false; use for debugging
@@ -147,7 +147,7 @@ $(function() {
         //alert (dataString); return false;
         $.ajax({
             type: "POST",
-            url: "action_insertSemester.php",
+            url: "action/action_insertSemester.php",
             data: dataString,
             success: function(msg) {
                 if (msg.indexOf("does exist") != -1){
@@ -187,7 +187,7 @@ $(function() {
         //alert (dataString); return false;
         $.ajax({
             type: "POST",
-            url: "action_insertBuilding.php",
+            url: "action/action_insertBuilding.php",
             data: dataString,
             success: function(msg) {
                 if (msg.indexOf("does exist") != -1){
@@ -218,7 +218,7 @@ $(function() {
         //alert (dataString); return false;
         $.ajax({
             type: "POST",
-            url: "action_insertCampus.php",
+            url: "action/action_insertCampus.php",
             data: dataString,
             success: function(msg) {
                 if (msg.indexOf("does exist") != -1){
@@ -245,7 +245,7 @@ $(function() {
         //alert (dataString); return false;
         $.ajax({
             type: "POST",
-            url: "action_insertDepartment.php",
+            url: "action/action_insertDepartment.php",
             data: dataString,
             success: function(msg) {
                 if (msg.indexOf("does exist") != -1){
@@ -300,7 +300,7 @@ $(function() {
         //console.log (dataString); return false;
         $.ajax({
             type: "POST",
-            url: "action_insertSection.php",
+            url: "action/action_insertSection.php",
             data: dataString,
             success: function(msg) {
                 //console.log(msg); return false;

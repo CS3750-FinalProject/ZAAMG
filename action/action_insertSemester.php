@@ -2,7 +2,7 @@
 
 <?php
 
-include 'Semester.php';
+include '../Semester.php';
 
 
 $semYear = isset($_POST['semYear']) ? $_POST['semYear'] : "not entered";
@@ -15,14 +15,6 @@ $secondBlockStart = isset($_POST['secondBlockStart']) ? $_POST['secondBlockStart
 $semester = new Semester(NULL, $semYear, $semSeason, $semNumWeeks, $semStart, $firstBlockStart, $secondBlockStart);
 
 
-echo<<<YO
-Year: $semYear <br>
-Season: $semSeason <br>
-Number Weeks: $semNumWeeks <br>
-Start Date: $semStart <br>
-First Block Start Date: $firstBlockStart <br>
-Second Block Start Date: $secondBlockStart <br>
-YO;
 
 $result = $semester->semesterExists($semYear, $semSeason);
 echo $result;

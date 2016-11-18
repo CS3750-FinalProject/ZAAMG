@@ -1,6 +1,6 @@
 <?php
 
-include 'Section.php';
+include '../Section.php';
 
 $sectionCourse = isset($_POST['sectionCourse']) ? $_POST['sectionCourse'] : "not entered";
 $sectionProfessor = isset($_POST['sectionProfessor']) ? $_POST['sectionProfessor'] : "not entered";
@@ -24,7 +24,6 @@ $section = new Section(NULL, $sectionCourse, $sectionProfessor, $sectionClassroo
 
 $result = $section->sectionExists($sectionCourse, $sectionProfessor, $sectionClassroom,
     $sectionSemester, $sectionDays, $sectionStartTime);
-echo $result;
 
 if ($result == "does not exist"){
     $section->insertNewSection();

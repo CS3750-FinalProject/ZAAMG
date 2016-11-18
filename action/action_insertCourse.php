@@ -1,6 +1,6 @@
 <?php
 
-include 'Course.php';
+include '../Course.php';
 
 
 
@@ -13,12 +13,9 @@ $deptId = isset($_POST['deptId']) ? $_POST['deptId'] : "not entered";
 
 $course = new Course(NULL, $coursePrefix, $courseNumber, $courseTitle,  $courseCred, $deptId);
 
-echo "deptId = ".$deptId;
 
 $result = $course->courseExists($coursePrefix, $courseNumber, $deptId);
-echo $result;
 
-//echo "Last Insert Id =".$course->insertNewCourse();
 
 if ($result == "does not exist"){
     $course->insertNewCourse();
@@ -31,11 +28,3 @@ if ($result == "does not exist"){
 
 
 
-/*
-echo<<<YO
-
-Course Title: $courseTitle <br>
-Course Capacity: $courseCap <br>
-Course Credits: $courseCred <br>
-Department Id: $deptId <br>
-YO;*/
