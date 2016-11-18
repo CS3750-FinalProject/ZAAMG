@@ -27,7 +27,7 @@ $body = "
 
 
 
-$allClassrooms = $database->getAllClassrooms(null);
+$allClassrooms = $database->getAllClassrooms('campus_name');
 foreach ($allClassrooms as $classroom){
     $body .= addClassroom($classroom);
 }

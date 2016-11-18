@@ -41,9 +41,7 @@ echo '
                                 echo "<option value=\"".$row['dept_id']."\">".$row['dept_name']."</option>";
                             }
 echo '
-                            <!--<option value="cs">Computer Science</option>
-                            <option value="nmt">Network, Multimedia and Technology</option>
-                            <option value="web">Web Development</option>-->
+
                         </select>
                     </div>
                     <div class="col-xs-3">

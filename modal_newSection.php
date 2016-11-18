@@ -101,11 +101,13 @@ $body = "
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionStartTime'>Start Time</label>
-                        <input type='time' class='form-control' id='sectionStartTime' value='00:00:00' >
+                        <input type='time' class='form-control' id='sectionStartTime'
+                            placeholder='09:30 AM' value='00:00:00' >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionEndTime'>End Time</label>
-                        <input type='time' class='form-control' id='sectionEndTime' value='00:00:00'  >
+                        <input type='time' class='form-control' id='sectionEndTime'
+                            placeholder='11:20 AM' value='00:00:00'  >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionSemester'>Semester</label>

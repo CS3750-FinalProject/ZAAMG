@@ -1,37 +1,69 @@
 $(document).ready(function() {
 
     $(window).resize(function() {
+        // without rerendering, the event blocks get jacked when the window changes size
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
-
 });
 
 
-function on_profRowClick(profRowId, eventObjects){
-    $('tr#' + 'profRow_'+ profRowId).toggle();
 
-    var theEvents = load_indProfRowEvents(eventObjects);
+
+/*  function for handling show/hide of an individual professor schedule
+ *
+ */
+function on_profRowClick(profRowId, sectionObjects){
+    $('tr#' + 'profRow_'+ profRowId).toggle();
+    var currentDate = 6; //why not
+
+    /* function 'load_indProfRowEvents()' is defined in
+     * this file ('calendar.js').  It takes an array of JSON sectionObjects
+     * and returns an events array for fullCalendar to read.
+     */
+    var theEvents = load_indProfRowEvents(sectionObjects);
+
+
+    //this is what initializes and creates the individual calendar.
+    //it's defined in this file (calendar.js)
     displayCalendar(profRowId, theEvents);
 
+
+    //here the table row containing the calendar is shown or hidden:
     if ($('span#' + 'seeProfCal_' + profRowId).attr('class').includes("menu-up")){
         $('div#' + 'profCalendar_'+ profRowId).hide();
     }else{
         $('div#'+'profCalendar_'+ profRowId).show();
+        currentDate = $('#profOverviewSchedule').fullCalendar('getDate');
     }
     $('span#' + 'seeProfCal_' + profRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+
 }
 
-function load_indProfRowEvents(eventObjects){
-    events = [];
-    eventObjects.forEach(function(event, i){
-        addNewEvent(event.title, event.start, event.end, event.location, event.classroom, event.professor,
-            event.online ? '#137c33' : '#583372', event.online, events)
+
+
+/*
+ * takes array of section JSON objects and returns array of events to be passed to
+ * fullCalendar for display.
+ */
+function load_indProfRowEvents(sectionObjects){
+    var events = [];
+    sectionObjects.forEach(function(section, i){
+        addNewEvent(section.title, section.start, section.end, section.location, section.classroom, section.professor,
+            section.online ? '#137c33' : '#583372', section.online, events)
     })
 
     return events;
 }
 
-// formats a time like '2016-11-07T09:30:00'
+
+
+
+/*  takes a string like '2016-11-07T08:00 AM' and returns
+ *  '2016-11-07T08:00:00'.
+ *  if the string is like '07:00:00', that's what gets returned.
+ *
+ *  This function is called in addNewEvent()
+ */
 function formatTime_fullCalendar(time){
     var timePattern = /[0-9-]{10}T[0-9:]{5} [APM]{2}/;
     if (timePattern.test(time)){
@@ -49,22 +81,18 @@ function formatTime_fullCalendar(time){
             timePart = hourPart + ':' + minutePart + ':00';
         }
         return time.substr(0, time.indexOf('T')+1) + timePart;
-    }else
+    }else{
         return time;
-}
-
-function formatTime_prettyPrint(time){
-    time = new Date(time);
-    var hour = time.getUTCHours();
-    var minute = time.getUTCMinutes();
-    var meridian = 'AM';
-    if (hour >= 12){
-        meridian = 'PM';
-        if (hour > 12) hour -= 12;
     }
-    return hour + ':' + minute + ' ' + meridian;
+
 }
 
+/*
+ * pushes an event to the events array read by fullCalendar for an individual professor
+ * figures out minimum course start time, so that the online courses can be lined up to the side
+ *
+ * fullCalendar works well with times formatted like '2016-11-14T07:30:00'
+ */
 function addNewEvent(title, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
     var timedEvents = [];
     var numOnline = 0;
@@ -77,7 +105,7 @@ function addNewEvent(title, eventstart, eventend, location, classroom, professor
 
     });
     var minCourseTime = getMinTime(timedEvents, 0);
-    var minHour = parseInt(minCourseTime.substr(0, minCourseTime.indexOf(':')));
+    var minHour = moment(minCourseTime, 'hh:mm:ss').hour();
     if (!isOnline){
         eventsArray.push({
             title: title,
@@ -99,7 +127,6 @@ function addNewEvent(title, eventstart, eventend, location, classroom, professor
         if (adj_minHour + 1 < 10) endtime += '0';
         var minutesMinus2 = parseInt(minCourseTime.substr(minCourseTime.indexOf(':')+1, 2)) - 2;
         endtime += (adj_minHour + 1) + ':' + minutesMinus2  + minCourseTime.substr(minCourseTime.lastIndexOf(':'));
-        console.log(starttime + ' ' + endtime);
 
         eventsArray.push({
             title: title,
@@ -130,7 +157,7 @@ function getMinTime(eventsArray, hourChange){  //times come in looking like 2016
 
 
 
-
+// display an individual professor's schedule
 var displayCalendar = function(profRowId, eventsArray){
     $('#' + 'profCalendar_' + profRowId).fullCalendar({
         height: 250,
@@ -142,17 +169,17 @@ var displayCalendar = function(profRowId, eventsArray){
         columnFormat: 'dddd',
         firstDay: '1', //Monday
         navLinks: true, // can click day/week names to navigate views
-        editable: true,
+        editable: false,
         eventLimit: true, // allow "more" link when too many events
         minTime: '06:30:00',
         slotLabelFormat: 'h(:mm) a',
         slotLabelInterval: '00:30',
         slotDuration: '00:60:00',
         events: eventsArray,
-        scrollTime: formatTime_fullCalendar(getMinTime(eventsArray, -1)),
+        scrollTime: formatTime_fullCalendar(getMinTime(eventsArray, -1)), //defined in this file (calendar.js)
         eventRender: function (event, element) {
             var timeString = event.online ? "" :
-                (formatTime_prettyPrint(event.start) + ' - ' + formatTime_prettyPrint(event.end));
+                (moment(event.start).format('h:mm A') + ' - ' + moment(event.end).format('h:mm A'));
             var room = event.classroom != undefined ? event.classroom : "";
             element.popover(
                 {
@@ -171,8 +198,17 @@ var displayCalendar = function(profRowId, eventsArray){
 }
 
 
-
+/*  This function takes the "set" of professors and their section objects, and forms them into
+ *  event blocks to be displayed by fullCalendar.  The events have starting and ending times which
+ *  do NOT correlate to class time -- these times are for positioning the professors vertically in
+ *  the first column.
+ *
+ *  To add to a moment object, call .clone() and then .add or .subtract (number, 'option').
+ *  Ex:  momentObject.clone().add(5,'m') adds 5 minutes.  'd' is for days.  'h' is for hours.
+ */
 function createEventsSet(theSet){
+    var singleRow = 5;   //row "height" is 5 minutes
+    var doubleRow = 10;  //two rows is 10 minutes
     var events = [];
     var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
     var prevDividerStart = rowZeroColumnZero;
@@ -180,7 +216,6 @@ function createEventsSet(theSet){
         var profName = prof.name;
         var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(5, 'm');
         var theEnd = theStart.clone().add(10, 'm');
-        //document.getElementsByClassName('profName')[1]
         events.push(
             {
                 title: profName,
@@ -231,13 +266,14 @@ function createEventsSet(theSet){
             events.push(
                 {
                     title: course.courseTitle + '   -- Online --',
-                    start: theStart.clone().add((10*2)+(5*k),'m'),
-                    end: theStart.clone().add((10*2)+(5*k)+5,'m'),
+                    start: theStart.clone().add((doubleRow * 2)+(singleRow * k),'m'),
+                    end: theStart.clone().add((doubleRow * 2)+(singleRow * k) + singleRow,'m'),
                     className: 'classEvent'
                 });
         });
         prof.nonStandardCourses.forEach(function(course, m){
             theCourseStart = momentGenerator(course.startTime, course.courseDays, theStart.clone());
+
             events.push(
                 {
                     title: course.courseTitle + '\n' +
@@ -319,6 +355,7 @@ function displayProfOverviewSchedule(theProfSet) {
         },
         events: theEvents
     });
+
 }
 
 
