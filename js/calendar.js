@@ -239,6 +239,7 @@ function createEventsSet_test(theSet){
     var events = [];
     var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
     var prevDividerStart = rowZeroColumnZero;
+
     theSet.forEach(function(prof, i){
         var profName = prof.name;
         var profId = 'prof_' + prof.id;
@@ -286,17 +287,52 @@ function createEventsSet_test(theSet){
         prof.timedCourses.forEach(function(course, j){
             theCourseTitle = course.courseTitle;
             theCourseStart = momentGenerator_test(course.startTime, course.courseDays, theStart.clone());
+            var courseDuration = moment.duration(
+                moment(course.endTime,'h:mm A').diff(moment(course.startTime, 'h:mm A'))
+                ).asMinutes();
+            var overPageBreak = isOverPageBreak(course.startTime, courseDuration);
+            if (!overPageBreak){
+                events.push(
+                    {
+                        title: theCourseTitle + '\n' +
+                        moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                        moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        start: theCourseStart,
+                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        className: 'classEvent',
+                        overPageBreak: overPageBreak,
+                        duration: courseDuration
+                    }
+                );
+            }else{
+                var minOverPageBreak = getMinutesOverPageBreak(course.startTime, courseDuration);
+                events.push(
+                    {
+                        title: theCourseTitle + '\n' +
+                        moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                        moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        start: theCourseStart,
+                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        className: 'classEvent',
+                        overPageBreak: overPageBreak,
+                        relativeToBreak: 'before',
+                        duration: courseDuration
+                    },
+                    {
+                        title: theCourseTitle + ' (cont.)\n' +
+                            moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                            moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        start: theCourseStart.clone().add(2, 'd'),
+                        end: theCourseStart.clone().add(2,'d').add(9.8,'m'),
+                        className: 'classEvent',
+                        overPageBreak: overPageBreak,
+                        relativeToBreak: 'after',
+                        minOverBreak: minOverPageBreak,
+                        duration: courseDuration
+                    }
+                );
+            }
 
-            events.push(
-                {
-                    title: theCourseTitle + '\n' +
-                    moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
-                    moment(course.endTime, 'h:mm A').format('h:mm A'),
-                    start: theCourseStart,
-                    end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
-                    className: 'classEvent'
-                }
-            );
         });
         prof.onlineCourses.forEach(function(course, k){
             events.push(
@@ -311,16 +347,52 @@ function createEventsSet_test(theSet){
         });
         prof.nonStandardCourses.forEach(function(course, m){
             theCourseStart = momentGenerator_test(course.startTime, course.courseDays, theStart.clone());
-            events.push(
-                {
-                    title: course.courseTitle + '\n' +
-                    moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
-                    moment(course.endTime, 'h:mm A').format('h:mm A'),
-                    start: theCourseStart,
-                    end: theCourseStart.clone().add(9.8, 'm'),
-                    className: 'onHour'
-                }
-            );
+            var courseDuration = moment.duration(
+                moment(course.endTime,'h:mm A').diff(moment(course.startTime, 'h:mm A'))
+            ).asMinutes();
+            var overPageBreak = isOverPageBreak(course.startTime, courseDuration);
+            if (!overPageBreak){
+                events.push(
+                    {
+                        title: course.courseTitle + '\n' +
+                        moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                        moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        start: theCourseStart,
+                        end: theCourseStart.clone().add(9.8, 'm'),
+                        duration: courseDuration,
+                        overPageBreak: overPageBreak,
+                        className: 'nonStandard'
+                    }
+                );
+            }else{
+                var minOverPageBreak = getMinutesOverPageBreak(course.startTime, courseDuration);
+                events.push(
+                    {
+                        title: course.courseTitle + '\n' +
+                        moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                        moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        start: theCourseStart,
+                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        className: 'nonStandard',
+                        overPageBreak: overPageBreak,
+                        relativeToBreak: 'before',
+                        duration: courseDuration
+                    },
+                    {
+                        title: course.courseTitle + ' (cont.)\n' +
+                        moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
+                        moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        start: theCourseStart.clone().add(2, 'd'),
+                        end: theCourseStart.clone().add(2,'d').add(9.8,'m'),
+                        className: 'nonStandard',
+                        overPageBreak: overPageBreak,
+                        relativeToBreak: 'after',
+                        minOverBreak: minOverPageBreak,
+                        duration: courseDuration
+                    }
+                );
+            }
+
         });
         prevDividerStart = theStart.clone()
             .add((10 * 2) + (5 * prof.onlineCourses.length)  /*(10 * prof.nonStandardCourses.length)*/, 'm');
@@ -341,12 +413,50 @@ function createEventsSet_test(theSet){
     return events;
 };
 
+/*******************************************************************************************/
 
+function isOverPageBreak(startTime, duration){
+    var isOver = false;
+    pageBreakTimes = ['1:30 PM', '7:30 PM'];
+    pageBreakTimes.forEach(function(pageBreakTime){
+        var diff = moment.duration(
+                            moment(pageBreakTime,'h:mm A').diff(moment(startTime, 'h:mm A'))
+                            ).asMinutes();
+        if (diff > 0){
+            if (diff < duration){
+                isOver = true;
+            }
+        }
+    });
+    return isOver;
+}
+
+/*******************************************************************************************/
+
+function getWidthMultiplier(duration){
+    return Math.floor(duration/60) + (duration / (60 * Math.ceil(duration/60)));
+}
+/*******************************************************************************************/
+
+function getMinutesOverPageBreak(startTime, duration){
+    var pageBreakTimes = ['1:30 PM', '7:30 PM'];
+    var minutesOverPageBreak = 0;
+    pageBreakTimes.forEach(function(pageBreakTime){
+        var diff = moment.duration(
+            moment(pageBreakTime,'h:mm A').diff(moment(startTime, 'h:mm A'))
+        ).asMinutes();
+        if (diff > 0){
+            if (diff < duration){
+                minutesOverPageBreak = duration - diff;
+            }
+        }
+    });
+    return minutesOverPageBreak;
+}
 /*******************************************************************************************/
 
 function displayTest(theProfSet) {
     var theEvents = createEventsSet_test(theProfSet);
-
 
     $('#profOverviewSchedule').fullCalendar({
         header: {
@@ -380,8 +490,17 @@ function displayTest(theProfSet) {
                 $(element).css('border-color', '#137c33');
             }
             if ($(element).hasClass("classEvent")) {
-                $(element).css('width', $(element).width() * 2 + 'px');
-                //$(element).css('margin-left', '50%');
+                if (!event.overPageBreak){
+                    var newWidth = getWidthMultiplier(event.duration * $(element).width());
+                    $(element).css('width', newWidth + 'px');
+                }else{
+                    if (event.relativeToBreak == 'after'){
+                        var newWidth =
+                            getWidthMultiplier(event.minOverBreak * $(element).width());
+                        $(element).css('width', newWidth + 'px');
+                    }
+
+                }
                 $(element).css('margin-right', '-50%');
                 $(element).css('background-color', '#583372');
                 $(element).css('border-color', '#583372');
@@ -396,10 +515,21 @@ function displayTest(theProfSet) {
                 $(element).css('background-color', '#e5deea');//  e5deea light purple-gray
                 $(element).css('border-color', '#e5deea');
             }
-            if ($(element).hasClass("onHour")) {
-                $(element).css('width', $(element).width() * 2 + 'px');
-                $(element).css('margin-left', '50%');
-                $(element).css('margin-right', '-50%');
+            if ($(element).hasClass("nonStandard")) {
+                if (!event.overPageBreak){
+                    var newWidth = getWidthMultiplier(event.duration * $(element).width());
+                    $(element).css('width', newWidth + 'px');
+                    $(element).css('margin-left', '50%');
+                }else{
+                    if (event.relativeToBreak == 'after'){
+                        var newWidth =
+                            getWidthMultiplier(event.minOverBreak * $(element).width());
+                        $(element).css('width', newWidth + 'px');
+                    }else{
+                        $(element).css('margin-left', '50%');
+                    }
+                }
+                $(element).css('margin-right', '-50%'); //I think this helps more text to show
                 $(element).css('background-color', '#840b38');
                 $(element).css('border-color', '#840b38');
             }
