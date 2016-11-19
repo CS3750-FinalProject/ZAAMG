@@ -4,6 +4,72 @@
  * (c) 2016 Adam Shaw
  */
 
+/*
+
+Changes made to original file (line numbers are give-or-take a bunch, just do Edit->Find if
+you're searching for this stuff):
+
+line 1114:
+.fc-time-grid .fc-slats .fc-minor td {
+	/*border-top-style: dotted;*//*
+}
+
+
+line 1216:
+.fc-time-grid-event .fc-time,
+.fc-time-grid-event .fc-title {
+	padding-top: 4px;
+	padding-left: 5px !important;
+	font-size: 1.1em !important;
+	font-weight: bold;
+}
+
+
+.fc-time-grid-event .fc-time {
+	display: none !important;
+	/*font-size: .85em;
+	white-space: nowrap;*//*
+}
+
+
+line 1033:
+#profOverviewSchedule .fc-axis{
+	display:none;
+}
+
+line 1217:
+.fc-time-grid-event {
+	margin-left: -1.5%;
+	margin-right: -3%;
+	overflow: hidden; /* don't let the bg flow over rounded corners *//*
+}
+
+line 95:    --REMOVED COLORED BACKGROUND FROM "today"
+.fc-unthemed .fc-today {
+}
+
+
+line 437:
+.indProfCal td.fc-axis span{
+	color: #492365;
+}
+
+#profOverviewSchedule th a, .indProfCal th a{
+	color: #492365;
+}
+
+#profOverviewSchedule th{
+	font-size: 1.2em;
+	padding: 1%;
+}
+
+
+
+
+some other commented out stuff at the bottom
+**************************************************************************************************/
+
+
 
 .fc {
 	direction: ltr;
@@ -389,14 +455,18 @@ hr.fc-divider {
 	color: #492365;
 }
 
-#profOverviewSchedule th a, .indProfCal th a{
+#profOverviewSchedule th a, #classroomOverviewSchedule th a, .indProfCal th a{
 	color: #492365;
 }
 
-#profOverviewSchedule th{
+
+
+#profOverviewSchedule th, #classroomOverviewSchedule th{
 	font-size: 1.2em;
 	padding: 1%;
 }
+
+
 
 .indProfCal th{
 	padding: 0.5%;
@@ -1001,9 +1071,12 @@ a.fc-more:hover {
 	white-space: nowrap;
 }
 
-#profOverviewSchedule .fc-axis{
+#profOverviewSchedule .fc-axis,
+#classroomOverviewSchedule td.fc-axis,
+#classroomOverviewSchedule th.fc-axis{
 	display:none;
 }
+
 
 
 
@@ -1260,11 +1333,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 
-/*#profOverviewSchedule th.fc-day-head.fc-widget-header{
-	font-size: 1.2em;
-	padding: 1%;
-	color: #492365 !important;
-}*/
+
 
 .fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after {
 	content: "=";
@@ -1450,3 +1519,10 @@ be a descendant of the grid when it is being dragged.
 	border-color: transparent black transparent transparent;
 }
 */
+
+
+/*#profOverviewSchedule th.fc-day-head.fc-widget-header{
+	font-size: 1.2em;
+	padding: 1%;
+	color: #492365 !important;
+}*/

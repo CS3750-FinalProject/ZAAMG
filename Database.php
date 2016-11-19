@@ -78,6 +78,26 @@ class Database
     }
 
 
+    public function getClassroomsInBuilding($buildingId){
+        $allClassrooms = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare('SELECT * FROM ZAAMG.Classroom c
+                                      WHERE c.building_id = '.$dbh->quote($buildingId));
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$classroomRecord){
+                $allClassrooms[] = new Classroom(  //don't need to put an index number between those brackets, awesome
+                    $classroomRecord['classroom_id'], $classroomRecord['classroom_number'], $classroomRecord['classroom_capacity'],
+                    $classroomRecord['classroom_workstations'],
+                    $classroomRecord['building_id']);
+            }
+            return $allClassrooms;
+        }catch(Exception $e){
+            echo "getClassroomsOnCampus: ".$e->getMessage();
+        }
+    }
+
 
 
     public function getAllClassrooms($orderBy){
@@ -129,6 +149,40 @@ class Database
         }
     }
 
+
+
+    public function getClassroomSections($classroom){
+        $classroomSections = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section
+                                      WHERE classroom_id = {$classroom->getClassroomID()}");
+        try{
+            $stmtSelect->execute();
+
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$sectionRecord){
+                $classroomSections[] = new Section(  //don't need to put an index number between those brackets, awesome
+                    $sectionRecord['section_id'],
+                    $sectionRecord['course_id'],
+                    $sectionRecord['prof_id'],
+                    $sectionRecord['classroom_id'],
+                    $sectionRecord['sem_id'],
+                    $sectionRecord['section_days'],
+                    $sectionRecord['section_start_time'],
+                    $sectionRecord['section_end_time'],
+                    $sectionRecord['section_is_online'],
+                    $sectionRecord['section_block'],
+                    $sectionRecord['section_capacity']);
+            }
+            return $classroomSections;
+        }catch(Exception $e){
+            echo "getClassroomSections: ".$e->getMessage();
+        }
+    }
+
+
+
+
     public function getCourse($section){
         $theCourse = null;
         $dbh = $this->getdbh();
@@ -172,7 +226,7 @@ class Database
             }
             return $allClassrooms;
         }catch(Exception $e){
-            return "getAllClassrooms: ".$e->getMessage();
+            return "getClassroomsWithAll: ".$e->getMessage();
         }
     }
 

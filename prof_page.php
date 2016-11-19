@@ -41,6 +41,8 @@ foreach ($allProfessors as $professor){
 $body .= "</table>";
 
 
+
+
 $body .= "<div  id='profOverviewSchedule'
                 style='
                 background-color: #fff;

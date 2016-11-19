@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="dd7d6492-d87e-4a03-99db-a0e1090ad96a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fullcalendar-3.0.1/fullcalendar-3.0.1/demos/agenda-views.html" afterPath="$PROJECT_DIR$/fullcalendar-3.0.1/fullcalendar-3.0.1/demos/agenda-views.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/calendar.js" afterPath="$PROJECT_DIR$/js/calendar.js" />
     </list>
+=======
+    <list default="true" id="dd7d6492-d87e-4a03-99db-a0e1090ad96a" name="Default" comment="" />
+>>>>>>> Stashed changes
     <ignored path="ZAAMG.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,8 +34,13 @@
       <file leaf-file-name="action_insertProfessor.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/action_insertProfessor.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="-0.6896552">
               <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -60,8 +69,12 @@
             <state vertical-scroll-proportion="-13.0">
               <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
+<<<<<<< Updated upstream
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <marker date="1478727441332" expanded="true" signature="2100:2209" placeholder="SELECT dept_... Department" />
+=======
+                <marker date="1479524079288" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
@@ -70,6 +83,7 @@
       <file leaf-file-name="index_lollar.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index_lollar.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="0.15771231">
               <caret line="83" column="12" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
 >>>>>>> parent of ef0a6df... Playing with fullcalendar.io
@@ -120,6 +134,21 @@
                 <marker date="1478727696376" expanded="true" signature="10179:10477" placeholder="..." />
                 <marker date="1478727696376" expanded="true" signature="10506:10710" placeholder="..." />
               </folding>
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Professor.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Professor.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="59" selection-start-line="76" selection-start-column="59" selection-end-line="76" selection-end-column="59" />
+              <folding />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -152,6 +181,19 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
+=======
+      <file leaf-file-name="Section.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Section.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="246" column="29" selection-start-line="246" selection-start-column="29" selection-end-line="246" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> Stashed changes
       <file leaf-file-name="Course.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Course.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -817,6 +859,7 @@
       <workItem from="1478017589861" duration="7367000" />
       <workItem from="1478026316419" duration="45321000" />
       <workItem from="1478235128815" duration="4487000" />
+<<<<<<< Updated upstream
       <workItem from="1478624698588" duration="2242000" />
       <workItem from="1478711581077" duration="1324000" />
 <<<<<<< HEAD
@@ -824,19 +867,27 @@
 =======
       <workItem from="1478713053769" duration="5061000" />
 >>>>>>> parent of ef0a6df... Playing with fullcalendar.io
+=======
+      <workItem from="1478624698588" duration="4098000" />
+      <workItem from="1479524085201" duration="169000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="155827000" />
 =======
     <option name="totallyTimeSpent" value="148858000" />
 >>>>>>> parent of ef0a6df... Playing with fullcalendar.io
+=======
+    <option name="totallyTimeSpent" value="144498000" />
+>>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -846,7 +897,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16764276" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16764276" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -907,7 +958,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,18 +1090,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16811092">
           <caret line="60" column="63" selection-start-line="60" selection-start-column="63" selection-end-line="60" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap.css.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30710173">
           <caret line="0" column="899" selection-start-line="0" selection-start-column="899" selection-end-line="0" selection-end-column="899" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/application.css">
@@ -1086,7 +1135,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41074523">
           <caret line="61" column="40" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1230,14 +1278,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="246" column="29" selection-start-line="246" selection-start-column="29" selection-end-line="246" selection-end-column="29" />
-          <folding>
-            <marker date="1478539274256" expanded="true" signature="1669:1815" placeholder="INSERT INTO zaamg.Section... " />
-            <marker date="1478539274256" expanded="true" signature="2686:3093" placeholder="SELECT secti... Section" />
-            <marker date="1478539274256" expanded="true" signature="2785:2835" placeholder="/* MySQL com... " />
-            <marker date="1478539274256" expanded="true" signature="4437:4508" placeholder="SELECT ${{$s... " />
-            <marker date="1478539274256" expanded="true" signature="6076:6299" placeholder="SELECT ${{$s... " />
-            <marker date="1478539274256" expanded="true" signature="8058:8355" placeholder="SELECT ${{$s... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,11 +1311,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modal_newProfessor.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state vertical-scroll-proportion="0.20277296">
           <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
             <marker date="1478712009640" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
           </folding>
+=======
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="59" selection-start-line="76" selection-start-column="59" selection-end-line="76" selection-end-column="59" />
+          <folding />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -1406,6 +1453,7 @@
           <caret line="83" column="12" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
 >>>>>>> parent of ef0a6df... Playing with fullcalendar.io
           <folding>
+<<<<<<< Updated upstream
             <marker date="1478727696376" expanded="true" signature="397:4403" placeholder="..." />
             <marker date="1478727696376" expanded="true" signature="406:754" placeholder="..." />
             <marker date="1478727696376" expanded="true" signature="763:4403" placeholder="..." />
@@ -1451,6 +1499,9 @@
             <marker date="1478727696376" expanded="true" signature="10171:10715" placeholder="..." />
             <marker date="1478727696376" expanded="true" signature="10179:10477" placeholder="..." />
             <marker date="1478727696376" expanded="true" signature="10506:10710" placeholder="..." />
+=======
+            <marker date="1479524079288" expanded="true" signature="1834:1938" placeholder="SELECT dept_... Department" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>
