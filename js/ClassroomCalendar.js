@@ -196,6 +196,7 @@ function createClassroomEventsSet(classroomSet){
 
 function displayClassroomSchedule(theClassroomSet) {
     var theEvents = createClassroomEventsSet(theClassroomSet);
+    $('#classroomOverviewSchedule').fullCalendar('destroy');
     $('#classroomOverviewSchedule').fullCalendar({
         header: {
             left:   '',

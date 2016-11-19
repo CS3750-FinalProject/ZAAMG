@@ -88,7 +88,9 @@ class Database
             $result = $stmtSelect->fetchAll();
             foreach($result as $index=>$classroomRecord){
                 $allClassrooms[] = new Classroom(  //don't need to put an index number between those brackets, awesome
-                    $classroomRecord['classroom_id'], $classroomRecord['classroom_number'], $classroomRecord['classroom_capacity'],
+                    $classroomRecord['classroom_id'],
+                    $classroomRecord['classroom_number'],
+                    $classroomRecord['classroom_capacity'],
                     $classroomRecord['classroom_workstations'],
                     $classroomRecord['building_id']);
             }

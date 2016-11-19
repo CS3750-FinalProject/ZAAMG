@@ -29,8 +29,6 @@ $body = "
     <script src='js/professorSet.js' charset='utf-8'></script>
     <script src='js/processForm.js' charset='utf-8'></script>
     <script src='js/calendar.js' charset='utf-8'></script>
-    <script src='js/newCalendar.js' charset='utf-8'></script> <!--testing different schedule overview-->
-    <script src='js/newProfessorSet.js' charset='utf-8'></script> <!--testing different schedule overview-->
     <script src='js/classroomCalendar.js' charset='utf-8'></script>
     <script src='js/classroomSet.js' charset='utf-8'></script>
     <script>

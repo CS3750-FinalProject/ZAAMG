@@ -2,6 +2,7 @@
 require_once 'Classroom.php';
 
 $database = new Database();
+$dbh = $database->getdbh();
 
 $body = "
 
@@ -37,8 +38,6 @@ foreach ($allClassrooms as $classroom){
 $body .= "</table>";
 
 
-
-
 $body .= "<div class='form-group' style=    'margin-bottom: 40px;
                                             border-top: 1px solid black;
                                             padding-top: 5px;'>
@@ -57,65 +56,92 @@ $body .= "<div class='form-group' style=    'margin-bottom: 40px;
                 $body .= "<option value=".$row['campus_id'].">"
                     .$row['campus_name']."</option>";
             }
-
  $body .= " </select>
             </div>
 
 
             <div class='col-xs-3'>
-            <select type='text' class='form-control' id='pickBuilding' >
-
-                   <option value='0'>Building...</option>";
-
-            $selectBuilding = $database->getdbh()->prepare(
-                            'SELECT building_name, building_id
-                            FROM ZAAMG.Building
-                            ORDER BY building_name ASC');
-            $selectBuilding->execute();
-            $result = $selectBuilding->fetchAll();
-
-            foreach($result as $row){
-                $body .= "<option value=".$row['building_id'].">"
-                    .$row['building_name']."</option>";
-            }
-
-$body .= " </select>
-            </div>
+            <select type='text' class='form-control' id='pickBuilding' name='pickBuilding'
+             disabled='true'>
+                  <option value='0'>Building...</option> </select>
+                  ";
 
 
-            <div class='col-xs-3'>
-            <select type='text' class='form-control' id='pickClassroom' >
 
-                   <option value='0'>Classroom...</option>";
 
-            $selectClassroom = $database->getdbh()->prepare(
-                            'SELECT classroom_id, classroom_number
-                            FROM ZAAMG.Classroom
-                            ORDER BY classroom_number ASC');
-            $selectClassroom->execute();
-            $result = $selectClassroom->fetchAll();
-
-            foreach($result as $row){
-                $body .= "<option value=".$row['classroom_id'].">"
-                    .$row['classroom_number']."</option>";
-            }
-
-$body .= "</select>
+$body .= "
         </div>  <!-- end of 'col-xs-3'  -->
-
-
-
-
-
-
         </div> <!-- end of 'form-group'  -->";
 
+$body .= "
+<script>
+    $('#pickCampus').change(function(){
+        var campusId = $(this).val();
+        if ($('#pickCampus').val() > 0)
+            $('#pickBuilding').removeAttr('disabled');
+        else{
+            $('#pickBuilding').attr('disabled', 'true');
+            //$('#pickClassroom').attr('disabled', 'true');
+        }
+
+
+ //http://stackoverflow.com/questions/36393409/ajax-call-to-populate-select-list-when-another-select-list-changes
+//http://www.codingcage.com/2015/11/ajax-login-script-with-jquery-php-mysql.html
+//https://openenergymonitor.org/emon/node/107
+
+$.ajax({
+      type: 'POST',
+      url: 'pickBuildings.php',        //the script to call to get data
+      data: 'campusId=' + campusId,    //you can insert url arguments here to pass to pickBuildings.php
+                                       //for example \"id=5&parent=6\"
+      dataType: 'json',                //data format
+      success: function(data)          //on receive of reply
+      {
+        var dropdown_Building = $('#pickBuilding');
+        dropdown_Building.empty();
+        dropdown_Building.append($('<option />').val(0).text('Building...'));
+
+        $.each(data, function() {
+            dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
+        });
+
+
+      }
+    });
+}); // end of pickCampus.change()
+
+
+
+
+$('#pickBuilding').change(function(){
+
+var buildingId = $(this).val();
+$('#pickBuilding:focus').blur();
+
+$.ajax({
+      type: 'POST',
+      url: 'showClassroomOverviewSchedule.php',        //the script to call to get data
+      data: 'buildingId=' + buildingId,    //you can insert url arguments here to pass to pickClassrooms.php
+                                       //for example \"id=5&parent=6\"
+      dataType: 'text',                //data format
+      success: function(data)          //on receive of reply
+      {
+            console.log(data.substr(data.lastIndexOf('var theClassroomSet')));
+            eval(data.substr(data.lastIndexOf('var theClassroomSet')));
+      },
+
+    });
+
+}); // end of pickBuilding.onChange()
+
+</script>";
 
 $body .= "<div  id='classroomOverviewSchedule'
                 style='
                 background-color: #fff;
                 padding-top: 15px;
-                border-top: 1px solid #492365'></div>";  // this div holds the schedule showing all classrooms
+                border-top: 1px solid #492365'>
+                </div>";  // this div holds the schedule showing all classrooms
 
 $body .= "</div>";  //end of 'col-xs-12'
 
@@ -142,12 +168,11 @@ $body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);
  *  javascript function displayClassroomSchedule is defined in
  *  classroomCalendar.js
  */
-$body .= "<script>displayClassroomSchedule(theClassroomSet)</script>";
+$body .= "<script>displayClassroomSchedule(theClassroomSet); console.log(theClassroomSet.length);</script>";
 
 
 
 echo $body;
-echo "<script> console.log(theClassroomSet.length) </script>";
 
 
 /*
@@ -164,7 +189,7 @@ function load_ClassroomSet($classrooms, $db){
          *  defined in professorSet.js
          */
         $body.='
-            add_toClassroomSet('  /*  first argument:  */
+            add_toClassroomSet([], '  /*  first argument:  */
             .'"'.$classroom->getClassroomNum().'"'.','.'
                 [ ';  //  <--  opening square bracket for the "timed courses" JSON obj. array
         $sections = $db->getClassroomSections($classroom);

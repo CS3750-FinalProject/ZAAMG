@@ -6,13 +6,15 @@
 /**
  *   FUNCTIONS IN THIS FILE:
  *
- *   add_toClassroomSet(courseName, timedCourseObjects)
- *   momentGenerator_test(time, days, startMoment)
+ *   add_toClassroomSet(classroomNumber, timedCourseObjects)
+ *
  *
  */
 
 
-function add_toClassroomSet(classroomNumber, timedCourseObjects){
+
+
+function add_toClassroomSet(theSet, classroomNumber, timedCourseObjects){
 
     var t_courseObjects = [];
     var nonStandard_courseObjects = [];
@@ -61,7 +63,7 @@ function add_toClassroomSet(classroomNumber, timedCourseObjects){
             );
         }
     });
-    theClassroomSet.push(
+    theSet.push(
         {
             name: classroomNumber,
             timedCourses: t_courseObjects,

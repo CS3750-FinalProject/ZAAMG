@@ -1,8 +1,4 @@
-<!--
 
-Just testing php/mysql wire-up.
-
--->
 
 <?php
 
