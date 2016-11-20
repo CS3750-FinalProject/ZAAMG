@@ -104,15 +104,15 @@ $body = "
                     aria-haspopup='true' aria-expanded='true' id='edit'>Edit <span class='caret'></span></a>
               <ul class='dropdown-menu'>
                 <li><a href='#' data-toggle='modal' data-target='#newSectionModal'
-                       class='newResourceLink' id='newSectionLink'>Classroom</a></li>
+                       class='newResourceLink' id='editRoom'>Classroom</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newCourseModal'
-                       class='newResourceLink' id='newCourseLink'>Building</a></li>
+                       class='newResourceLink' id='editBuilding'>Building</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newProfessorModal'
-                       class='newResourceLink'id='newProfLink'>Campus</a></li>
+                       class='newResourceLink'id='editCampus'>Campus</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newClassroomModal'
-                       class='newResourceLink' id='newClassroomLink'>Department</a></li>
+                       class='newResourceLink' id='editDept'>Department</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newSemesterModal'
-                       class='newResourceLink' id='newSemesterLink'>Semester</a></li>
+                       class='newResourceLink' id='editSem'>Semester</a></li>
               </ul>
             </li>
 
