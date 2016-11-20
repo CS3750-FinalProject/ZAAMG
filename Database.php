@@ -105,13 +105,19 @@ class Database
     public function getAllClassrooms($orderBy){
         $allClassrooms = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Classroom");
+        $stmtSelect = $dbh->prepare("SELECT classroom_id, classroom_number, classroom_capacity, classroom_workstations,
+                                      room.building_id, building_name, campus_name
+                                      FROM ZAAMG.Classroom room
+                                      JOIN ZAAMG.Building bld ON room.building_id = bld.building_id
+                                      JOIN ZAAMG.Campus camp ON bld.campus_id = camp.campus_id
+                                      ORDER BY camp.campus_name, bld.building_name, room.classroom_number");
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();
             foreach($result as $index=>$classroomRecord){
                 $allClassrooms[] = new Classroom(  //don't need to put an index number between those brackets, awesome
-                    $classroomRecord['classroom_id'], $classroomRecord['classroom_number'],
+                    $classroomRecord['classroom_id'],
+                    $classroomRecord['classroom_number'],
                     $classroomRecord['classroom_capacity'],
                     $classroomRecord['classroom_workstations'],
                     $classroomRecord['building_id']);

@@ -184,7 +184,7 @@ function addProfessor(Professor $professor, Database $db){
     }
 
     //Here's where we create the table of Professors on the "Professor Page".
-    $row = "<tr class='{$professor->getProfId()}' >
+    $row = "<tr id='{$professor->getProfId()}' >
             <!--  maybe the profId should be stored as an 'id' attribute instead of class-->
 
 			<td>{$professor->getProfFirst()}</td>

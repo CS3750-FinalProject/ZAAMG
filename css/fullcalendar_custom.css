@@ -50,7 +50,7 @@ line 95:    --REMOVED COLORED BACKGROUND FROM "today"
 
 
 line 437:
-.indProfCal td.fc-axis span{
+.indProfCal td.fc-axis span, .indRoomCal td.fc-axis span{
 	color: #492365;
 }
 
@@ -468,7 +468,9 @@ hr.fc-divider {
 
 
 
-.indProfCal th{
+
+
+.indProfCal th, .indRoomCal th{
 	padding: 0.5%;
 }
 

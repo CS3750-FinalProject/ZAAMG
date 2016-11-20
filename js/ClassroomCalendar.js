@@ -12,6 +12,184 @@ $(document).ready(function() {
 
 
 
+/*******************************************************************************************/
+
+/*  function for handling show/hide of an individual classroom schedule
+ *
+ */
+function on_roomRowClick(roomRowId, sectionObjects){
+    $('tr#' + 'roomRow_'+ roomRowId).toggle();
+    var currentDate = 6; //why not
+
+    /* function 'load_indRoomRowEvents()' is defined in
+     * this file ('classroomCalendar.js').  It takes an array of JSON sectionObjects
+     * and returns an events array for fullCalendar to read.
+     */
+    var theEvents = load_indRoomRowEvents(sectionObjects);
+
+
+    //this is what initializes and creates the individual calendar.
+    //it's defined in this file (classroomCalendar.js)
+    displayCalendar_Room(roomRowId, theEvents);
+
+
+    //here the table row containing the calendar is shown or hidden:
+    if ($('span#' + 'seeRoomCal_' + roomRowId).attr('class').includes("menu-up")){
+        $('div#' + 'roomCalendar_'+ roomRowId).hide();
+    }else{
+        $('div#'+'roomCalendar_'+ roomRowId).show();
+        currentDate = $('#classroomOverviewSchedule').fullCalendar('getDate');
+    }
+    $('span#' + 'seeRoomCal_' + roomRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+
+}
+
+/*******************************************************************************************/
+
+/*
+ * takes array of section JSON objects and returns array of events to be passed to
+ * fullCalendar for display.
+ */
+function load_indRoomRowEvents(sectionObjects){
+    var events = [];
+    sectionObjects.forEach(function(section, i){
+        addNewEvent_Room(section.title, section.start, section.end, section.location, section.classroom, section.professor,
+            section.online ? '#137c33' : '#583372', section.online, events)
+    })
+
+    return events;
+}
+
+/*******************************************************************************************/
+
+
+/*  takes a string like '2016-11-07T08:00 AM' and returns
+ *  '2016-11-07T08:00:00' because fullCalendar likes it like that.
+ *
+ *  If the string is like '07:00:00', that's what gets returned.
+ *
+ *  This function is called in addNewEvent()
+ */
+function formatTime_fullCalendar(time){
+    var timePattern = /[0-9-]{10}T[0-9:]{5} [APM]{2}/;
+    if (timePattern.test(time)){
+        var timePart = time.substr(time.indexOf('T')+1);
+        var hourPart = timePart.substr(0, 2);
+        var hour = parseInt(hourPart);
+        var minutePart = timePart.substr(timePart.indexOf(':')+1, 2);
+        if (timePart.indexOf('PM') != -1){
+            if (hour < 12){
+                timePart = (hour + 12) + ':' + minutePart + ':00';
+            }else{ //hourPart is 12 and it's PM
+                timePart = hourPart + ':' + minutePart + ':00';
+            }
+        }else { // time is AM
+            timePart = hourPart + ':' + minutePart + ':00';
+        }
+        return time.substr(0, time.indexOf('T')+1) + timePart;
+    }else{
+        return time;
+    }
+
+}
+
+/*******************************************************************************************/
+
+/*
+ * pushes an event to the events array read by fullCalendar for an individual classroom
+ * figures out minimum course start time, so that the online courses can be lined up to the side
+ *
+ * fullCalendar works well with times formatted like '2016-11-14T07:30:00'
+ */
+function addNewEvent_Room(title, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
+    var timedEvents = [];
+    //var numOnline = 0;
+    eventsArray.forEach(function(event, i){
+        if (!event.online){
+            timedEvents.push(event);
+        }
+    });
+    var minCourseTime = getMinTime(timedEvents, 0);
+    var minHour = moment(minCourseTime, 'hh:mm:ss').hour();
+    if (!isOnline){
+        eventsArray.push({
+            title: title,
+            start: formatTime_fullCalendar(eventstart),
+            end: formatTime_fullCalendar(eventend),
+            color: color,
+            location: location,
+            classroom: classroom,
+            professor: professor,
+            online: isOnline
+        });
+    }
+}
+
+
+/*******************************************************************************************/
+//used for scrolling a calendar to just below the earliest section
+
+function getMinTime(eventsArray, hourChange){  //times come in looking like 2016-11-08T09:30 AM
+    var minTime = '01/01/2017 23:59:00';
+    eventsArray.forEach(function(event, i){
+        var eventTime = '01/01/2017 ' + event.start.substr(event.start.indexOf('T')+1);
+        if (Date.parse(eventTime) < Date.parse(minTime) )
+            minTime = eventTime;
+    });
+    if (minTime == '01/01/2017 23:59:00') minTime = '01/01/2017 07:30:00'
+    var hour = parseInt(minTime.substr(minTime.indexOf(' ')+1,2)) + hourChange;
+    if (hour < 10) hour = '0' + hour;
+    return hour + minTime.substr(minTime.indexOf(':'));
+}
+
+/*******************************************************************************************/
+
+// display an individual classroom's schedule
+var displayCalendar_Room = function(roomRowId, eventsArray){
+    $('#' + 'roomCalendar_' + roomRowId).fullCalendar({
+        height: 250,
+        header: false,
+        defaultDate: '2016-11-07',  // 11/7/16 is a Monday
+        allDaySlot: false,  // online courses can show here
+        defaultView: 'agendaWeek',
+        dayNames: [ '','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        columnFormat: 'dddd',
+        firstDay: '1', //Monday
+        navLinks: true, // can click day/week names to navigate views
+        editable: false,
+        eventLimit: true, // allow "more" link when too many events
+        minTime: '06:30:00',
+        slotLabelFormat: 'h(:mm) a',
+        slotLabelInterval: '00:30',
+        slotDuration: '00:60:00',
+        events: eventsArray,
+        scrollTime: formatTime_fullCalendar(getMinTime(eventsArray, -1)), //defined in this file (calendar.js)
+        eventRender: function (event, element) {
+            var timeString = event.online ? "" :
+                (moment(event.start).format('h:mm A') + ' - ' + moment(event.end).format('h:mm A'));
+            var room = event.classroom != undefined ? event.classroom : "";
+            element.popover(
+                {
+                    html: true,
+                    title: "<strong>" + event.title + "</strong>",  //some html has to be in the title or it won't work
+                    content: event.professor + "<br>" + event.location + " " + room + "<br>" + timeString,
+                    trigger: 'hover click',
+                    placement: "right",
+                    selector: event,
+                    container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
+                }
+            );
+        },
+    });
+
+}
+
+
+
+
+
+
+
 /*  This function takes the "set" of classrooms and their section objects, and forms them into
  *  event blocks to be displayed by fullCalendar.  The events have starting and ending times which
  *  do NOT correlate to class time -- these times are for positioning the classrooms vertically in

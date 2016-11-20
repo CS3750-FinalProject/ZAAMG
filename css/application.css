@@ -78,7 +78,7 @@ body {
   background-image: url('../img/dimension.png');*/
 }
 
-div#profOverviewSchedule, div#sectionIndex table, div#profIndex table{
+div#profOverviewSchedule, div#sectionIndex table, div#profIndex table, div#roomIndex table{
   background-color: #f8f8f8
 }
 

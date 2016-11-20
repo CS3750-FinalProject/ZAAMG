@@ -14,7 +14,7 @@ $body = "
 
 </div>
     <div class='container'>
-      <div class='col-xs-12'>
+      <div class='col-xs-12' id='roomIndex'>
         <table class='list-data'>
         <tr>
             <th>Campus</th>
@@ -29,7 +29,9 @@ $body = "
 
 $allClassrooms = $database->getAllClassrooms(null);
 foreach ($allClassrooms as $classroom){
-    $body .= addClassroom($classroom);
+    $body .= addClassroom($classroom, $database);
+    //function addClassroom is defined in this file (classroom_page.php)
+    //it produces each row of individual classrooms.
 }
 
 
@@ -39,10 +41,12 @@ $body .= "</table>";
 
 
 $body .= "<div class='form-group' style=    'margin-bottom: 40px;
-                                            border-top: 1px solid black;
+                                            border-top: 1px solid #492365;
                                             padding-top: 5px;'>
-
+            <span style='float:left; padding-top: 5px; font-weight:bold; color:#492365'>
+            Select a Campus and a Building:</span>
             <div class='col-xs-3'>
+
             <select type='text' class='form-control' id='pickCampus' >
                 <option value='0'>Campus...</option>";
             $selectCampus = $database->getdbh()->prepare(
@@ -217,20 +221,95 @@ function load_ClassroomSet($classrooms, $db){
 
 
 
+function addClassroom(Classroom $classroom, Database $db){
+    //var_dump($classroom);
+    $eventObjects = array();
 
-function addClassroom(Classroom $classroom){
-    $row = "<tr class='{$classroom->getClassroomID()}'>
+    // $daysToDates maps section weekdays to the dates that position the courses on the
+    // individual classroom's fullCalendar schedule
+    $daysToDates = array("Mon"=>"2016-11-07", "Tues" => "2016-11-08", "Wednes" => "2016-11-09",
+        "Thurs" => "2016-11-10", "Fri" => "2016-11-11", "Satur" => "2016-11-12" , "online"=> "2016-11-13");
+
+    $classroomSections = $db->getClassroomSections($classroom, null);
+    foreach($classroomSections as $section){
+        $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
+        $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
+        $title = $prefix . " " . $number;
+        $dayString = $section->getDayString();
+        if ($dayString != "online"){
+            $days = explode('day', $section->getDays()); //converts a string like TuesdayThursday into ['Tues','Thurs']
+            array_pop($days); // last element is useless and breaks things, pop it off.
+        }
+        else
+            $days = array("online" => "online");
+
+        $eventStart = $section->getStartTime();
+        $eventEnd = $section->getEndTime();
+        $location = $section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
+            'classroom_id', 'building_id', 'campus_id', 'classroomID');
+        //$classroom = $section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID');
+        $profFirst = $section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID');
+        $profLast = $section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID');
+        $prof = $profFirst . " " . $profLast;
+        $isOnline = $section->getIsOnline();
+
+        foreach($days as $day){
+            array_push($eventObjects, json_encode(array(
+                "title" => $title,
+                "start" => $daysToDates[$day]."T".$eventStart,
+                "end" => $daysToDates[$day]."T".$eventEnd,
+                "location" => $location,
+                //"classroom" => $classroom,
+                "professor" => $prof,
+                "online" => $isOnline
+            )));
+        }
+
+    }
+
+    //Here's where we create the table of Classrooms on the "Classroom Page".
+    $row = "<tr id='.{$classroom->getClassroomID()}.'>
 			<td>{$classroom->getClassroomProperty_Join_3('campus_name', 'Building', 'Campus',
                 'building_id', 'campus_id', 'buildId')}</td>
 			<td>{$classroom->getClassroomProperty('building_name', 'Building', 'building_id', 'buildId')}</td>
 			<td><small><em>{$classroom->getClassroomNum()}</em></small></td>
 			<td> {$classroom->getClassroomCap()}</td>
 			<td>{$classroom->getNumWorkstations()}</td>
-			<td><img src='img/pencil.png' class='action-edit'/><img src='img/close.png' class='action-delete'></td>
+			<td><img src='img/pencil.png' class='action-edit'/><img src='img/close.png' class='action-delete'>
+
+            <!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
+			<!--so the span itself has a onClick() set on it -->
+			    <span id='seeRoomCal_{$classroom->getClassroomID()}'
+			    onclick='on_roomRowClick({$classroom->getClassroomID()}, [";
+
+            /*function 'on_roomRowClick()' is defined in classroomCalendar.js
+            on_roomRowClick(roomRowId (int), sectionObjects (array of objects from top of this function)*/
+
+    foreach($eventObjects as $eventObj) {
+        $row .= $eventObj . ",";  //these are JSON objects
+    }
+
+    // finish giving attributes to the <span> and close it...
+    $row .= "])' class=' glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+			</td>
 		  </tr>";
 
+    /*
+    *  the next two rows are set to display:none so that they exist but are hiding until
+    *      the calendar displays.
+    *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
+    */
+    $row .= "<tr style='display:none' id='roomRow_{$classroom->getClassroomID()}'>
+                <td colspan='8' style='padding:0'>
+                <!-- roomCalendar_<id>:  the div that the individual calendar lives in. -->
+                <div class='indRoomCal' id='roomCalendar_{$classroom->getClassroomID()}'></div>
+                </td>
+            </tr>
+            <tr style='display:none'></tr>
+            ";
 
-    return $row;
+
+    return $row;  //finally the long $row string can be echoed
 }
 
 

@@ -13,7 +13,7 @@ echo '<div class="modal fade" id="newBuildingModal" tabindex="-1" role="dialog" 
                 <div class="form-group">
                     <div class="col-xs-3">
                         <label for="buildingCode">Building Code</label>
-                        <input type="text" class="form-control" id="buildingCode"  >
+                        <input autofocus type="text" class="form-control" id="buildingCode"  >
                     </div>
                     <div class="col-xs-6">
                         <label for="buildingCampus">Campus</label>
