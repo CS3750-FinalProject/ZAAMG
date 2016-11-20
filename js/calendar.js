@@ -1,20 +1,18 @@
 $(document).ready(function() {
-
-
     $(window).resize(function() {
         // without rerendering, the event blocks get jacked when the window changes size
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
-
-
-
 });
+
 
 
 
 /*
  * FUNCTIONS IN THIS FILE:  (no particular order)
  *
+ * loadPhpPage(page)
+ * changePage(anchor)
  * on_profRowClick(profRowId, sectionObjects)
  * load_indProfRowEvents(sectionObjects)
  * formatTime_fullCalendar(time)
@@ -26,6 +24,44 @@ $(document).ready(function() {
  * fixButtons()
  * fixHeaders_prof
  */
+
+
+
+
+function loadPhpPage(page){
+    $("#main_container").load(page);
+}
+
+/* changePage(anchor) is what changes the shading on the Navbar and also loads the correct php content
+* into the main container.
+ ***************************************************************************************************/
+function changePage(anchor){
+    phpPages = {"sec":"section_page.php", "prof":"prof_page.php", "room":"room_page.php"};
+    navbar_item = anchor.parentElement;
+
+
+    switch (navbar_item.getAttribute('id')){
+        case 'navbar_sec':
+            loadPhpPage("section_page.php");
+            $('#navbar_sec').addClass('active');
+            $('#navbar_prof').removeClass('active');
+            $('#navbar_room').removeClass('active');
+            break;
+        case 'navbar_prof':
+            loadPhpPage("prof_page.php");
+            $('#navbar_sec').removeClass('active');
+            $('#navbar_prof').addClass('active');
+            $('#navbar_room').removeClass('active');
+            break;
+        case 'navbar_room':
+            loadPhpPage("classroom_page.php");
+            $('#navbar_sec').removeClass('active');
+            $('#navbar_prof').removeClass('active');
+            $('#navbar_room').addClass('active');
+            break;
+    }
+}
+
 
 
 
@@ -314,7 +350,7 @@ function createEventsSet_test(theSet){
                 var minOverPageBreak = getMinutesOverPageBreak(course.startTime, courseDuration);
                 events.push(
                     {
-                        title: theCourseTitle + '\n' +
+                        title: theCourseTitle + '   >>>\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart,
@@ -374,7 +410,7 @@ function createEventsSet_test(theSet){
                 var minOverPageBreak = getMinutesOverPageBreak(course.startTime, courseDuration);
                 events.push(
                     {
-                        title: course.courseTitle + '\n' +
+                        title: course.courseTitle + '   >>>\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart,

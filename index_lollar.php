@@ -35,16 +35,11 @@ $body = "
 
     $(document).ready(function() {
         $(\"#main_container\").load(\"section_page.php\");
-
     });
-
-    function loadPhpPage(page){
-        $(\"#main_container\").load(page);
-    }
 
     </script>
 
-    <title>Project ZAAMG</title>
+  <title>Project ZAAMG</title>
   </head>
 
   <body>
@@ -64,9 +59,9 @@ $body = "
         </div>
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
           <ul class='nav navbar-nav'>
-            <li id='sec' class='active'><a href='#' onclick='loadPhpPage(\"section_page.php\")'>Section <span class='sr-only'>(current)</span></a></li>
-            <li id='prof'><a href='#' onclick='loadPhpPage(\"prof_page.php\")'>Professor</a></li>
-            <li id='room'><a href='#' onclick='loadPhpPage(\"classroom_page.php\")'>Classroom</a></li>
+            <li id='navbar_sec' class='active'><a  onclick='changePage(this)'>Section <span class='sr-only'>(current)</span></a></li>
+            <li id='navbar_prof'><a onclick='changePage(this)'>Professor</a></li>
+            <li id='navbar_room'><a onclick='changePage(this)'>Classroom</a></li>
           </ul>
           <form class='navbar-form navbar-left'>
             <div class='form-group'>
@@ -74,9 +69,12 @@ $body = "
             </div>
             <button type='submit' class='btn btn-default'>Submit</button>
           </form>
+
+
           <ul class='nav navbar-nav navbar-right'>
-            <li class='dropdown'>
-              <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='true'>Create New <span class='caret'></span></a>
+              <li class='dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'
+                    aria-haspopup='true' aria-expanded='true' id='createNew'>Create New <span class='caret'></span></a>
               <ul class='dropdown-menu'>
                 <li><a href='#' data-toggle='modal' data-target='#newSectionModal'
                        class='newResourceLink' id='newSectionLink'>Section</a></li>
@@ -99,6 +97,26 @@ $body = "
                        class='newResourceLink' id='newDepartmentLink'>Department</a></li>
               </ul>
             </li>
+
+
+            <li class='dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'
+                    aria-haspopup='true' aria-expanded='true' id='edit'>Edit <span class='caret'></span></a>
+              <ul class='dropdown-menu'>
+                <li><a href='#' data-toggle='modal' data-target='#newSectionModal'
+                       class='newResourceLink' id='newSectionLink'>Classroom</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#newCourseModal'
+                       class='newResourceLink' id='newCourseLink'>Building</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#newProfessorModal'
+                       class='newResourceLink'id='newProfLink'>Campus</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#newClassroomModal'
+                       class='newResourceLink' id='newClassroomLink'>Department</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#newSemesterModal'
+                       class='newResourceLink' id='newSemesterLink'>Semester</a></li>
+              </ul>
+            </li>
+
+
           </ul>
         </div>
       </div>
