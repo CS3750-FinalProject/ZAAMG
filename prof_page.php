@@ -195,7 +195,7 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfRelease()}</td>
 			<td>to be calc...</td>
 			<td>
-			    <img src='img/pencil.png' class='action-edit' />
+			    <img src='img/pencil.png' class='action-edit' id='edit_1'/>
 			    <img src='img/close.png' class='action-delete'>
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
@@ -227,7 +227,66 @@ function addProfessor(Professor $professor, Database $db){
                 <div class='indProfCal' id='profCalendar_{$professor->getProfId()}'></div>
                 </td>
             </tr>
-            <tr style='display:none'></tr>
+            <!--<tr style='display:none'></tr>-->
+            <tr class='hide' id='edit_section_1'>
+            <td>
+              <p><strong> Editing: </strong>CS 1030 <em>Foundations of Computer Science</em></p>
+              <label for='sectionProfessor'>Professor</label>
+              <select class='form-control' id='sectionProfessor' >
+                <option value=''''>Please Select...</option>
+                <option value='1'>Spencer Hilton</option>
+                <option value='2'>Garth Tuck</option>
+                <option value='3'>Joshua Jensen</option>
+                <option value='4'>Brian Rague</option>
+              </select>
+            </td>
+             <td>
+              <label class='checkbox-inline'><input type='checkbox' value='m'>M</label>
+              <label class='checkbox-inline'><input type='checkbox' value='t'>T</label>
+              <label class='checkbox-inline'><input type='checkbox' value='w'>W</label>
+              <label class='checkbox-inline'><input type='checkbox' value='r'>R</label>
+              <label class='checkbox-inline'><input type='checkbox' value='f'>F</label>
+              <label class='checkbox-inline'><input type='checkbox' value='s'>S</label>
+              <br>
+              <br>
+              <label for='startTime'>Start Time<input type='time' id='startTime'  class='form-control'></label>
+              <label for='endTime'>End Time<input type='time' id='endTime'  class='form-control'></label>
+              <br />
+              <label for='block'>Block:</label>
+              <br>
+              <label class='radio-inline'><input type='radio' name='full'>Full</label>
+              <label class='radio-inline'><input type='radio' name='first'>First</label>
+              <label class='radio-inline'><input type='radio' name='second'>Second</label>
+            </td>
+
+             <td colspan='2'>
+              <div class='col-xs-12'>
+                <label class='radio-inline'><input type='radio' name='ogden'>Ogden</label>
+                <label class='radio-inline'><input type='radio' name='davis'>Davis</label>
+                <label class='radio-inline'><input type='radio' name='slcc'>SLCC</label>
+                <label class='radio-inline'><input type='radio' name='online'>Online</label>
+                <br />
+                <label for='sectionBuilding'>Building</label>
+                <select class='form-control' id='sectionBuilding' >
+                  <option value=''''>Please Select...</option>
+                  <option value='1'>Blah</option>
+                  <option value='2'>Bleh</option>
+                  <option value='3'>Yo!</option>
+                  <option value='4'>No</option>
+                </select>
+                <label for='sectionClassroom'>Classroom</label>
+                <select class='form-control' id='sectionClassroom' >
+                  <option value=''''>Please Select...</option>
+                  <option value='1'>Blah</option>
+                  <option value='2'>Bleh</option>
+                  <option value='3'>Yo!</option>
+                  <option value='4'>No</option>
+                </select>
+              </div>
+            </td>
+            <td><img src='img/save.png' class='action-save hide' id='save_1'/></td>
+          </tr>
+
             ";
 
     return $row;  //finally the long $row string can be echoed
