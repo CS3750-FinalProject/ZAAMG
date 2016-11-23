@@ -1,10 +1,13 @@
-<?php
+ <?php
 require_once 'Classroom.php';
 
 $database = new Database();
 $dbh = $database->getdbh();
 
 $body = "
+
+<script src='js/ClassroomCalendar.js' charset='utf-8'></script>
+
 
 <div class='col-xs-12'>
     <div class='page-header'>
@@ -267,19 +270,31 @@ function addClassroom(Classroom $classroom, Database $db){
 
     }
 
+    //<tr> (room record)        id = record_room<#>
+    //<img> (pencil)            id = pencil_room<#>
+    //<span> (little arrow):    id = seeCal_room<#>
+    //<tr> (contains cal div):  id = calRow_room<#>
+    //<div> (contains cal)      id = cal_room<#>
+    //<tr>  (editing div)       id = edit_room<#>
+    //<img> (disc)              id = save_room<#>
+
+
+
     //Here's where we create the table of Classrooms on the "Classroom Page".
-    $row = "<tr id='.{$classroom->getClassroomID()}.'>
+    $row = "<tr id='record_room{$classroom->getClassroomID()}'>
 			<td>{$classroom->getClassroomProperty_Join_3('campus_name', 'Building', 'Campus',
                 'building_id', 'campus_id', 'buildId')}</td>
 			<td>{$classroom->getClassroomProperty('building_name', 'Building', 'building_id', 'buildId')}</td>
 			<td><small><em>{$classroom->getClassroomNum()}</em></small></td>
 			<td> {$classroom->getClassroomCap()}</td>
 			<td>{$classroom->getNumWorkstations()}</td>
-			<td><img src='img/pencil.png' class='action-edit'/><img src='img/close.png' class='action-delete'>
+			<td>
+			<img src='img/pencil.png' class='action-edit' id='pencil_room{$classroom->getClassroomID()}'/>
+			<img src='img/close.png' class='action-delete'>
 
             <!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
-			    <span id='seeRoomCal_{$classroom->getClassroomID()}'
+			    <span id='seeCal_room{$classroom->getClassroomID()}'
 			    onclick='on_roomRowClick({$classroom->getClassroomID()}, [";
 
             /*function 'on_roomRowClick()' is defined in classroomCalendar.js
@@ -299,13 +314,20 @@ function addClassroom(Classroom $classroom, Database $db){
     *      the calendar displays.
     *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
     */
-    $row .= "<tr style='display:none' id='roomRow_{$classroom->getClassroomID()}'>
+    $row .= "<tr class='hide' id='calRow_room{$classroom->getClassroomID()}'>
                 <td colspan='8' style='padding:0'>
                 <!-- roomCalendar_<id>:  the div that the individual calendar lives in. -->
-                <div class='indRoomCal' id='roomCalendar_{$classroom->getClassroomID()}'></div>
+                <div class='indRoomCal' id='cal_room{$classroom->getClassroomID()}'></div>
                 </td>
             </tr>
-            <tr style='display:none'></tr>
+            <!--<tr style='display:none'></tr>-->
+
+
+           <tr class='hide' id='edit_room{$classroom->getClassroomID()}'>
+            <td></td><td></td>
+            <td></td><td></td><td></td>
+            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_room{$classroom->getClassroomID()}'/></td>
+          </tr>
             ";
 
 

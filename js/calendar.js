@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    InlineEditing();
+
+
     $(window).resize(function() {
         // without rerendering, the event blocks get jacked when the window changes size
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
@@ -25,16 +28,13 @@ $(document).ready(function() {
  * fixHeaders_prof
  */
 
-
-
-
 function loadPhpPage(page){
     $("#main_container").load(page);
 }
 
 /* changePage(anchor) is what changes the shading on the Navbar and also loads the correct php content
-* into the main container.
- ***************************************************************************************************/
+*  into the main container.
+************************************************************************************************************/
 function changePage(anchor){
     phpPages = {"sec":"section_page.php", "prof":"prof_page.php", "room":"room_page.php"};
     navbar_item = anchor.parentElement;
@@ -72,7 +72,8 @@ function changePage(anchor){
  *
  */
 function on_profRowClick(profRowId, sectionObjects){
-    $('tr#' + 'profRow_'+ profRowId).toggle();
+    $('tr#' + 'calRow_prof'+ profRowId).toggleClass('hide');
+
     var currentDate = 6; //why not
 
     /* function 'load_indProfRowEvents()' is defined in
@@ -88,13 +89,13 @@ function on_profRowClick(profRowId, sectionObjects){
 
 
     //here the table row containing the calendar is shown or hidden:
-    if ($('span#' + 'seeProfCal_' + profRowId).attr('class').includes("menu-up")){
-        $('div#' + 'profCalendar_'+ profRowId).hide();
+    if ($('span#' + 'seeCal_prof' + profRowId).attr('class').includes("menu-up")){
+        $('div#' + 'cal_prof'+ profRowId).hide();
     }else{
-        $('div#'+'profCalendar_'+ profRowId).show();
+        $('div#'+'cal_prof'+ profRowId).show();
         currentDate = $('#profOverviewSchedule').fullCalendar('getDate');
     }
-    $('span#' + 'seeProfCal_' + profRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+    $('span#' + 'seeCal_prof' + profRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
 
 }
 
@@ -223,7 +224,7 @@ function getMinTime(eventsArray, hourChange){  //times come in looking like 2016
 
 // display an individual professor's schedule
 var displayCalendar = function(profRowId, eventsArray){
-    $('#' + 'profCalendar_' + profRowId).fullCalendar({
+    $('#' + 'cal_prof' + profRowId).fullCalendar({
         height: 250,
         header: false,
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday

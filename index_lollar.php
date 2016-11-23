@@ -26,6 +26,7 @@ $body = "
     <script src='js/moment.min.js' charset='utf-8'></script>
     <script src='js/fullcalendar.min.js' charset='utf-8'></script>
 
+    <script src='js/inline-editing.js' charset='utf-8'></script>
     <script src='js/professorSet.js' charset='utf-8'></script>
     <script src='js/processForm.js' charset='utf-8'></script>
     <script src='js/calendar.js' charset='utf-8'></script>
@@ -39,7 +40,7 @@ $body = "
 
     </script>
 
-  <title>Project ZAAMG</title>
+  <title>Project LOLLAR &#9829; PHP</title>
   </head>
 
   <body>
@@ -55,7 +56,7 @@ $body = "
             <span class='icon-bar'></span>
             <span class='icon-bar'></span>
           </button>
-          <a class='navbar-brand' href='#'>ZAAMG</a>
+          <a class='navbar-brand' href='#'>LOLLAR &#9829; PHP</a>
         </div>
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
           <ul class='nav navbar-nav'>

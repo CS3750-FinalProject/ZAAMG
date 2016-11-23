@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function() {
+    InlineEditing();
 
     $(window).resize(function() {
         // without rerendering, the event blocks get jacked when the window changes size
@@ -18,7 +19,7 @@ $(document).ready(function() {
  *
  */
 function on_roomRowClick(roomRowId, sectionObjects){
-    $('tr#' + 'roomRow_'+ roomRowId).toggle();
+    $('tr#' + 'calRow_room'+ roomRowId).toggleClass('hide');
     var currentDate = 6; //why not
 
     /* function 'load_indRoomRowEvents()' is defined in
@@ -34,13 +35,13 @@ function on_roomRowClick(roomRowId, sectionObjects){
 
 
     //here the table row containing the calendar is shown or hidden:
-    if ($('span#' + 'seeRoomCal_' + roomRowId).attr('class').includes("menu-up")){
-        $('div#' + 'roomCalendar_'+ roomRowId).hide();
+    if ($('span#' + 'seeCal_room' + roomRowId).attr('class').includes("menu-up")){
+        $('div#' + 'cal_room'+ roomRowId).hide();
     }else{
-        $('div#'+'roomCalendar_'+ roomRowId).show();
+        $('div#'+'cal_room'+ roomRowId).show();
         currentDate = $('#classroomOverviewSchedule').fullCalendar('getDate');
     }
-    $('span#' + 'seeRoomCal_' + roomRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+    $('span#' + 'seeCal_room' + roomRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
 
 }
 
@@ -146,7 +147,7 @@ function getMinTime(eventsArray, hourChange){  //times come in looking like 2016
 
 // display an individual classroom's schedule
 var displayCalendar_Room = function(roomRowId, eventsArray){
-    $('#' + 'roomCalendar_' + roomRowId).fullCalendar({
+    $('#' + 'cal_room' + roomRowId).fullCalendar({
         height: 250,
         header: false,
         defaultDate: '2016-11-07',  // 11/7/16 is a Monday

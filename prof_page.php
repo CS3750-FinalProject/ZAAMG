@@ -183,9 +183,16 @@ function addProfessor(Professor $professor, Database $db){
         }
     }
 
+    //<tr> (prof record)        id = record_prof<#>
+    //<img> (pencil)            id = pencil_prof<#>
+    //<span> (little arrow):    id = seeCal_prof<#>
+    //<tr> (contains cal div):  id = calRow_prof<#>
+    //<div> (contains cal)      id = cal_prof<#>
+    //<tr>  (editing div)       id = edit_prof<#>
+    //<img> (disc)              id = save_prof<#>
+
     //Here's where we create the table of Professors on the "Professor Page".
-    $row = "<tr id='{$professor->getProfId()}' >
-            <!--  maybe the profId should be stored as an 'id' attribute instead of class-->
+    $row = "<tr id='record_prof{$professor->getProfId()}' >
 
 			<td>{$professor->getProfFirst()}</td>
 			<td>{$professor->getProfLast()}</td>
@@ -195,12 +202,12 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfRelease()}</td>
 			<td>to be calc...</td>
 			<td>
-			    <img src='img/pencil.png' class='action-edit' id='edit_1'/>
+			    <img src='img/pencil.png' class='action-edit' id='pencil_prof{$professor->getProfId()}'/>
 			    <img src='img/close.png' class='action-delete'>
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
-			    <span id='seeProfCal_{$professor->getProfId()}'
+			    <span id='seeCal_prof{$professor->getProfId()}'
 			    onclick='on_profRowClick({$professor->getProfId()}, [";
 
             /*function 'on_profRowClick()' is defined in calendar.js
@@ -212,7 +219,7 @@ function addProfessor(Professor $professor, Database $db){
     }
 
     // finish giving attributes to the <span> and close it...
-    $row .= "])' class=' glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+    $row .= "])' class='glyphicon glyphicon-menu-down' aria-hidden='true'></span>
 			</td>
 		  </tr>";
 
@@ -221,70 +228,18 @@ function addProfessor(Professor $professor, Database $db){
      *      the calendar displays.
      *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
      */
-    $row .= "<tr style='display:none' id='profRow_{$professor->getProfId()}'>
+    $row .= "<tr class='hide' id='calRow_prof{$professor->getProfId()}'>
                 <td colspan='8' style='padding:0'>
-                <!-- profCalendar_<id>:  the div that the individual calendar lives in. -->
-                <div class='indProfCal' id='profCalendar_{$professor->getProfId()}'></div>
+                <!-- profCal_<id>:  the div that the individual calendar lives in. -->
+                <div class='indProfCal' id='cal_prof{$professor->getProfId()}'></div>
                 </td>
             </tr>
             <!--<tr style='display:none'></tr>-->
-            <tr class='hide' id='edit_section_1'>
-            <td>
-              <p><strong> Editing: </strong>CS 1030 <em>Foundations of Computer Science</em></p>
-              <label for='sectionProfessor'>Professor</label>
-              <select class='form-control' id='sectionProfessor' >
-                <option value=''''>Please Select...</option>
-                <option value='1'>Spencer Hilton</option>
-                <option value='2'>Garth Tuck</option>
-                <option value='3'>Joshua Jensen</option>
-                <option value='4'>Brian Rague</option>
-              </select>
-            </td>
-             <td>
-              <label class='checkbox-inline'><input type='checkbox' value='m'>M</label>
-              <label class='checkbox-inline'><input type='checkbox' value='t'>T</label>
-              <label class='checkbox-inline'><input type='checkbox' value='w'>W</label>
-              <label class='checkbox-inline'><input type='checkbox' value='r'>R</label>
-              <label class='checkbox-inline'><input type='checkbox' value='f'>F</label>
-              <label class='checkbox-inline'><input type='checkbox' value='s'>S</label>
-              <br>
-              <br>
-              <label for='startTime'>Start Time<input type='time' id='startTime'  class='form-control'></label>
-              <label for='endTime'>End Time<input type='time' id='endTime'  class='form-control'></label>
-              <br />
-              <label for='block'>Block:</label>
-              <br>
-              <label class='radio-inline'><input type='radio' name='full'>Full</label>
-              <label class='radio-inline'><input type='radio' name='first'>First</label>
-              <label class='radio-inline'><input type='radio' name='second'>Second</label>
-            </td>
 
-             <td colspan='2'>
-              <div class='col-xs-12'>
-                <label class='radio-inline'><input type='radio' name='ogden'>Ogden</label>
-                <label class='radio-inline'><input type='radio' name='davis'>Davis</label>
-                <label class='radio-inline'><input type='radio' name='slcc'>SLCC</label>
-                <label class='radio-inline'><input type='radio' name='online'>Online</label>
-                <br />
-                <label for='sectionBuilding'>Building</label>
-                <select class='form-control' id='sectionBuilding' >
-                  <option value=''''>Please Select...</option>
-                  <option value='1'>Blah</option>
-                  <option value='2'>Bleh</option>
-                  <option value='3'>Yo!</option>
-                  <option value='4'>No</option>
-                </select>
-                <label for='sectionClassroom'>Classroom</label>
-                <select class='form-control' id='sectionClassroom' >
-                  <option value=''''>Please Select...</option>
-                  <option value='1'>Blah</option>
-                  <option value='2'>Bleh</option>
-                  <option value='3'>Yo!</option>
-                  <option value='4'>No</option>
-                </select>
-              </div>
-            </td>
-            <td><img src='img/save.png' class='action-save hide' id='save_1'/></td>
+           <tr class='hide' id='edit_prof{$professor->getProfId()}'>
+            <td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td>
+            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$professor->getProfId()}'/></td>
           </tr>
 
             ";
