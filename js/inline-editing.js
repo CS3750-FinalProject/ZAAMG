@@ -1,15 +1,21 @@
 var InlineEditing = function() {
     var toggleHideClass = function() {
         $('.action-edit, .action-save, .action-delete').click(function() {
+            theRecordID = $(this).parent().parent().attr('id').split('_').pop();
             theID = $(this).attr('id').split('_').pop();
             theNum = theID.replace(/\D/g,'');
+
+            theRecordIDwChar = theRecordID.substr(theRecordID.indexOf(theNum)-1);
+
+            console.log("parentID: " + theRecordID);
             console.log("theID: " + theID);
+            console.log("theRecordIDwChar: " + theRecordIDwChar);
+            console.log("theNum: " + theNum);
+
             $('[id$=' + theID + ']').toggleClass('hide');
-            $('[id^=' + 'record_' +'][id$=' + theNum + ']').toggleClass('inline_editing_record');
-            $('[id^=' + 'edit_' +'][id$=' + theNum + ']').toggleClass('inline_editing_edit_box');
-
+            $('[id^=' + 'record_' +'][id$=' + theRecordIDwChar + ']').toggleClass('inline_editing_record');
+            $('[id^=' + 'edit_' +'][id$=' + theID + ']').toggleClass('inline_editing_edit_box');
         });
-
     }
 
     toggleHideClass();

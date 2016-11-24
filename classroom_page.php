@@ -100,7 +100,7 @@ $.ajax({
       type: 'POST',
       url: 'pickBuildings.php',        //the script to call to get data
       data: 'campusId=' + campusId,    //you can insert url arguments here to pass to pickBuildings.php
-                                       //for example \"id=5&parent=6\"
+                                       //for example 'id=5&parent=6\"
       dataType: 'json',                //data format
       success: function(data)          //on receive of reply
       {
@@ -225,7 +225,7 @@ function load_ClassroomSet($classrooms, $db){
 
 
 function addClassroom(Classroom $classroom, Database $db){
-    //var_dump($classroom);
+    $roomId = $classroom->getClassroomID();
     $eventObjects = array();
 
     // $daysToDates maps section weekdays to the dates that position the courses on the
@@ -270,7 +270,7 @@ function addClassroom(Classroom $classroom, Database $db){
 
     }
 
-    //<tr> (room record)        id = record_room<#>
+    //<tr> (room record)        id = record_classRoom<#>  //if it doesn't end in _room# then it won't toggle 'hide'
     //<img> (pencil)            id = pencil_room<#>
     //<span> (little arrow):    id = seeCal_room<#>
     //<tr> (contains cal div):  id = calRow_room<#>
@@ -281,7 +281,7 @@ function addClassroom(Classroom $classroom, Database $db){
 
 
     //Here's where we create the table of Classrooms on the "Classroom Page".
-    $row = "<tr id='record_room{$classroom->getClassroomID()}'>
+    $row = "<tr id='record_classRoom{$classroom->getClassroomID()}'>
 			<td>{$classroom->getClassroomProperty_Join_3('campus_name', 'Building', 'Campus',
                 'building_id', 'campus_id', 'buildId')}</td>
 			<td>{$classroom->getClassroomProperty('building_name', 'Building', 'building_id', 'buildId')}</td>
@@ -324,8 +324,46 @@ function addClassroom(Classroom $classroom, Database $db){
 
 
            <tr class='hide' id='edit_room{$classroom->getClassroomID()}'>
-            <td></td><td></td>
-            <td></td><td></td><td></td>
+            <td>
+            <label for='inlineEdit_roomBuilding{$roomId}'>Campus/Building</label>
+                        <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >";
+
+                            $selectBuilding = $db->getdbh()->prepare(
+                                'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
+                                  FROM ZAAMG.Campus JOIN ZAAMG.Building
+                                  ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
+                                  ORDER BY campus_name ASC');
+                            $selectBuilding->execute();
+                            $result = $selectBuilding->fetchAll();
+
+                            foreach($result as $room){
+                                if ($room['building_id'] == $classroom->getBuildingId()){
+                                    $row.= "<option selected value=".$room['building_id'].">"
+                                        .$room['campus_name'].": ".$room['building_name']."</option>";
+                                }else{
+                                    $row.= "<option value=".$room['building_id'].">"
+                                        .$room['campus_name'].": ".$room['building_name']."</option>";
+                                }
+                            }
+$row.="
+                        </select>
+            </td>
+            <td></td>
+            <td>
+                <label for='inlineEdit_roomNumber{$roomId}'>Room Number</label>
+                        <input type='text' style='margin-bottom: 6px' class='form-control' id='inlineEdit_roomNumber{$roomId}'
+                         placeholder='{$classroom->getClassroomNum()}' style='width: 60%'>
+            </td>
+            <td>
+                <label for='inlineEdit_roomCap{$roomId}'>Capacity</label>
+                        <input type='number' style='margin-bottom: 6px' class='form-control' id='inlineEdit_roomCap{$roomId}'
+                        placeholder='{$classroom->getClassroomCap()}' min=1 style='width: 60%'>
+            </td>
+            <td>
+                <label for='inlineEdit_roomComputers{$roomId}'>Computers</label>
+                <input type='number' style='margin-bottom: 6px' class='form-control' id='inlineEdit_roomComputers{$roomId}'
+                        placeholder='{$classroom->getNumWorkstations()}' min=1 style='width: 60%'>
+            </td>
             <td><img src='img/save.png' width='30px' class='action-save hide' id='save_room{$classroom->getClassroomID()}'/></td>
           </tr>
             ";

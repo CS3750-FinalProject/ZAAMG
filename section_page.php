@@ -41,16 +41,17 @@ $body .= "</div>";
 
 echo $body;
 
-//<tr> (section record)     id = record_section<#>  //if it doesn't end in _sec# then it won't toggle 'hide'
-//<img> (pencil)            id = pencil_sec<#>
-//<span> (little arrow):    id = seeCal_sec<#>
-//<tr>  (editing div)       id = edit_sec<#>
-//<img> (save disc)         id = save_sec<#>
+//<tr> (section record)     id = record_sectiont<#>  //if it doesn't end in _sect# then it won't toggle 'hide'
+                                                     //also 'sectiont' is correct, the t is there on purpose to match last letter of 'sect'
+//<img> (pencil)            id = pencil_sect<#>
+//<span> (little arrow):    id = seeCal_sect<#>
+//<tr>  (editing div)       id = edit_sect<#>
+//<img> (save disc)         id = save_sect<#>
 
 
 function addSection(Section $section, $database){
 
-      $row = "<tr id='record_section{$section->getSectionID()}'>
+      $row = "<tr id='record_sectiont{$section->getSectionID()}'>
             <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}</td>"
         ."<td>{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}</td>"
         ."<td> <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
@@ -76,16 +77,16 @@ function addSection(Section $section, $database){
                 'classroom_id', 'building_id', 'campus_id', 'classroomID')}
                 </small></td>
                 <td>
-                <img src='img/pencil.png' class='action-edit' id='pencil_sec{$section->getSectionID()}' />
+                <img src='img/pencil.png' class='action-edit' id='pencil_sect{$section->getSectionID()}' />
                 <img src='img/close.png' class='action-delete'/></td>
            </tr>
 
 
-            <tr class='hide' id='edit_sec{$section->getSectionID()}'>
-            <td style='padding-bottom: 4%' colspan='3'>
+            <tr class='hide' id='edit_sect{$section->getSectionID()}'>
+            <td style='padding-bottom: 4%; padding-left: 1%' colspan='3'>
 
-            <label for='inlineEdit_secCourse{$section->getSectionID()}' >Course</label>
-                        <select class='form-control' id='inlineEdit_secCourse{$section->getSectionID()}' style='margin-bottom: 10px'>";
+            <label for='inlineEdit_sectCourse{$section->getSectionID()}' >Course</label>
+                        <select class='form-control' id='inlineEdit_sectCourse{$section->getSectionID()}' style='margin-bottom: 10px'>";
 
                             $selectCourse = $database->getdbh()->prepare(
                                 'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
@@ -108,8 +109,8 @@ function addSection(Section $section, $database){
                             }
                         $row .= "</select>
 
-            <label for='inlineEdit_secProf{$section->getSectionID()}'>Professor</label>
-                        <select  class='form-control' id='inlineEdit_secProf{$section->getSectionID()}' style='margin-bottom: 10px'>";
+            <label for='inlineEdit_sectProf{$section->getSectionID()}'>Professor</label>
+                        <select  class='form-control' id='inlineEdit_sectProf{$section->getSectionID()}' style='margin-bottom: 10px'>";
 
                             $selectProf = $database->getdbh()->prepare(
                                 'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
@@ -131,8 +132,8 @@ function addSection(Section $section, $database){
 
                         $row .= "</select>
 
-                <label for='inlineEdit_secRoom{$section->getSectionID()}'>Classroom</label>
-                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_secRoom{$section->getSectionID()}'>
+                <label for='inlineEdit_sectRoom{$section->getSectionID()}'>Classroom</label>
+                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectRoom{$section->getSectionID()}'>
                             <option value='0'>Online</option>";
 
                             $selectRoom = $database->getdbh()->prepare(
@@ -159,11 +160,11 @@ function addSection(Section $section, $database){
         $row .= "
                         </select>
             </td>
-            <td  >
+            <td  style='padding-left: 1%'>
 
-                <label for='inlineEdit_secDays{$section->getSectionID()}'>Days</label>
+                <label for='inlineEdit_sectDays{$section->getSectionID()}'>Days</label>
                         <select multiple  class='form-control' style='margin-bottom: 10px'
-                             id='inlineEdit_secDays{$section->getSectionID()}'>
+                             id='inlineEdit_sectDays{$section->getSectionID()}'>
                             <option value='online'>Online</option>
                             <option value='Monday'>Monday</option>
                             <option value='Tuesday'>Tuesday</option>
@@ -178,9 +179,9 @@ function addSection(Section $section, $database){
                             style='margin-bottom: 10px' class='form-control'>
               <label for='endTime'>End Time</label><input type='time' id='endTime'  class='form-control'>
         </td>
-        <td  style='padding-bottom: 5%'>
-                <label for='inlineEdit_secSem{$section->getSectionID()}'>Semester</label>
-                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_secSem{$section->getSectionID()}'>";
+        <td  style='padding-bottom: 1%; padding-left: 1%'>
+                <label for='inlineEdit_sectSem{$section->getSectionID()}'>Semester</label>
+                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectSem{$section->getSectionID()}'>";
 
                             $selectSem = $database->getdbh()->prepare(
                                 'SELECT sem_id, sem_season, sem_year, sem_start_date
@@ -202,33 +203,32 @@ function addSection(Section $section, $database){
                             $row .= "
                         </select>
 
-                        <label for='inlineEdit_secBlock{$section->getSectionID()}'>Block</label>
-                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_secBlock{$section->getSectionID()}'>
+                        <label for='inlineEdit_sectBlock{$section->getSectionID()}'>Block</label>
+                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectBlock{$section->getSectionID()}'>
                             <option value='0'>Full</option>
                             <option value='1'>First</option>
                             <option value='2'>Second</option>
                         </select>
 
-                        <div >
-                        <div style='float:left'>
-                        <label for='inlineEdit_secCap{$section->getSectionID()}'>Capacity</label>
-                        <input style='width: 50%' type='number' class='form-control'
-                                id='inlineEdit_secCap{$section->getSectionID()}' min='1' value='{$section->getCapacity()}' >
-                        </div>
-                        <div style=' float:right; padding-top: 5%'>
-                        <label class='checkbox-inline' for='inlineEdit_secOnl{$section->getSectionID()}' style='font-weight: bold; '>
 
-                        <input type='checkbox' id='inlineEdit_secOnl{$section->getSectionID()}'
+                        <label for='inlineEdit_sectCap{$section->getSectionID()}'>Capacity</label>
+                        <input style='width: 55%; margin-bottom: 20px' type='number' class='form-control'
+                                id='inlineEdit_sectCap{$section->getSectionID()}' min='1' value='{$section->getCapacity()}' >
+
+                        <div style='width: 55%; margin-left: 2%'>
+                        <label class='checkbox-inline' for='inlineEdit_sectOnl{$section->getSectionID()}' style='font-weight: bold; '>
+
+                        <input type='checkbox' id='inlineEdit_sectOnl{$section->getSectionID()}'
                             value='1' style='transform: scale(1.5); '>
                             &nbsp;&nbsp;&nbsp;Online</label>
                         </div>
-                        </div>
+
 
             </td>
             <td></td>
-            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_sec{$section->getSectionID()}'/></td>
+            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_sect{$section->getSectionID()}'/></td>
 </tr>
-<tr class='hide' id='hiddenRow_sec{$section->getSectionID()}'></tr>
+<tr class='hide' id='hiddenRow_sect{$section->getSectionID()}'></tr>
 
 
 

@@ -19,8 +19,8 @@ $body .= "
       <div class='col-xs-12' id='profIndex'>
         <table class='list-data'>
           <tr>
-            <th>First Name</th>
             <th>Last Name</th>
+            <th>First Name</th>
             <th>E-Mail</th>
             <th>Department</th>
             <th>Req Hours</th>
@@ -141,6 +141,7 @@ function load_ProfSet($allTheProfs, $db){
  */
 function addProfessor(Professor $professor, Database $db){
     $eventObjects = array();
+    $id = $professor->getProfId();
 
     // $daysToDates maps section weekdays to the dates that position the courses on the
     // individual professor's fullCalendar schedule
@@ -165,8 +166,8 @@ function addProfessor(Professor $professor, Database $db){
         $location = $section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
             'classroom_id', 'building_id', 'campus_id', 'classroomID');
         $classroom = $section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID');
-        $profFirst = $section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID');
         $profLast = $section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID');
+        $profFirst = $section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID');
         $prof = $profFirst . " " . $profLast;
         $isOnline = $section->getIsOnline();
 
@@ -183,7 +184,8 @@ function addProfessor(Professor $professor, Database $db){
         }
     }
 
-    //<tr> (prof record)        id = record_prof<#>
+    //<tr> (prof record)        id = record_professorf<#>   //if it doesn't end in _prof# then it won't toggle 'hide'
+                                //also 'professorf' is correct, the f is there on purpose to match last letter of 'prof'
     //<img> (pencil)            id = pencil_prof<#>
     //<span> (little arrow):    id = seeCal_prof<#>
     //<tr> (contains cal div):  id = calRow_prof<#>
@@ -192,23 +194,23 @@ function addProfessor(Professor $professor, Database $db){
     //<img> (disc)              id = save_prof<#>
 
     //Here's where we create the table of Professors on the "Professor Page".
-    $row = "<tr id='record_prof{$professor->getProfId()}' >
+    $row = "<tr id='record_professorf{$id}' >
 
+            <td>{$professor->getProfLast()}</td>
 			<td>{$professor->getProfFirst()}</td>
-			<td>{$professor->getProfLast()}</td>
 			<td><small><em>{$professor->getProfEmail()}</em></small></td>
 			<td> {$professor->getProfessorProperty('dept_name', 'Department', 'dept_id', 'deptId')}</td>
 			<td>{$professor->getProfRequiredHours()}</td>
 			<td>{$professor->getProfRelease()}</td>
 			<td>to be calc...</td>
 			<td>
-			    <img src='img/pencil.png' class='action-edit' id='pencil_prof{$professor->getProfId()}'/>
+			    <img src='img/pencil.png' class='action-edit' id='pencil_prof{$id}'/>
 			    <img src='img/close.png' class='action-delete'>
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
-			    <span id='seeCal_prof{$professor->getProfId()}'
-			    onclick='on_profRowClick({$professor->getProfId()}, [";
+			    <span id='seeCal_prof{$id}'
+			    onclick='on_profRowClick({$id}, [";
 
             /*function 'on_profRowClick()' is defined in calendar.js
             on_profRowClick(profRowId (int), sectionObjects (array of objects from top of this function)*/
@@ -228,18 +230,68 @@ function addProfessor(Professor $professor, Database $db){
      *      the calendar displays.
      *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
      */
-    $row .= "<tr class='hide' id='calRow_prof{$professor->getProfId()}'>
+    $row .= "<tr class='hide' id='calRow_prof{$id}'>
                 <td colspan='8' style='padding:0'>
                 <!-- profCal_<id>:  the div that the individual calendar lives in. -->
-                <div class='indProfCal' id='cal_prof{$professor->getProfId()}'></div>
+                <div class='indProfCal' id='cal_prof{$id}'></div>
                 </td>
             </tr>
             <!--<tr style='display:none'></tr>-->
 
-           <tr class='hide' id='edit_prof{$professor->getProfId()}'>
-            <td></td><td></td><td></td><td></td>
-            <td></td><td></td><td></td>
-            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$professor->getProfId()}'/></td>
+           <tr class='hide' id='edit_prof{$id}'>
+            <td colspan='2'>
+                <label for='inlineEdit_profFirst{$id}' >First Name</label>
+
+                <input type='text' class='form-control' id='inlineEdit_profFirst{$id}'
+                placeholder='{$professor->getProfFirst()}' style='margin-bottom: 10px' >
+
+                <label for='inlineEdit_profLast{$id}' >Last Name</label>
+
+                <input type='text' class='form-control' id='inlineEdit_profLast{$id}'
+                placeholder='{$professor->getProfLast()}' style='margin-bottom: 10px' >
+
+            </td>
+
+            <td colspan='2'>
+                <label for='inlineEdit_profEmail{$id}' >Email</label>
+
+                <input type='email' class='form-control' id='inlineEdit_profEmail{$id}'
+                placeholder='{$professor->getProfEmail()}' style='margin-bottom: 10px'>
+
+            <label for='inlineEdit_profDept{$id}'>Department</label>
+                        <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>";
+
+                            $selectDepts = $db->getdbh()->prepare(
+                                'SELECT dept_id, dept_name FROM ZAAMG.Department
+                                  ORDER BY dept_name ASC');
+                            $selectDepts->execute();
+                            $result = $selectDepts->fetchAll();
+
+                            foreach($result as $dept){
+                                if ($dept['dept_id'] == $professor->getDeptId()){
+                                    $row.=
+                                        "<option selected value=".$dept['dept_id'].'>'.$dept['dept_name'].'</option>';
+                                }else{
+                                    $row.=
+                                        "<option value=".$dept['dept_id'].'>'.$dept['dept_name'].'</option>';
+                                }
+                            }
+$row.="
+                        </select>
+            </td>
+
+            <td colspan='2'>
+                <label for='inlineEdit_profReqHours{$id}'>Required Hours</label>
+                <input type='number' class='form-control' id='profinlineEdit_profReqHours{$id}'
+                    style='margin-bottom: 10px'
+                    placeholder={$professor->getProfRequiredHours()}>
+
+                <label for='inlineEdit_profRelHours{$id}'>Release Hours</label>
+                <input type='number' class='form-control' id='inlineEdit_profRelHours{$id}'
+                    placeholder={$professor->getProfRelease()} style='margin-bottom: 10px'>
+            </td>
+            <td></td>
+            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$id}'/></td>
           </tr>
 
             ";
