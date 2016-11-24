@@ -238,6 +238,30 @@ class Database
         }
     }
 
+    public function getSemester($year, $season){
+        $theSemester = null;
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Semester`
+                                      WHERE sem_year = {$dbh->quote($year)}
+                                      AND sem_season = {$dbh->quote($season)}");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll();
+            $theSemester = new Semester(
+                $result['sem_id'],
+                $result['sem_year'],
+                $result['sem_season'],
+                $result['sem_num_weeks'],
+                $result['sem_start_date'],
+                $result['sem_first_block_start_date'],
+                $result['sem_second_block_start_date']);
+
+            return $theSemester;
+        }catch(Exception $e){
+            return "getSemester: ".$e->getMessage();
+        }
+    }
+
 
 
     public function getdbh(){

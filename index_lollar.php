@@ -7,6 +7,7 @@ require_once 'modals/modal_newCourse.php';
 require_once 'modals/modal_newProfessor.php';
 require_once 'modals/modal_newClassroom.php';
 require_once 'modals/modal_newSemester.php';
+require_once 'modals/modal_editSemester.php';
 require_once 'modals/modal_newBuilding.php';
 require_once 'modals/modal_newCampus.php';
 require_once 'modals/modal_newDepartment.php';
@@ -27,6 +28,7 @@ $body = "
     <script src='js/fullcalendar.min.js' charset='utf-8'></script>
 
     <script src='js/inline-editing.js' charset='utf-8'></script>
+    <script src='js/modal-editing.js' charset='utf-8'></script>
     <script src='js/professorSet.js' charset='utf-8'></script>
     <script src='js/processForm.js' charset='utf-8'></script>
     <script src='js/calendar.js' charset='utf-8'></script>
@@ -104,16 +106,15 @@ $body = "
                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'
                     aria-haspopup='true' aria-expanded='true' id='edit'>Edit <span class='caret'></span></a>
               <ul class='dropdown-menu'>
-                <li><a href='#' data-toggle='modal' data-target='#newSectionModal'
-                       class='newResourceLink' id='editRoom'>Classroom</a></li>
-                <li><a href='#' data-toggle='modal' data-target='#newCourseModal'
-                       class='newResourceLink' id='editBuilding'>Building</a></li>
-                <li><a href='#' data-toggle='modal' data-target='#newProfessorModal'
-                       class='newResourceLink'id='editCampus'>Campus</a></li>
-                <li><a href='#' data-toggle='modal' data-target='#newClassroomModal'
-                       class='newResourceLink' id='editDept'>Department</a></li>
-                <li><a href='#' data-toggle='modal' data-target='#newSemesterModal'
-                       class='newResourceLink' id='editSem'>Semester</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#editSemesterModal'
+                       class='editResourceLink' id='editSemesterLink'>Semester</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#editBuildingModal'
+                       class='editResourceLink' id='editBuildingLink'>Building</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#editCampusModal'
+                       class='editResourceLink' id='editCampusLink'>Campus</a></li>
+                <li role='separator' class='divider'></li>
+                <li><a href='#' data-toggle='modal' data-target='#editDepartmentModal'
+                       class='editResourceLink' id='editDepartmentLink'>Department</a></li>
               </ul>
             </li>
 

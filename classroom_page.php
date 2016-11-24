@@ -351,20 +351,22 @@ $row.="
             <td></td>
             <td>
                 <label for='inlineEdit_roomNumber{$roomId}'>Room Number</label>
-                        <input type='text' style='margin-bottom: 6px' class='form-control' id='inlineEdit_roomNumber{$roomId}'
-                         placeholder='{$classroom->getClassroomNum()}' style='width: 60%'>
+                        <input type='text'  class='form-control' id='inlineEdit_roomNumber{$roomId}'
+                         placeholder='{$classroom->getClassroomNum()}' style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomCap{$roomId}'>Capacity</label>
-                        <input type='number' style='margin-bottom: 6px' class='form-control' id='inlineEdit_roomCap{$roomId}'
-                        placeholder='{$classroom->getClassroomCap()}' min=1 style='width: 60%'>
+                        <input type='number' class='form-control' id='inlineEdit_roomCap{$roomId}'
+                        placeholder='{$classroom->getClassroomCap()}' min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomComputers{$roomId}'>Computers</label>
-                <input type='number' style='margin-bottom: 6px' class='form-control' id='inlineEdit_roomComputers{$roomId}'
-                        placeholder='{$classroom->getNumWorkstations()}' min=1 style='width: 60%'>
+                <input type='number'  class='form-control' id='inlineEdit_roomComputers{$roomId}'
+                        placeholder='{$classroom->getNumWorkstations()}' min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
-            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_room{$classroom->getClassroomID()}'/></td>
+            <td style='padding-bottom: 1%'><img src='img/save.png' width='30px' class='action-save hide'
+                id='save_room{$classroom->getClassroomID()}'/>
+            </td>
           </tr>
             ";
 

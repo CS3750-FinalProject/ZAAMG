@@ -3,7 +3,7 @@ var InlineEditing = function() {
         $('.action-edit, .action-save, .action-delete').click(function() {
             theRecordID = $(this).parent().parent().attr('id').split('_').pop();
             theID = $(this).attr('id').split('_').pop();
-            theNum = theID.replace(/\D/g,'');
+            theNum = theID.replace(/\D/g,'');  //strip out just the id number
 
             theRecordIDwChar = theRecordID.substr(theRecordID.indexOf(theNum)-1);
 
