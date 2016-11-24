@@ -4,11 +4,7 @@ $database = new Database();
 
 $body = "
 
-<!--<script>
-$(document).ready(function() {
-    InlineEditing();
-});
-</script>-->
+
 
 <script src='js/calendar.js' charset='utf-8'></script>
 
@@ -35,7 +31,7 @@ $(document).ready(function() {
 
 $allSections = $database->getAllSections(null);
 foreach ($allSections as $section){
-    $body .= addSection($section);
+    $body .= addSection($section, $database);
 }
 
 $body .= "</table>";
@@ -45,15 +41,16 @@ $body .= "</div>";
 
 echo $body;
 
-//<tr> (section record)     id = record_sec<#>
+//<tr> (section record)     id = record_section<#>  //if it doesn't end in _sec# then it won't toggle 'hide'
 //<img> (pencil)            id = pencil_sec<#>
 //<span> (little arrow):    id = seeCal_sec<#>
 //<tr>  (editing div)       id = edit_sec<#>
 //<img> (save disc)         id = save_sec<#>
 
 
-function addSection(Section $section){
-    $row = "<tr id='record_sec{$section->getSectionID()}'>
+function addSection(Section $section, $database){
+
+      $row = "<tr id='record_section{$section->getSectionID()}'>
             <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}</td>"
         ."<td>{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}</td>"
         ."<td> <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
@@ -80,65 +77,155 @@ function addSection(Section $section){
                 </small></td>
                 <td>
                 <img src='img/pencil.png' class='action-edit' id='pencil_sec{$section->getSectionID()}' />
-                <img src='img/close.png' class='action-delete'></td>
+                <img src='img/close.png' class='action-delete'/></td>
            </tr>
 
 
             <tr class='hide' id='edit_sec{$section->getSectionID()}'>
-            <td colspan='3'>
-              <p><strong> Editing: </strong>CS 1030 <em>Foundations of Computer Science</em></p>
-              <label for='sectionProfessor'>Professor</label>
-              <select class='form-control' id='sectionProfessor' >
-                <option value=''''>Please Select...</option>
-                <option value='1'>Spencer Hilton</option>
-                <option value='2'>Garth Tuck</option>
-                <option value='3'>Joshua Jensen</option>
-                <option value='4'>Brian Rague</option>
-              </select>
+            <td style='padding-bottom: 4%' colspan='3'>
+
+            <label for='inlineEdit_secCourse{$section->getSectionID()}' >Course</label>
+                        <select class='form-control' id='inlineEdit_secCourse{$section->getSectionID()}' style='margin-bottom: 10px'>";
+
+                            $selectCourse = $database->getdbh()->prepare(
+                                'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
+                                  ORDER BY course_prefix, course_number');
+                            $selectCourse->execute();
+                            $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result as $course){
+                                if ($course['course_id'] == $section->getCourseID()){
+                                    $row .= '<option selected value='.$course['course_id']
+                                        .'>';
+                                }else{
+                                    $row .= '<option value='.$course['course_id']
+                                        .'>';
+                                }
+                                $row .= $course['course_prefix']
+                                    .' '.$course['course_number']
+                                    .' '.$course['course_title']
+                                    .'</option>';
+                            }
+                        $row .= "</select>
+
+            <label for='inlineEdit_secProf{$section->getSectionID()}'>Professor</label>
+                        <select  class='form-control' id='inlineEdit_secProf{$section->getSectionID()}' style='margin-bottom: 10px'>";
+
+                            $selectProf = $database->getdbh()->prepare(
+                                'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
+                                  ORDER BY prof_last ASC');
+                            $selectProf->execute();
+                            $result = $selectProf->fetchAll();
+
+                            foreach($result as $prof){
+                                if ($prof['prof_id'] == $section->getProfID()){
+                                    $row .='<option selected value='.$prof['prof_id']
+                                        .'>';
+                                }else{
+                                    $row .='<option value='.$prof['prof_id']
+                                        .'>';
+                                }
+                                $row .=$prof['prof_last'].', '.$prof['prof_first']
+                                    .'</option>';
+                            }
+
+                        $row .= "</select>
+
+                <label for='inlineEdit_secRoom{$section->getSectionID()}'>Classroom</label>
+                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_secRoom{$section->getSectionID()}'>
+                            <option value='0'>Online</option>";
+
+                            $selectRoom = $database->getdbh()->prepare(
+                                "SELECT classroom_id, campus_name, building_name, classroom_number
+                                  FROM ZAAMG.Campus c JOIN ZAAMG.Building b
+                                  ON c.campus_id = b.campus_id
+                                  JOIN ZAAMG.Classroom r
+                                  ON b.building_id = r.building_id
+                                  ORDER BY campus_name ASC");
+                            $selectRoom->execute();
+                            $result = $selectRoom->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result as $room){
+                                if ($room['classroom_id'] == $section->getClassroomID()){
+                                    $row .= '<option selected value='.$room['classroom_id'].'>';
+                                }else{
+                                    $row .= '<option value='.$room['classroom_id'].'>';
+                                }
+                                $row .= $room['campus_name'].', '
+                                    .$room['building_name'].': '
+                                    .$room['classroom_number']
+                                    .'</option>';
+                            }
+        $row .= "
+                        </select>
             </td>
-            <td>
-              <label class='checkbox-inline'><input type='checkbox' value='m'>M</label>
-              <label class='checkbox-inline'><input type='checkbox' value='t'>T</label>
-              <label class='checkbox-inline'><input type='checkbox' value='w'>W</label>
-              <label class='checkbox-inline'><input type='checkbox' value='r'>R</label>
-              <label class='checkbox-inline'><input type='checkbox' value='f'>F</label>
-              <label class='checkbox-inline'><input type='checkbox' value='s'>S</label>
-              <br>
-              <br>
-              <label for='startTime'>Start Time<input type='time' id='startTime'  class='form-control'></label>
-              <label for='endTime'>End Time<input type='time' id='endTime'  class='form-control'></label>
-              <br />
-              <label for='block'>Block:</label>
-              <br>
-              <label class='radio-inline'><input type='radio' name='full'>Full</label>
-              <label class='radio-inline'><input type='radio' name='first'>First</label>
-              <label class='radio-inline'><input type='radio' name='second'>Second</label>
+            <td  >
+
+                <label for='inlineEdit_secDays{$section->getSectionID()}'>Days</label>
+                        <select multiple  class='form-control' style='margin-bottom: 10px'
+                             id='inlineEdit_secDays{$section->getSectionID()}'>
+                            <option value='online'>Online</option>
+                            <option value='Monday'>Monday</option>
+                            <option value='Tuesday'>Tuesday</option>
+                            <option value='Wednesday'>Wednesday</option>
+                            <option value='Thursday'>Thursday</option>
+                            <option value='Friday'>Friday</option>
+                            <option value='Saturday'>Saturday</option>
+                        </select>
+
+               <label  for='startTime'>Start Time</label>
+               <input type='time' id='startTime'
+                            style='margin-bottom: 10px' class='form-control'>
+              <label for='endTime'>End Time</label><input type='time' id='endTime'  class='form-control'>
+        </td>
+        <td  style='padding-bottom: 5%'>
+                <label for='inlineEdit_secSem{$section->getSectionID()}'>Semester</label>
+                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_secSem{$section->getSectionID()}'>";
+
+                            $selectSem = $database->getdbh()->prepare(
+                                'SELECT sem_id, sem_season, sem_year, sem_start_date
+                                  FROM ZAAMG.Semester
+                                  ORDER BY sem_start_date DESC');
+                            $selectSem->execute();
+                            $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result as $sem){
+                                if ($sem['sem_id'] == $section->getSemester()){
+                                    $row .= '<option selected value='.$sem['sem_id'].'>';
+                                }else{
+                                    $row .= '<option value='.$sem['sem_id'].'>';
+                                }
+                                $row .=$sem['sem_year'].' '
+                                .$sem['sem_season']
+                                .'</option>';
+                            }
+                            $row .= "
+                        </select>
+
+                        <label for='inlineEdit_secBlock{$section->getSectionID()}'>Block</label>
+                        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_secBlock{$section->getSectionID()}'>
+                            <option value='0'>Full</option>
+                            <option value='1'>First</option>
+                            <option value='2'>Second</option>
+                        </select>
+
+                        <div >
+                        <div style='float:left'>
+                        <label for='inlineEdit_secCap{$section->getSectionID()}'>Capacity</label>
+                        <input style='width: 50%' type='number' class='form-control'
+                                id='inlineEdit_secCap{$section->getSectionID()}' min='1' value='{$section->getCapacity()}' >
+                        </div>
+                        <div style=' float:right; padding-top: 5%'>
+                        <label class='checkbox-inline' for='inlineEdit_secOnl{$section->getSectionID()}' style='font-weight: bold; '>
+
+                        <input type='checkbox' id='inlineEdit_secOnl{$section->getSectionID()}'
+                            value='1' style='transform: scale(1.5); '>
+                            &nbsp;&nbsp;&nbsp;Online</label>
+                        </div>
+                        </div>
+
             </td>
-            <td colspan='2'>
-              <div class='col-xs-12'>
-                <label class='radio-inline'><input type='radio' name='ogden'>Ogden</label>
-                <label class='radio-inline'><input type='radio' name='davis'>Davis</label>
-                <label class='radio-inline'><input type='radio' name='slcc'>SLCC</label>
-                <label class='radio-inline'><input type='radio' name='online'>Online</label>
-                <br />
-                <label for='sectionBuilding'>Building</label>
-                <select class='form-control' id='sectionBuilding' >
-                  <option value=''''>Please Select...</option>
-                  <option value='1'>Blah</option>
-                  <option value='2'>Bleh</option>
-                  <option value='3'>Yo!</option>
-                  <option value='4'>No</option>
-                </select>
-                <label for='sectionClassroom'>Classroom</label>
-                <select class='form-control' id='sectionClassroom' >
-                  <option value=''''>Please Select...</option>
-                  <option value='1'>Blah</option>
-                  <option value='2'>Bleh</option>
-                  <option value='3'>Yo!</option>
-                  <option value='4'>No</option>
-                </select>
-              </div>
-            </td>
+            <td></td>
             <td><img src='img/save.png' width='30px' class='action-save hide' id='save_sec{$section->getSectionID()}'/></td>
 </tr>
 <tr class='hide' id='hiddenRow_sec{$section->getSectionID()}'></tr>

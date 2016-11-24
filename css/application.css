@@ -82,3 +82,25 @@ div#profOverviewSchedule, div#sectionIndex table, div#profIndex table, div#roomI
   background-color: #f8f8f8
 }
 
+.inline_editing_record td{
+  background-color: #d0e5bd;
+  border-right-color: #d0e5bd;
+  border-left-color: #d0e5bd;
+  border-top: 2px solid black;
+}
+
+.inline_editing_edit_box td{
+  background-color: #edfce0;
+  border-right-color: #edfce0;
+  border-left-color: #edfce0;
+  border-bottom: 2px solid black;
+}
+
+.inline_editing_record td:first-child, .inline_editing_edit_box td:first-child{
+  border-left: 2px solid black;
+}
+
+.inline_editing_record td:last-child, .inline_editing_edit_box td:last-child{
+  border-right: 2px solid black;
+}
+

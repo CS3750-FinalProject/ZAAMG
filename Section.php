@@ -251,6 +251,14 @@ class Section
         return $theBlock;
     }
 
+
+    public function getSemester()
+    {
+        return $this->semester;
+    }
+
+
+
     public function getDays(): string
     {
         //there is also a getDayString() method
