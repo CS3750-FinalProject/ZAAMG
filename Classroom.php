@@ -48,7 +48,7 @@ class Classroom {
 
     public function insertNewClassroom(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Classroom VALUES (:id, :num, :cap, :stations, :buildId)");
+        $stmtInsert = $dbh->prepare("INSERT INTO W01143557.Classroom VALUES (:id, :num, :cap, :stations, :buildId)");
         # send NULL for classroom_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":num", $this->classroomNum);
@@ -68,7 +68,7 @@ class Classroom {
     public function classroomExists($classNum, $buildId){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT classroom_id FROM ZAAMG.Classroom
+            "SELECT classroom_id FROM W01143557.Classroom
               WHERE classroom_number = {$dbh->quote($classNum)} AND building_id = {$dbh->quote($buildId)}");
         try {
             $stmtSelect->execute();
@@ -98,7 +98,7 @@ class Classroom {
     public function getClassroomProperty($sql_property, $table, $id, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT {$sql_property} FROM ZAAMG.{$table}
+            "SELECT {$sql_property} FROM W01143557.{$table}
               WHERE {$id} = ".$dbh->quote($this->{$object_property}));
         try{
             $stmtSelect->execute();
@@ -133,10 +133,10 @@ class Classroom {
     public function getClassroomProperty_Join_3($sql_property, $table1, $table2, $id1, $id2, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT {$sql_property} FROM ZAAMG.Classroom S
-              JOIN ZAAMG.{$table1} A
+            "SELECT {$sql_property} FROM W01143557.Classroom S
+              JOIN W01143557.{$table1} A
               ON S.{$id1} = A.{$id1}
-              JOIN ZAAMG.{$table2} B
+              JOIN W01143557.{$table2} B
               ON A.{$id2} = B.{$id2}
               WHERE S.{$id1} = ".$dbh->quote($this->{$object_property}));
         try{

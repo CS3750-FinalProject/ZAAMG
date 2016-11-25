@@ -6,14 +6,15 @@ require_once 'Semester.php';
 class Database
 {
     private $host = "localhost";
-    private $dbname  = "zaamg";
-    private $username = "zaamg";
+    private $dbname  = "W01143557";
+    private $username = "W01143557";
+    private $password = "Ashtoncs!";
     private $dbh; //let's not expose the database
 
     public function __construct() {
 
         try {
-            $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username);
+            $this->dbh = new PDO("mysql:host=$this->host;dbname:$this->dbname", $this->username, $this->password);
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             #echo "<br>Success creating Database Object<br>";
         } catch (PDOException $e) {
@@ -30,7 +31,7 @@ class Database
     public function getAllSections($orderBy){
         $allSections = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section");
+        $stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section");
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();
@@ -59,9 +60,9 @@ class Database
     public function getAllProfessors($orderBy){
         $allProfessors = [];
         $dbh = $this->getdbh();
-        //$prepString = 'SELECT * FROM ZAAMG.Professor'.
+        //$prepString = 'SELECT * FROM W01143557.Professor'.
           //  $orderBy != null ? ' ORDER BY '.$orderBy : '';
-        $stmtSelect = $dbh->prepare('SELECT * FROM ZAAMG.Professor ORDER BY '.$orderBy);
+        $stmtSelect = $dbh->prepare('SELECT * FROM W01143557.Professor ORDER BY '.$orderBy);
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();
@@ -82,7 +83,7 @@ class Database
     public function getClassroomsInBuilding($buildingId){
         $allClassrooms = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare('SELECT * FROM ZAAMG.Classroom c
+        $stmtSelect = $dbh->prepare('SELECT * FROM W01143557.Classroom c
                                       WHERE c.building_id = '.$dbh->quote($buildingId));
         try{
             $stmtSelect->execute();
@@ -108,9 +109,9 @@ class Database
         $dbh = $this->getdbh();
         $stmtSelect = $dbh->prepare("SELECT classroom_id, classroom_number, classroom_capacity, classroom_workstations,
                                       room.building_id, building_name, campus_name
-                                      FROM ZAAMG.Classroom room
-                                      JOIN ZAAMG.Building bld ON room.building_id = bld.building_id
-                                      JOIN ZAAMG.Campus camp ON bld.campus_id = camp.campus_id
+                                      FROM W01143557.Classroom room
+                                      JOIN W01143557.Building bld ON room.building_id = bld.building_id
+                                      JOIN W01143557.Campus camp ON bld.campus_id = camp.campus_id
                                       ORDER BY camp.campus_name, bld.building_name, room.classroom_number");
         try{
             $stmtSelect->execute();
@@ -132,7 +133,7 @@ class Database
     public function getProfSections($prof, $orderBy){
         $profSections = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section
+        $stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section
                                       WHERE prof_id = {$prof->getProfId()}");
         try{
             $stmtSelect->execute();
@@ -163,7 +164,7 @@ class Database
     public function getClassroomSections($classroom){
         $classroomSections = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section
+        $stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section
                                       WHERE classroom_id = {$classroom->getClassroomID()}");
         try{
             $stmtSelect->execute();
@@ -195,7 +196,7 @@ class Database
     public function getCourse($section){
         $theCourse = null;
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Course
+        $stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Course
                                       WHERE course_id = {$section->getCourseID()}");
         try{
             $stmtSelect->execute();
@@ -220,8 +221,8 @@ class Database
     public function getClassroomsWithAll($orderBy = null){
         $allClassrooms = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Classroom` JOIN `ZAAMG`.`Building` ON `building_id`
-            JOIN `ZAAMG`.`Campus` ON `campus_id`");
+        $stmtSelect = $dbh->prepare("SELECT * FROM `W01143557`.`Classroom` JOIN `W01143557`.`Building` ON `building_id`
+            JOIN `W01143557`.`Campus` ON `campus_id`");
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();
@@ -242,7 +243,7 @@ class Database
     public function getSemester($id){
         $theSemester = null;
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Semester`
+        $stmtSelect = $dbh->prepare("SELECT * FROM `W01143557`.`Semester`
                                       WHERE `sem_id` = {$dbh->quote($id)}");
         try{
             $stmtSelect->execute();
@@ -266,7 +267,7 @@ class Database
     public function getCampus($id){
         $theCampus = null;
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Campus`
+        $stmtSelect = $dbh->prepare("SELECT * FROM `W01143557`.`Campus`
                                       WHERE `campus_id` = {$dbh->quote($id)}");
         try{
             $stmtSelect->execute();

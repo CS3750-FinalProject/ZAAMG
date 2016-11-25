@@ -21,9 +21,9 @@ echo '
                             <option value="-1">None</option>';
 
                             $selectBuilding = $database->getdbh()->prepare(
-                                'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
-                                  FROM ZAAMG.Campus JOIN ZAAMG.Building
-                                  ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
+                                'SELECT W01143557.Campus.campus_id, campus_name, building_name, building_id
+                                  FROM W01143557.Campus JOIN W01143557.Building
+                                  ON W01143557.Campus.campus_id = W01143557.Building.campus_id
                                   ORDER BY campus_name ASC');
                             $selectBuilding->execute();
                             $result = $selectBuilding->fetchAll();

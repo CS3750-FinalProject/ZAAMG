@@ -8,38 +8,33 @@ $body = "
                 <h4 class='modal-title' id='semester-label'>Edit Semester</h4>
             </div>
             <div class='modal-body' style='margin-bottom: 360px; '>
-
             <div class='col-xs-8'>
             <label for='pick_editSemester'>Semester</label>
                         <select size='3' class='form-control'  id='pick_editSemester'>";
-
-            $selectSem = $database->getdbh()->prepare(
-                                "SELECT sem_id, sem_season, sem_year, sem_start_date
-                                  FROM ZAAMG.Semester
+$selectSem = $database->getdbh()->prepare(
+    "SELECT sem_id, sem_season, sem_year, sem_start_date
+                                  FROM W01143557.Semester
                                   ORDER BY sem_start_date DESC");
-                            $selectSem->execute();
-                            $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
-
-                            foreach($result as $sem){
-                                $body .= "<option value=".$sem['sem_id'].">";
-                                $body .=$sem['sem_year']." "
-                                .$sem['sem_season']
-                                ."</option>";
-                            }
-  $body .= "
+$selectSem->execute();
+$result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
+foreach($result as $sem){
+    $body .= "<option value=".$sem['sem_id'].">";
+    $body .=$sem['sem_year']." "
+        .$sem['sem_season']
+        ."</option>";
+}
+$body .= "
                         </select>
                         </div>
             <!--<div class='col-xs-5' ></div>-->
             <div class='col-xs-4' style='padding-top: 5%'>
-            <button type='button' class='btn btn-primary btn-modalEdit' id='btn_editSemester' style='margin-right: 12px'>Edit</button>
+            <!--<button type='button' class='btn btn-primary btn-modalEdit' id='btn_editSemester'
+                    style='margin-right: 12px'>Edit</button>-->
             <button type='button' class='btn btn-default' id='btn_deleteSemester'>Delete</button>
             </div>
-
             <div class='col-xs-12'> <hr style='border-width: 2px'></div>
-
-
             <!--style='max-height: 190px; overflow-y:auto'-->
-            <div class='hide col-xs-12' id='editModalDiv_Semester'  >
+            <div class=' col-xs-12' id='editModalDiv_Semester'  >
             <div class='form-group' >
                     <div class='col-xs-3'>
                         <label for='editModal_semesterYear'>Year</label>
@@ -54,7 +49,6 @@ $body = "
                         </select>
                     </div>
             </div>
-
              <div class='form-group' >
                     <div class='col-xs-5'>
                         <label for='editModal_semesterStartDate'>Start Date</label>
@@ -81,9 +75,6 @@ $body = "
                     </div>
                 </div>
             </div>
-
-
-
             </div>
             <div class='modal-footer'>
                 <span class='error-message'></span>
@@ -93,5 +84,4 @@ $body = "
         </div>
     </div>
 </div>";
-
 echo $body;

@@ -39,7 +39,7 @@ class Building {
 
     public function insertNewBuilding(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Building VALUES (:id, :code, :buildName, :campusID)");
+        $stmtInsert = $dbh->prepare("INSERT INTO W01143557.Building VALUES (:id, :code, :buildName, :campusID)");
         # send NULL for building_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
         $stmtInsert->bindValue(":code", $this->buildCode);
@@ -59,7 +59,7 @@ class Building {
     public function buildingExists($buildName, $buildCode, $campusId){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT building_id FROM ZAAMG.Building
+            "SELECT building_id FROM W01143557.Building
               WHERE campus_id = $campusId
               AND (building_code = ".$dbh->quote($buildCode)." OR building_name = ".$dbh->quote($buildName).")");
 

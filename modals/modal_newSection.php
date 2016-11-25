@@ -19,7 +19,7 @@ $body = "
                             <option value='0'>Please Select...</option>";
 
                             $selectCourse = $database->getdbh()->prepare(
-                                'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
+                                'SELECT course_id, course_prefix, course_number, course_title FROM W01143557.Course
                                   ORDER BY course_prefix, course_number');
                             $selectCourse->execute();
                             $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ $body = "
                             <option value='0'>Please Select...</option>";
 
                             $selectProf = $database->getdbh()->prepare(
-                                'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
+                                'SELECT prof_id, prof_first, prof_last FROM W01143557.Professor
                                   ORDER BY prof_last ASC');
                             $selectProf->execute();
                             $result = $selectProf->fetchAll();
@@ -61,9 +61,9 @@ $body = "
                             <option value='0'>Online</option>";
                             $selectRoom = $database->getdbh()->prepare(
                                 "SELECT classroom_id, campus_name, building_name, classroom_number
-                                  FROM ZAAMG.Campus c JOIN ZAAMG.Building b
+                                  FROM W01143557.Campus c JOIN W01143557.Building b
                                   ON c.campus_id = b.campus_id
-                                  JOIN ZAAMG.Classroom r
+                                  JOIN W01143557.Classroom r
                                   ON b.building_id = r.building_id
                                   ORDER BY campus_name ASC");
                             $selectRoom->execute();
@@ -117,7 +117,7 @@ $body = "
 
                             $selectSem = $database->getdbh()->prepare(
                                 'SELECT sem_id, sem_season, sem_year, sem_start_date
-                                  FROM ZAAMG.Semester
+                                  FROM W01143557.Semester
                                   ORDER BY sem_start_date DESC');
                             $selectSem->execute();
                             $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);

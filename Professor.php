@@ -69,7 +69,7 @@ class Professor{
     public function insertNewProfessor(){
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(
-            "INSERT INTO ZAAMG.Professor VALUES (
+            "INSERT INTO W01143557.Professor VALUES (
               :id, :first, :last, :email, :reqhours,  :release, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
@@ -92,7 +92,7 @@ class Professor{
         $profEmail_lower = strtolower($profEmail);
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT prof_id FROM ZAAMG.Professor
+            "SELECT prof_id FROM W01143557.Professor
               WHERE prof_email = '$profEmail_lower'");
         try {
             $stmtSelect->execute();
@@ -122,7 +122,7 @@ class Professor{
     public function getProfessorProperty($sql_property, $table, $id, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT {$sql_property} FROM ZAAMG.{$table}
+            "SELECT {$sql_property} FROM W01143557.{$table}
               WHERE {$id} = ".$dbh->quote($this->{$object_property}));
         try{
             $stmtSelect->execute();

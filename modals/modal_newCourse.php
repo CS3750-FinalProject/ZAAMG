@@ -38,7 +38,7 @@ echo '
 
                             $database = new Database();
                             $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name, dept_code FROM ZAAMG.Department
+                                'SELECT dept_id, dept_name, dept_code FROM W01143557.Department
                             ORDER BY dept_code ASC');
                             $selectDepts->execute();
                             $result = $selectDepts->fetchAll();

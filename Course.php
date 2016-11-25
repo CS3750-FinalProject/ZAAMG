@@ -61,7 +61,7 @@ class Course {
     public function insertNewCourse(){
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(
-            "INSERT INTO ZAAMG.Course VALUES (
+            "INSERT INTO W01143557.Course VALUES (
               :id, :prefix, :num, :title,  :cred, :deptId)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
@@ -85,7 +85,7 @@ class Course {
     public function courseExists($coursePrefix, $courseNumber, $deptId){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT course_id FROM ZAAMG.Course
+            "SELECT course_id FROM W01143557.Course
                 WHERE course_prefix = ".$dbh->quote($coursePrefix)."
                 AND course_number = ".$dbh->quote($courseNumber));
         try {

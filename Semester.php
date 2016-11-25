@@ -73,7 +73,7 @@ class Semester {
     public function insertNewSemester(){
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(
-            "INSERT INTO ZAAMG.Semester VALUES (
+            "INSERT INTO W01143557.Semester VALUES (
               :id, :year, :season, :weeks, :start, :first_block, :second_block)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
@@ -95,7 +95,7 @@ class Semester {
     public function semesterExists($semYear, $semSeason){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT sem_id FROM ZAAMG.Semester
+            "SELECT sem_id FROM W01143557.Semester
               WHERE sem_year = {$dbh->quote($semYear)} AND sem_season = {$dbh->quote($semSeason)}");
         try {
             $stmtSelect->execute();

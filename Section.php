@@ -73,7 +73,7 @@ class Section
     public function sectionExists($courseID, $profID, $roomID, $semID, $days, $startTime){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT section_id FROM ZAAMG.Section
+            "SELECT section_id FROM W01143557.Section
               WHERE course_id = ".$dbh->quote($courseID)."
               AND prof_id = ".$dbh->quote($profID)."
               AND classroom_id = ".$dbh->quote($roomID)."
@@ -109,7 +109,7 @@ class Section
     public function getSectionProperty($sql_property, $table, $id, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT {$sql_property} FROM ZAAMG.{$table}
+            "SELECT {$sql_property} FROM W01143557.{$table}
               WHERE {$id} = ".$dbh->quote($this->{$object_property}));
         try{
             $stmtSelect->execute();
@@ -139,10 +139,10 @@ class Section
     public function getSectionProperty_Join_3($sql_property, $table1, $table2, $id1, $id2, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT {$sql_property} FROM ZAAMG.Section S
-              JOIN ZAAMG.{$table1} A
+            "SELECT {$sql_property} FROM W01143557.Section S
+              JOIN W01143557.{$table1} A
               ON S.{$id1} = A.{$id1}
-              JOIN ZAAMG.{$table2} B
+              JOIN W01143557.{$table2} B
               ON A.{$id2} = B.{$id2}
               WHERE S.{$id1} = ".$dbh->quote($this->{$object_property}));
         try{
@@ -176,12 +176,12 @@ class Section
     public function getSectionProperty_Join_4($sql_property, $table1, $table2, $table3, $id1, $id2, $id3, $object_property){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT {$sql_property} FROM ZAAMG.Section S
-              JOIN ZAAMG.{$table1} A
+            "SELECT {$sql_property} FROM W01143557.Section S
+              JOIN W01143557.{$table1} A
               ON S.{$id1} = A.{$id1}
-              JOIN ZAAMG.{$table2} B
+              JOIN W01143557.{$table2} B
               ON A.{$id2} = B.{$id2}
-              JOIN ZAAMG.{$table3} C
+              JOIN W01143557.{$table3} C
               ON B.{$id3} = C.{$id3}
               WHERE S.{$id1} = ".$dbh->quote($this->{$object_property}));
         try{
@@ -337,7 +337,7 @@ class Section
 /*public function getSectionCourseName(){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT course_title FROM ZAAMG.Course
+            "SELECT course_title FROM W01143557.Course
               WHERE course_id = ".$dbh->quote($this->courseID));
         try{
             $stmtSelect->execute();
@@ -351,10 +351,10 @@ class Section
 /*public function getBuildingCode(){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT building_code FROM ZAAMG.Section s
-              JOIN ZAAMG.Classroom c
+            "SELECT building_code FROM W01143557.Section s
+              JOIN W01143557.Classroom c
               ON s.classroom_id = c.classroom_id
-              JOIN ZAAMG.Building b
+              JOIN W01143557.Building b
               ON c.building_id = b.building_id
               WHERE s.classroom_id = ".$dbh->quote($this->classroomID));
         try{

@@ -22,7 +22,7 @@ echo '<div class="modal fade" id="newBuildingModal" tabindex="-1" role="dialog" 
                             <option value="">Please Select...</option>';
 
                             $selectCampi = $database->getdbh()->prepare(
-                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
+                                'SELECT campus_id, campus_name FROM W01143557.Campus
                                   ORDER BY campus_name ASC');
                             $selectCampi->execute();
                             $result = $selectCampi->fetchAll();

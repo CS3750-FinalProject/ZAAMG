@@ -25,7 +25,7 @@ class Campus {
 
     public function insertNewCampus(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Campus VALUES (:id, :name)");
+        $stmtInsert = $dbh->prepare("INSERT INTO W01143557.Campus VALUES (:id, :name)");
         # send NULL for campus_id because the database auto-increments it
         $stmtInsert->bindValue(":id", NULL);
         $stmtInsert->bindValue(":name", $this->campusName);
@@ -36,7 +36,7 @@ class Campus {
     public function campusExists($campusName){
         $dbh = $this->database->getdbh();
         $stmtSelect = $dbh->prepare(
-            "SELECT campus_id FROM ZAAMG.Campus
+            "SELECT campus_id FROM W01143557.Campus
               WHERE campus_name = ".$dbh->quote($campusName));
         try {
             $stmtSelect->execute();
