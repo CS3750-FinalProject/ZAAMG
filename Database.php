@@ -263,6 +263,25 @@ class Database
     }
 
 
+    public function getCampus($id){
+        $theCampus = null;
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Campus`
+                                      WHERE `campus_id` = {$dbh->quote($id)}");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll()[0];
+            $theCampus = new Campus(
+                $result['campus_id'],
+                $result['campus_name']);
+
+            return $theCampus;
+        }catch(Exception $e){
+            return "getCampus: ".$e->getMessage();
+        }
+    }
+
+
 
     public function getdbh(){
         return $this->dbh;

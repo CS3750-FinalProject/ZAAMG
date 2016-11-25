@@ -88,7 +88,7 @@ $body = "
             <div class='modal-footer'>
                 <span class='error-message'></span>
                 <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                <button type='button' class='btn btn-primary' id='btn_editSemester'>Update</button>
+                <button type='button' class='btn btn-primary' id='btn_updateSemester'>Update</button>
             </div>
         </div>
     </div>

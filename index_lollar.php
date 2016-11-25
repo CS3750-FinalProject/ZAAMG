@@ -10,6 +10,7 @@ require_once 'modals/modal_newSemester.php';
 require_once 'modals/modal_editSemester.php';
 require_once 'modals/modal_newBuilding.php';
 require_once 'modals/modal_newCampus.php';
+require_once 'modals/modal_editCampus.php';
 require_once 'modals/modal_newDepartment.php';
 $database = new Database();
 $body = "
@@ -89,12 +90,12 @@ $body = "
                 <li><a href='#' data-toggle='modal' data-target='#newClassroomModal'
                        class='newResourceLink' id='newClassroomLink'>Classroom</a></li>
                 <li role='separator' class='divider'></li>
-                <li><a href='#' data-toggle='modal' data-target='#newSemesterModal'
-                       class='newResourceLink' id='newSemesterLink'>Semester</a></li>
-                <li><a href='#' data-toggle='modal' data-target='#newBuildingModal'
-                       class='newResourceLink' id='newBuildingLink'>Building</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newCampusModal'
                        class='newResourceLink' id='newCampusLink'>Campus</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#newBuildingModal'
+                       class='newResourceLink' id='newBuildingLink'>Building</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#newSemesterModal'
+                       class='newResourceLink' id='newSemesterLink'>Semester</a></li>
                 <li role='separator' class='divider'></li>
                 <li><a href='#' data-toggle='modal' data-target='#newDepartmentModal'
                        class='newResourceLink' id='newDepartmentLink'>Department</a></li>
@@ -106,12 +107,12 @@ $body = "
                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'
                     aria-haspopup='true' aria-expanded='true' id='edit'>Edit <span class='caret'></span></a>
               <ul class='dropdown-menu'>
-                <li><a href='#' data-toggle='modal' data-target='#editSemesterModal'
-                       class='editResourceLink' id='editSemesterLink'>Semester</a></li>
-                <li><a href='#' data-toggle='modal' data-target='#editBuildingModal'
-                       class='editResourceLink' id='editBuildingLink'>Building</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#editCampusModal'
                        class='editResourceLink' id='editCampusLink'>Campus</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#editBuildingModal'
+                       class='editResourceLink' id='editBuildingLink'>Building</a></li>
+                <li><a href='#' data-toggle='modal' data-target='#editSemesterModal'
+                       class='editResourceLink' id='editSemesterLink'>Semester</a></li>
                 <li role='separator' class='divider'></li>
                 <li><a href='#' data-toggle='modal' data-target='#editDepartmentModal'
                        class='editResourceLink' id='editDepartmentLink'>Department</a></li>
