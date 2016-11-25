@@ -280,7 +280,7 @@ function createEventsSet_test(theSet){
     var singleRow = 5;   //row "height" is 5 minutes
     var doubleRow = 10;  //two rows is 10 minutes
     var events = [];
-    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
+    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:2, minutes:0}); //11/7/16, 2 AM
     var prevDividerStart = rowZeroColumnZero;
 
     theSet.forEach(function(prof, i){
@@ -323,8 +323,24 @@ function createEventsSet_test(theSet){
                 dow: [0],
                 className: 'days',
                 order_by: 'B'
+            },
+            {
+                title: " ",
+                start: theStart.clone().add(20, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(20,'m').toString().slice(16,24),
+                dow: [0],
+                className: 'event_placeholder',
+                order_by: 'A'
+            },
+            {
+                title: 'MWF',
+                start: theStart.clone().add(20, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(20,'m').toString().slice(16,24),
+                dow: [0],
+                className: 'days',
+                order_by: 'B'
             }
-        );
+            );
         var theCourseTitle;
         var theCourseStart;
         prof.timedCourses.forEach(function(course, j){
@@ -381,8 +397,8 @@ function createEventsSet_test(theSet){
             events.push(
                 {
                     title: course.courseTitle + '   -- Online --',
-                    start: theStart.clone().add((doubleRow * 2)+(singleRow * k),'m').toString().slice(16,24),
-                    end: theStart.clone().add((doubleRow * 2)+(singleRow * k)+ 4.8,'m').toString().slice(16,24),
+                    start: theStart.clone().add((doubleRow * 3)+(singleRow * k),'m').toString().slice(16,24),
+                    end: theStart.clone().add((doubleRow * 3)+(singleRow * k)+ 4.8,'m').toString().slice(16,24),
                     color: '#583372',
                     //className: 'online',
                     dow: [0]
@@ -438,7 +454,7 @@ function createEventsSet_test(theSet){
 
         });
         prevDividerStart = theStart.clone()
-            .add((10 * 2) + (5 * prof.onlineCourses.length)  /*(10 * prof.nonStandardCourses.length)*/, 'm');
+            .add((doubleRow * 3) + (singleRow * prof.onlineCourses.length)  /*(10 * prof.nonStandardCourses.length)*/, 'm');
 
         for (i=0; i < 7; i++) {
             events.push(
@@ -520,7 +536,8 @@ function displayTest(theProfSet) {
         firstDay: '0', //Monday
         slotLabelFormat: ' ', //the space makes the slots blank.  First time is 6 AM.
         slotDuration: '00:5:00',
-        minTime: '06:00:00',
+        minTime: '02:00:00',
+        scrollTime: '02:00:00',
         eventOrder: 'order_by',
         eventAfterRender: function (event, element, view) {
             if ($(element).hasClass("profName")) {

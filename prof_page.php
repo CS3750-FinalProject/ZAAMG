@@ -16,7 +16,7 @@ $body .= "
 
 
     <div class='container' >
-      <div class='col-xs-12' id='profIndex'>
+      <div class='col-xs-12' id='profIndex'  style='max-height: 300px; overflow-y:auto'>
         <table class='list-data'>
           <tr>
             <th>Last Name</th>
@@ -42,14 +42,15 @@ $body .= "</table>";
 
 
 
-
+$body .= "</div>";  //   end of <div class='col-xs-12' id='profIndex'>
 $body .= "<div  id='profOverviewSchedule'
                 style='
                 background-color: #fff;
                 padding-top: 15px;
                 border-top: 1px solid #492365'></div>";  // this div holds the schedule showing all professors
 
-$body .= "</div>";  //   end of <div class='col-xs-12' id='profIndex'>
+
+
 $body .= "</div>";  //   end of  <div class='container' >
 
 
