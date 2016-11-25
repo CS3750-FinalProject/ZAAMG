@@ -16,6 +16,11 @@ var ModalEditing = function() {
                 loadCampusFields();
             }
 
+            //if this Edit button has editBuildingModal as an ancestor:
+            if($(this).parents('div#editBuildingModal').length){
+                loadBuildingFields();
+            }
+
         });
 
 
@@ -34,6 +39,11 @@ var ModalEditing = function() {
 
         });
     });
+
+
+    $("[id^='pick_edit']").change(function(){
+        console.log($(this));
+    })
 
     var loadSemesterFields = function(){
         var pickedSemId = $('#pick_editSemester :selected').val();
@@ -69,6 +79,26 @@ var ModalEditing = function() {
             success: function(data)
             {
                 $('#editModal_campusName').val(data.name);
+            },
+            error: function(data){
+                console.log(data.responseText);
+            }
+        });
+    }
+
+    var loadBuildingFields = function(){
+        var pickedBuildingId = $('#pick_editBuilding :selected').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'loadBuilding_toEdit.php',
+            data: 'buildingId=' + pickedBuildingId,
+            dataType: 'json',
+            success: function(data)
+            {
+                $('#editModal_buildingCode').val(data.code);
+                $('#editModal_buildingName').val(data.name);
+                $('#editModal_buildingCampus option[value=' + data.campus+']').attr('selected', 'selected');
             },
             error: function(data){
                 console.log(data.responseText);

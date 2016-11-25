@@ -9,6 +9,7 @@ require_once 'modals/modal_newClassroom.php';
 require_once 'modals/modal_newSemester.php';
 require_once 'modals/modal_editSemester.php';
 require_once 'modals/modal_newBuilding.php';
+require_once 'modals/modal_editBuilding.php';
 require_once 'modals/modal_newCampus.php';
 require_once 'modals/modal_editCampus.php';
 require_once 'modals/modal_newDepartment.php';

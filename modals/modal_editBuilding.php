@@ -12,11 +12,11 @@ $body = "
             </div>
 
 
-        <div class='modal-body' style='margin-bottom: 200px;'>
+        <div class='modal-body' style='margin-bottom: 300px;'>
 
             <div class='col-xs-8'>
-                <label for='pick_editBuilding'>Campus</label>
-                    <select size='3' class='form-control'  id='pick_editBuilding'>";
+                <label for='pick_editBuilding'>Building</label>
+                    <select size='5' class='form-control'  id='pick_editBuilding'>";
 
                     $selectBuilding = $database->getdbh()->prepare(
                         'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
@@ -27,7 +27,7 @@ $body = "
                     $result = $selectBuilding->fetchAll();
 
                     foreach($result as $building){
-                        echo "<option value=".$building['building_id'].">"
+                        $body.= "<option value=".$building['building_id'].">"
                             .$building['campus_name'].": ".$building['building_name']."</option>";
                     }
 $body.= "
@@ -44,6 +44,34 @@ $body.= "
 
             <!--style='max-height: 190px; overflow-y:auto'-->
             <div class='hide col-xs-12' id='editModalDiv_Building'>
+
+                <div class='col-xs-3'>
+                    <label for='editModal_buildingCode'>Building Code</label>
+                    <input autofocus type='text' class='form-control' id='editModal_buildingCode'  >
+                </div>
+
+                <div class='col-xs-6'>
+                        <label for='editModal_buildingCampus'>Campus</label>
+                        <select type='text' class='form-control' id='editModal_buildingCampus' >";
+
+                            $selectCampi = $database->getdbh()->prepare(
+                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
+                                  ORDER BY campus_name ASC');
+                            $selectCampi->execute();
+                            $result = $selectCampi->fetchAll();
+
+                            foreach($result as $campus){
+                                $body.= "<option value = ".$campus['campus_id'].">"
+                                .$campus['campus_name']."</option>";
+                            }
+$body.="
+                        </select>
+                </div>
+
+                <div class='col-xs-9'>
+                    <label for='editModal_buildingName'>Building Name</label>
+                    <input type='text' class='form-control' id='editModal_buildingName'  >
+                </div>
 
 
             </div>

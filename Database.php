@@ -281,7 +281,25 @@ class Database
         }
     }
 
+    public function getBuilding($id){
+        $theBuilding = null;
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Building`
+                                      WHERE `building_id` = {$dbh->quote($id)}");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll()[0];
+            $theBuilding = new Building(
+                $result['building_id'],
+                $result['building_code'],
+                $result['building_name'],
+                $result['campus_id']);
 
+            return $theBuilding;
+        }catch(Exception $e){
+            return "getBuilding: ".$e->getMessage();
+        }
+    }
 
     public function getdbh(){
         return $this->dbh;

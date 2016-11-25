@@ -28,7 +28,7 @@ echo '<div class="modal fade" id="newBuildingModal" tabindex="-1" role="dialog" 
                             $result = $selectCampi->fetchAll();
 
                             foreach($result as $row){
-                                echo "<option value=\"".$row['campus_id']."\">".$row['campus_name']."</option>";
+                                echo "<option value=".$row['campus_id'].">".$row['campus_name']."</option>";
                             }
 echo '
 
