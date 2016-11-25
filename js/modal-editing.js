@@ -41,8 +41,22 @@ var ModalEditing = function() {
     });
 
 
-    $("[id^='pick_edit']").change(function(){
-        console.log($(this));
+    $("[id^='pick_edit']").unbind().change(function(){
+        var whichThing = $(this).attr('id').split('pick_edit').pop();
+
+        switch (whichThing){
+            case 'Semester':
+                loadSemesterFields();
+                break;
+            case 'Campus':
+                loadCampusFields();
+                break;
+            case 'Building':
+                loadBuildingFields();
+                break;
+        }
+
+
     })
 
     var loadSemesterFields = function(){
@@ -107,3 +121,21 @@ var ModalEditing = function() {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*$('#' + 'editModal_form' + whichThing).find('input').each(function(){
+ $(this).val('');
+ });*/

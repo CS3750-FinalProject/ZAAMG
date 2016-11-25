@@ -45,6 +45,8 @@ $body.= "
             <!--style='max-height: 190px; overflow-y:auto'-->
             <div class='hide col-xs-12' id='editModalDiv_Building'>
 
+            <form id='editModal_formBuilding'>
+
                 <div class='col-xs-3'>
                     <label for='editModal_buildingCode'>Building Code</label>
                     <input autofocus type='text' class='form-control' id='editModal_buildingCode'  >
@@ -72,7 +74,7 @@ $body.="
                     <label for='editModal_buildingName'>Building Name</label>
                     <input type='text' class='form-control' id='editModal_buildingName'  >
                 </div>
-
+            </form>
 
             </div>
 
