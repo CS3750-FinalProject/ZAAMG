@@ -1,9 +1,9 @@
 <?php
 
-include 'Database.php';
+//include 'Database.php';
 
 class Semester {
-    private $database;
+    //private $database;
 
     private $semId;
     private $semYear;
@@ -24,33 +24,52 @@ class Semester {
         $this->semFirstBlockStartDate = $semFirstBlockStartDate;
         $this->semSecondBlockStartDate = $semSecondBlockStartDate;
 
-        $this->database = new Database();
-    }
-/*     ------   FIX   ----------
-    public function getCourseId(){
-        return $this->courseId;
+        //$this->database = new Database();
     }
 
-    public function getCourseCode(){
-        return $this->courseCode;
+
+    public function getSemId()
+    {
+        return $this->semId;
     }
 
-    public function getCourseTitle(){
-        return $this->courseTitle;
+
+    public function getSemYear()
+    {
+        return $this->semYear;
     }
 
-    public function getCourseCapacity(){
-        return $this->courseCapacity;
+
+    public function getSemSeason()
+    {
+        return $this->semSeason;
     }
 
-    public function getCourseCredits(){
-        return $this->courseCredits;
+
+    public function getSemNumWeeks()
+    {
+        return $this->semNumWeeks;
     }
 
-    public function getDeptId(){
-        return $this->deptId;
+
+    public function getSemStartDate()
+    {
+        return $this->semStartDate;
     }
-*/
+
+    public function getSemFirstBlockStartDate()
+    {
+        return $this->semFirstBlockStartDate;
+    }
+
+    public function getSemSecondBlockStartDate()
+    {
+        return $this->semSecondBlockStartDate;
+    }
+
+
+
+
     public function insertNewSemester(){
         $dbh = $this->database->getdbh();
         $stmtInsert = $dbh->prepare(

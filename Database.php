@@ -1,6 +1,7 @@
 <?php
 require_once 'Section.php';
 require_once 'Course.php';
+require_once 'Semester.php';
 
 class Database
 {
@@ -238,15 +239,14 @@ class Database
         }
     }
 
-    public function getSemester($year, $season){
+    public function getSemester($id){
         $theSemester = null;
         $dbh = $this->getdbh();
         $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Semester`
-                                      WHERE sem_year = {$dbh->quote($year)}
-                                      AND sem_season = {$dbh->quote($season)}");
+                                      WHERE `sem_id` = {$dbh->quote($id)}");
         try{
             $stmtSelect->execute();
-            $result = $stmtSelect->fetchAll();
+            $result = $stmtSelect->fetchAll()[0];
             $theSemester = new Semester(
                 $result['sem_id'],
                 $result['sem_year'],

@@ -7,7 +7,7 @@ $body = "
                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
                 <h4 class='modal-title' id='semester-label'>Edit Semester</h4>
             </div>
-            <div class='modal-body' style='margin-bottom: 325px; '>
+            <div class='modal-body' style='margin-bottom: 360px; '>
 
             <div class='col-xs-8'>
             <label for='pick_editSemester'>Semester</label>
@@ -38,8 +38,8 @@ $body = "
             <div class='col-xs-12'> <hr style='border-width: 2px'></div>
 
 
-
-            <div class='hide col-xs-12' id='editModalDiv_Semester' style='max-height: 190px; overflow-y:auto'>
+            <!--style='max-height: 190px; overflow-y:auto'-->
+            <div class='hide col-xs-12' id='editModalDiv_Semester'  >
             <div class='form-group' >
                     <div class='col-xs-3'>
                         <label for='editModal_semesterYear'>Year</label>
@@ -88,7 +88,7 @@ $body = "
             <div class='modal-footer'>
                 <span class='error-message'></span>
                 <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                <button type='button' class='btn btn-primary' id='btn_editSemester'>Save</button>
+                <button type='button' class='btn btn-primary' id='btn_editSemester'>Update</button>
             </div>
         </div>
     </div>
