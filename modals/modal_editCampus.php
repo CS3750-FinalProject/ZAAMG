@@ -12,11 +12,11 @@ $body = "
             </div>
 
 
-        <div class='modal-body' style='margin-bottom: 200px;'>
+        <div class='modal-body' style='margin-bottom: 240px;'>
 
             <div class='col-xs-8'>
                 <label for='pick_editCampus'>Campus</label>
-                     <select size='3' class='form-control'  id='pick_editCampus'>";
+                     <select size='5' class='form-control'  id='pick_editCampus'>";
 
 $selectCampi = $database->getdbh()->prepare(
     'SELECT campus_id, campus_name FROM ZAAMG.Campus
@@ -32,7 +32,8 @@ $body .= "
             </div>
 
             <div class='col-xs-4' style='padding-top: 5%'>
-                <button type='button' class='btn btn-primary btn-modalEdit' id='btn_editCampus' style='margin-right: 12px'>Edit</button>
+            <!--  <button type='button' class='btn btn-primary btn-modalEdit' id='btn_editCampus'
+                            style='margin-right: 12px'>Edit</button>-->
                 <button type='button' class='btn btn-default' id='btn_deleteCampus'>Delete</button>
             </div>
 
@@ -40,7 +41,7 @@ $body .= "
 
 
             <!--style='max-height: 190px; overflow-y:auto'-->
-            <div class='hide col-xs-12' id='editModalDiv_Campus'>
+            <div class=' col-xs-12' id='editModalDiv_Campus'>
 
                 <div class='form-group' >
                         <div class='col-xs-12'>

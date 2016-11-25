@@ -35,7 +35,8 @@ $body.= "
             </div>
 
             <div class='col-xs-4' style='padding-top: 5%'>
-                <button type='button' class='btn btn-primary btn-modalEdit' id='btn_editBuilding' style='margin-right: 12px'>Edit</button>
+            <!-- <button type='button' class='btn btn-primary btn-modalEdit' id='btn_editBuilding'
+                        style='margin-right: 12px'>Edit</button>-->
                 <button type='button' class='btn btn-default' id='btn_deleteBuilding'>Delete</button>
             </div>
 
@@ -43,7 +44,7 @@ $body.= "
 
 
             <!--style='max-height: 190px; overflow-y:auto'-->
-            <div class='hide col-xs-12' id='editModalDiv_Building'>
+            <div class=' col-xs-12' id='editModalDiv_Building'>
 
             <form id='editModal_formBuilding'>
 

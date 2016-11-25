@@ -25,25 +25,29 @@ var ModalEditing = function() {
 
 
     }
-    toggleHideClass_modal();
+    //toggleHideClass_modal();  //try not doing this
 
     //reset the modal when it gets shown/hidden
 
     $("[id^='edit'][id$='Modal']").unbind().on("shown.bs.modal", function () {
-        $("[id^='editModalDiv_']").addClass('hide');
+        //$("[id^='editModalDiv_']").addClass('hide'); //try not doing this
         $("[id^='pick_edit']").find('option:eq(0)').prop('selected', true);
-        $(this).on("hidden.bs.modal", function () {
-            console.log('hidden');
-            $("[id^='editModalDiv_']").addClass('hide');
-            $("[id^='pick_edit']").find('option:eq(0)').prop('selected', true);
+        var whichThing = $(this).attr('id').split('edit').pop().split('Modal').shift();
+        loadFields(whichThing);
 
+        $(this).on("hidden.bs.modal", function () {
+            //$("[id^='editModalDiv_']").addClass('hide');  //try not doing this
+            $("[id^='pick_edit']").find('option:eq(0)').prop('selected', true);
         });
     });
 
 
     $("[id^='pick_edit']").unbind().change(function(){
         var whichThing = $(this).attr('id').split('pick_edit').pop();
+        loadFields(whichThing);
+    })
 
+    var loadFields = function(whichThing){
         switch (whichThing){
             case 'Semester':
                 loadSemesterFields();
@@ -55,9 +59,7 @@ var ModalEditing = function() {
                 loadBuildingFields();
                 break;
         }
-
-
-    })
+    };
 
     var loadSemesterFields = function(){
         var pickedSemId = $('#pick_editSemester :selected').val();
@@ -69,6 +71,10 @@ var ModalEditing = function() {
             dataType: 'json',                //data format
             success: function(data)          //on receive of reply
             {
+                //remove 'selected' from previous choice so there won't be multiple selected
+                $('#editModal_semesterSeason option').each(function(){
+                    $(this).removeAttr('selected');
+                });
                 $('#editModal_semesterYear').val(data.year);
                 $('#editModal_semesterSeason option[value=' + data.season+']').attr('selected', 'selected');
                 $('#editModal_semesterStartDate').val(data.start.slice(0,10));
