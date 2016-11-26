@@ -46,12 +46,13 @@ $body .= "</table>";
 $body .= "<div class='form-group' style=    'margin-bottom: 40px;
                                             border-top: 1px solid #492365;
                                             padding-top: 5px;'>
-            <span style='float:left; padding-top: 5px; font-weight:bold; color:#492365'>
+            <span style='float:left; padding-top: 5px; font-weight:bold; color:#492365' >
             Select a Campus and a Building:</span>
             <div class='col-xs-3'>
 
             <select type='text' class='form-control' id='pickCampus' >
-                <option value='0'>Campus...</option>";
+                <option value='-1'>Campus...</option>
+                <option value='0'>Online</option>";
             $selectCampus = $database->getdbh()->prepare(
                             'SELECT campus_name, campus_id
                             FROM ZAAMG.Campus
@@ -70,8 +71,7 @@ $body .= "<div class='form-group' style=    'margin-bottom: 40px;
             <div class='col-xs-3'>
             <select type='text' class='form-control' id='pickBuilding' name='pickBuilding'
              disabled='true'>
-                  <option value='0'>Building...</option> </select>
-                  ";
+                  <option value='0'>Building...</option> </select>";
 
 
 
@@ -84,11 +84,10 @@ $body .= "
 <script>
     $('#pickCampus').change(function(){
         var campusId = $(this).val();
-        if ($('#pickCampus').val() > 0)
+        if ($('#pickCampus').val() >= 0)
             $('#pickBuilding').removeAttr('disabled');
         else{
             $('#pickBuilding').attr('disabled', 'true');
-            //$('#pickClassroom').attr('disabled', 'true');
         }
 
 
@@ -106,13 +105,15 @@ $.ajax({
       {
         var dropdown_Building = $('#pickBuilding');
         dropdown_Building.empty();
-        dropdown_Building.append($('<option />').val(0).text('Building...'));
 
-        $.each(data, function() {
-            dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
-        });
-
-
+        if (campusId==0){
+            dropdown_Building.append($('<option />').val(0).text('Online'));
+        }else{
+            $.each(data, function() {
+                dropdown_Building.append($('<option />').val(0).text('Building...'));
+                dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
+            });
+        }
       }
     });
 }); // end of pickCampus.change()
@@ -143,10 +144,13 @@ $.ajax({
 
 </script>";
 
-$body .= "<div  id='classroomOverviewSchedule'
+$body .= "<div  class='col-xs-12'
+                id='classroomOverviewSchedule'
                 style='
                 background-color: #fff;
                 padding-top: 15px;
+                margin-bottom: 50px;
+                border-bottom: 1px solid #492365;
                 border-top: 1px solid #492365'>
                 </div>";  // this div holds the schedule showing all classrooms
 
@@ -168,14 +172,14 @@ $body .= "<script> var theClassroomSet = [];</script>";
  * displayClassroomOverviewSchedule(theClassroomSet), which constructs
  * and displays the fullCalendar overview schedule of all rooms.
  */
-$body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);
+$body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);//not really used
 
 
 /*
  *  javascript function displayClassroomSchedule is defined in
  *  classroomCalendar.js
  */
-$body .= "<script>displayClassroomSchedule(theClassroomSet); console.log(theClassroomSet.length);</script>";
+$body .= "<script>displayClassroomSchedule(theClassroomSet);</script>";
 
 
 

@@ -202,18 +202,18 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
  *  *  Adding days moves an event to a different column.  Adding minutes moves it down to lower rows.
  */
 function createClassroomEventsSet(classroomSet){
-    var singleRow = 5;   //row "height" is 5 minutes
-    var doubleRow = 10;  //two rows is 10 minutes
+    var singleRow = 1;   //row "height" is 5 minutes
+    var doubleRow = 2;  //two rows is 10 minutes
     var events = [];
-    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
+    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:2, minutes:00}); //11/7/16, 2 AM
     var prevDividerStart = rowZeroColumnZero;
 
     classroomSet.forEach(function(classroom, i){
         var classroomName = classroom.name;
         var classroomId = 'classroom_' + classroom.id;
         //var mwId = 'mw_' + classroom.id;
-        var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(5, 'm');
-        var theEnd = theStart.clone().add(10, 'm');
+        var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(1, 'm');
+        var theEnd = theStart.clone().add(2, 'm');
         events.push(
             {
                 title: classroomName,
@@ -234,16 +234,32 @@ function createClassroomEventsSet(classroomSet){
             },
             {
                 title: " ",
-                start: theStart.clone().add(10, 'm').toString().slice(16,24),
-                end: theEnd.clone().add(10,'m').toString().slice(16,24),
+                start: theStart.clone().add(2, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(2,'m').toString().slice(16,24),
                 dow: [0],
                 className: 'event_placeholder',
                 order_by: 'A'
             },
             {
                 title: 'TTH',
-                start: theStart.clone().add(10, 'm').toString().slice(16,24),
-                end: theEnd.clone().add(10,'m').toString().slice(16,24),
+                start: theStart.clone().add(2, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(2,'m').toString().slice(16,24),
+                dow: [0],
+                className: 'days',
+                order_by: 'B'
+            },
+            {
+                title: " ",
+                start: theStart.clone().add(4, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(4,'m').toString().slice(16,24),
+                dow: [0],
+                className: 'event_placeholder',
+                order_by: 'A'
+            },
+            {
+                title: 'MWF',
+                start: theStart.clone().add(4, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(4,'m').toString().slice(16,24),
                 dow: [0],
                 className: 'days',
                 order_by: 'B'
@@ -265,7 +281,7 @@ function createClassroomEventsSet(classroomSet){
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        end: theCourseStart.clone().add(1.95,'m'),   //just shy of 10 puts a little gap between blocks
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         duration: courseDuration
@@ -275,11 +291,11 @@ function createClassroomEventsSet(classroomSet){
                 var minOverPageBreak = getMinutesOverPageBreak(course.startTime, courseDuration);
                 events.push(
                     {
-                        title: theCourseTitle + '\n' +
+                        title: theCourseTitle + '   >>>\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        end: theCourseStart.clone().add(1.95,'m'),   //just shy of 10 puts a little gap between blocks
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'before',
@@ -290,7 +306,7 @@ function createClassroomEventsSet(classroomSet){
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart.clone().add(2, 'd'),
-                        end: theCourseStart.clone().add(2,'d').add(9.8,'m'),
+                        end: theCourseStart.clone().add(2,'d').add(1.95,'m'),
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'after',
@@ -315,7 +331,7 @@ function createClassroomEventsSet(classroomSet){
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8, 'm'),
+                        end: theCourseStart.clone().add(1.95, 'm'),
                         duration: courseDuration,
                         overPageBreak: overPageBreak,
                         className: 'nonStandard'
@@ -329,7 +345,7 @@ function createClassroomEventsSet(classroomSet){
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        end: theCourseStart.clone().add(1.95,'m'),   //just shy of 2 puts a little gap between blocks
                         className: 'nonStandard',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'before',
@@ -340,7 +356,7 @@ function createClassroomEventsSet(classroomSet){
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
                         start: theCourseStart.clone().add(2, 'd'),
-                        end: theCourseStart.clone().add(2,'d').add(9.8,'m'),
+                        end: theCourseStart.clone().add(2,'d').add(1.95,'m'),
                         className: 'nonStandard',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'after',
@@ -351,7 +367,7 @@ function createClassroomEventsSet(classroomSet){
             }
 
         });
-        prevDividerStart = theStart.clone().add((10 * 2), 'm');
+        prevDividerStart = theStart.clone().add((doubleRow * 3), 'm');
 
         for (i=0; i < 7; i++) {
             events.push(
@@ -359,7 +375,7 @@ function createClassroomEventsSet(classroomSet){
                     title: "",
                     start: prevDividerStart.clone().add(i, 'd').toString().slice(16,24),
                     end: prevDividerStart.clone()
-                        .add(5, 'm')
+                        .add(singleRow, 'm')
                         .add(i,'d').toString().slice(16,24),
                     dow: [i],
                     className: 'classroomDivider'
@@ -383,6 +399,7 @@ function displayClassroomSchedule(theClassroomSet) {
             right:  'prev,next'
         },
         //titleFormat: '[7:30 AM - 12:30 PM]',
+        height: 1500,
         defaultView: 'agendaWeek',
         navLinks: true, // can click day/week names to navigate views
         editable: false,
@@ -393,8 +410,9 @@ function displayClassroomSchedule(theClassroomSet) {
         defaultDate: '2016-11-06',  // 11/7/16 is a Monday
         firstDay: '0', //Monday
         slotLabelFormat: ' ', //the space makes the slots blank.  First time is 6 AM.
-        slotDuration: '00:5:00',
-        minTime: '06:00:00',
+        slotDuration: '00:1:00',
+        minTime: '02:00:00',
+        scrollTime: '02:00:00',
         eventOrder: 'order_by',
         eventAfterRender: function (event, element, view) {
             if ($(element).hasClass("classroomName")) {

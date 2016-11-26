@@ -151,9 +151,9 @@ function momentGenerator_test(time, days, startMoment){
             break;
     }
     if (days.toUpperCase() == "TTH")
-        theMoment = theMoment.clone().add(10, 'm');
+        theMoment = theMoment.clone().add(2, 'm');
     if (days.toUpperCase() == "MWF")
-        theMoment = theMoment.clone().add(20, 'm');
+        theMoment = theMoment.clone().add(4, 'm');
     return theMoment;
 };
 

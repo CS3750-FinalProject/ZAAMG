@@ -57,7 +57,6 @@ foreach($classrooms as $classroom){
  */
 $script .= 'displayClassroomSchedule(theClassroomSet);
             console.log("theClassroomSet.length: " + theClassroomSet.length);';
-//$script .= "</script>";
 
 echo $script;
 
