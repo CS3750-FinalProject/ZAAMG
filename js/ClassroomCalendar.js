@@ -12,6 +12,27 @@ $(document).ready(function() {
 });
 
 
+var load_onlineSections = function(){
+    $.ajax({
+        url: 'showOnlineSchedule.php',
+        dataType: 'json',
+        success: function(data)
+        {
+            var theOnlineSet = [];
+            //add_toOnlineSet(theOnlineSet, data);
+            displayClassroomSchedule(data, true);
+            data.forEach(function(obj){
+                console.log(obj);
+            })
+
+        },
+        error: function(data){
+            console.log(data.responseText);
+        }
+    });
+};
+
+
 
 /*******************************************************************************************/
 
@@ -186,7 +207,31 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
 }
 
 
+function createOnlineEventsSet(onlineSet){
+    var singleRow = 1;   //row "height" is 5 minutes
+    var events = [];
+    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:2, minutes:00}); //11/7/16, 2 AM
 
+    onlineSet.forEach(function(course,i){
+        courseCode = course.prefix + ' ' + course.number;
+        var theStart = i == 0 ? rowZeroColumnZero : prevCourseStart.clone().add(singleRow, 'm');
+        var theEnd = theStart.clone().add(0.95 * singleRow, 'm');
+
+        events.push(
+            {
+                title:      courseCode,
+                profFirst:  course.profFirst,
+                profLast:   course.profLast,
+                start:      theStart,
+                end:        theEnd,
+                color:      '#583372',
+                className:  'onlineCourse'
+            }
+        );
+        prevCourseStart = theStart;
+    });
+    return events;
+}
 
 
 
@@ -389,8 +434,13 @@ function createClassroomEventsSet(classroomSet){
 
 /*******************************************************************************************/
 
-function displayClassroomSchedule(theClassroomSet) {
-    var theEvents = createClassroomEventsSet(theClassroomSet);
+function displayClassroomSchedule(theClassroomSet, isOnline) {
+    //add a boolean parameter for whether the set is online or not
+    //if online, send the Set to method createOnlineEventsSet,
+    //else send to createClassroomEventsSet
+
+    var theEvents = isOnline ? createOnlineEventsSet(theClassroomSet) : createClassroomEventsSet(theClassroomSet);
+
     $('#classroomOverviewSchedule').fullCalendar('destroy');
     $('#classroomOverviewSchedule').fullCalendar({
         header: {
@@ -435,7 +485,6 @@ function displayClassroomSchedule(theClassroomSet) {
                             getWidthMultiplier(event.minOverBreak * $(element).width());
                         $(element).css('width', newWidth + 'px');
                     }
-
                 }
                 $(element).css('margin-right', '-50%');
                 $(element).css('background-color', '#583372');

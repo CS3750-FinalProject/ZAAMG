@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Gisela
- * Date: 11/19/2016
- * Time: 9:50 AM
- */
 
 //require_once 'Database.php';
 require_once 'classroom_page.php';
@@ -26,7 +20,7 @@ foreach($classrooms as $classroom){
          *  function add_toClassroomSet(profFirst (string), profLast (string), profId (int),
          *                          timedCourseObjects (array of JSON objects,
          *                          onlineCourseObjects (array of JSON objects)
-         *  defined in professorSet.js
+         *  defined in classroomSet.js
          */
         $script.='
             add_toClassroomSet(theClassroomSet, '  /*  first argument:  */

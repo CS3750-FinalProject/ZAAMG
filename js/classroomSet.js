@@ -11,7 +11,9 @@
  *
  */
 
+function add_toOnlineSet(theSet, onlineCourseObjects){
 
+}
 
 
 function add_toClassroomSet(theSet, classroomNumber, timedCourseObjects){

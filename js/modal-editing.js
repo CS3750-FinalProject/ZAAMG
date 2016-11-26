@@ -140,7 +140,9 @@ var ModalEditing = function() {
 
 
 
-
+//http://stackoverflow.com/questions/36393409/ajax-call-to-populate-select-list-when-another-select-list-changes
+//http://www.codingcage.com/2015/11/ajax-login-script-with-jquery-php-mysql.html
+//https://openenergymonitor.org/emon/node/107
 
 /*$('#' + 'editModal_form' + whichThing).find('input').each(function(){
  $(this).val('');

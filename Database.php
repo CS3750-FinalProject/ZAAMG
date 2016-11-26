@@ -190,6 +190,44 @@ class Database
     }
 
 
+    public function getOnlineSections(){
+        $onlineSections = [];
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("
+            SELECT  section_id, s.course_id, prof_id, classroom_id, sem_id, section_days,
+                    section_start_time, section_end_time, section_is_online, section_block, section_capacity,
+                    course_prefix, course_number
+            FROM    ZAAMG.Section s JOIN ZAAMG.Course c
+            ON      s.course_id = c.course_id
+            AND     section_is_online = 1
+            ORDER BY  course_prefix, course_number");
+
+        try{
+            $stmtSelect->execute();
+
+            $result = $stmtSelect->fetchAll();
+            foreach($result as $index=>$sectionRecord){
+                $onlineSections[] = new Section(  //don't need to put an index number between those brackets, awesome
+                    $sectionRecord['section_id'],
+                    $sectionRecord['course_id'],
+                    $sectionRecord['prof_id'],
+                    $sectionRecord['classroom_id'],
+                    $sectionRecord['sem_id'],
+                    $sectionRecord['section_days'],
+                    $sectionRecord['section_start_time'],
+                    $sectionRecord['section_end_time'],
+                    $sectionRecord['section_is_online'],
+                    $sectionRecord['section_block'],
+                    $sectionRecord['section_capacity']);
+            }
+            return $onlineSections;
+        }catch(Exception $e){
+            echo "getOnlineSections: ".$e->getMessage();
+        }
+    }
+
+
+
 
 
     public function getCourse($section){

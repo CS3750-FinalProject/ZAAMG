@@ -7,6 +7,8 @@
  */
 
 
+
+
 function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCourseObjects){
     var profName = profLast + ", " + profFirst;
 

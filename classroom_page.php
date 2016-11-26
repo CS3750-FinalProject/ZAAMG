@@ -67,13 +67,10 @@ $body .= "<div class='form-group' style=    'margin-bottom: 40px;
  $body .= " </select>
             </div>
 
-
             <div class='col-xs-3'>
             <select type='text' class='form-control' id='pickBuilding' name='pickBuilding'
              disabled='true'>
                   <option value='0'>Building...</option> </select>";
-
-
 
 
 $body .= "
@@ -84,38 +81,33 @@ $body .= "
 <script>
     $('#pickCampus').change(function(){
         var campusId = $(this).val();
-        if ($('#pickCampus').val() >= 0)
-            $('#pickBuilding').removeAttr('disabled');
-        else{
+
+        if ($('#pickCampus').val() == 0){           // 0 is the 'online' campus
+            $('#pickBuilding').empty();
+            $('#pickBuilding').append($('<option />').val(0).text('Online'));
             $('#pickBuilding').attr('disabled', 'true');
-        }
-
-
- //http://stackoverflow.com/questions/36393409/ajax-call-to-populate-select-list-when-another-select-list-changes
-//http://www.codingcage.com/2015/11/ajax-login-script-with-jquery-php-mysql.html
-//https://openenergymonitor.org/emon/node/107
-
-$.ajax({
-      type: 'POST',
-      url: 'pickBuildings.php',        //the script to call to get data
-      data: 'campusId=' + campusId,    //you can insert url arguments here to pass to pickBuildings.php
-                                       //for example 'id=5&parent=6\"
-      dataType: 'json',                //data format
-      success: function(data)          //on receive of reply
-      {
-        var dropdown_Building = $('#pickBuilding');
-        dropdown_Building.empty();
-
-        if (campusId==0){
-            dropdown_Building.append($('<option />').val(0).text('Online'));
+            load_onlineSections();
         }else{
-            $.each(data, function() {
-                dropdown_Building.append($('<option />').val(0).text('Building...'));
-                dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
-            });
-        }
-      }
-    });
+                $('#pickBuilding').removeAttr('disabled');
+                $.ajax({
+                      type: 'POST',
+                      url: 'pickBuildings.php',        //the script to call to get data
+                      data: 'campusId=' + campusId,    //you can insert url arguments here to pass to pickBuildings.php
+                                                       //for example 'id=5&parent=6\"
+                      dataType: 'json',                //data format
+                      success: function(data)          //on receive of reply
+                      {
+                        var dropdown_Building = $('#pickBuilding');
+                        dropdown_Building.empty();
+                        dropdown_Building.append($('<option />').val(0).text('Building...'));
+                        $.each(data, function() {
+                            dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
+                        });
+
+                      }
+                });
+            }
+
 }); // end of pickCampus.change()
 
 
@@ -179,7 +171,7 @@ $body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);//n
  *  javascript function displayClassroomSchedule is defined in
  *  classroomCalendar.js
  */
-$body .= "<script>displayClassroomSchedule(theClassroomSet);</script>";
+$body .= "<script>displayClassroomSchedule(theClassroomSet, false);</script>";
 
 
 
@@ -194,10 +186,8 @@ function load_ClassroomSet($classrooms, $db){
     $body = '<script> '; //getting ready to echo javascript code...
     foreach($classrooms as $classroom){
         /*
-         *  function add_toClassroomSet(profFirst (string), profLast (string), profId (int),
-         *                          timedCourseObjects (array of JSON objects,
-         *                          onlineCourseObjects (array of JSON objects)
-         *  defined in professorSet.js
+         *  function add_toClassroomSet(classroomNumber, timedCourseObjects)
+         *  defined in classroomSet.js
          */
         $body.='
             add_toClassroomSet([], '  /*  first argument:  */
