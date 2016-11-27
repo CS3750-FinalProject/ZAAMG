@@ -20,8 +20,7 @@ $body .= "
       <div class='col-xs-12' id='profIndex'
             style='
             max-height: 360px;
-            overflow-y: auto;
-            '>
+            overflow-y: auto;  '>
 
         <table class='list-data'>
           <tr>
@@ -45,8 +44,6 @@ foreach ($allProfessors as $professor){
 
 
 $body .= "</table>";
-
-
 
 $body .= "</div>";  //   end of <div class='col-xs-12' id='profIndex'>
 
@@ -80,70 +77,55 @@ $body .= "<script> var theProfSet = [];</script>";
  */
 $body .= load_ProfSet($allProfessors, $database);
 
-
-
 /*
  *  javascript function displayTest is defined in
  *  Calendar.js   (was called test when I was retooling the whole thing)
  */
-$body .= "<script>displayTest(theProfSet)
-//init_ProfOverviewSchedule(); // probably don't need this
-</script>";
+$body .= "<script>  displayTest(theProfSet)  </script>";
 
 echo $body;
 
-
-/*
- * TODO:  probably better to use json_encode to do some of this!
- * I did it by scratch here out of ignorance.  :-(
- */
 function load_ProfSet($allTheProfs, $db){
-    $body = '<script> '; //getting ready to echo javascript code...
+    $body = "<script> ";
+
     foreach($allTheProfs as $professor){
-        $onlineCourses = [];  // this array will hold online course JSON objects
-        /*
-         *  function add_toProfSet(profFirst (string), profLast (string), profId (int),
+        $onlineCourses = [];
+        $timedCourses = [];
+        $sections = $db->getProfSections($professor, null);
+        foreach($sections as $section){
+            if (!$section->getIsOnline()){
+                array_push($timedCourses, array(
+                    'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
+                    'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
+                    'days'=>$section->getDayString(),
+                    'startTime'=>$section->getStartTime(),
+                    'endTime'=>$section->getEndTime()
+                ));
+            }else{
+                array_push($onlineCourses, array(
+                    'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
+                    'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')
+                ));
+            }
+            $timedCourses_json = json_encode($timedCourses);
+            $onlineCourses_json = json_encode($onlineCourses);
+        }
+         /*  function add_toProfSet(profFirst (string), profLast (string), profId (int),
          *                          timedCourseObjects (array of JSON objects,
          *                          onlineCourseObjects (array of JSON objects)
-         *  defined in professorSet.js
+         *   defined in professorSet.js
          */
-        $body.='
-            add_toProfSet('  /*  first three arguments:  */
-            .'"'.$professor->getProfFirst().'"'.','
-            .'"'.$professor->getProfLast().'"'.','
-            .'"'.$professor->getProfId().'"'.','.'
-                [ ';  //  <--  opening square bracket for the "timed courses" JSON obj. array
-        $sections = $db->getProfSections($professor, null);
+        $body.= "
+                add_toProfSet('{$professor->getProfFirst()}','{$professor->getProfLast()}',{$professor->getProfId()},
+                $timedCourses_json, $onlineCourses_json);
+            ";
 
-        // looping through each of one professor's sections...
-        foreach($sections as $oneSection){
-            $course = $db->getCourse($oneSection);
-            if (!$oneSection->getIsOnline()){  // if the section is not online, add it to "timed courses"
-                $body .= '
-                    { pref:  '.'"'.$course->getCoursePrefix().'"'.',
-                      num:   '.'"'.$course->getCourseNumber().'"'.',
-                      days:  '.'"'.$oneSection->getDayString().'"'.',
-                      startTime:  '.'"'.$oneSection->getStartTime().'"'.',
-                      endTime:  '.'"'.$oneSection->getEndTime().'"'.',
-                    },';  // (just wrote one JSON object for each section)
-            } else{
-                // if a section is online, put it in $onlineCourses array
-                array_push($onlineCourses, $course);
-            }
-        }
-        $body .= " ],[ ";  //  <-- done with timedCourses array, beginning onlineCourses array...
-        // loop through array of onlineCourses and construct JSON objects
-        foreach($onlineCourses as $onlineCourse){
-            $body .= '
-            { pref:  '.'"'.$onlineCourse->getCoursePrefix().'"'.',
-              num:   '.'"'.$onlineCourse->getCourseNumber().'"'.'
-            },';
-        }
-        $body.= ' ]);'; // end of sending arguments to add_toProfSet()
     }
-    $body.='</script>';
+    $body.="</script>";
     return $body;
 }
+
+
 
 
 

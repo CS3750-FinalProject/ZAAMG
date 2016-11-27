@@ -23,13 +23,13 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
         var endTimeMoment = moment(course.endTime, "hh:mm A");
 
         var formatted_startTime =
-            startTimeMoment.hour() > 12 ?  startTimeMoment.hour() - 12 : startTimeMoment.hour();
+        startTimeMoment.hour() > 12 ?  startTimeMoment.hour() - 12 : startTimeMoment.hour();
         formatted_startTime += ":";
         formatted_startTime += startTimeMoment.minute() == 0 ? '00' : startTimeMoment.minute();
         formatted_startTime += " " + course.startTime.substr(course.startTime.length - 2, course.startTime.length);
 
         var formatted_endTime =
-            endTimeMoment.hour() > 12 ?  endTimeMoment.hour() - 12 : endTimeMoment.hour();
+        endTimeMoment.hour() > 12 ?  endTimeMoment.hour() - 12 : endTimeMoment.hour();
         formatted_endTime += ":";
         formatted_endTime += endTimeMoment.minute() == 0 ? '00' : endTimeMoment.minute();
         formatted_endTime += " " + course.endTime.substr(course.endTime.length - 2, course.endTime.length);

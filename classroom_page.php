@@ -17,7 +17,14 @@ $body = "
 
 </div>
     <div class='container'>
-      <div class='col-xs-12' id='roomIndex'>
+      <div class='col-xs-12' id='roomIndex'
+            style='
+            border-bottom: 1px solid #492365;
+            margin-bottom: 15px;
+            max-height: 360px;
+            overflow-y: auto;
+            '>
+
         <table class='list-data'>
         <tr>
             <th>Campus</th>
@@ -41,11 +48,11 @@ foreach ($allClassrooms as $classroom){
 
 
 $body .= "</table>";
+ $body .= "</div>";  //end of 'col-xs-12'
 
+$body .= "<div class='form-group' style=   'padding-left: 10px;
+                                            padding-bottom: 5px;'>
 
-$body .= "<div class='form-group' style=    'margin-bottom: 40px;
-                                            border-top: 1px solid #492365;
-                                            padding-top: 5px;'>
             <span style='float:left; padding-top: 5px; font-weight:bold; color:#492365' >
             Select a Campus and a Building:</span>
             <div class='col-xs-3'>
@@ -125,82 +132,30 @@ $('#pickBuilding:focus').blur();
 
 </script>";
 
+
+
 $body .= "<div  class='col-xs-12'
                 id='classroomOverviewSchedule'
                 style='
                 background-color: #fff;
+                margin-top: 15px;
                 padding-top: 15px;
                 margin-bottom: 50px;
                 border-bottom: 1px solid #492365;
                 border-top: 1px solid #492365'>
                 </div>";  // this div holds the schedule showing all classrooms
 
-$body .= "</div>";  //end of 'col-xs-12'
 
-
-
-/*
- *  javascript variable theClassroomSet is the array that
- *  will hold arrays of JSON event objects for each classroom.
- */
-$body .= "<script> var theClassroomSet = [];</script>";
-
-
-
-/* load_ClassroomSet is defined in this file (classroom_page.php)
- * It loads the array defined just above here (theClassroomSet).
- * theClassroomSet array will next be sent to javascript function
- * displayClassroomOverviewSchedule(theClassroomSet), which constructs
- * and displays the fullCalendar overview schedule of all rooms.
- */
-$body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);//not really used
 
 
 /*
  *  javascript function displayClassroomSchedule is defined in
- *  classroomCalendar.js
+ *  classroomCalendar.js.  Here the calendar is initialized as blank.
  */
-$body .= "<script>displayClassroomSchedule(theClassroomSet, false);</script>";
 
-
+$body .= "<script>displayClassroomSchedule([], false);</script>";
 
 echo $body;
-
-
-/*
- * TODO:  probably better to use json_encode to do some of this!
- * I did it by scratch here out of ignorance.  :-(
- */
-function load_ClassroomSet($classrooms, $db){
-    $body = '<script> '; //getting ready to echo javascript code...
-    foreach($classrooms as $classroom){
-        /*
-         *  function add_toClassroomSet(classroomNumber, timedCourseObjects)
-         *  defined in classroomSet.js
-         */
-        $body.='
-            add_toClassroomSet([], '  /*  first argument:  */
-            .'"'.$classroom->getClassroomNum().'"'.','.'
-                [ ';  //  <--  opening square bracket for the "timed courses" JSON obj. array
-        $sections = $db->getClassroomSections($classroom);
-
-        // looping through each of one classroom's sections...
-        foreach($sections as $oneSection){
-            $course = $db->getCourse($oneSection);
-            $body .= '
-            { pref:  '.'"'.$course->getCoursePrefix().'"'.',
-              num:   '.'"'.$course->getCourseNumber().'"'.',
-              days:  '.'"'.$oneSection->getDayString().'"'.',
-              startTime:  '.'"'.$oneSection->getStartTime().'"'.',
-              endTime:  '.'"'.$oneSection->getEndTime().'"'.',
-            },';  // (just wrote one JSON object for each section)
-        }
-        //$body .= " ]";
-        $body.= ' ]);'; // end of sending arguments to add_toProfSet()
-    }
-    $body.='</script>';
-    return $body;
-}
 
 
 
@@ -359,6 +314,25 @@ $row.="
 
 
 
-function getClassroomsByCampus($campusId, $db){
-    return $db->getClassroomsOnCampus($campusId);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* load_ClassroomSet is defined in this file (classroom_page.php)
+  * It loads the array defined just above here (theClassroomSet).
+  * theClassroomSet array will next be sent to javascript function
+  * displayClassroomOverviewSchedule(theClassroomSet), which constructs
+  * and displays the fullCalendar overview schedule of all rooms.
+  */
+ //$body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);//not really used
