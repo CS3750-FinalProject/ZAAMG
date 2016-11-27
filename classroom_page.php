@@ -86,6 +86,7 @@ $body .= "
             $('#pickBuilding').empty();
             $('#pickBuilding').append($('<option />').val(0).text('Online'));
             $('#pickBuilding').attr('disabled', 'true');
+            $('#pickCampus:focus').blur();
             load_onlineSections();
         }else{
                 $('#pickBuilding').removeAttr('disabled');
@@ -116,21 +117,9 @@ $body .= "
 $('#pickBuilding').change(function(){
 
 var buildingId = $(this).val();
+load_buildingSections(buildingId);
+
 $('#pickBuilding:focus').blur();
-
-$.ajax({
-      type: 'POST',
-      url: 'showClassroomOverviewSchedule.php',        //the script to call to get data
-      data: 'buildingId=' + buildingId,    //you can insert url arguments here to pass to pickClassrooms.php
-                                       //for example \"id=5&parent=6\"
-      dataType: 'text',                //data format
-      success: function(data)          //on receive of reply
-      {
-            console.log(data.substr(data.lastIndexOf('var theClassroomSet')));
-            eval(data.substr(data.lastIndexOf('var theClassroomSet')));
-      },
-
-    });
 
 }); // end of pickBuilding.onChange()
 

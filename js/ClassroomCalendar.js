@@ -12,7 +12,7 @@ $(document).ready(function() {
 });
 
 
-var load_onlineSections = function(){
+function load_onlineSections(){
     $.ajax({
         url: 'showOnlineSchedule.php',
         dataType: 'json',
@@ -32,6 +32,27 @@ var load_onlineSections = function(){
     });
 };
 
+function load_buildingSections(buildingId){
+    var theClassroomSet = [];
+
+    $.ajax({
+        type: 'POST',
+        url: 'showClassroomOverviewSchedule.php',        //the script to call to get data
+        data: 'buildingId=' + buildingId,
+        dataType: 'json',                //data format
+        success: function(classrooms)          //on receive of reply
+        {
+            classrooms.forEach(function(classroom){
+                add_toClassroomSet(theClassroomSet, classroom.roomNumber, classroom.sections);
+            })
+            displayClassroomSchedule(theClassroomSet);
+            console.log(classrooms);
+        },
+        error: function(msg){
+            console.log("load_buildingSections: ", msg);
+        }
+    });
+};
 
 
 /*******************************************************************************************/

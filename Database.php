@@ -2,6 +2,7 @@
 require_once 'Section.php';
 require_once 'Course.php';
 require_once 'Semester.php';
+require_once 'Classroom.php';
 
 class Database
 {

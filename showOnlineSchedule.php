@@ -8,18 +8,13 @@ $onlineSections = $database->getOnlineSections();
 $onlineSections_json = [];
 
 foreach($onlineSections as $section){
-    $prefix     = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
-    $number     = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
-    $title      = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
-    $profFirst  = $section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID');
-    $profLast   = $section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID');
 
     $onlineSections_json[] = array(
-        'prefix'=>$prefix,
-        'number'=>$number,
-        'title'=>$title,
-        'profFirst'=>$profFirst,
-        'profLast'=>$profLast
+        'prefix'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
+        'number'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
+        'title'=>$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID'),
+        'profFirst'=>$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID'),
+        'profLast'=>$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')
     );
 }
 
