@@ -96,7 +96,7 @@ function on_roomRowClick(roomRowId, sectionObjects){
 function load_indRoomRowEvents(sectionObjects){
     var events = [];
     sectionObjects.forEach(function(section, i){
-        addNewEvent_Room(section.title, section.start, section.end, section.location, section.classroom, section.professor,
+        addNewEvent_Room(section.title, section.name, section.start, section.end, section.location, section.classroom, section.professor,
             section.online ? '#137c33' : '#583372', section.online, events)
     })
 
@@ -144,7 +144,7 @@ function formatTime_fullCalendar(time){
  *
  * fullCalendar works well with times formatted like '2016-11-14T07:30:00'
  */
-function addNewEvent_Room(title, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
+function addNewEvent_Room(title, name, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
     var timedEvents = [];
     //var numOnline = 0;
     eventsArray.forEach(function(event, i){
@@ -157,6 +157,7 @@ function addNewEvent_Room(title, eventstart, eventend, location, classroom, prof
     if (!isOnline){
         eventsArray.push({
             title: title,
+            name: name,
             start: formatTime_fullCalendar(eventstart),
             end: formatTime_fullCalendar(eventend),
             color: color,
@@ -214,7 +215,7 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
             element.popover(
                 {
                     html: true,
-                    title: "<strong>" + event.title + "</strong>",  //some html has to be in the title or it won't work
+                    title: "<strong>" + event.title + "<br>" + event.name + "</strong>",  //some html has to be in the title or it won't work
                     content: event.professor + "<br>" + event.location + " " + room + "<br>" + timeString,
                     trigger: 'hover click',
                     placement: "right",
@@ -241,12 +242,14 @@ function createOnlineEventsSet(onlineSet){
         events.push(
             {
                 title:      courseCode,
+                courseName: course.title,
                 profFirst:  course.profFirst,
                 profLast:   course.profLast,
                 start:      theStart,
                 end:        theEnd,
                 color:      '#583372',
-                className:  'onlineCourse'
+                className:  'online',
+                online:     true,
             }
         );
         prevCourseStart = theStart;
@@ -275,14 +278,14 @@ function createClassroomEventsSet(classroomSet){
     var prevDividerStart = rowZeroColumnZero;
 
     classroomSet.forEach(function(classroom, i){
-        var classroomName = classroom.name;
+        //var classroomName = classroom.name;
         var classroomId = 'classroom_' + classroom.id;
         //var mwId = 'mw_' + classroom.id;
         var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(1, 'm');
         var theEnd = theStart.clone().add(2, 'm');
         events.push(
             {
-                title: classroomName,
+                title: classroom.name,
                 start: theStart.toString().slice(16,24),
                 end: theEnd.toString().slice(16,24),
                 dow: [0],                           //dow means day of week  -- this is a recurring event
@@ -346,11 +349,22 @@ function createClassroomEventsSet(classroomSet){
                         title: theCourseTitle + '\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
                         end: theCourseStart.clone().add(1.95,'m'),   //just shy of 10 puts a little gap between blocks
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }else{
@@ -360,24 +374,46 @@ function createClassroomEventsSet(classroomSet){
                         title: theCourseTitle + '   >>>\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
                         end: theCourseStart.clone().add(1.95,'m'),   //just shy of 10 puts a little gap between blocks
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'before',
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     },
                     {
                         title: theCourseTitle + ' (cont.)\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart.clone().add(2, 'd'),
                         end: theCourseStart.clone().add(2,'d').add(1.95,'m'),
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'after',
                         minOverBreak: minOverPageBreak,
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }
@@ -396,11 +432,22 @@ function createClassroomEventsSet(classroomSet){
                         title: course.courseTitle + '\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
                         end: theCourseStart.clone().add(1.95, 'm'),
                         duration: courseDuration,
                         overPageBreak: overPageBreak,
-                        className: 'nonStandard'
+                        className: 'nonStandard',
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }else{
@@ -410,24 +457,46 @@ function createClassroomEventsSet(classroomSet){
                         title: course.courseTitle + '\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
                         end: theCourseStart.clone().add(1.95,'m'),   //just shy of 2 puts a little gap between blocks
                         className: 'nonStandard',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'before',
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     },
                     {
                         title: course.courseTitle + ' (cont.)\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart.clone().add(2, 'd'),
                         end: theCourseStart.clone().add(2,'d').add(1.95,'m'),
                         className: 'nonStandard',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'after',
                         minOverBreak: minOverPageBreak,
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }
@@ -485,6 +554,27 @@ function displayClassroomSchedule(theClassroomSet, isOnline) {
         minTime: '02:00:00',
         scrollTime: '02:00:00',
         eventOrder: 'order_by',
+        events: theEvents,
+        eventRender: function(event, element){
+            var theTitle = event.online ? event.title : event.courseTitle;
+            var profString = event.profFirst + " " + event.profLast;
+            var campusString = event.online ? "Online" : event.campus + "<br>";
+            var roomString = event.online ? "" : event.building + " " + event.room + "<br>";
+            var timeString = event.online ? "" : event.courseDays + " " + event.startTime + ' - ' + event.endTime ;
+            if ( $(element).hasClass('classEvent') || $(element).hasClass('online') || $(element).hasClass('nonStandard')){
+                element.popover(
+                    {
+                        html: true,
+                        title: "<strong>" + theTitle + "<br>" + event.courseName + "</strong>",  //some html has to be in the title or it won't work
+                        content: profString + "<br>" + campusString + roomString  +  timeString,
+                        trigger: 'hover',
+                        placement: event.online? "right" : "left",
+                        selector: event,
+                        container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
+                    }
+                );
+            }
+        },
         eventAfterRender: function (event, element, view) {
             if ($(element).hasClass("classroomName")) {
                 $(element).css('background-color', '#194d96');
@@ -544,8 +634,7 @@ function displayClassroomSchedule(theClassroomSet, isOnline) {
         eventAfterAllRender: function(event, element, view){
             fixHeaders_classroom(); //this function changes the innerHTML of the weekday headers when we switch weeks
             //no need for button listeners
-        },
-        events: theEvents
+        }
     });
 
 }

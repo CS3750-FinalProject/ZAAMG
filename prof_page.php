@@ -94,18 +94,25 @@ function load_ProfSet($allTheProfs, $db){
         $sections = $db->getProfSections($professor, null);
 
         foreach($sections as $section){
-            if (!$section->getIsOnline()){
+            if (!$section->getIsOnline()){                  //not online
                 array_push($timedCourses, array(
                     'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
                     'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
-                    'days'=>$section->getDayString(),
+                    'c_name'=>$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID'),
+                    'days'=>$section->getDayString_toUpper(),
                     'startTime'=>$section->getStartTime(),
-                    'endTime'=>$section->getEndTime()
+                    'endTime'=>$section->getEndTime(),
+                    'campus'=>$section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
+                        'classroom_id', 'building_id', 'campus_id', 'classroomID'),
+                    'building'=>$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
+                        'classroom_id', 'building_id', 'classroomID'),
+                    'room'=>$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID')
                 ));
             }else{
                 array_push($onlineCourses, array(
                     'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
-                    'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')
+                    'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
+                    'c_name'=>$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')
                 ));
             }
 
@@ -120,7 +127,7 @@ function load_ProfSet($allTheProfs, $db){
         $onlineCourses_json = count($onlineCourses) != 0 ? json_encode($onlineCourses) : json_encode(array());
         $body.= "
                 add_toProfSet('{$professor->getProfFirst()}','{$professor->getProfLast()}',{$professor->getProfId()},
-                $timedCourses_json, $onlineCourses_json);";
+                {$timedCourses_json}, {$onlineCourses_json});";
 
     }
     $body.="</script>";
@@ -147,6 +154,7 @@ function addProfessor(Professor $professor, Database $db){
     foreach($profSections as $section){
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
+        $name = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
         $title = $prefix . " " . $number;
         $dayString = $section->getDayString();
         if ($dayString != "online"){
@@ -169,6 +177,7 @@ function addProfessor(Professor $professor, Database $db){
         foreach($days as $day){
             array_push($eventObjects, json_encode(array(
                 "title" => $title,
+                "name"=> $name,
                 "start" => $daysToDates[$day]."T".$eventStart,
                 "end" => $daysToDates[$day]."T".$eventEnd,
                 "location" => $location,
@@ -189,7 +198,7 @@ function addProfessor(Professor $professor, Database $db){
     //<img> (disc)              id = save_prof<#>
 
     //Here's where we create the table of Professors on the "Professor Page".
-    $row = "<tr id='record_professorf{$id}' >
+    $row = "<tr id='record_professorf{$id}' >   <!-- NOT A TYPO (f)  -->
 
             <td>{$professor->getProfLast()}</td>
 			<td>{$professor->getProfFirst()}</td>

@@ -49,18 +49,30 @@ function add_toClassroomSet(theSet, classroomNumber, timedCourseObjects){
             nonStandard_courseObjects.push(
                 {
                     courseTitle: courseTitle,
+                    courseName: course.c_name,
                     courseDays: course.days,
                     startTime: formatted_startTime,
-                    endTime: formatted_endTime
+                    endTime: formatted_endTime,
+                    campus: course.campus,
+                    building: course.building,
+                    room: course.room,
+                    profFirst: course.profFirst,
+                    profLast: course.profLast
                 }
             );
         }else{
             t_courseObjects.push(
                 {
                     courseTitle: courseTitle,
+                    courseName: course.c_name,
                     courseDays: course.days,
                     startTime: formatted_startTime,
-                    endTime: formatted_endTime
+                    endTime: formatted_endTime,
+                    campus: course.campus,
+                    building: course.building,
+                    room: course.room,
+                    profFirst: course.profFirst,
+                    profLast: course.profLast
                 }
             );
         }

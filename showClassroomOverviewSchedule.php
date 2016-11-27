@@ -19,9 +19,17 @@ foreach($classrooms as $index=>$classroom){
         array_push($sections_json,array(
             'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
             'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
-            'days'=>$section->getDayString(),
+            'c_name'=>$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID'),
+            'days'=>$section->getDayString_toUpper(),
             'startTime'=>$section->getStartTime(),
-            'endTime'=>$section->getEndTime()
+            'endTime'=>$section->getEndTime(),
+            'campus'=>$section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
+                'classroom_id', 'building_id', 'campus_id', 'classroomID'),
+            'building'=>$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
+                'classroom_id', 'building_id', 'classroomID'),
+            'room'=>$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID'),
+            'profFirst'=>$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID'),
+            'profLast'=>$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')
         ));
     }
     $classrooms_json[$index] = array(

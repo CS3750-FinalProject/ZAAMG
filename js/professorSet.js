@@ -43,18 +43,26 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
             nonStandard_courseObjects.push(
                 {
                     courseTitle: courseTitle,
+                    courseName: course.c_name,
                     courseDays: course.days,
                     startTime: formatted_startTime,
-                    endTime: formatted_endTime
+                    endTime: formatted_endTime,
+                    campus: course.campus,
+                    building: course.building,
+                    room: course.room
                 }
             );
         }else{
             t_courseObjects.push(
                 {
                     courseTitle: courseTitle,
+                    courseName: course.c_name,
                     courseDays: course.days,
                     startTime: formatted_startTime,
-                    endTime: formatted_endTime
+                    endTime: formatted_endTime,
+                    campus: course.campus,
+                    building: course.building,
+                    room: course.room
                 }
             );
         }
@@ -63,12 +71,13 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
         var courseTitle = course.pref + " " + course.num;
         o_courseObjects.push(
             {
-                courseTitle: courseTitle
+                courseTitle: courseTitle,
+                courseName: course.c_name
             }
         );
 
     });
-    theProfSet.push(
+    theProfSet.push(          //theProfSet is an array variable declared on prof_page.php ~~ line 70ish
         {
             name: profName,
             id: profId,

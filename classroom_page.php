@@ -175,6 +175,7 @@ function addClassroom(Classroom $classroom, Database $db){
     foreach($classroomSections as $section){
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
+        $name = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
         $title = $prefix . " " . $number;
         $dayString = $section->getDayString();
         if ($dayString != "online"){
@@ -197,6 +198,7 @@ function addClassroom(Classroom $classroom, Database $db){
         foreach($days as $day){
             array_push($eventObjects, json_encode(array(
                 "title" => $title,
+                "name"=> $name,
                 "start" => $daysToDates[$day]."T".$eventStart,
                 "end" => $daysToDates[$day]."T".$eventEnd,
                 "location" => $location,
