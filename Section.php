@@ -212,6 +212,10 @@ class Section
         return $theLetters;
     }
 
+    public function getDayString_toUpper(){
+        return strtoupper($this->getDayString());
+    }
+
     #adding getters, most of them auto-generated, so fix things as needed.
     public function getSectionID(): int
     {

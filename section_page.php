@@ -16,7 +16,7 @@ $body = "
 </div>
 
     <div class='container'>
-      <div class='col-xs-12' id='sectionIndex'>
+      <div class='col-xs-12' id='sectionIndex' >
         <table class='list-data'>
           <tr>
             <th colspan='3'>Course</th>
@@ -59,10 +59,10 @@ function addSection(Section $section, $database){
                 {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>
                 <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}</em></small>
             </td>";
-                if ($section->getDayString() == ''){
+                if ($section->getDayString() == 'online'){
                     $row .= "<td><strong>Online</strong><br/>";
                 }else{
-                    $row .= "<td><strong>{$section->getDayString()}:</strong>"."
+                    $row .= "<td><strong>{$section->getDayString_toUpper()}:</strong>"."
                     {$section->getStartTime()} - {$section->getEndTime()}<br/>";
                 }
         $row .= "

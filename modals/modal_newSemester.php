@@ -10,11 +10,11 @@ echo '<div class="modal fade" id="newSemesterModal" tabindex="-1" role="dialog" 
                 <div class="form-group" >
                     <div class="col-xs-3">
                         <label for="semesterYear">Year</label>
-                        <input type="number" class="form-control" id="semesterYear" value=2017 >
+                        <input style="margin-bottom:10px" type="number" class="form-control" id="semesterYear" value=2017 >
                     </div>
                     <div class="col-xs-8">
                         <label for="semesterSeason">Season</label>
-                        <select class="form-control" id="semesterSeason" >
+                        <select style="margin-bottom:10px" class="form-control" id="semesterSeason" >
                             <option value="0">Please Select...</option>
                             <option value="Spring">Spring</option>
                             <option value="Summer">Summer</option>

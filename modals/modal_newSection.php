@@ -11,11 +11,12 @@ $body = "
                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
                 <h4 class='modal-title' id='section-label'>Create New Section</h4>
             </div>
-            <div class='modal-body' style='margin-bottom: 350px; '>
+            <div class='modal-body' style='margin-bottom: 360px; '>
                 <div class='form-group'>
-                    <div class='col-xs-7'>
-                        <label for='sectionCourse'>Course</label>
-                        <select class='form-control' id='sectionCourse'  >
+                <label for='sectionCourse' class='col-sm-3 control-label'>Course</label>
+                    <div class='col-xs-8'>
+
+                        <select style='margin-bottom: 10px' class='form-control' id='sectionCourse'  >
                             <option value='0'>Please Select...</option>";
 
                             $selectCourse = $database->getdbh()->prepare(
@@ -33,9 +34,10 @@ $body = "
                             }
                         $body .= "</select>
                     </div>
-                    <div class='col-xs-7'>
-                        <label for='sectionProfessor'>Professor</label>
-                        <select  class='form-control' id='sectionProfessor' >
+                    <label for='sectionProfessor' class='col-sm-3 control-label'>Professor</label>
+                    <div class='col-xs-8'>
+
+                        <select style='margin-bottom: 10px' class='form-control' id='sectionProfessor' >
 
                             <option value='0'>Please Select...</option>";
 
@@ -54,8 +56,9 @@ $body = "
 
                         $body .= "</select>
                     </div>
-                    <div class='col-xs-7'>
-                        <label for='sectionClassroom'>Classroom</label>
+                    <label for='sectionClassroom' class='col-sm-3 control-label'>Classroom</label>
+                    <div class='col-xs-8'>
+
                         <select class='form-control' id='sectionClassroom'  >
                             <option value='-1'>Please Select...</option>
                             <option value='0'>Online</option>";
@@ -88,7 +91,7 @@ $body = "
                 <div class='form-group' >
                     <div class='col-xs-4'>
                         <label for='sectionDays'>Days</label>
-                        <select multiple  class='form-control' id='sectionDays'  >
+                        <select multiple size='8' class='form-control' id='sectionDays'  >
                             <option value='online'>Online</option>
                             <option value='Monday'>Monday</option>
                             <option value='Tuesday'>Tuesday</option>
@@ -101,17 +104,17 @@ $body = "
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionStartTime'>Start Time</label>
-                        <input type='time' class='form-control' id='sectionStartTime'
+                        <input style='margin-bottom: 10px' type='time' class='form-control' id='sectionStartTime'
                             placeholder='09:30 AM' value='00:00:00' >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionEndTime'>End Time</label>
-                        <input type='time' class='form-control' id='sectionEndTime'
+                        <input style='margin-bottom: 10px' type='time' class='form-control' id='sectionEndTime'
                             placeholder='11:20 AM' value='00:00:00'  >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionSemester'>Semester</label>
-                        <select class='form-control' id='sectionSemester'  >
+                        <select  class='form-control' id='sectionSemester'  >
                             <option value='0'>Please Select...</option>
 ";
 
@@ -132,23 +135,25 @@ $body = "
                         </select>
                     </div>
 
-                    <div class='col-xs-2'>
+                    <div class='col-xs-4'>
                         <label for='sectionBlock'>Block</label>
-                        <select class='form-control' id='sectionBlock'>
+                        <select class='form-control' style='margin-bottom:10px' id='sectionBlock'>
                             <option value='0'>Full</option>
                             <option value='1'>First</option>
                             <option value='2'>Second</option>
                         </select>
                     </div>
 
-                    <div class='col-xs-2'>
+                    <div class='col-xs-4'>
                         <label for='sectionCapacity'>Capacity</label>
                         <input type='number' class='form-control' id='sectionCapacity' min='1' >
                     </div>
-                    <div class='col-xs-3'>
-                        <label class='checkbox-inline' for='sectionOnline'>
+                    <div class='col-xs-1'></div>
+                    <div class='col-xs-4'>
+                        <label style='margin-top: 30px; font-weight:bold' class='checkbox-inline' for='sectionOnline'>
                         <input type='checkbox' id='sectionOnline' value='1'>Online</label>
                     </div>
+
 
                 </div>
             </div>

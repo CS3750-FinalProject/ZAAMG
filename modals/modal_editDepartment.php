@@ -18,15 +18,17 @@ $body = "
                 <label for='pick_editDepartment'>Department</label>
                 <select size=5 class='form-control' id='pick_editDepartment' >";
 
+
                     $selectDepts = $database->getdbh()->prepare(
                         'SELECT dept_id, dept_code, dept_name FROM ZAAMG.Department
-                          ORDER BY dept_name ASC');
+                          ORDER BY dept_code ASC');
                     $selectDepts->execute();
                     $result = $selectDepts->fetchAll();
 
                     foreach($result as $dept){
-                        $body.= "<option value=".$dept['dept_id'].">"
-                            .$dept['dept_code']." ".$dept['dept_name']."</option>";
+                        $body.= "<option value=".$dept['dept_id'].">".
+         str_replace('~','&nbsp;',str_pad($dept['dept_code'],(12-strlen($dept['dept_code'])),'~'))
+                             .$dept['dept_name']."</option>";
                     }
 $body .= "
             </select>

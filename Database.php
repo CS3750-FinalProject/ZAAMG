@@ -29,9 +29,16 @@ class Database
      *      $orderBy:   might need this for sorting the Sections different ways
      */
     public function getAllSections($orderBy){
+
         $allSections = [];
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section");
+        //$stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Section");
+        $stmtSelect = $dbh->prepare("
+            SELECT s.*, c.course_prefix, c.course_number
+            FROM ZAAMG.Section s JOIN ZAAMG.Course c
+            ON s.course_id = c.course_id
+            ORDER BY c.course_prefix, c.course_number
+        ");
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();

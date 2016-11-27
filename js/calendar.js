@@ -6,6 +6,8 @@ $(document).ready(function(){
         // without rerendering, the event blocks get jacked when the window changes size
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
+
+
 });
 
 
@@ -689,3 +691,4 @@ var fixHeaders_prof = function(){
     }
 
 }
+

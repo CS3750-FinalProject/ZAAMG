@@ -13,11 +13,11 @@ echo '
                 <div class="form-group" >
                     <div class="col-xs-4">
                         <label for="courseCode">Code</label>
-                        <input type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
+                        <input style="margin-bottom:20px" type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
                     </div>
                     <div class="col-xs-8">
                         <label for="courseTitle">Title</label>
-                        <input type="text" class="form-control" id="courseTitle" placeholder="Course Title Here..." >
+                        <input style="margin-bottom:20px" type="text" class="form-control" id="courseTitle" placeholder="Course Title Here..." >
                     </div>
 
                 </div>
