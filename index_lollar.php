@@ -13,6 +13,7 @@ require_once 'modals/modal_editBuilding.php';
 require_once 'modals/modal_newCampus.php';
 require_once 'modals/modal_editCampus.php';
 require_once 'modals/modal_newDepartment.php';
+require_once 'modals/modal_editDepartment.php';
 $database = new Database();
 $body = "
 <!DOCTYPE html>

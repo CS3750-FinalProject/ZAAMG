@@ -21,6 +21,11 @@ var ModalEditing = function() {
                 loadBuildingFields();
             }
 
+            //if this Edit button has editDepartmentModal as an ancestor:
+            if($(this).parents('div#editDepartmentModal').length){
+                loadDepartmentFields();
+            }
+
         });
 
 
@@ -48,6 +53,7 @@ var ModalEditing = function() {
     })
 
     var loadFields = function(whichThing){
+        console.log(whichThing);
         switch (whichThing){
             case 'Semester':
                 loadSemesterFields();
@@ -57,6 +63,9 @@ var ModalEditing = function() {
                 break;
             case 'Building':
                 loadBuildingFields();
+                break;
+            case 'Department':
+                loadDepartmentFields();
                 break;
         }
     };
@@ -119,6 +128,26 @@ var ModalEditing = function() {
                 $('#editModal_buildingCode').val(data.code);
                 $('#editModal_buildingName').val(data.name);
                 $('#editModal_buildingCampus option[value=' + data.campus+']').attr('selected', 'selected');
+            },
+            error: function(data){
+                console.log(data.responseText);
+            }
+        });
+    }
+
+    var loadDepartmentFields = function(){
+        var pickedDepartmentId = $('#pick_editDepartment :selected').val();
+        console.log(pickedDepartmentId);
+        $.ajax({
+            type: 'POST',
+            url: 'loadDepartment_toEdit.php',
+            data: 'deptId=' + pickedDepartmentId,
+            dataType: 'json',
+            success: function(data)
+            {
+                $('#editModal_departmentCode').val(data.code);
+                $('#editModal_departmentName').val(data.name);
+
             },
             error: function(data){
                 console.log(data.responseText);

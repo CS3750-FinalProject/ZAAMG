@@ -18,15 +18,15 @@ $body = "
                 <label for='pick_editCampus'>Campus</label>
                      <select size='5' class='form-control'  id='pick_editCampus'>";
 
-$selectCampi = $database->getdbh()->prepare(
-    'SELECT campus_id, campus_name FROM ZAAMG.Campus
-                                                  ORDER BY campus_name ASC');
-$selectCampi->execute();
-$result = $selectCampi->fetchAll();
+                        $selectCampi = $database->getdbh()->prepare(
+                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
+                              ORDER BY campus_name ASC');
+                            $selectCampi->execute();
+                            $result = $selectCampi->fetchAll();
 
-foreach($result as $campus){
-    $body.= "<option value=".$campus['campus_id'].">".$campus['campus_name']."</option>";
-}
+                        foreach($result as $campus){
+                            $body.= "<option value=".$campus['campus_id'].">".$campus['campus_name']."</option>";
+                        }
 $body .= "
                 </select>
             </div>

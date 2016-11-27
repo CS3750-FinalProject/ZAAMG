@@ -340,6 +340,28 @@ class Database
         }
     }
 
+
+    public function getDepartment($id){
+        $theDepartment = null;
+        $dbh = $this->getdbh();
+        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Department`
+                                      WHERE `dept_id` = {$dbh->quote($id)}");
+        try{
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetchAll()[0];
+            $theDepartment = new Department(
+                $result['dept_id'],
+                $result['dept_name'],
+                $result['dept_code']
+            );
+
+            return $theDepartment;
+        }catch(Exception $e){
+            return "getDepartment: ".$e->getMessage();
+        }
+    }
+
+
     public function getdbh(){
         return $this->dbh;
     }
