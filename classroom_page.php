@@ -21,7 +21,7 @@ $body = "
             style='
             border-bottom: 1px solid #492365;
             margin-bottom: 15px;
-            max-height: 360px;
+            max-height: 440px;
             overflow-y: auto;
             '>
 

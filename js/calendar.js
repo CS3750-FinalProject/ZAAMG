@@ -107,10 +107,19 @@ function on_profRowClick(profRowId, sectionObjects){
  */
 function load_indProfRowEvents(sectionObjects){
     var events = [];
+    var onlineEvents = [];
     sectionObjects.forEach(function(section, i){
-        addNewEvent(section.title, section.start, section.end, section.location, section.classroom, section.professor,
-            section.online ? '#137c33' : '#583372', section.online, events)
+        if (section.online){
+            onlineEvents.push(section);
+        }else{
+            addNewEvent(section.title, section.start, section.end, section.location, section.classroom, section.professor,
+                '#583372', section.online, events)
+        }
     })
+    onlineEvents.forEach(function(section){
+        addNewEvent(section.title, section.start, section.end, section.location, section.classroom, section.professor,
+            '#137c33', section.online, events)
+    });
 
     return events;
 }
@@ -165,7 +174,6 @@ function addNewEvent(title, eventstart, eventend, location, classroom, professor
        }else{
            timedEvents.push(event);
        }
-
     });
     var minCourseTime = getMinTime(timedEvents, 0);
     var minHour = moment(minCourseTime, 'hh:mm:ss').hour();
@@ -185,16 +193,18 @@ function addNewEvent(title, eventstart, eventend, location, classroom, professor
         var starttime = '2016-11-13T';
         if (adj_minHour < 10) starttime += '0';
         starttime += adj_minHour + minCourseTime.substr(minCourseTime.indexOf(':'));
+        var startMoment = moment(starttime, 'YYYY-MM-DDThh:mm:ss');
 
-        var endtime = '2016-11-13T';
+       /* var endtime = '2016-11-13T';
         if (adj_minHour + 1 < 10) endtime += '0';
         var minutesMinus2 = parseInt(minCourseTime.substr(minCourseTime.indexOf(':')+1, 2)) - 2;
-        endtime += (adj_minHour + 1) + ':' + minutesMinus2  + minCourseTime.substr(minCourseTime.lastIndexOf(':'));
+        endtime += (adj_minHour + 1) + minCourseTime.slice(2);*/
+        var endMoment = startMoment.clone().add(58, 'm');
 
         eventsArray.push({
             title: title,
-            start: formatTime_fullCalendar(starttime),
-            end: formatTime_fullCalendar(endtime),
+            start: formatTime_fullCalendar(startMoment.format('YYYY-MM-DDThh:mm:ss')),
+            end: formatTime_fullCalendar(endMoment.format('YYYY-MM-DDThh:mm:ss')),
             color: color,
             location: "Online",
             professor: professor,
@@ -214,7 +224,7 @@ function getMinTime(eventsArray, hourChange){  //times come in looking like 2016
         if (Date.parse(eventTime) < Date.parse(minTime) )
             minTime = eventTime;
     });
-    if (minTime == '01/01/2017 23:59:00') minTime = '01/01/2017 07:30:00'
+    if (minTime == '01/01/2017 23:59:00') minTime = '01/01/2017 07:30:00';
     var hour = parseInt(minTime.substr(minTime.indexOf(' ')+1,2)) + hourChange;
     if (hour < 10) hour = '0' + hour;
     return hour + minTime.substr(minTime.indexOf(':'));

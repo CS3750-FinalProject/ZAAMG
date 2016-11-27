@@ -19,7 +19,7 @@ $body .= "
 
       <div class='col-xs-12' id='profIndex'
             style='
-            max-height: 360px;
+            max-height: 440px;
             overflow-y: auto;  '>
 
         <table class='list-data'>
