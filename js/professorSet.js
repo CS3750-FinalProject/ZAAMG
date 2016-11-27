@@ -11,7 +11,6 @@
 
 function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCourseObjects){
     var profName = profLast + ", " + profFirst;
-
     var t_courseObjects = [];
     var o_courseObjects = [];
     var nonStandard_courseObjects = [];
@@ -78,7 +77,6 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
             nonStandardCourses: nonStandard_courseObjects
         }
     );
-
 }
 
 

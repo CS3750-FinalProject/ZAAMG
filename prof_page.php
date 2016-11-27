@@ -92,6 +92,7 @@ function load_ProfSet($allTheProfs, $db){
         $onlineCourses = [];
         $timedCourses = [];
         $sections = $db->getProfSections($professor, null);
+
         foreach($sections as $section){
             if (!$section->getIsOnline()){
                 array_push($timedCourses, array(
@@ -107,18 +108,19 @@ function load_ProfSet($allTheProfs, $db){
                     'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')
                 ));
             }
-            $timedCourses_json = json_encode($timedCourses);
-            $onlineCourses_json = json_encode($onlineCourses);
+
+
         }
          /*  function add_toProfSet(profFirst (string), profLast (string), profId (int),
          *                          timedCourseObjects (array of JSON objects,
          *                          onlineCourseObjects (array of JSON objects)
          *   defined in professorSet.js
          */
+        $timedCourses_json = count($timedCourses) != 0 ? json_encode($timedCourses) : json_encode(array());
+        $onlineCourses_json = count($onlineCourses) != 0 ? json_encode($onlineCourses) : json_encode(array());
         $body.= "
                 add_toProfSet('{$professor->getProfFirst()}','{$professor->getProfLast()}',{$professor->getProfId()},
-                $timedCourses_json, $onlineCourses_json);
-            ";
+                $timedCourses_json, $onlineCourses_json);";
 
     }
     $body.="</script>";
