@@ -253,12 +253,12 @@ function addProfessor(Professor $professor, Database $db){
                 <label for='inlineEdit_profFirst{$id}' >First Name</label>
 
                 <input type='text' class='form-control' id='inlineEdit_profFirst{$id}'
-                placeholder='{$professor->getProfFirst()}' style='margin-bottom: 10px' >
+                value='{$professor->getProfFirst()}' style='margin-bottom: 10px' >
 
                 <label for='inlineEdit_profLast{$id}' >Last Name</label>
 
                 <input type='text' class='form-control' id='inlineEdit_profLast{$id}'
-                placeholder='{$professor->getProfLast()}' style='margin-bottom: 10px' >
+                value='{$professor->getProfLast()}' style='margin-bottom: 10px' >
 
             </td>
 
@@ -266,7 +266,7 @@ function addProfessor(Professor $professor, Database $db){
                 <label for='inlineEdit_profEmail{$id}' >Email</label>
 
                 <input type='email' class='form-control' id='inlineEdit_profEmail{$id}'
-                placeholder='{$professor->getProfEmail()}' style='margin-bottom: 10px'>
+                value='{$professor->getProfEmail()}' style='margin-bottom: 10px'>
 
             <label for='inlineEdit_profDept{$id}'>Department</label>
                         <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>";
@@ -292,13 +292,13 @@ $row.="
 
             <td colspan='2'>
                 <label for='inlineEdit_profReqHours{$id}'>Required Hours</label>
-                <input type='number' class='form-control' id='profinlineEdit_profReqHours{$id}'
+                <input type='number' class='form-control' id='inlineEdit_profReqHours{$id}'
                     style='margin-bottom: 10px'
-                    placeholder={$professor->getProfRequiredHours()}>
+                    value={$professor->getProfRequiredHours()}>
 
                 <label for='inlineEdit_profRelHours{$id}'>Release Hours</label>
                 <input type='number' class='form-control' id='inlineEdit_profRelHours{$id}'
-                    placeholder={$professor->getProfRelease()} style='margin-bottom: 10px'>
+                    value={$professor->getProfRelease()} style='margin-bottom: 10px'>
             </td>
             <td></td>
             <td>

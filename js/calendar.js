@@ -6,11 +6,7 @@ $(document).ready(function(){
         // without rerendering, the event blocks get jacked when the window changes size
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
-
-
 });
-
-
 
 
 /*
@@ -40,7 +36,6 @@ function loadPhpPage(page){
 function changePage(anchor){
     phpPages = {"sec":"section_page.php", "prof":"prof_page.php", "room":"room_page.php"};
     navbar_item = anchor.parentElement;
-
 
     switch (navbar_item.getAttribute('id')){
         case 'navbar_sec':

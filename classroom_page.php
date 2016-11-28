@@ -228,7 +228,7 @@ function addClassroom(Classroom $classroom, Database $db){
 
 
     //Here's where we create the table of Classrooms on the "Classroom Page".
-    $row = "<tr id='record_classRoom{$classroom->getClassroomID()}'>
+    $row = "<tr id='record_classRoom{$roomId}'>
 			<td>{$classroom->getClassroomProperty_Join_3('campus_name', 'Building', 'Campus',
                 'building_id', 'campus_id', 'buildId')}</td>
 			<td>{$classroom->getClassroomProperty('building_name', 'Building', 'building_id', 'buildId')}</td>
@@ -237,12 +237,10 @@ function addClassroom(Classroom $classroom, Database $db){
 			<td>{$classroom->getNumWorkstations()}</td>
 			<td>
 
-
-
             <!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
-			    <span id='seeCal_room{$classroom->getClassroomID()}'
-			    onclick='on_roomRowClick({$classroom->getClassroomID()}, [";
+			    <span id='seeCal_room{$roomId}'
+			    onclick='on_roomRowClick({$roomId}, [";
 
             /*function 'on_roomRowClick()' is defined in classroomCalendar.js
             on_roomRowClick(roomRowId (int), sectionObjects (array of objects from top of this function)*/
@@ -253,7 +251,7 @@ function addClassroom(Classroom $classroom, Database $db){
 
     // finish giving attributes to the <span> and close it...
     $row .= "])' class=' glyphicon glyphicon-calendar' style='margin-left: 15%' aria-hidden='true'></span>
-        <img src='img/pencil.png' class='action-edit' style='margin-left: 15%' id='pencil_room{$classroom->getClassroomID()}'/>
+        <img src='img/pencil.png' class='action-edit' style='margin-left: 15%' id='pencil_room{$roomId}'/>
 			</td>
 		  </tr>";
 
@@ -262,16 +260,16 @@ function addClassroom(Classroom $classroom, Database $db){
     *      the calendar displays.
     *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
     */
-    $row .= "<tr class='hide' id='calRow_room{$classroom->getClassroomID()}'>
+    $row .= "<tr class='hide' id='calRow_room{$roomId}'>
                 <td colspan='8' style='padding:0'>
                 <!-- roomCalendar_<id>:  the div that the individual calendar lives in. -->
-                <div class='indRoomCal' id='cal_room{$classroom->getClassroomID()}'></div>
+                <div class='indRoomCal' id='cal_room{$roomId}'></div>
                 </td>
             </tr>
             <!--<tr style='display:none'></tr>-->
 
 
-           <tr class='hide' id='edit_room{$classroom->getClassroomID()}'>
+           <tr class='hide' id='edit_room{$roomId}'>
             <td>
             <label for='inlineEdit_roomBuilding{$roomId}'>Campus/Building</label>
                         <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >";
@@ -300,17 +298,17 @@ $row.="
             <td>
                 <label for='inlineEdit_roomNumber{$roomId}'>Room Number</label>
                         <input type='text'  class='form-control' id='inlineEdit_roomNumber{$roomId}'
-                         placeholder='{$classroom->getClassroomNum()}' style='width: 60%; margin-bottom: 6px'>
+                         value='{$classroom->getClassroomNum()}' style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomCap{$roomId}'>Capacity</label>
                         <input type='number' class='form-control' id='inlineEdit_roomCap{$roomId}'
-                        placeholder='{$classroom->getClassroomCap()}' min=1 style='width: 60%; margin-bottom: 6px'>
+                        value='{$classroom->getClassroomCap()}' min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomComputers{$roomId}'>Computers</label>
                 <input type='number'  class='form-control' id='inlineEdit_roomComputers{$roomId}'
-                        placeholder='{$classroom->getNumWorkstations()}' min=1 style='width: 60%; margin-bottom: 6px'>
+                        value='{$classroom->getNumWorkstations()}' min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
             <td style='padding-bottom: 1%'>
             <div style='padding-bottom: 20%;' class='action-save hide' id='save_room{$roomId}'>

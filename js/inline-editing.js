@@ -72,9 +72,81 @@ var InlineEditing = function() {
     });
 
 
+
+
+    $('[id^=' + 'save_prof' +']').click(function(){
+        profId      = $(this).attr('id').split('save_prof').pop();
+        first       = $('#' + 'inlineEdit_profFirst' + profId).val();
+        last        = $('#' + 'inlineEdit_profLast' + profId).val();
+        email       = $('#' + 'inlineEdit_profEmail' + profId).val();
+        dept        = $('#' + 'inlineEdit_profDept' + profId + ' :selected').val();
+        reqHrs      = $('#' + 'inlineEdit_profReqHours' + profId).val();
+        relHrs      = $('#' + 'inlineEdit_profRelHours' + profId).val();
+
+        console.log(
+            "profId: " + profId + "\n" +
+            "first: " + first +  "\n" +
+            "last: " + last + "\n" +
+            "email: " + email +  "\n" +
+            "dept: " + dept + "\n" +
+            "reqHrs: " + reqHrs + "\n" +
+            "relHrs: " + relHrs + "\n");
+
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateProfessor.php",
+            data:
+            "profId="       + profId +
+            "&first="       + first +
+            "&last="        + last +
+            "&email="       + email +
+            "&dept="        + dept +
+            "&reqHrs="      + reqHrs +
+            "&relHrs="      + relHrs,
+            success: function(msg) {
+                console.log("message from updateProfessor: " + msg);
+                loadPhpPage("prof_page.php");
+            }
+        });
+
+    });
+
+
+
+    $('[id^=' + 'save_room' +']').click(function(){
+        roomId      = $(this).attr('id').split('save_room').pop();
+        building       = $('#' + 'inlineEdit_roomBuilding' + roomId + ' :selected').val();
+        number        = $('#' + 'inlineEdit_roomNumber' + roomId).val();
+        cap       = $('#' + 'inlineEdit_roomCap' + roomId).val();
+        computers        = $('#' + 'inlineEdit_roomComputers' + roomId).val();
+
+        console.log(
+            "roomId: "      + roomId + "\n" +
+            "building: "    + building +  "\n" +
+            "number: "      + number + "\n" +
+            "cap: "         + cap +  "\n" +
+            "computers: "   + computers);
+
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateClassroom.php",
+            data:
+            "roomId="           + roomId +
+            "&building="        + building +
+            "&number="          + number +
+            "&cap="             + cap +
+            "&computers="       + computers,
+            success: function(msg) {
+                console.log("message from updateClassroom: " + msg);
+                loadPhpPage("classroom_page.php");
+            }
+        });
+
+    });
+
+
     $('[id^=' + 'sect_delete' +']').click(function(){
         var secId       = $(this).attr('id').split('sect_delete').pop();
-        console.log(secId);
         $.ajax({
             type: "POST",
             url: "action/action_deleteSection.php",
@@ -84,7 +156,35 @@ var InlineEditing = function() {
                 loadPhpPage("section_page.php");
             }
         });
+    });
 
+
+    $('[id^=' + 'prof_delete' +']').click(function(){
+        var profId = $(this).attr('id').split('prof_delete').pop();
+        $.ajax({
+            type: "POST",
+            url: "action/action_deleteProfessor.php",
+            data:   "profId="    + profId,
+            success: function(msg) {
+                console.log("message from deleteProfessor: " + msg);
+                loadPhpPage("prof_page.php");
+            }
+        });
+    });
+
+
+
+    $('[id^=' + 'room_delete' +']').click(function(){
+        var roomId = $(this).attr('id').split('room_delete').pop();
+        $.ajax({
+            type: "POST",
+            url: "action/action_deleteClassroom.php",
+            data:   "roomId="    + roomId,
+            success: function(msg) {
+                console.log("message from deleteClassroom: " + msg);
+                loadPhpPage("classroom_page.php");
+            }
+        });
     });
 
 
