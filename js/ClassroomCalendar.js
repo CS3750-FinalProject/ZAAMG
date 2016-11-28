@@ -13,18 +13,17 @@ $(document).ready(function() {
 
 
 function load_onlineSections(){
+    $('#room_ajax-loader').removeClass('hide');
+
     $.ajax({
         url: 'showOnlineSchedule.php',
         dataType: 'json',
         success: function(data)
         {
+
             var theOnlineSet = [];
             //add_toOnlineSet(theOnlineSet, data);
             displayClassroomSchedule(data, true);
-            data.forEach(function(obj){
-                console.log(obj);
-            })
-
         },
         error: function(data){
             console.log(data.responseText);
@@ -33,6 +32,8 @@ function load_onlineSections(){
 };
 
 function load_buildingSections(buildingId){
+    $('#room_ajax-loader').removeClass('hide');
+
     var theClassroomSet = [];
 
     $.ajax({
@@ -42,11 +43,13 @@ function load_buildingSections(buildingId){
         dataType: 'json',                //data format
         success: function(classrooms)          //on receive of reply
         {
+
             classrooms.forEach(function(classroom){
                 add_toClassroomSet(theClassroomSet, classroom.roomNumber, classroom.sections);
             })
             displayClassroomSchedule(theClassroomSet);
-            console.log(classrooms);
+            $('#room_ajax-loader').addClass('hide');
+
         },
         error: function(msg){
             console.log("load_buildingSections: ", msg);
@@ -223,7 +226,7 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
                     container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
                 }
             );
-        },
+        }
     });
 
 }
@@ -528,10 +531,11 @@ function displayClassroomSchedule(theClassroomSet, isOnline) {
     //add a boolean parameter for whether the set is online or not
     //if online, send the Set to method createOnlineEventsSet,
     //else send to createClassroomEventsSet
-
     var theEvents = isOnline ? createOnlineEventsSet(theClassroomSet) : createClassroomEventsSet(theClassroomSet);
 
     $('#classroomOverviewSchedule').fullCalendar('destroy');
+
+
     $('#classroomOverviewSchedule').fullCalendar({
         header: {
             left:   '',
@@ -632,10 +636,14 @@ function displayClassroomSchedule(theClassroomSet, isOnline) {
 
         },
         eventAfterAllRender: function(event, element, view){
+            $('#room_ajax-loader').addClass('hide');
+            $('#rooms_ajax-loader').addClass('hide');
+
             fixHeaders_classroom(); //this function changes the innerHTML of the weekday headers when we switch weeks
             //no need for button listeners
         }
     });
+
 
 }
 

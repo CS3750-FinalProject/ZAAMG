@@ -11,7 +11,10 @@ $body = "
 
 <div class='col-xs-12'>
     <div class='page-header'>
-          <h1>Classrooms <small>for Spring 2017</small></h1>
+          <h1 style='display:inline'>Classrooms <small>for Spring 2017</small></h1>
+
+          <img src='img/ajax-loader.gif'  id='rooms_ajax-loader'
+          style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>
     </div>
 </div>
 
@@ -77,11 +80,14 @@ $body .= "<div class='form-group' style=   'padding-left: 10px;
             <div class='col-xs-3'>
             <select type='text' class='form-control' id='pickBuilding' name='pickBuilding'
              disabled='true'>
-                  <option value='0'>Building...</option> </select>";
+                  <option value='0'>Building...</option>
+             </select>";
 
 
 $body .= "
         </div>  <!-- end of 'col-xs-3'  -->
+        <img src='img/ajax-loader.gif'  id='room_ajax-loader' class='hide'
+          style='display:inline-block; padding-left: 3%; padding-top: 8px'/>
         </div> <!-- end of 'form-group'  -->";
 
 $body .= "
@@ -122,6 +128,7 @@ $body .= "
 
 
 $('#pickBuilding').change(function(){
+
 
 var buildingId = $(this).val();
 load_buildingSections(buildingId);

@@ -685,6 +685,7 @@ function displayTest(theProfSet) {
 
         },
         eventAfterAllRender: function(event, element, view){
+            $('#prof_ajax-loader').addClass('hide');
             fixHeaders_prof(); //this function changes the innerHTML of the weekday headers when we switch weeks
             //no need for button listeners
         }

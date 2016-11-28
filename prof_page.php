@@ -10,7 +10,12 @@ $body = "
 $body .= "
 <div class='col-xs-12' >
         <div class='page-header'>
-          <h1>Professors <small>for Spring 2017</small></h1>
+
+          <h1 style='display:inline'>Professors <small>for Spring 2017</small></h1>
+
+          <img src='img/ajax-loader.gif'  id='prof_ajax-loader'
+          style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>
+
         </div>
 </div>
 
