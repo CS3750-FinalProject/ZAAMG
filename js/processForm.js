@@ -277,12 +277,19 @@ $(function() {
             daysString = "online";
         //alert(daysInt);
         //alert( $("#sectionStartTime").val());
+         var timePattern = /[0-1][0-9]:[0-5][0-9] [AP]M/i;
         var sectionStartTime = $("#sectionStartTime").val();
         var sectionEndTime = $("#sectionEndTime").val();
-        if (sectionStartTime == '')
-            sectionStartTime = '00:00:00';
-        if (sectionEndTime == "")
-            sectionEndTime = '00:00:00';
+        if (!timePattern.test(sectionStartTime)){
+            window.alert("Invalid start time entered! Please enter a valid time in this format:\n 00:00 AM");
+            this.modal("show");
+        }
+            //sectionStartTime = '00:00:00';
+        if (!timePattern.test(sectionEndTime)){
+            window.alert("Invalid end time entered! Please enter a valid time in this format:\n 00:00 AM");
+            this.modal("show");
+        }
+            //sectionEndTime = '00:00:00';
         var sectionIsOnline = $("#sectionOnline:checkbox:checked").length > 0 ? 1 : 0;
         var sectionBlock = $("#sectionBlock").val();
         var sectionSemester = $("#sectionSemester").val();
