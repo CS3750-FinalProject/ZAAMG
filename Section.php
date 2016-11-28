@@ -255,6 +255,9 @@ class Section
         return $theBlock;
     }
 
+    public function getBlock_int(){
+        return $this->block;
+    }
 
     public function getSemester()
     {

@@ -1,7 +1,10 @@
 <?php
 
+require_once '../Database.php';
 require_once '../Section.php';
 
+
+$sectionId = isset($_POST['sectionId']) ? $_POST['sectionId'] : "not entered";
 $sectionCourse = isset($_POST['sectionCourse']) ? $_POST['sectionCourse'] : "not entered";
 $sectionProfessor = isset($_POST['sectionProfessor']) ? $_POST['sectionProfessor'] : "not entered";
 $sectionClassroom = isset($_POST['sectionClassroom']) ? $_POST['sectionClassroom'] : "not entered";
@@ -13,22 +16,32 @@ $sectionBlock = isset($_POST['sectionBlock']) ? $_POST['sectionBlock'] : "not en
 $sectionCapacity = isset($_POST['sectionCapacity']) ? $_POST['sectionCapacity'] : "not entered";
 $sectionSemester = isset($_POST['sectionSemester']) ? $_POST['sectionSemester'] : "not entered";
 
+$database = new Database();
+$dbh = $database->getdbh();
 
+$message = "";
 
-$section = new Section(NULL, $sectionCourse, $sectionProfessor, $sectionClassroom,
-    $sectionBlock, $sectionDays, $sectionStartTime, $sectionEndTime, $sectionIsOnline,
-    $sectionSemester, $sectionCapacity);
+$updateStmt = $dbh->prepare(
+    "  UPDATE ZAAMG.Section
+        SET course_id           = $sectionCourse,
+            prof_id             = $sectionProfessor,
+            classroom_id        = $sectionClassroom,
+            sem_id              = $sectionSemester,
+            section_days        = '$sectionDays',
+            section_start_time  = '$sectionStartTime',
+            section_end_time    = '$sectionEndTime',
+            section_is_online   = $sectionIsOnline,
+            section_block       = $sectionBlock,
+            section_capacity    = $sectionCapacity
+        WHERE section_id = $sectionId
+    "
+);
 
-
-
-
-$result = $section->sectionExists($sectionCourse, $sectionProfessor, $sectionClassroom,
-    $sectionSemester, $sectionDays, $sectionStartTime);
-
-if ($result == "does not exist"){
-    $section->insertNewSection();
+try{
+    $updateStmt->execute();
+    $message = "success";
+}catch(Exception $e){
+    $message = "getAllProfessors: ".$e->getMessage();
 }
 
-
-
-
+echo $message;

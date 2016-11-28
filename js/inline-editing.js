@@ -7,10 +7,10 @@ var InlineEditing = function() {
 
             theRecordIDwChar = theRecordID.substr(theRecordID.indexOf(theNum)-1);
 
-            console.log("parentID: " + theRecordID);
+            /*console.log("parentID: " + theRecordID);
             console.log("theID: " + theID);
             console.log("theRecordIDwChar: " + theRecordIDwChar);
-            console.log("theNum: " + theNum);
+            console.log("theNum: " + theNum);*/
 
             $('[id$=' + theID + ']').toggleClass('hide');
             $('[id^=' + 'record_' +'][id$=' + theRecordIDwChar + ']').toggleClass('inline_editing_record');
@@ -19,6 +19,75 @@ var InlineEditing = function() {
     }
 
     toggleHideClass();
+
+    $('[id^=' + 'save_sect' +']').click(function(){
+        secId       = $(this).attr('id').split('save_sect').pop();
+        courseId    = $('#' + 'inlineEdit_sectCourse' + secId + ' :selected').val();
+        profId      = $('#' + 'inlineEdit_sectProf' + secId + ' :selected').val();
+        roomId      = $('#' + 'inlineEdit_sectRoom' + secId + ' :selected').val();
+        days        = $('#' + 'inlineEdit_sectDays' + secId).val().join("");
+        start       = formatTime($('#' + 'inlineEdit_sectStartTime' + secId).val());
+        end         = formatTime($('#' + 'inlineEdit_sectEndTime' + secId).val());
+        semester    = $('#' + 'inlineEdit_sectSem' + secId + ' :selected').val();
+        block       = $('#' + 'inlineEdit_sectBlock' + secId + ' :selected').val();
+        cap         = $('#' + 'inlineEdit_sectCap' + secId).val();
+        online      = $('#' + 'inlineEdit_sectOnline' + secId).is(':checked') ? 1 : 0;
+
+        console.log(
+            "secId: " + secId + "\n" +
+                "courseId: " + courseId +  "\n" +
+                "profId: " + profId + "\n" +
+                "roomId: " + roomId +  "\n" +
+                "days: " + days + "\n" +
+                "start: " + start + "\n" +
+                "end: " + end + "\n" +
+                "semester: " + semester + "\n" +
+                "block: " + block + "\n" +
+                "cap: " + cap + "\n" +
+                "online: " + online);
+
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateSection.php",
+            data:   "sectionId="            + secId +
+                    "&sectionCourse="       + courseId +
+                    "&sectionProfessor="    + profId +
+                    "&sectionClassroom="    + roomId +
+                    "&sectionDays="         + days +
+                    "&sectionStartTime="    + start +
+                    "&sectionEndTime="      + end +
+                    "&sectionIsOnline="     + online +
+                    "&sectionBlock="        + block +
+                    "&sectionCapacity="     + cap +
+                    "&sectionSemester="     + semester,
+            success: function(msg) {
+                console.log("message from updateSection: " + msg);
+                loadPhpPage("section_page.php");
+            }
+        });
+
+
+
+    });
+
+    function formatTime(time){
+        if (time.indexOf('AM') > -1){
+            time = time.slice(0,5) + ":00";
+        }
+        else if (time.indexOf('PM') > -1){
+            var hour = parseInt(time.slice(0,2));
+            if (hour < 12){
+                hour += 12;
+            }
+            time = hour + time.slice(2,5) + ":00";
+        }
+        else{
+            time = time + ":00";
+        }
+        return time;
+    };
+
+
 }
 
 
