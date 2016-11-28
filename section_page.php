@@ -83,7 +83,7 @@ $row .= "<small><em>{$section->getBlock()}</em></small></td>
             </small></td>
         <td>
             <img src='img/pencil.png' class='action-edit' id='pencil_sect{$secId}' />
-            <img src='img/close.png' class='action-delete'/></td>
+        </td>
    </tr>
 
 
@@ -243,7 +243,25 @@ $row.="</select>
                         </div>
             </td>
             <td></td>
-            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_sect{$secId}'/></td>
+            <td>
+            <div style='padding-bottom: 20%;' class='action-save hide' id='save_sect{$secId}'>
+                <button type=button class='btn btn-xs btn-success'>Update&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-floppy-save'></button>
+                </span>
+            </div>
+            <div style='padding-bottom:90%;' id='sect_delete{$secId}'>
+                <button type=button class='btn btn-xs btn-danger'>Delete&nbsp;&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-remove'></button>
+                </span>
+            </div>
+            <div id='cancel_sect{$secId}' class='action-edit hide'>
+                <button type=button class='btn btn-xs btn-warning'>Cancel&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-remove'></button>
+                </span>
+                </div>
+            </td>
+            <!-- <img src='img/save.png' width='30px'  class='action-save hide' id='save_sect{$secId}'/>-->
+            <!-- <img src='img/close.png' class='action-delete' id='sect_delete{$secId}'/> -->
     </tr>
 
     <tr class='hide' id='hiddenRow_sect{$secId}'></tr>

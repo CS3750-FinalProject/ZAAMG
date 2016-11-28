@@ -88,7 +88,7 @@ function on_profRowClick(profRowId, sectionObjects){
     //this is what initializes and creates the individual calendar.
     //it's defined in this file (calendar.js)
     displayCalendar(profRowId, theEvents);
-
+    console.log(theEvents);
 
     //here the table row containing the calendar is shown or hidden:
     if ($('span#' + 'seeCal_prof' + profRowId).attr('class').includes("menu-up")){
@@ -97,7 +97,7 @@ function on_profRowClick(profRowId, sectionObjects){
         $('div#'+'cal_prof'+ profRowId).show();
         currentDate = $('#profOverviewSchedule').fullCalendar('getDate');
     }
-    $('span#' + 'seeCal_prof' + profRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+    $('span#' + 'seeCal_prof' + profRowId).toggleClass('glyphicon-calendar  glyphicon-menu-up');
 
 }
 
@@ -455,6 +455,7 @@ function createEventsSet_test(theSet){
             if (!overPageBreak){
                 var startMoment = moment(course.startTime, 'h:mm A').format('h:mm A');
                 var endMoment = moment(course.endTime, 'h:mm A').format('h:mm A');
+                if (theCourseStart == undefined)
                 events.push(
                     {
                         title: course.courseTitle + '\n' + startMoment + ' - ' + endMoment,

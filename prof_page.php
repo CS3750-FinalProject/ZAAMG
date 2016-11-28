@@ -213,11 +213,11 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfRelease()}</td>
 			<td>to be calc...</td>
 			<td>
-			    <img src='img/pencil.png' class='action-edit' id='pencil_prof{$id}'/>
-			    <img src='img/close.png' class='action-delete'>
+
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
+
 			    <span id='seeCal_prof{$id}'
 			    onclick='on_profRowClick({$id}, [";
 
@@ -230,7 +230,8 @@ function addProfessor(Professor $professor, Database $db){
     }
 
     // finish giving attributes to the <span> and close it...
-    $row .= "])' class='glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+    $row .= "])' class='glyphicon glyphicon-calendar' aria-hidden='true' style='margin-left: 15%'></span>
+<img src='img/pencil.png' class='action-edit' style='margin-left: 15%' id='pencil_prof{$id}'/>
 			</td>
 		  </tr>";
 
@@ -300,7 +301,25 @@ $row.="
                     placeholder={$professor->getProfRelease()} style='margin-bottom: 10px'>
             </td>
             <td></td>
-            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$id}'/></td>
+            <td>
+                <div style='padding-bottom: 20%;' class='action-save hide' id='save_prof{$id}'>
+                <button type=button class='btn btn-xs btn-success'>Update&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-floppy-save'></button>
+                </span>
+                </div>
+                <div id='prof_delete{$id}' style='padding-bottom: 50%;'>
+                <button type=button class='btn btn-xs btn-danger'>Delete&nbsp;&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-trash'></button>
+                </span>
+                </div>
+                <div id='cancel_prof{$id}' class='action-edit hide'>
+                <button type=button class='btn btn-xs btn-warning'>Cancel&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-remove'></button>
+                </span>
+                </div>
+            </td>
+
+          <!--  <img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$id}'/> -->
           </tr>
 
             ";

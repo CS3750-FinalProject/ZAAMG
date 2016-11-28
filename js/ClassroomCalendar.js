@@ -86,7 +86,7 @@ function on_roomRowClick(roomRowId, sectionObjects){
         $('div#'+'cal_room'+ roomRowId).show();
         currentDate = $('#classroomOverviewSchedule').fullCalendar('getDate');
     }
-    $('span#' + 'seeCal_room' + roomRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+    $('span#' + 'seeCal_room' + roomRowId).toggleClass('glyphicon-calendar glyphicon-menu-up');
 
 }
 
@@ -220,7 +220,7 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
                     html: true,
                     title: "<strong>" + event.title + "<br>" + event.name + "</strong>",  //some html has to be in the title or it won't work
                     content: event.professor + "<br>" + event.location + " " + room + "<br>" + timeString,
-                    trigger: 'hover click',
+                    trigger: 'hover',
                     placement: "right",
                     selector: event,
                     container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything

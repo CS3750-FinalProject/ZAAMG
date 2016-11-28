@@ -1,16 +1,19 @@
 var InlineEditing = function() {
     var toggleHideClass = function() {
         $('.action-edit, .action-save, .action-delete').click(function() {
-            theRecordID = $(this).parent().parent().attr('id').split('_').pop();
-            theID = $(this).attr('id').split('_').pop();
-            theNum = theID.replace(/\D/g,'');  //strip out just the id number
+
+            if ($(this).attr('id').indexOf('_delete') == -1){
+                theID = $(this).attr('id').split('_').pop();
+                theRecordID = $(this).parent().parent().attr('id').split('_').pop();
+                theNum = theID.replace(/\D/g,'');  //strip out just the id number
+            }
 
             theRecordIDwChar = theRecordID.substr(theRecordID.indexOf(theNum)-1);
 
-            /*console.log("parentID: " + theRecordID);
+            console.log("parentID: " + theRecordID);
             console.log("theID: " + theID);
             console.log("theRecordIDwChar: " + theRecordIDwChar);
-            console.log("theNum: " + theNum);*/
+            console.log("theNum: " + theNum);
 
             $('[id$=' + theID + ']').toggleClass('hide');
             $('[id^=' + 'record_' +'][id$=' + theRecordIDwChar + ']').toggleClass('inline_editing_record');
@@ -66,9 +69,24 @@ var InlineEditing = function() {
             }
         });
 
+    });
 
+
+    $('[id^=' + 'sect_delete' +']').click(function(){
+        var secId       = $(this).attr('id').split('sect_delete').pop();
+        console.log(secId);
+        $.ajax({
+            type: "POST",
+            url: "action/action_deleteSection.php",
+            data:   "sectionId="    + secId,
+            success: function(msg) {
+                console.log("message from deleteSection: " + msg);
+                loadPhpPage("section_page.php");
+            }
+        });
 
     });
+
 
     function formatTime(time){
         if (time.indexOf('AM') > -1){

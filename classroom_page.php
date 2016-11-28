@@ -236,8 +236,8 @@ function addClassroom(Classroom $classroom, Database $db){
 			<td> {$classroom->getClassroomCap()}</td>
 			<td>{$classroom->getNumWorkstations()}</td>
 			<td>
-			<img src='img/pencil.png' class='action-edit' id='pencil_room{$classroom->getClassroomID()}'/>
-			<img src='img/close.png' class='action-delete'>
+
+
 
             <!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
@@ -252,7 +252,8 @@ function addClassroom(Classroom $classroom, Database $db){
     }
 
     // finish giving attributes to the <span> and close it...
-    $row .= "])' class=' glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+    $row .= "])' class=' glyphicon glyphicon-calendar' style='margin-left: 15%' aria-hidden='true'></span>
+        <img src='img/pencil.png' class='action-edit' style='margin-left: 15%' id='pencil_room{$classroom->getClassroomID()}'/>
 			</td>
 		  </tr>";
 
@@ -311,8 +312,22 @@ $row.="
                 <input type='number'  class='form-control' id='inlineEdit_roomComputers{$roomId}'
                         placeholder='{$classroom->getNumWorkstations()}' min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
-            <td style='padding-bottom: 1%'><img src='img/save.png' width='30px' class='action-save hide'
-                id='save_room{$classroom->getClassroomID()}'/>
+            <td style='padding-bottom: 1%'>
+            <div style='padding-bottom: 20%;' class='action-save hide' id='save_room{$roomId}'>
+                <button type=button class='btn btn-xs btn-success'>Update&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-floppy-save'></button>
+                </span>
+                </div>
+                <div id='room_delete{$roomId}' style='padding-bottom: 50%;'>
+                <button type=button class='btn btn-xs btn-danger'>Delete&nbsp;&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-trash'></button>
+                </span>
+                </div>
+                <div id='cancel_room{$roomId}' class='action-edit hide'>
+                <button type=button class='btn btn-xs btn-warning'>Cancel&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-remove'></button>
+                </span>
+                </div>
             </td>
           </tr>
             ";

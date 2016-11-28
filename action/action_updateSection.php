@@ -41,7 +41,7 @@ try{
     $updateStmt->execute();
     $message = "success";
 }catch(Exception $e){
-    $message = "getAllProfessors: ".$e->getMessage();
+    $message = "action_updateSection: ".$e->getMessage();
 }
 
 echo $message;
