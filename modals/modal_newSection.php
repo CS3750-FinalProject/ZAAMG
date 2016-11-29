@@ -92,7 +92,7 @@ $body = "
                     <div class='col-xs-4'>
                         <label for='sectionDays'>Days</label>
                         <select multiple size='8' class='form-control' id='sectionDays'  >
-                            <option value='online'>Online</option>
+                            <option value='Online'>Online</option>
                             <option value='Monday'>Monday</option>
                             <option value='Tuesday'>Tuesday</option>
                             <option value='Wednesday'>Wednesday</option>
@@ -115,8 +115,7 @@ $body = "
                     <div class='col-xs-4'>
                         <label for='sectionSemester'>Semester</label>
                         <select  class='form-control' id='sectionSemester'  >
-                            <option value='0'>Please Select...</option>
-";
+                            <option value='0'>Please Select...</option>";
 
                             $selectSem = $database->getdbh()->prepare(
                                 'SELECT sem_id, sem_season, sem_year, sem_start_date

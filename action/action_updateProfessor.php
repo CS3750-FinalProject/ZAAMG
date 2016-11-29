@@ -11,14 +11,17 @@ $email = isset($_POST['email']) ? $_POST['email'] : "not entered";
 $dept = isset($_POST['dept']) ? $_POST['dept'] : "not entered";
 $reqHrs = isset($_POST['reqHrs']) ? $_POST['reqHrs'] : "not entered";
 $relHrs = isset($_POST['relHrs']) ? $_POST['relHrs'] : "not entered";
+$action = isset($_POST['action']) ? $_POST['action'] : "not entered";
+
 
 $database = new Database();
 $dbh = $database->getdbh();
 
 $message = "";
 
-$updateStmt = $dbh->prepare(
-    "  UPDATE ZAAMG.Professor
+if ($action == 'update'){
+    $updateStmt = $dbh->prepare(
+        "  UPDATE ZAAMG.Professor
         SET prof_id           = $profId,
             prof_first        = '$first',
             prof_last         = '$last',
@@ -26,15 +29,46 @@ $updateStmt = $dbh->prepare(
             dept_id           = $dept,
             prof_req_hours    = $reqHrs,
             prof_rel_hours    = $relHrs
-        WHERE prof_id = $profId
-    "
-);
+        WHERE prof_id = $profId");
+    try{
+        $updateStmt->execute();
+        $message = "success";
+    }catch(Exception $e){
+        $message = "action_updateProfessor: ".$e->getMessage();
+    }
+}else if ($action == 'delete'){
+    $deleteStmt = $dbh->prepare(
+        "  DELETE FROM ZAAMG.Professor
+        WHERE prof_id = $profId");
 
-try{
-    $updateStmt->execute();
-    $message = "success";
-}catch(Exception $e){
-    $message = "action_updateProfessor: ".$e->getMessage();
+    try{
+        $deleteStmt->execute();
+        $message = "success";
+    }catch(Exception $e){
+        $message = "action_deleteProfessor: ".$e->getMessage();
+    }
 }
 
-echo $message;
+
+$selectProf = $dbh->prepare(
+    'SELECT * FROM ZAAMG.Professor
+      ORDER BY prof_last ASC');
+$selectProf->execute();
+$professors = $selectProf->fetchAll();
+$professors_json = [];
+
+foreach($professors as $professor){
+    $professors_json[] = array(
+        'id'=>$professor['prof_id'],
+        'first'=>$professor['prof_first'],
+        'last'=>$professor['prof_last'],
+        'email'=>$professor['prof_email'],
+        'dept'=>$professor['dept_id'],
+        'req'=>$professor['prof_req_hours'],
+        'rel'=>$professor['prof_rel_hours']
+    );
+};
+
+
+
+echo json_encode($professors_json);  // to use in refreshing dropdown lists inside modals

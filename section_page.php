@@ -113,53 +113,10 @@ $row .= "<small><em>{$section->getBlock()}</em></small></td>
 $row .= "</select>
 
         <label for='inlineEdit_sectProf{$secId}'>Professor</label>
-        <select  class='form-control' id='inlineEdit_sectProf{$secId}' style='margin-bottom: 10px'>";
-
-            $selectProf = $database->getdbh()->prepare(
-                'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
-                  ORDER BY prof_last ASC');
-            $selectProf->execute();
-            $result = $selectProf->fetchAll();
-
-            foreach($result as $prof){
-                if ($prof['prof_id'] == $section->getProfID()){
-                    $row .='<option selected value='.$prof['prof_id']
-                        .'>';
-                }else{
-                    $row .='<option value='.$prof['prof_id']
-                        .'>';
-                }
-                $row .=$prof['prof_last'].', '.$prof['prof_first']
-                    .'</option>';
-            }
-$row .= "</select>
+        <select  class='form-control' id='inlineEdit_sectProf{$secId}' style='margin-bottom: 10px'></select>
 
         <label for='inlineEdit_sectRoom{$secId}'>Classroom</label>
-        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectRoom{$secId}'>
-            <option value='0'>Online</option>";
-
-                    $selectRoom = $database->getdbh()->prepare(
-                        "SELECT classroom_id, campus_name, building_name, classroom_number
-                          FROM ZAAMG.Campus c JOIN ZAAMG.Building b
-                          ON c.campus_id = b.campus_id
-                          JOIN ZAAMG.Classroom r
-                          ON b.building_id = r.building_id
-                          ORDER BY campus_name ASC");
-                    $selectRoom->execute();
-                    $result = $selectRoom->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach($result as $room){
-                        if ($room['classroom_id'] == $section->getClassroomID()){
-                            $row .= '<option selected value='.$room['classroom_id'].'>';
-                        }else{
-                            $row .= '<option value='.$room['classroom_id'].'>';
-                        }
-                        $row .= $room['campus_name'].', '
-                            .$room['building_name'].': '
-                            .$room['classroom_number']
-                            .'</option>';
-                    }
-$row .= "</select>
+        <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectRoom{$secId}'></select>
          </td>
 
         <td  style='padding-left: 1%'>
@@ -197,26 +154,7 @@ $row.="</select>
 
     <td  style='padding-bottom: 1%; padding-left: 1%'>
         <label for='inlineEdit_sectSem{$secId}'>Semester</label>
-            <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectSem{$secId}'>";
-
-            $selectSem = $database->getdbh()->prepare(
-                'SELECT sem_id, sem_season, sem_year, sem_start_date
-                  FROM ZAAMG.Semester
-                  ORDER BY sem_start_date DESC');
-            $selectSem->execute();
-            $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach($result as $sem){
-                if ($sem['sem_id'] == $section->getSemester()){
-                    $row .= '<option selected value='.$sem['sem_id'].'>';
-                }else{
-                    $row .= '<option value='.$sem['sem_id'].'>';
-                }
-                $row .=$sem['sem_year'].' '
-                .$sem['sem_season']
-                .'</option>';
-            }
-            $row .= "
+            <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectSem{$secId}'>
             </select>
 
             <label for='inlineEdit_sectBlock{$secId}'>Block</label>
@@ -234,10 +172,7 @@ $row.="</select>
 
             <div style='width: 55%; margin-left: 2%'>
             <label class='checkbox-inline' for='inlineEdit_sectOnline{$secId}' style='font-weight: bold;'>
-            <input type='checkbox'";
-
-    $row .= $section->getIsOnline() ? "checked" : "";
-    $row .= " id='inlineEdit_sectOnline{$secId}'
+            <input type='checkbox'  id='inlineEdit_sectOnline{$secId}'
                             value='1' style='transform: scale(1.5); '>
                             &nbsp;&nbsp;&nbsp;Online</label>
                         </div>

@@ -15,14 +15,18 @@ $sectionIsOnline = isset($_POST['sectionIsOnline']) ? $_POST['sectionIsOnline'] 
 $sectionBlock = isset($_POST['sectionBlock']) ? $_POST['sectionBlock'] : "not entered";
 $sectionCapacity = isset($_POST['sectionCapacity']) ? $_POST['sectionCapacity'] : "not entered";
 $sectionSemester = isset($_POST['sectionSemester']) ? $_POST['sectionSemester'] : "not entered";
+$action = isset($_POST['action']) ? $_POST['action'] : "not entered";
+
 
 $database = new Database();
 $dbh = $database->getdbh();
 
 $message = "";
 
-$updateStmt = $dbh->prepare(
-    "  UPDATE ZAAMG.Section
+
+if ($action == "update"){
+    $updateStmt = $dbh->prepare(
+        "  UPDATE ZAAMG.Section
         SET course_id           = $sectionCourse,
             prof_id             = $sectionProfessor,
             classroom_id        = $sectionClassroom,
@@ -33,15 +37,50 @@ $updateStmt = $dbh->prepare(
             section_is_online   = $sectionIsOnline,
             section_block       = $sectionBlock,
             section_capacity    = $sectionCapacity
+        WHERE section_id = $sectionId");
+    try{
+        $updateStmt->execute();
+        $message = "success";
+    }catch(Exception $e){
+        $message = "action_updateSection: ".$e->getMessage();
+    }
+}else if ($action == "delete"){
+    $deleteStmt = $dbh->prepare(
+        "  DELETE FROM ZAAMG.Section
         WHERE section_id = $sectionId
-    "
-);
+    ");
 
-try{
-    $updateStmt->execute();
-    $message = "success";
-}catch(Exception $e){
-    $message = "action_updateSection: ".$e->getMessage();
+    try{
+        $deleteStmt->execute();
+        $message = "success";
+    }catch(Exception $e){
+        $message = "action_deleteSection: ".$e->getMessage();
+    }
 }
 
-echo $message;
+
+$selectSections = $dbh->prepare(
+    "SELECT * FROM ZAAMG.Section");
+$selectSections->execute();
+$sections = $selectSections->fetchAll();
+$sections_json = [];
+
+foreach($sections as $section){
+    $sections_json[] = array(
+        'id'=>$section['section_id'],
+        'course'=>$section['course_id'],
+        'prof'=>$section['prof_id'],
+        'room'=>$section['classroom_id'],
+        'sem'=>$section['sem_id'],
+        'days'=>$section['section_days'],
+        'start'=>$section['section_start_time'],
+        'end'=>$section['section_end_time'],
+        'online'=>$section['section_is_online'],
+        'block'=>$section['section_block'],
+        'cap'=>$section['section_capacity']
+    );
+};
+
+
+
+echo json_encode($sections_json);  // to use in refreshing dropdown lists inside modals

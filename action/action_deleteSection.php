@@ -15,8 +15,7 @@ $message = "";
 $deleteStmt = $dbh->prepare(
     "  DELETE FROM ZAAMG.Section
         WHERE section_id = $sectionId
-    "
-);
+    ");
 
 try{
     $deleteStmt->execute();

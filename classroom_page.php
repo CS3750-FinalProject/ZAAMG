@@ -272,43 +272,24 @@ function addClassroom(Classroom $classroom, Database $db){
            <tr class='hide' id='edit_room{$roomId}'>
             <td>
             <label for='inlineEdit_roomBuilding{$roomId}'>Campus/Building</label>
-                        <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >";
-
-                            $selectBuilding = $db->getdbh()->prepare(
-                                'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
-                                  FROM ZAAMG.Campus JOIN ZAAMG.Building
-                                  ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
-                                  ORDER BY campus_name ASC');
-                            $selectBuilding->execute();
-                            $result = $selectBuilding->fetchAll();
-
-                            foreach($result as $room){
-                                if ($room['building_id'] == $classroom->getBuildingId()){
-                                    $row.= "<option selected value=".$room['building_id'].">"
-                                        .$room['campus_name'].": ".$room['building_name']."</option>";
-                                }else{
-                                    $row.= "<option value=".$room['building_id'].">"
-                                        .$room['campus_name'].": ".$room['building_name']."</option>";
-                                }
-                            }
-$row.="
+                        <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >
                         </select>
             </td>
             <td></td>
             <td>
                 <label for='inlineEdit_roomNumber{$roomId}'>Room Number</label>
                         <input type='text'  class='form-control' id='inlineEdit_roomNumber{$roomId}'
-                         value='{$classroom->getClassroomNum()}' style='width: 60%; margin-bottom: 6px'>
+                          style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomCap{$roomId}'>Capacity</label>
                         <input type='number' class='form-control' id='inlineEdit_roomCap{$roomId}'
-                        value='{$classroom->getClassroomCap()}' min=1 style='width: 60%; margin-bottom: 6px'>
+                         min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomComputers{$roomId}'>Computers</label>
                 <input type='number'  class='form-control' id='inlineEdit_roomComputers{$roomId}'
-                        value='{$classroom->getNumWorkstations()}' min=1 style='width: 60%; margin-bottom: 6px'>
+                         min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
             <td style='padding-bottom: 1%'>
             <div style='padding-bottom: 20%;' class='action-save hide' id='save_room{$roomId}'>

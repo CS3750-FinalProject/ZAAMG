@@ -253,12 +253,12 @@ function addProfessor(Professor $professor, Database $db){
                 <label for='inlineEdit_profFirst{$id}' >First Name</label>
 
                 <input type='text' class='form-control' id='inlineEdit_profFirst{$id}'
-                value='{$professor->getProfFirst()}' style='margin-bottom: 10px' >
+                 style='margin-bottom: 10px' >
 
                 <label for='inlineEdit_profLast{$id}' >Last Name</label>
 
                 <input type='text' class='form-control' id='inlineEdit_profLast{$id}'
-                value='{$professor->getProfLast()}' style='margin-bottom: 10px' >
+                 style='margin-bottom: 10px' >
 
             </td>
 
@@ -266,39 +266,21 @@ function addProfessor(Professor $professor, Database $db){
                 <label for='inlineEdit_profEmail{$id}' >Email</label>
 
                 <input type='email' class='form-control' id='inlineEdit_profEmail{$id}'
-                value='{$professor->getProfEmail()}' style='margin-bottom: 10px'>
+                 style='margin-bottom: 10px'>
 
             <label for='inlineEdit_profDept{$id}'>Department</label>
-                        <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>";
-
-                            $selectDepts = $db->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM ZAAMG.Department
-                                  ORDER BY dept_name ASC');
-                            $selectDepts->execute();
-                            $result = $selectDepts->fetchAll();
-
-                            foreach($result as $dept){
-                                if ($dept['dept_id'] == $professor->getDeptId()){
-                                    $row.=
-                                        "<option selected value=".$dept['dept_id'].'>'.$dept['dept_name'].'</option>';
-                                }else{
-                                    $row.=
-                                        "<option value=".$dept['dept_id'].'>'.$dept['dept_name'].'</option>';
-                                }
-                            }
-$row.="
+                        <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>
                         </select>
             </td>
 
             <td colspan='2'>
                 <label for='inlineEdit_profReqHours{$id}'>Required Hours</label>
                 <input type='number' class='form-control' id='inlineEdit_profReqHours{$id}'
-                    style='margin-bottom: 10px'
-                    value={$professor->getProfRequiredHours()}>
+                    style='margin-bottom: 10px'>
 
                 <label for='inlineEdit_profRelHours{$id}'>Release Hours</label>
                 <input type='number' class='form-control' id='inlineEdit_profRelHours{$id}'
-                    value={$professor->getProfRelease()} style='margin-bottom: 10px'>
+                    style='margin-bottom: 10px'>
             </td>
             <td></td>
             <td>

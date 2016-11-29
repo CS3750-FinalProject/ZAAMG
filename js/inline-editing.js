@@ -22,6 +22,217 @@ var InlineEditing = function() {
     }
 
     toggleHideClass();
+    fill_editFields_prof();
+    fill_editFields_room();
+    fill_editFields_section();
+
+
+    function fill_editFields_section(){
+        $('[id^=' + 'pencil_sect' + ']').click(function(){
+            var secId = $(this).attr('id').split('pencil_sect').pop();
+            var profId;
+            var courseId;
+            var roomId;
+            var semId;
+
+            $.ajax({
+                type: "POST",
+                url: "action/action_updateSection.php",
+                data: "secId=" + secId,
+                dataType:  'json',
+                success: function(sections) {
+                    var section = {};
+                    sections.forEach(function(obj){
+                        if (obj.id == secId)
+                            section = obj;
+                    });
+                    profId = section.prof;
+                    courseId = section.course;
+                    roomId = section.room;
+                    semId = section.sem;
+
+                    $('#' + 'inlineEdit_sectCap' + secId).val(section.cap);
+                    $('#' + 'inlineEdit_sectStartTime' + secId).val();
+                    $('#' + 'inlineEdit_sectEndTime' + secId).val();
+
+                    if(section.online == 1){
+                        $('#' + 'inlineEdit_sectOnline' + secId).attr('checked', 'checked');
+                    }
+
+                    $('#' + 'inlineEdit_sectDays' + secId).empty();
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Online").text("Online"));
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Monday").text("Monday"));
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Tuesday").text("Tuesday"));
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Wednesday").text("Wednesday"));
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Thursday").text("Thursday"));
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Friday").text("Friday"));
+                    $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Saturday").text("Saturday"));
+
+                    var days = section.days.match(/[A-Z][a-z]+/g); //split the day string by Capitalized Day Names
+                    $('#' + 'inlineEdit_sectDays' + secId +'> option').each(function() {
+                        if (  jQuery.inArray(this.innerHTML, days) > -1){
+                            console.log(this.innerHTML + ": " + days);
+                            console.log("inArray: " + jQuery.inArray(this.innerHTML, days));
+                            $('#' + 'inlineEdit_sectDays' + secId +' option[value=' + this.innerHTML + ']').attr('selected', 'true');
+                        }
+                    });
+
+                    $('#' + 'inlineEdit_sectBlock' + secId).empty();
+                    $('#' + 'inlineEdit_sectBlock' + secId).append($('<option />').val(0).text("Full"));
+                    $('#' + 'inlineEdit_sectBlock' + secId).append($('<option />').val(1).text("First"));
+                    $('#' + 'inlineEdit_sectBlock' + secId).append($('<option />').val(2).text("Second"));
+
+                    $('#' + 'inlineEdit_sectBlock' + secId +'> option').each(function() {
+                        if ( this.value == section.block){
+                            $('#' + 'inlineEdit_sectDays' + secId +' option[value=' + this.value + ']').attr('selected', 'true');
+                        }
+                    });
+
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "action/action_getResources.php",
+                data: "resource=courses",
+                dataType:  'json',
+                success: function(courses) {
+                    $('#' + 'inlineEdit_sectCourse' + secId).empty();
+                    courses.forEach(function(obj){
+                        $('#' + 'inlineEdit_sectCourse' + secId).append($('<option />').val(obj.id).text(obj.pref + " " + obj.num + " " + obj.title));
+                        if (obj.id == courseId)
+                            $('#' + 'inlineEdit_sectCourse' + secId +' option[value=' + courseId + ']').attr('selected','selected');
+                    });
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "action/action_getResources.php",
+                data: "resource=professors",
+                dataType:  'json',
+                success: function(profs) {
+                    $('#' + 'inlineEdit_sectProf' + secId).empty();
+                    profs.forEach(function(obj){
+                        $('#' + 'inlineEdit_sectProf' + secId).append($('<option />').val(obj.id).text(obj.last + ", " + obj.first));
+                        if (obj.id == profId)
+                            $('#' + 'inlineEdit_sectProf' + secId +' option[value=' + profId + ']').attr('selected','selected');
+                    });
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "action/action_getResources.php",
+                data: "resource=rooms",
+                dataType:  'json',
+                success: function(rooms) {
+                    $('#' + 'inlineEdit_sectRoom' + secId).empty();
+                    rooms.forEach(function(obj){
+                        $('#' + 'inlineEdit_sectRoom' + secId).append($('<option />').val(obj.id).text(obj.campus + ", " + obj.building + ": " + obj.number));
+                        if (obj.id == roomId)
+                            $('#' + 'inlineEdit_sectRoom' + secId +' option[value=' + roomId + ']').attr('selected','selected');
+                    });
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "action/action_getResources.php",
+                data: "resource=semesters",
+                dataType:  'json',
+                success: function(sems) {
+                    $('#' + 'inlineEdit_sectSem' + secId).empty();
+                    sems.forEach(function(obj){
+                        $('#' + 'inlineEdit_sectSem' + secId).append($('<option />').val(obj.id).text(obj.year + " " + obj.season));
+                        if (obj.id == semId)
+                            $('#' + 'inlineEdit_sectSem' + secId +' option[value=' + semId + ']').attr('selected','selected');
+                    });
+                }
+            });
+
+
+        });
+    }
+
+
+
+
+    function fill_editFields_room(){
+        $('[id^=' + 'pencil_room' + ']').click(function(){
+            var roomId = $(this).attr('id').split('pencil_room').pop();
+            var buildId;
+            $.ajax({
+                type: "POST",
+                url: "action/action_updateClassroom.php",
+                data: "roomId=" + roomId,
+                dataType:  'json',
+                success: function(rooms) {
+                    var room = {};
+                    rooms.forEach(function(obj){
+                       if (obj.id == roomId)
+                           room = obj;
+                    });
+                    $('#' + 'inlineEdit_roomNumber' + roomId).val(room.number);
+                    $('#' + 'inlineEdit_roomCap' + roomId).val(room.cap);
+                    $('#' + 'inlineEdit_roomComputers' + roomId).val(room.computers);
+                    buildId = room.building;
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "action/action_getResources.php",
+                data: "resource=campus_buildings",
+                dataType:  'json',
+                success: function(buildings) {
+                    $('#' + 'inlineEdit_roomBuilding' + roomId).empty();
+                    buildings.forEach(function(obj){
+                        $('#' + 'inlineEdit_roomBuilding' + roomId).append($('<option />').val(buildId).text(obj.campus + ": " + obj.building_name));
+                        if (obj.building_id == buildId)
+                            $('#' + 'inlineEdit_roomBuilding' + roomId +' option[value=' + buildId + ']').attr('selected','selected');
+                    });
+                }
+            });
+        });
+    }
+
+
+    function fill_editFields_prof(){
+        $('[id^=' + 'pencil_prof' + ']').click(function(){
+            var profId = $(this).attr('id').split('pencil_prof').pop();
+            var deptId;
+            $.ajax({
+                type: "POST",
+                url: "action/action_updateProfessor.php",
+                data: "profId="       + profId,
+                dataType:  'json',
+                success: function(profs) {
+                    var prof = {};
+                    profs.forEach(function(obj){
+                        if (obj.id == profId)
+                            prof = obj;
+                    });
+                    $('#' + 'inlineEdit_profFirst' + profId).val(prof.first);
+                    $('#' + 'inlineEdit_profLast' + profId).val(prof.last);
+                    $('#' + 'inlineEdit_profEmail' + profId).val(prof.email);
+                    $('#' + 'inlineEdit_profReqHours' + profId).val(prof.req);
+                    $('#' + 'inlineEdit_profRelHours' + profId).val(prof.rel);
+                    deptId = prof.dept;
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "action/action_getResources.php",
+                data: "resource=departments",
+                dataType:  'json',
+                success: function(depts) {
+                    $('#' + 'inlineEdit_profDept' + profId).empty();
+                    depts.forEach(function(obj){
+                        $('#' + 'inlineEdit_profDept' + profId).append($('<option />').val(deptId).text(obj.code + " " + obj.name));
+                        if (obj.id == deptId)
+                            $('#' + 'inlineEdit_profDept' + profId +' option[value=' + deptId + ']').attr('selected','selected');
+                    });
+                }
+            });
+        });
+    }
+
 
     $('[id^=' + 'save_sect' +']').click(function(){
         secId       = $(this).attr('id').split('save_sect').pop();
@@ -62,7 +273,8 @@ var InlineEditing = function() {
                     "&sectionIsOnline="     + online +
                     "&sectionBlock="        + block +
                     "&sectionCapacity="     + cap +
-                    "&sectionSemester="     + semester,
+                    "&sectionSemester="     + semester +
+                    "&action="              + "update",
             success: function(msg) {
                 console.log("message from updateSection: " + msg);
                 loadPhpPage("section_page.php");
@@ -102,9 +314,11 @@ var InlineEditing = function() {
             "&email="       + email +
             "&dept="        + dept +
             "&reqHrs="      + reqHrs +
-            "&relHrs="      + relHrs,
-            success: function(msg) {
-                console.log("message from updateProfessor: " + msg);
+            "&relHrs="      + relHrs +
+            "&action="      + "update",
+            dataType:  'json',
+            success: function(profObjects) {
+                console.log("message from updateProfessor: " + profObjects);
                 loadPhpPage("prof_page.php");
             }
         });
@@ -135,7 +349,8 @@ var InlineEditing = function() {
             "&building="        + building +
             "&number="          + number +
             "&cap="             + cap +
-            "&computers="       + computers,
+            "&computers="       + computers +
+            "&action="          + 'update',
             success: function(msg) {
                 console.log("message from updateClassroom: " + msg);
                 loadPhpPage("classroom_page.php");
@@ -146,11 +361,12 @@ var InlineEditing = function() {
 
 
     $('[id^=' + 'sect_delete' +']').click(function(){
-        var secId       = $(this).attr('id').split('sect_delete').pop();
+        var secId  = $(this).attr('id').split('sect_delete').pop();
         $.ajax({
             type: "POST",
             url: "action/action_deleteSection.php",
-            data:   "sectionId="    + secId,
+            data:   "sectionId=" + secId +
+                    "&action=delete",
             success: function(msg) {
                 console.log("message from deleteSection: " + msg);
                 loadPhpPage("section_page.php");
@@ -164,9 +380,12 @@ var InlineEditing = function() {
         $.ajax({
             type: "POST",
             url: "action/action_deleteProfessor.php",
-            data:   "profId="    + profId,
-            success: function(msg) {
-                console.log("message from deleteProfessor: " + msg);
+            data:   "profId=" + profId +
+                    "&action=" + "delete",
+            dataType: 'json',
+            success: function(professorObjects) {
+                console.log("message from deleteProfessor: " + professorObjects);
+                //refreshModals_prof(professorObjects);
                 loadPhpPage("prof_page.php");
             }
         });
@@ -179,7 +398,8 @@ var InlineEditing = function() {
         $.ajax({
             type: "POST",
             url: "action/action_deleteClassroom.php",
-            data:   "roomId="    + roomId,
+            data:   "roomId="    + roomId +
+            "&action=" + "delete",
             success: function(msg) {
                 console.log("message from deleteClassroom: " + msg);
                 loadPhpPage("classroom_page.php");
@@ -209,7 +429,12 @@ var InlineEditing = function() {
 }
 
 
-
+function refreshModals_prof(profObjects){
+    $('#sectionProfessor').empty();
+    profObjects.forEach(function(prof){
+        $('#sectionProfessor').append($('<option />').val(prof.id).text(prof.last +' '+ prof.first));
+    });
+}
 
 
 

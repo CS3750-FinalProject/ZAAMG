@@ -25,4 +25,20 @@ try{
     $message = "action_deleteProfessor: ".$e->getMessage();
 }
 
-echo $message;
+
+$selectProf = $dbh->prepare(
+    'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
+                                  ORDER BY prof_last ASC');
+$selectProf->execute();
+$professors = $selectProf->fetchAll();
+$professors_json = [];
+
+foreach($professors as $professor){
+    $professors_json[] = array(
+        'id'=>$professor['prof_id'],
+        'first'=>$professor['prof_first'],
+        'last'=>$professor['prof_last'],
+    );
+}
+
+echo json_encode($professors_json);  // to use in refreshing dropdown lists inside modals
