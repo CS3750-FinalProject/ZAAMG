@@ -10,15 +10,15 @@ echo '
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="professor-label">Create New Professor</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 170px;">
+            <div class="modal-body" style="margin-bottom: 230px;">
                 <div class="form-group">
                     <div class="col-xs-6">
                         <label for="profFirst">First Name</label>
-                        <input type="text" class="form-control" id="profFirst" placeholder="First Name" >
+                        <input style="margin-bottom: 10px" type="text" class="form-control" id="profFirst" placeholder="First Name" >
                     </div>
                     <div class="col-xs-6">
                         <label for="profLast">Last Name</label>
-                        <input type="text" class="form-control" id="profLast" placeholder="Last Name" >
+                        <input style="margin-bottom: 10px" type="text" class="form-control" id="profLast" placeholder="Last Name" >
                     </div>
                 </div>
                 <div class="form-group">
@@ -28,30 +28,26 @@ echo '
                     </div>
                     <div class="col-xs-6">
                         <label for="profDepartment">Department</label>
-                        <select class="form-control" id="profDepartment" >
-                            <option value="">Please Select...</option>';
-
-                            $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM W01143557.Department
-                                  ORDER BY dept_name ASC');
-                            $selectDepts->execute();
-                            $result = $selectDepts->fetchAll();
-
-                            foreach($result as $row){
-                                echo "<option value=\"".$row['dept_id']."\">".$row['dept_name']."</option>";
-                            }
-echo '
-
-                        </select>
+                        <select class="form-control" id="profDepartment"> </select>
                     </div>
+                    <div class=\'col-xs-12\'>
+                    <hr style=\'border-width: 2px\'>
+
+                    </div>
+
+
+                    <div class="form-group" id="hoursGroup">
+                    <label for="hoursGroup" class="col-sm-3 control-label">Hours:</label>
                     <div class="col-xs-3">
-                        <label for="profHours">Hours</label>
+                    <label for="profHours">Required</label>
                         <input type="number" class="form-control" id="profHours" placeholder=12 >
                     </div>
-                    <div class="col-xs-3">
+                        <div class="col-xs-3">
                         <label for="profRelease">Release</label>
                         <input type="number" class="form-control" id="profRelease" placeholder=4 >
                     </div>
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">

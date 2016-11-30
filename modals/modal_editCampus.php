@@ -8,24 +8,13 @@ $body = "
                 <span aria-hidden='true'>&times;</span></button>
                 <h4 class='modal-title' id='campus-label'>Edit Campus</h4>
             </div>
+
+
         <div class='modal-body' style='margin-bottom: 240px;'>
+
             <div class='col-xs-8'>
-                <label for='pick_editCampus'>Campus</label>
-                     <select size='5' class='form-control'  id='pick_editCampus'>";
-
-$selectCampi = $database->getdbh()->prepare(
-    'SELECT campus_id, campus_name FROM W01143557.Campus ORDER BY campus_name ASC');
-$selectCampi->execute();
-$result = $selectCampi->fetchAll();
-foreach($result as $campus){
-    //declare campus id and name for cleaner code and better readability
-    $campusID = $campus['campus_id'];
-    $campusName = $campus['campus_name'];
-    $body.= "<option value=\"$campusID\">$campusName</option>";
-}
-
-$body .= "
-                </select>
+                <label for='pick_editCampus'>Select Campus to Edit</label>
+                     <select size='5' class='form-control'  id='pick_editCampus'></select>
             </div>
             <div class='col-xs-4' style='padding-top: 5%'>
             <!--  <button type='button' class='btn btn-primary btn-modalEdit' id='btn_editCampus'
@@ -35,6 +24,7 @@ $body .= "
             <div class='col-xs-12'> <hr style='border-width: 2px'></div>
             <!--style='max-height: 190px; overflow-y:auto'-->
             <div class=' col-xs-12' id='editModalDiv_Campus'>
+
                 <div class='form-group' >
                         <div class='col-xs-12'>
                             <label for='editModal_campusName'>Edit Campus Name</label>

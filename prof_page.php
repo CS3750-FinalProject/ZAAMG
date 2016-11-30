@@ -10,13 +10,23 @@ $body = "
 $body .= "
 <div class='col-xs-12' >
         <div class='page-header'>
-          <h1>Professors <small>for Spring 2017</small></h1>
+
+          <h1 style='display:inline'>Professors <small>for Spring 2017</small></h1>
+
+          <img src='img/ajax-loader.gif'  id='prof_ajax-loader'
+          style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>
+
         </div>
 </div>
 
 
     <div class='container' >
-      <div class='col-xs-12' id='profIndex'>
+
+      <div class='col-xs-12' id='profIndex'
+            style='
+            max-height: 440px;
+            overflow-y: auto;  '>
+
         <table class='list-data'>
           <tr>
             <th>Last Name</th>
@@ -40,16 +50,19 @@ foreach ($allProfessors as $professor){
 
 $body .= "</table>";
 
+$body .= "</div>";  //   end of <div class='col-xs-12' id='profIndex'>
 
-
-
-$body .= "<div  id='profOverviewSchedule'
+$body .= "<div class='col-xs-12'><hr style='border-width: 2px border-color: #492365'></div>";
+$body .= "<div
+                class='col-xs-12'
+                id='profOverviewSchedule'
                 style='
                 background-color: #fff;
                 padding-top: 15px;
-                border-top: 1px solid #492365'></div>";  // this div holds the schedule showing all professors
+                margin-bottom: 50px;
+                border-bottom: 1px solid #492365;
+                '></div>";  // this div holds the schedule showing all professors
 
-$body .= "</div>";  //   end of <div class='col-xs-12' id='profIndex'>
 $body .= "</div>";  //   end of  <div class='container' >
 
 
@@ -69,68 +82,60 @@ $body .= "<script> var theProfSet = [];</script>";
  */
 $body .= load_ProfSet($allProfessors, $database);
 
-
-
 /*
  *  javascript function displayTest is defined in
  *  Calendar.js   (was called test when I was retooling the whole thing)
  */
-$body .= "<script>displayTest(theProfSet)
-//init_ProfOverviewSchedule(); // probably don't need this
-</script>";
+$body .= "<script>  displayTest(theProfSet)  </script>";
 
 echo $body;
 
-
-/*
- * TODO:  probably better to use json_encode to do some of this!
- * I did it by scratch here out of ignorance.  :-(
- */
 function load_ProfSet($allTheProfs, $db){
-    $body = '<script> '; //getting ready to echo javascript code...
+    $body = "<script> ";
+
     foreach($allTheProfs as $professor){
-        $onlineCourses = [];  // this array will hold online course JSON objects
-        /*
-         *  function add_toProfSet(profFirst (string), profLast (string), profId (int),
-         *                          timedCourseObjects (array of JSON objects,
-         *                          onlineCourseObjects (array of JSON objects)
-         *  defined in professorSet.js
-         */
-        $body.='
-            add_toProfSet('  /*  first three arguments:  */
-            .'"'.$professor->getProfFirst().'"'.','
-            .'"'.$professor->getProfLast().'"'.','
-            .'"'.$professor->getProfId().'"'.','.'
-                [ ';  //  <--  opening square bracket for the "timed courses" JSON obj. array
+        $onlineCourses = [];
+        $timedCourses = [];
         $sections = $db->getProfSections($professor, null);
 
-        // looping through each of one professor's sections...
-        foreach($sections as $oneSection){
-            $course = $db->getCourse($oneSection);
-            if (!$oneSection->getIsOnline()){  // if the section is not online, add it to "timed courses"
-                $body .= '
-                    { pref:  '.'"'.$course->getCoursePrefix().'"'.',
-                      num:   '.'"'.$course->getCourseNumber().'"'.',
-                      days:  '.'"'.$oneSection->getDayString().'"'.',
-                      startTime:  '.'"'.$oneSection->getStartTime().'"'.',
-                      endTime:  '.'"'.$oneSection->getEndTime().'"'.',
-                    },';  // (just wrote one JSON object for each section)
-            } else{
-                // if a section is online, put it in $onlineCourses array
-                array_push($onlineCourses, $course);
+        foreach($sections as $section){
+            if (!$section->getIsOnline()){                  //not online
+                array_push($timedCourses, array(
+                    'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
+                    'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
+                    'c_name'=>$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID'),
+                    'days'=>$section->getDayString_toUpper(),
+                    'startTime'=>$section->getStartTime(),
+                    'endTime'=>$section->getEndTime(),
+                    'campus'=>$section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
+                        'classroom_id', 'building_id', 'campus_id', 'classroomID'),
+                    'building'=>$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
+                        'classroom_id', 'building_id', 'classroomID'),
+                    'room'=>$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID')
+                ));
+            }else{
+                array_push($onlineCourses, array(
+                    'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
+                    'num'=>$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID'),
+                    'c_name'=>$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')
+                ));
             }
+
+
         }
-        $body .= " ],[ ";  //  <-- done with timedCourses array, beginning onlineCourses array...
-        // loop through array of onlineCourses and construct JSON objects
-        foreach($onlineCourses as $onlineCourse){
-            $body .= '
-            { pref:  '.'"'.$onlineCourse->getCoursePrefix().'"'.',
-              num:   '.'"'.$onlineCourse->getCourseNumber().'"'.'
-            },';
-        }
-        $body.= ' ]);'; // end of sending arguments to add_toProfSet()
+         /*  function add_toProfSet(profFirst (string), profLast (string), profId (int),
+         *                          timedCourseObjects (array of JSON objects,
+         *                          onlineCourseObjects (array of JSON objects)
+         *   defined in professorSet.js
+         */
+        $timedCourses_json = count($timedCourses) != 0 ? json_encode($timedCourses) : json_encode(array());
+        $onlineCourses_json = count($onlineCourses) != 0 ? json_encode($onlineCourses) : json_encode(array());
+        $body.= "
+                add_toProfSet('{$professor->getProfFirst()}','{$professor->getProfLast()}',{$professor->getProfId()},
+                {$timedCourses_json}, {$onlineCourses_json});";
+
     }
-    $body.='</script>';
+    $body.="</script>";
     return $body;
 }
 
@@ -152,6 +157,7 @@ function addProfessor(Professor $professor, Database $db){
     foreach($profSections as $section){
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
+        $name = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
         $title = $prefix . " " . $number;
         $dayString = $section->getDayString();
         if ($dayString != "online"){
@@ -174,6 +180,7 @@ function addProfessor(Professor $professor, Database $db){
         foreach($days as $day){
             array_push($eventObjects, json_encode(array(
                 "title" => $title,
+                "name"=> $name,
                 "start" => $daysToDates[$day]."T".$eventStart,
                 "end" => $daysToDates[$day]."T".$eventEnd,
                 "location" => $location,
@@ -194,7 +201,7 @@ function addProfessor(Professor $professor, Database $db){
     //<img> (disc)              id = save_prof<#>
 
     //Here's where we create the table of Professors on the "Professor Page".
-    $row = "<tr id='record_professorf{$id}' >
+    $row = "<tr id='record_professorf{$id}' >   <!-- NOT A TYPO (f)  -->
 
             <td>{$professor->getProfLast()}</td>
 			<td>{$professor->getProfFirst()}</td>
@@ -204,8 +211,7 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfRelease()}</td>
 			<td>to be calc...</td>
 			<td>
-			    <img src='img/pencil.png' class='action-edit' id='pencil_prof{$id}'/>
-			    <img src='img/close.png' class='action-delete'>
+
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
@@ -221,7 +227,8 @@ function addProfessor(Professor $professor, Database $db){
     }
 
     // finish giving attributes to the <span> and close it...
-    $row .= "])' class='glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+    $row .= "])' class='glyphicon glyphicon-calendar' aria-hidden='true' style='margin-left: 15%'></span>
+<img src='img/pencil.png' class='action-edit' style='margin-left: 15%' id='pencil_prof{$id}'/>
 			</td>
 		  </tr>";
 
@@ -243,12 +250,12 @@ function addProfessor(Professor $professor, Database $db){
                 <label for='inlineEdit_profFirst{$id}' >First Name</label>
 
                 <input type='text' class='form-control' id='inlineEdit_profFirst{$id}'
-                placeholder='{$professor->getProfFirst()}' style='margin-bottom: 10px' >
+                 style='margin-bottom: 10px' >
 
                 <label for='inlineEdit_profLast{$id}' >Last Name</label>
 
                 <input type='text' class='form-control' id='inlineEdit_profLast{$id}'
-                placeholder='{$professor->getProfLast()}' style='margin-bottom: 10px' >
+                 style='margin-bottom: 10px' >
 
             </td>
 
@@ -256,42 +263,42 @@ function addProfessor(Professor $professor, Database $db){
                 <label for='inlineEdit_profEmail{$id}' >Email</label>
 
                 <input type='email' class='form-control' id='inlineEdit_profEmail{$id}'
-                placeholder='{$professor->getProfEmail()}' style='margin-bottom: 10px'>
+                 style='margin-bottom: 10px'>
 
             <label for='inlineEdit_profDept{$id}'>Department</label>
-                        <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>";
-
-                            $selectDepts = $db->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM W01143557.Department
-                                  ORDER BY dept_name ASC');
-                            $selectDepts->execute();
-                            $result = $selectDepts->fetchAll();
-
-                            foreach($result as $dept){
-                                if ($dept['dept_id'] == $professor->getDeptId()){
-                                    $row.=
-                                        "<option selected value=".$dept['dept_id'].'>'.$dept['dept_name'].'</option>';
-                                }else{
-                                    $row.=
-                                        "<option value=".$dept['dept_id'].'>'.$dept['dept_name'].'</option>';
-                                }
-                            }
-$row.="
+                        <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>
                         </select>
             </td>
 
             <td colspan='2'>
                 <label for='inlineEdit_profReqHours{$id}'>Required Hours</label>
-                <input type='number' class='form-control' id='profinlineEdit_profReqHours{$id}'
-                    style='margin-bottom: 10px'
-                    placeholder={$professor->getProfRequiredHours()}>
+                <input type='number' class='form-control' id='inlineEdit_profReqHours{$id}'
+                    style='margin-bottom: 10px'>
 
                 <label for='inlineEdit_profRelHours{$id}'>Release Hours</label>
                 <input type='number' class='form-control' id='inlineEdit_profRelHours{$id}'
-                    placeholder={$professor->getProfRelease()} style='margin-bottom: 10px'>
+                    style='margin-bottom: 10px'>
             </td>
             <td></td>
-            <td><img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$id}'/></td>
+            <td>
+                <div style='padding-bottom: 20%;' class='action-save hide' id='save_prof{$id}'>
+                <button type=button class='btn btn-xs btn-success'>Update&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-floppy-save'></button>
+                </span>
+                </div>
+                <div id='prof_delete{$id}' style='padding-bottom: 50%;'>
+                <button type=button class='btn btn-xs btn-danger'>Delete&nbsp;&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-trash'></button>
+                </span>
+                </div>
+                <div id='cancel_prof{$id}' class='action-edit hide'>
+                <button type=button class='btn btn-xs btn-warning'>Cancel&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-remove'></button>
+                </span>
+                </div>
+            </td>
+
+          <!--  <img src='img/save.png' width='30px' class='action-save hide' id='save_prof{$id}'/> -->
           </tr>
 
             ";

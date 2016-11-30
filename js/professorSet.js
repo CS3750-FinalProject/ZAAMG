@@ -7,9 +7,10 @@
  */
 
 
+
+
 function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCourseObjects){
     var profName = profLast + ", " + profFirst;
-
     var t_courseObjects = [];
     var o_courseObjects = [];
     var nonStandard_courseObjects = [];
@@ -21,13 +22,13 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
         var endTimeMoment = moment(course.endTime, "hh:mm A");
 
         var formatted_startTime =
-            startTimeMoment.hour() > 12 ?  startTimeMoment.hour() - 12 : startTimeMoment.hour();
+        startTimeMoment.hour() > 12 ?  startTimeMoment.hour() - 12 : startTimeMoment.hour();
         formatted_startTime += ":";
         formatted_startTime += startTimeMoment.minute() == 0 ? '00' : startTimeMoment.minute();
         formatted_startTime += " " + course.startTime.substr(course.startTime.length - 2, course.startTime.length);
 
         var formatted_endTime =
-            endTimeMoment.hour() > 12 ?  endTimeMoment.hour() - 12 : endTimeMoment.hour();
+        endTimeMoment.hour() > 12 ?  endTimeMoment.hour() - 12 : endTimeMoment.hour();
         formatted_endTime += ":";
         formatted_endTime += endTimeMoment.minute() == 0 ? '00' : endTimeMoment.minute();
         formatted_endTime += " " + course.endTime.substr(course.endTime.length - 2, course.endTime.length);
@@ -42,18 +43,26 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
             nonStandard_courseObjects.push(
                 {
                     courseTitle: courseTitle,
+                    courseName: course.c_name,
                     courseDays: course.days,
                     startTime: formatted_startTime,
-                    endTime: formatted_endTime
+                    endTime: formatted_endTime,
+                    campus: course.campus,
+                    building: course.building,
+                    room: course.room
                 }
             );
         }else{
             t_courseObjects.push(
                 {
                     courseTitle: courseTitle,
+                    courseName: course.c_name,
                     courseDays: course.days,
                     startTime: formatted_startTime,
-                    endTime: formatted_endTime
+                    endTime: formatted_endTime,
+                    campus: course.campus,
+                    building: course.building,
+                    room: course.room
                 }
             );
         }
@@ -62,12 +71,13 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
         var courseTitle = course.pref + " " + course.num;
         o_courseObjects.push(
             {
-                courseTitle: courseTitle
+                courseTitle: courseTitle,
+                courseName: course.c_name
             }
         );
 
     });
-    theProfSet.push(
+    theProfSet.push(          //theProfSet is an array variable declared on prof_page.php ~~ line 70ish
         {
             name: profName,
             id: profId,
@@ -76,7 +86,6 @@ function add_toProfSet(profFirst, profLast, profId, timedCourseObjects, onlineCo
             nonStandardCourses: nonStandard_courseObjects
         }
     );
-
 }
 
 
@@ -150,8 +159,11 @@ function momentGenerator_test(time, days, startMoment){
             theMoment = startMoment.clone().add(18, 'd');
             break;
     }
+    //console.log("theMoment: " + theMoment.toString());
     if (days.toUpperCase() == "TTH")
-        theMoment = theMoment.clone().add(10, 'm');
+        theMoment = theMoment.clone().add(2, 'm');
+    if (days.toUpperCase() == "MWF")
+        theMoment = theMoment.clone().add(4, 'm');
     return theMoment;
 };
 

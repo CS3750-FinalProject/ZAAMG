@@ -11,13 +11,23 @@ $body = "
 
 <div class='col-xs-12'>
     <div class='page-header'>
-          <h1>Classrooms <small>for Spring 2017</small></h1>
+          <h1 style='display:inline'>Classrooms <small>for Spring 2017</small></h1>
+
+          <img src='img/ajax-loader.gif'  id='rooms_ajax-loader'
+          style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>
     </div>
 </div>
 
 </div>
     <div class='container'>
-      <div class='col-xs-12' id='roomIndex'>
+      <div class='col-xs-12' id='roomIndex'
+            style='
+            border-bottom: 1px solid #492365;
+            margin-bottom: 15px;
+            max-height: 440px;
+            overflow-y: auto;
+            '>
+
         <table class='list-data'>
         <tr>
             <th>Campus</th>
@@ -41,17 +51,18 @@ foreach ($allClassrooms as $classroom){
 
 
 $body .= "</table>";
+ $body .= "</div>";  //end of 'col-xs-12'
 
+$body .= "<div class='form-group' style=   'padding-left: 10px;
+                                            padding-bottom: 5px;'>
 
-$body .= "<div class='form-group' style=    'margin-bottom: 40px;
-                                            border-top: 1px solid #492365;
-                                            padding-top: 5px;'>
-            <span style='float:left; padding-top: 5px; font-weight:bold; color:#492365'>
+            <span style='float:left; padding-top: 5px; font-weight:bold; color:#492365' >
             Select a Campus and a Building:</span>
             <div class='col-xs-3'>
 
             <select type='text' class='form-control' id='pickCampus' >
-                <option value='0'>Campus...</option>";
+                <option value='-1'>Campus...</option>
+                <option value='0'>Online</option>";
             $selectCampus = $database->getdbh()->prepare(
                             'SELECT campus_name, campus_id
                             FROM W01143557.Campus
@@ -66,55 +77,51 @@ $body .= "<div class='form-group' style=    'margin-bottom: 40px;
  $body .= " </select>
             </div>
 
-
             <div class='col-xs-3'>
             <select type='text' class='form-control' id='pickBuilding' name='pickBuilding'
              disabled='true'>
-                  <option value='0'>Building...</option> </select>
-                  ";
-
-
+                  <option value='0'>Building...</option>
+             </select>";
 
 
 $body .= "
         </div>  <!-- end of 'col-xs-3'  -->
+        <img src='img/ajax-loader.gif'  id='room_ajax-loader' class='hide'
+          style='display:inline-block; padding-left: 3%; padding-top: 8px'/>
         </div> <!-- end of 'form-group'  -->";
 
 $body .= "
 <script>
     $('#pickCampus').change(function(){
         var campusId = $(this).val();
-        if ($('#pickCampus').val() > 0)
-            $('#pickBuilding').removeAttr('disabled');
-        else{
+
+        if ($('#pickCampus').val() == 0){           // 0 is the 'online' campus
+            $('#pickBuilding').empty();
+            $('#pickBuilding').append($('<option />').val(0).text('Online'));
             $('#pickBuilding').attr('disabled', 'true');
-            //$('#pickClassroom').attr('disabled', 'true');
-        }
+            $('#pickCampus:focus').blur();
+            load_onlineSections();
+        }else{
+                $('#pickBuilding').removeAttr('disabled');
+                $.ajax({
+                      type: 'POST',
+                      url: 'pickBuildings.php',        //the script to call to get data
+                      data: 'campusId=' + campusId,    //you can insert url arguments here to pass to pickBuildings.php
+                                                       //for example 'id=5&parent=6\"
+                      dataType: 'json',                //data format
+                      success: function(data)          //on receive of reply
+                      {
+                        var dropdown_Building = $('#pickBuilding');
+                        dropdown_Building.empty();
+                        dropdown_Building.append($('<option />').val(0).text('Building...'));
+                        $.each(data, function() {
+                            dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
+                        });
 
+                      }
+                });
+            }
 
- //http://stackoverflow.com/questions/36393409/ajax-call-to-populate-select-list-when-another-select-list-changes
-//http://www.codingcage.com/2015/11/ajax-login-script-with-jquery-php-mysql.html
-//https://openenergymonitor.org/emon/node/107
-
-$.ajax({
-      type: 'POST',
-      url: 'pickBuildings.php',        //the script to call to get data
-      data: 'campusId=' + campusId,    //you can insert url arguments here to pass to pickBuildings.php
-                                       //for example 'id=5&parent=6\"
-      dataType: 'json',                //data format
-      success: function(data)          //on receive of reply
-      {
-        var dropdown_Building = $('#pickBuilding');
-        dropdown_Building.empty();
-        dropdown_Building.append($('<option />').val(0).text('Building...'));
-
-        $.each(data, function() {
-            dropdown_Building.append($('<option />').val(this.building_id).text(this.building_name));
-        });
-
-
-      }
-    });
 }); // end of pickCampus.change()
 
 
@@ -123,101 +130,38 @@ $.ajax({
 $('#pickBuilding').change(function(){
 
 var buildingId = $(this).val();
+load_buildingSections(buildingId);
+
 $('#pickBuilding:focus').blur();
-
-$.ajax({
-      type: 'POST',
-      url: 'showClassroomOverviewSchedule.php',        //the script to call to get data
-      data: 'buildingId=' + buildingId,    //you can insert url arguments here to pass to pickClassrooms.php
-                                       //for example \"id=5&parent=6\"
-      dataType: 'text',                //data format
-      success: function(data)          //on receive of reply
-      {
-            console.log(data.substr(data.lastIndexOf('var theClassroomSet')));
-            eval(data.substr(data.lastIndexOf('var theClassroomSet')));
-      },
-
-    });
 
 }); // end of pickBuilding.onChange()
 
 </script>";
 
-$body .= "<div  id='classroomOverviewSchedule'
+
+
+$body .= "<div  class='col-xs-12'
+                id='classroomOverviewSchedule'
                 style='
                 background-color: #fff;
+                margin-top: 15px;
                 padding-top: 15px;
+                margin-bottom: 50px;
+                border-bottom: 1px solid #492365;
                 border-top: 1px solid #492365'>
                 </div>";  // this div holds the schedule showing all classrooms
 
-$body .= "</div>";  //end of 'col-xs-12'
 
-
-
-/*
- *  javascript variable theClassroomSet is the array that
- *  will hold arrays of JSON event objects for each classroom.
- */
-$body .= "<script> var theClassroomSet = [];</script>";
-
-
-
-/* load_ClassroomSet is defined in this file (classroom_page.php)
- * It loads the array defined just above here (theClassroomSet).
- * theClassroomSet array will next be sent to javascript function
- * displayClassroomOverviewSchedule(theClassroomSet), which constructs
- * and displays the fullCalendar overview schedule of all rooms.
- */
-$body .= load_ClassroomSet($database->getClassroomsInBuilding(6), $database);
 
 
 /*
  *  javascript function displayClassroomSchedule is defined in
- *  classroomCalendar.js
+ *  classroomCalendar.js.  Here the calendar is initialized as blank.
  */
-$body .= "<script>displayClassroomSchedule(theClassroomSet); console.log(theClassroomSet.length);</script>";
 
-
+$body .= "<script>displayClassroomSchedule([], false);</script>";
 
 echo $body;
-
-
-/*
- * TODO:  probably better to use json_encode to do some of this!
- * I did it by scratch here out of ignorance.  :-(
- */
-function load_ClassroomSet($classrooms, $db){
-    $body = '<script> '; //getting ready to echo javascript code...
-    foreach($classrooms as $classroom){
-        /*
-         *  function add_toClassroomSet(profFirst (string), profLast (string), profId (int),
-         *                          timedCourseObjects (array of JSON objects,
-         *                          onlineCourseObjects (array of JSON objects)
-         *  defined in professorSet.js
-         */
-        $body.='
-            add_toClassroomSet([], '  /*  first argument:  */
-            .'"'.$classroom->getClassroomNum().'"'.','.'
-                [ ';  //  <--  opening square bracket for the "timed courses" JSON obj. array
-        $sections = $db->getClassroomSections($classroom);
-
-        // looping through each of one classroom's sections...
-        foreach($sections as $oneSection){
-            $course = $db->getCourse($oneSection);
-            $body .= '
-            { pref:  '.'"'.$course->getCoursePrefix().'"'.',
-              num:   '.'"'.$course->getCourseNumber().'"'.',
-              days:  '.'"'.$oneSection->getDayString().'"'.',
-              startTime:  '.'"'.$oneSection->getStartTime().'"'.',
-              endTime:  '.'"'.$oneSection->getEndTime().'"'.',
-            },';  // (just wrote one JSON object for each section)
-        }
-        //$body .= " ]";
-        $body.= ' ]);'; // end of sending arguments to add_toProfSet()
-    }
-    $body.='</script>';
-    return $body;
-}
 
 
 
@@ -237,6 +181,7 @@ function addClassroom(Classroom $classroom, Database $db){
     foreach($classroomSections as $section){
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
+        $name = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
         $title = $prefix . " " . $number;
         $dayString = $section->getDayString();
         if ($dayString != "online"){
@@ -259,6 +204,7 @@ function addClassroom(Classroom $classroom, Database $db){
         foreach($days as $day){
             array_push($eventObjects, json_encode(array(
                 "title" => $title,
+                "name"=> $name,
                 "start" => $daysToDates[$day]."T".$eventStart,
                 "end" => $daysToDates[$day]."T".$eventEnd,
                 "location" => $location,
@@ -281,7 +227,7 @@ function addClassroom(Classroom $classroom, Database $db){
 
 
     //Here's where we create the table of Classrooms on the "Classroom Page".
-    $row = "<tr id='record_classRoom{$classroom->getClassroomID()}'>
+    $row = "<tr id='record_classRoom{$roomId}'>
 			<td>{$classroom->getClassroomProperty_Join_3('campus_name', 'Building', 'Campus',
                 'building_id', 'campus_id', 'buildId')}</td>
 			<td>{$classroom->getClassroomProperty('building_name', 'Building', 'building_id', 'buildId')}</td>
@@ -289,13 +235,11 @@ function addClassroom(Classroom $classroom, Database $db){
 			<td> {$classroom->getClassroomCap()}</td>
 			<td>{$classroom->getNumWorkstations()}</td>
 			<td>
-			<img src='img/pencil.png' class='action-edit' id='pencil_room{$classroom->getClassroomID()}'/>
-			<img src='img/close.png' class='action-delete'>
 
             <!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
-			    <span id='seeCal_room{$classroom->getClassroomID()}'
-			    onclick='on_roomRowClick({$classroom->getClassroomID()}, [";
+			    <span id='seeCal_room{$roomId}'
+			    onclick='on_roomRowClick({$roomId}, [";
 
             /*function 'on_roomRowClick()' is defined in classroomCalendar.js
             on_roomRowClick(roomRowId (int), sectionObjects (array of objects from top of this function)*/
@@ -305,7 +249,8 @@ function addClassroom(Classroom $classroom, Database $db){
     }
 
     // finish giving attributes to the <span> and close it...
-    $row .= "])' class=' glyphicon glyphicon-menu-down' aria-hidden='true'></span>
+    $row .= "])' class=' glyphicon glyphicon-calendar' style='margin-left: 15%' aria-hidden='true'></span>
+        <img src='img/pencil.png' class='action-edit' style='margin-left: 15%' id='pencil_room{$roomId}'/>
 			</td>
 		  </tr>";
 
@@ -314,58 +259,53 @@ function addClassroom(Classroom $classroom, Database $db){
     *      the calendar displays.
     *  the second (empty) row is a placeholder so that the stripe color alternates correctly.
     */
-    $row .= "<tr class='hide' id='calRow_room{$classroom->getClassroomID()}'>
+    $row .= "<tr class='hide' id='calRow_room{$roomId}'>
                 <td colspan='8' style='padding:0'>
                 <!-- roomCalendar_<id>:  the div that the individual calendar lives in. -->
-                <div class='indRoomCal' id='cal_room{$classroom->getClassroomID()}'></div>
+                <div class='indRoomCal' id='cal_room{$roomId}'></div>
                 </td>
             </tr>
             <!--<tr style='display:none'></tr>-->
 
 
-           <tr class='hide' id='edit_room{$classroom->getClassroomID()}'>
+           <tr class='hide' id='edit_room{$roomId}'>
             <td>
             <label for='inlineEdit_roomBuilding{$roomId}'>Campus/Building</label>
-                        <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >";
-
-                            $selectBuilding = $db->getdbh()->prepare(
-                                'SELECT W01143557.Campus.campus_id, campus_name, building_name, building_id
-                                  FROM W01143557.Campus JOIN W01143557.Building
-                                  ON W01143557.Campus.campus_id = W01143557.Building.campus_id
-                                  ORDER BY campus_name ASC');
-                            $selectBuilding->execute();
-                            $result = $selectBuilding->fetchAll();
-
-                            foreach($result as $room){
-                                if ($room['building_id'] == $classroom->getBuildingId()){
-                                    $row.= "<option selected value=".$room['building_id'].">"
-                                        .$room['campus_name'].": ".$room['building_name']."</option>";
-                                }else{
-                                    $row.= "<option value=".$room['building_id'].">"
-                                        .$room['campus_name'].": ".$room['building_name']."</option>";
-                                }
-                            }
-$row.="
+                        <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >
                         </select>
             </td>
             <td></td>
             <td>
                 <label for='inlineEdit_roomNumber{$roomId}'>Room Number</label>
                         <input type='text'  class='form-control' id='inlineEdit_roomNumber{$roomId}'
-                         placeholder='{$classroom->getClassroomNum()}' style='width: 60%; margin-bottom: 6px'>
+                          style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomCap{$roomId}'>Capacity</label>
                         <input type='number' class='form-control' id='inlineEdit_roomCap{$roomId}'
-                        placeholder='{$classroom->getClassroomCap()}' min=1 style='width: 60%; margin-bottom: 6px'>
+                         min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
             <td>
                 <label for='inlineEdit_roomComputers{$roomId}'>Computers</label>
                 <input type='number'  class='form-control' id='inlineEdit_roomComputers{$roomId}'
-                        placeholder='{$classroom->getNumWorkstations()}' min=1 style='width: 60%; margin-bottom: 6px'>
+                         min=1 style='width: 60%; margin-bottom: 6px'>
             </td>
-            <td style='padding-bottom: 1%'><img src='img/save.png' width='30px' class='action-save hide'
-                id='save_room{$classroom->getClassroomID()}'/>
+            <td style='padding-bottom: 1%'>
+            <div style='padding-bottom: 20%;' class='action-save hide' id='save_room{$roomId}'>
+                <button type=button class='btn btn-xs btn-success'>Update&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-floppy-save'></button>
+                </span>
+                </div>
+                <div id='room_delete{$roomId}' style='padding-bottom: 50%;'>
+                <button type=button class='btn btn-xs btn-danger'>Delete&nbsp;&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-trash'></button>
+                </span>
+                </div>
+                <div id='cancel_room{$roomId}' class='action-edit hide'>
+                <button type=button class='btn btn-xs btn-warning'>Cancel&nbsp;&nbsp;
+                <span class='glyphicon glyphicon-remove'></button>
+                </span>
+                </div>
             </td>
           </tr>
             ";

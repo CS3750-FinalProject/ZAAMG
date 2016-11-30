@@ -10,21 +10,7 @@ $body = "
             <div class='modal-body' style='margin-bottom: 360px; '>
             <div class='col-xs-8'>
             <label for='pick_editSemester'>Semester</label>
-                        <select size='3' class='form-control'  id='pick_editSemester'>";
-$selectSem = $database->getdbh()->prepare(
-    "SELECT sem_id, sem_season, sem_year, sem_start_date
-                                  FROM W01143557.Semester
-                                  ORDER BY sem_start_date DESC");
-$selectSem->execute();
-$result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
-foreach($result as $sem){
-    $body .= "<option value=".$sem['sem_id'].">";
-    $body .=$sem['sem_year']." "
-        .$sem['sem_season']
-        ."</option>";
-}
-$body .= "
-                        </select>
+                        <select size='3' class='form-control'  id='pick_editSemester'></select>
                         </div>
             <!--<div class='col-xs-5' ></div>-->
             <div class='col-xs-4' style='padding-top: 5%'>

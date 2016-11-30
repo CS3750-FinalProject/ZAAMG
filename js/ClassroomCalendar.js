@@ -12,6 +12,51 @@ $(document).ready(function() {
 });
 
 
+function load_onlineSections(){
+    $('#room_ajax-loader').removeClass('hide');
+
+    $.ajax({
+        url: 'showOnlineSchedule.php',
+        dataType: 'json',
+        success: function(data)
+        {
+
+            var theOnlineSet = [];
+            //add_toOnlineSet(theOnlineSet, data);
+            displayClassroomSchedule(data, true);
+        },
+        error: function(data){
+            console.log(data.responseText);
+        }
+    });
+};
+
+function load_buildingSections(buildingId){
+    $('#room_ajax-loader').removeClass('hide');
+
+    var theClassroomSet = [];
+
+    $.ajax({
+        type: 'POST',
+        url: 'showClassroomOverviewSchedule.php',        //the script to call to get data
+        data: 'buildingId=' + buildingId,
+        dataType: 'json',                //data format
+        success: function(classrooms)          //on receive of reply
+        {
+
+            classrooms.forEach(function(classroom){
+                add_toClassroomSet(theClassroomSet, classroom.roomNumber, classroom.sections);
+            })
+            displayClassroomSchedule(theClassroomSet);
+            $('#room_ajax-loader').addClass('hide');
+
+        },
+        error: function(msg){
+            console.log("load_buildingSections: ", msg);
+        }
+    });
+};
+
 
 /*******************************************************************************************/
 
@@ -41,7 +86,7 @@ function on_roomRowClick(roomRowId, sectionObjects){
         $('div#'+'cal_room'+ roomRowId).show();
         currentDate = $('#classroomOverviewSchedule').fullCalendar('getDate');
     }
-    $('span#' + 'seeCal_room' + roomRowId).toggleClass('glyphicon-menu-down glyphicon-menu-up');
+    $('span#' + 'seeCal_room' + roomRowId).toggleClass('glyphicon-calendar glyphicon-menu-up');
 
 }
 
@@ -54,7 +99,7 @@ function on_roomRowClick(roomRowId, sectionObjects){
 function load_indRoomRowEvents(sectionObjects){
     var events = [];
     sectionObjects.forEach(function(section, i){
-        addNewEvent_Room(section.title, section.start, section.end, section.location, section.classroom, section.professor,
+        addNewEvent_Room(section.title, section.name, section.start, section.end, section.location, section.classroom, section.professor,
             section.online ? '#137c33' : '#583372', section.online, events)
     })
 
@@ -102,7 +147,7 @@ function formatTime_fullCalendar(time){
  *
  * fullCalendar works well with times formatted like '2016-11-14T07:30:00'
  */
-function addNewEvent_Room(title, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
+function addNewEvent_Room(title, name, eventstart, eventend, location, classroom, professor, color, isOnline, eventsArray) {
     var timedEvents = [];
     //var numOnline = 0;
     eventsArray.forEach(function(event, i){
@@ -115,6 +160,7 @@ function addNewEvent_Room(title, eventstart, eventend, location, classroom, prof
     if (!isOnline){
         eventsArray.push({
             title: title,
+            name: name,
             start: formatTime_fullCalendar(eventstart),
             end: formatTime_fullCalendar(eventend),
             color: color,
@@ -172,21 +218,47 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
             element.popover(
                 {
                     html: true,
-                    title: "<strong>" + event.title + "</strong>",  //some html has to be in the title or it won't work
+                    title: "<strong>" + event.title + "<br>" + event.name + "</strong>",  //some html has to be in the title or it won't work
                     content: event.professor + "<br>" + event.location + " " + room + "<br>" + timeString,
-                    trigger: 'hover click',
+                    trigger: 'hover',
                     placement: "right",
                     selector: event,
                     container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
                 }
             );
-        },
+        }
     });
 
 }
 
 
+function createOnlineEventsSet(onlineSet){
+    var singleRow = 1;   //row "height" is 5 minutes
+    var events = [];
+    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:2, minutes:00}); //11/7/16, 2 AM
 
+    onlineSet.forEach(function(course,i){
+        courseCode = course.prefix + ' ' + course.number;
+        var theStart = i == 0 ? rowZeroColumnZero : prevCourseStart.clone().add(singleRow, 'm');
+        var theEnd = theStart.clone().add(0.95 * singleRow, 'm');
+
+        events.push(
+            {
+                title:      courseCode,
+                courseName: course.title,
+                profFirst:  course.profFirst,
+                profLast:   course.profLast,
+                start:      theStart,
+                end:        theEnd,
+                color:      '#583372',
+                className:  'online',
+                online:     true,
+            }
+        );
+        prevCourseStart = theStart;
+    });
+    return events;
+}
 
 
 
@@ -202,21 +274,21 @@ var displayCalendar_Room = function(roomRowId, eventsArray){
  *  *  Adding days moves an event to a different column.  Adding minutes moves it down to lower rows.
  */
 function createClassroomEventsSet(classroomSet){
-    var singleRow = 5;   //row "height" is 5 minutes
-    var doubleRow = 10;  //two rows is 10 minutes
+    var singleRow = 1;   //row "height" is 5 minutes
+    var doubleRow = 2;  //two rows is 10 minutes
     var events = [];
-    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:6, minutes:00}); //11/7/16, 6 AM
+    var rowZeroColumnZero = moment({ years:2016, months:10, date:6, hours:2, minutes:00}); //11/7/16, 2 AM
     var prevDividerStart = rowZeroColumnZero;
 
     classroomSet.forEach(function(classroom, i){
-        var classroomName = classroom.name;
+        //var classroomName = classroom.name;
         var classroomId = 'classroom_' + classroom.id;
         //var mwId = 'mw_' + classroom.id;
-        var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(5, 'm');
-        var theEnd = theStart.clone().add(10, 'm');
+        var theStart = i == 0 ? rowZeroColumnZero : prevDividerStart.clone().add(1, 'm');
+        var theEnd = theStart.clone().add(2, 'm');
         events.push(
             {
-                title: classroomName,
+                title: classroom.name,
                 start: theStart.toString().slice(16,24),
                 end: theEnd.toString().slice(16,24),
                 dow: [0],                           //dow means day of week  -- this is a recurring event
@@ -234,16 +306,32 @@ function createClassroomEventsSet(classroomSet){
             },
             {
                 title: " ",
-                start: theStart.clone().add(10, 'm').toString().slice(16,24),
-                end: theEnd.clone().add(10,'m').toString().slice(16,24),
+                start: theStart.clone().add(2, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(2,'m').toString().slice(16,24),
                 dow: [0],
                 className: 'event_placeholder',
                 order_by: 'A'
             },
             {
                 title: 'TTH',
-                start: theStart.clone().add(10, 'm').toString().slice(16,24),
-                end: theEnd.clone().add(10,'m').toString().slice(16,24),
+                start: theStart.clone().add(2, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(2,'m').toString().slice(16,24),
+                dow: [0],
+                className: 'days',
+                order_by: 'B'
+            },
+            {
+                title: " ",
+                start: theStart.clone().add(4, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(4,'m').toString().slice(16,24),
+                dow: [0],
+                className: 'event_placeholder',
+                order_by: 'A'
+            },
+            {
+                title: 'MWF',
+                start: theStart.clone().add(4, 'm').toString().slice(16,24),
+                end: theEnd.clone().add(4,'m').toString().slice(16,24),
                 dow: [0],
                 className: 'days',
                 order_by: 'B'
@@ -264,38 +352,71 @@ function createClassroomEventsSet(classroomSet){
                         title: theCourseTitle + '\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        end: theCourseStart.clone().add(1.95,'m'),   //just shy of 10 puts a little gap between blocks
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }else{
                 var minOverPageBreak = getMinutesOverPageBreak(course.startTime, courseDuration);
                 events.push(
                     {
-                        title: theCourseTitle + '\n' +
+                        title: theCourseTitle + '   >>>\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        end: theCourseStart.clone().add(1.95,'m'),   //just shy of 10 puts a little gap between blocks
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'before',
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     },
                     {
                         title: theCourseTitle + ' (cont.)\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart.clone().add(2, 'd'),
-                        end: theCourseStart.clone().add(2,'d').add(9.8,'m'),
+                        end: theCourseStart.clone().add(2,'d').add(1.95,'m'),
                         className: 'classEvent',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'after',
                         minOverBreak: minOverPageBreak,
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }
@@ -303,6 +424,7 @@ function createClassroomEventsSet(classroomSet){
         });
 
         classroom.nonStandardCourses.forEach(function(course, m){
+
             theCourseStart = momentGenerator_test(course.startTime, course.courseDays, theStart.clone());
             var courseDuration = moment.duration(
                 moment(course.endTime,'h:mm A').diff(moment(course.startTime, 'h:mm A'))
@@ -314,11 +436,22 @@ function createClassroomEventsSet(classroomSet){
                         title: course.courseTitle + '\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8, 'm'),
+                        end: theCourseStart.clone().add(1.95, 'm'),
                         duration: courseDuration,
                         overPageBreak: overPageBreak,
-                        className: 'nonStandard'
+                        className: 'nonStandard',
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }else{
@@ -328,30 +461,52 @@ function createClassroomEventsSet(classroomSet){
                         title: course.courseTitle + '\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart,
-                        end: theCourseStart.clone().add(9.8,'m'),   //just shy of 10 puts a little gap between blocks
+                        end: theCourseStart.clone().add(1.95,'m'),   //just shy of 2 puts a little gap between blocks
                         className: 'nonStandard',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'before',
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     },
                     {
                         title: course.courseTitle + ' (cont.)\n' +
                         moment(course.startTime, 'h:mm A').format('h:mm A') + ' - ' +
                         moment(course.endTime, 'h:mm A').format('h:mm A'),
+                        courseTitle: course.courseTitle,
                         start: theCourseStart.clone().add(2, 'd'),
-                        end: theCourseStart.clone().add(2,'d').add(9.8,'m'),
+                        end: theCourseStart.clone().add(2,'d').add(1.95,'m'),
                         className: 'nonStandard',
                         overPageBreak: overPageBreak,
                         relativeToBreak: 'after',
                         minOverBreak: minOverPageBreak,
-                        duration: courseDuration
+                        duration: courseDuration,
+                        courseName: course.courseName,
+                        courseDays: course.courseDays,
+                        startTime: course.startTime,
+                        endTime: course.endTime,
+                        campus: course.campus,
+                        building: course.building,
+                        room: course.room,
+                        profFirst: course.profFirst,
+                        profLast: course.profLast,
+                        online: false
                     }
                 );
             }
 
         });
-        prevDividerStart = theStart.clone().add((10 * 2), 'm');
+        prevDividerStart = theStart.clone().add((doubleRow * 3), 'm');
 
         for (i=0; i < 7; i++) {
             events.push(
@@ -359,7 +514,7 @@ function createClassroomEventsSet(classroomSet){
                     title: "",
                     start: prevDividerStart.clone().add(i, 'd').toString().slice(16,24),
                     end: prevDividerStart.clone()
-                        .add(5, 'm')
+                        .add(singleRow, 'm')
                         .add(i,'d').toString().slice(16,24),
                     dow: [i],
                     className: 'classroomDivider'
@@ -373,9 +528,15 @@ function createClassroomEventsSet(classroomSet){
 
 /*******************************************************************************************/
 
-function displayClassroomSchedule(theClassroomSet) {
-    var theEvents = createClassroomEventsSet(theClassroomSet);
+function displayClassroomSchedule(theClassroomSet, isOnline) {
+    //add a boolean parameter for whether the set is online or not
+    //if online, send the Set to method createOnlineEventsSet,
+    //else send to createClassroomEventsSet
+    var theEvents = isOnline ? createOnlineEventsSet(theClassroomSet) : createClassroomEventsSet(theClassroomSet);
+
     $('#classroomOverviewSchedule').fullCalendar('destroy');
+
+
     $('#classroomOverviewSchedule').fullCalendar({
         header: {
             left:   '',
@@ -383,6 +544,7 @@ function displayClassroomSchedule(theClassroomSet) {
             right:  'prev,next'
         },
         //titleFormat: '[7:30 AM - 12:30 PM]',
+        height: 1500,
         defaultView: 'agendaWeek',
         navLinks: true, // can click day/week names to navigate views
         editable: false,
@@ -393,9 +555,31 @@ function displayClassroomSchedule(theClassroomSet) {
         defaultDate: '2016-11-06',  // 11/7/16 is a Monday
         firstDay: '0', //Monday
         slotLabelFormat: ' ', //the space makes the slots blank.  First time is 6 AM.
-        slotDuration: '00:5:00',
-        minTime: '06:00:00',
+        slotDuration: '00:1:00',
+        minTime: '02:00:00',
+        scrollTime: '02:00:00',
         eventOrder: 'order_by',
+        events: theEvents,
+        eventRender: function(event, element){
+            var theTitle = event.online ? event.title : event.courseTitle;
+            var profString = event.profFirst + " " + event.profLast;
+            var campusString = event.online ? "Online" : event.campus + "<br>";
+            var roomString = event.online ? "" : event.building + " " + event.room + "<br>";
+            var timeString = event.online ? "" : event.courseDays + " " + event.startTime + ' - ' + event.endTime ;
+            if ( $(element).hasClass('classEvent') || $(element).hasClass('online') || $(element).hasClass('nonStandard')){
+                element.popover(
+                    {
+                        html: true,
+                        title: "<strong>" + theTitle + "<br>" + event.courseName + "</strong>",  //some html has to be in the title or it won't work
+                        content: profString + "<br>" + campusString + roomString  +  timeString,
+                        trigger: 'hover',
+                        placement: event.online? "right" : "left",
+                        selector: event,
+                        container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
+                    }
+                );
+            }
+        },
         eventAfterRender: function (event, element, view) {
             if ($(element).hasClass("classroomName")) {
                 $(element).css('background-color', '#194d96');
@@ -417,7 +601,6 @@ function displayClassroomSchedule(theClassroomSet) {
                             getWidthMultiplier(event.minOverBreak * $(element).width());
                         $(element).css('width', newWidth + 'px');
                     }
-
                 }
                 $(element).css('margin-right', '-50%');
                 $(element).css('background-color', '#583372');
@@ -454,11 +637,14 @@ function displayClassroomSchedule(theClassroomSet) {
 
         },
         eventAfterAllRender: function(event, element, view){
+            $('#room_ajax-loader').addClass('hide');
+            $('#rooms_ajax-loader').addClass('hide');
+
             fixHeaders_classroom(); //this function changes the innerHTML of the weekday headers when we switch weeks
             //no need for button listeners
-        },
-        events: theEvents
+        }
     });
+
 
 }
 

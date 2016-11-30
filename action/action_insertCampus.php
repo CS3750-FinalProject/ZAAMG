@@ -2,7 +2,7 @@
 
 <?php
 
-include '../Campus.php';
+require_once '../Campus.php';
 
 $campusName = isset($_POST['campusName']) ? $_POST['campusName'] : "not entered";
 
@@ -15,7 +15,11 @@ $result = $campus->campusExists($campusName);
 echo $result;
 
 if ($result == "does not exist"){
-    $campus->insertNewCampus();
+    try{
+        $campus->insertNewCampus();
+    }catch (Exception $e){
+        echo "insertNewCampus: " + $e->getMessage();
+    }
 }
 
 

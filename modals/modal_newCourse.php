@@ -13,11 +13,11 @@ $body = '
                 <div class="form-group" >
                     <div class="col-xs-4">
                         <label for="courseCode">Code</label>
-                        <input type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
+                        <input style="margin-bottom:20px" type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
                     </div>
                     <div class="col-xs-8">
                         <label for="courseTitle">Title</label>
-                        <input type="text" class="form-control" id="courseTitle" placeholder="Course Title Here..." >
+                        <input style="margin-bottom:20px" type="text" class="form-control" id="courseTitle" placeholder="Course Title Here..." >
                     </div>
 
                 </div>
@@ -33,24 +33,6 @@ $body = '
                     <div class="col-xs-8">
                         <label for="courseDepartment">Department</label>
                         <select class="form-control" id="courseDepartment" >
-                            <option value="0" >Please Select...</option>';
-
-
-                            $database = new Database();
-                            $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name, dept_code FROM W01143557.Department
-                            ORDER BY dept_code ASC');
-                            $selectDepts->execute();
-                            $result = $selectDepts->fetchAll();
-
-                            foreach($result as $department) {
-                                //declare variables for cleaner code and better readability
-                                $departmentID = $department['dept_id'];
-                                $departmentName = $department['dept_name'];
-                                $departmentCode = $department['dept_code'];
-                                $body .= "<option value=\"$departmentID\">$departmentName ($departmentCode) </option>";
-                            }
-$body .= '
                         </select>
                     </div>
                 </div>
