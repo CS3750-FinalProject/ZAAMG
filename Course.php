@@ -77,9 +77,9 @@ class Course {
         } catch (Exception $e) {
             echo "deptId: ".$this->deptId;
             echo "insertNewCourse: ".$e->getMessage();
-            return $e->getMessage();
+            echo $e->getMessage();
         }
-        return $dbh->lastInsertId();
+        $this->courseId = $dbh->lastInsertId();
     }
 
     public function courseExists($coursePrefix, $courseNumber, $deptId){
@@ -98,6 +98,7 @@ class Course {
             }
         } catch (Exception $e) {
             echo $e->getMessage();
+            return "Error in courseExists";
         }
     }
 

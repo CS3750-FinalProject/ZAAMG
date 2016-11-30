@@ -2,7 +2,7 @@
 
 $database = new Database();
 
-echo '
+$body = '
 <div class="modal fade" id="newClassroomModal" tabindex="-1" role="dialog" aria-labelledby="classroom-label">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -15,7 +15,7 @@ echo '
 
                     <div class="col-xs-7">
                         <label for="classroomBuilding">Campus/Building</label>
-                        <select type="text" class="form-control" id="classroomBuilding" >
+                        <select class="form-control" id="classroomBuilding" >
 
                             <option value="0">Please Select...</option>
                             <option value="-1">None</option>';
@@ -29,10 +29,10 @@ echo '
                             $result = $selectBuilding->fetchAll();
 
                             foreach($result as $row){
-                                echo "<option value=\"".$row['building_id']."\">"
+                                $body .= "<option value=\"".$row['building_id']."\">"
                                     .$row['campus_name'].": ".$row['building_name']."</option>";
                             }
-echo '
+$body .= '
                         </select>
                     </div>
                     <div class="col-xs-1"></div> <!-- spacer div -->
@@ -61,3 +61,5 @@ echo '
         </div>
     </div>
 </div>';
+
+echo $body;

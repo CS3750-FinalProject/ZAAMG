@@ -1,5 +1,5 @@
 <?php
-include 'Database.php';
+require_once 'Database.php';
 
 class Department {
     private $database;
@@ -36,7 +36,12 @@ class Department {
         $stmtInsert->bindValue(":id", NULL);
         $stmtInsert->bindValue(":deptName", $this->deptName);
         $stmtInsert->bindValue(":code", $this->deptCode);
-        $stmtInsert->execute();
+        try {
+            $stmtInsert->execute();
+            echo "Success executing Insert";
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function departmentExists($deptCode, $deptName){
@@ -55,6 +60,7 @@ class Department {
             }
         } catch (Exception $e) {
             echo "Here's what went wrong: ".$e->getMessage();
+            return "departmentExists failed!";
         }
     }
 }

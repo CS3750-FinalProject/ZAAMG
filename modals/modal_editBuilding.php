@@ -20,8 +20,11 @@ $selectBuilding = $database->getdbh()->prepare(
 $selectBuilding->execute();
 $result = $selectBuilding->fetchAll();
 foreach($result as $building){
-    $body.= "<option value=".$building['building_id'].">"
-        .$building['campus_name'].": ".$building['building_name']."</option>";
+    //declare separate variable for cleaner code and better readability
+    $buildingID = $building['building_id'];
+    $buildingCampus = $building['campus_name'];
+    $buildingName = $building['building_name'];
+    $body.= "<option value=\"$buildingID\">$buildingCampus: $buildingName</option>";
 }
 $body.= "
                     </select>
@@ -41,15 +44,16 @@ $body.= "
                 </div>
                 <div class='col-xs-6'>
                         <label for='editModal_buildingCampus'>Campus</label>
-                        <select type='text' class='form-control' id='editModal_buildingCampus' >";
+                        <select class='form-control' id='editModal_buildingCampus' >";
 $selectCampi = $database->getdbh()->prepare(
     'SELECT campus_id, campus_name FROM W01143557.Campus
                                   ORDER BY campus_name ASC');
 $selectCampi->execute();
 $result = $selectCampi->fetchAll();
 foreach($result as $campus){
-    $body.= "<option value = ".$campus['campus_id'].">"
-        .$campus['campus_name']."</option>";
+    $campusID = $campus['campus_id'];
+    $campusName = $campus['campus_name'];
+    $body.= "<option value=\"$campusID\">$campusName</option>";
 }
 $body.="
                         </select>

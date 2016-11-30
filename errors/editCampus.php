@@ -19,13 +19,13 @@ $body = "
                      <select size='3' class='form-control'  id='pick_editCampus'>";
 
                 $selectCampi = $database->getdbh()->prepare(
-                    'SELECT campus_id, campus_name FROM ZAAMG.Campus
+                    'SELECT campus_id, campus_name FROM W01143557.Campus
                                                   ORDER BY campus_name ASC');
                 $selectCampi->execute();
                 $result = $selectCampi->fetchAll();
 
                 foreach($result as $campus){
-                    $body.= "<option value=".$campus['campus_id'].">".$campus['campus_name']."</option>";
+                    $body.= "<option value=\"".$campus['campus_id']."\">".$campus['campus_name']."</option>";
                 }
 $body .= "
                 </select>
@@ -40,11 +40,11 @@ $body .= "
 
 
             <!--style='max-height: 190px; overflow-y:auto'-->
-            <div class='hide col-xs-12' id='editModalDiv_Campus'  >
+            <div class='col-xs-12 hide' id='editModalDiv_Campus'  >
                 <div class='form-group' >
                         <div class='col-xs-12'>
-                            <label for='editModal_campusName'>Edit Campus Name</label>
-                            <input type='text' class='form-control' id='editModal_campusName'  >
+                            <label>Edit Campus Name
+                            <input type='text' class='form-control' id='editModal_campusName'  ></label>
                         </div>
                 </div>
             </div>

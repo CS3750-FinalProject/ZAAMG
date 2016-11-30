@@ -262,7 +262,7 @@ function addProfessor(Professor $professor, Database $db){
                         <select class='form-control' id='inlineEdit_profDept{$id}' style='margin-bottom: 10px'>";
 
                             $selectDepts = $db->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM ZAAMG.Department
+                                'SELECT dept_id, dept_name FROM W01143557.Department
                                   ORDER BY dept_name ASC');
                             $selectDepts->execute();
                             $result = $selectDepts->fetchAll();

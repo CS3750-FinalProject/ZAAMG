@@ -1,6 +1,6 @@
 <?php
 
-include '../Course.php';
+require_once '../Course.php';
 
 
 

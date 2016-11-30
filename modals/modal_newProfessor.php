@@ -32,7 +32,7 @@ echo '
                             <option value="">Please Select...</option>';
 
                             $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM ZAAMG.Department
+                                'SELECT dept_id, dept_name FROM W01143557.Department
                                   ORDER BY dept_name ASC');
                             $selectDepts->execute();
                             $result = $selectDepts->fetchAll();

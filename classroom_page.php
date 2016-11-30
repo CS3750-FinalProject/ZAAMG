@@ -54,7 +54,7 @@ $body .= "<div class='form-group' style=    'margin-bottom: 40px;
                 <option value='0'>Campus...</option>";
             $selectCampus = $database->getdbh()->prepare(
                             'SELECT campus_name, campus_id
-                            FROM ZAAMG.Campus
+                            FROM W01143557.Campus
                             ORDER BY campus_name ASC');
             $selectCampus->execute();
             $result = $selectCampus->fetchAll();
@@ -329,9 +329,9 @@ function addClassroom(Classroom $classroom, Database $db){
                         <select style='margin-bottom: 6px' type='text' class='form-control' id='inlineEdit_roomBuilding{$roomId}' >";
 
                             $selectBuilding = $db->getdbh()->prepare(
-                                'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
-                                  FROM ZAAMG.Campus JOIN ZAAMG.Building
-                                  ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
+                                'SELECT W01143557.Campus.campus_id, campus_name, building_name, building_id
+                                  FROM W01143557.Campus JOIN W01143557.Building
+                                  ON W01143557.Campus.campus_id = W01143557.Building.campus_id
                                   ORDER BY campus_name ASC');
                             $selectBuilding->execute();
                             $result = $selectBuilding->fetchAll();

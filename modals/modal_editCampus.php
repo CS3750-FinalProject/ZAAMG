@@ -12,14 +12,18 @@ $body = "
             <div class='col-xs-8'>
                 <label for='pick_editCampus'>Campus</label>
                      <select size='5' class='form-control'  id='pick_editCampus'>";
+
 $selectCampi = $database->getdbh()->prepare(
-    'SELECT campus_id, campus_name FROM W01143557.Campus
-                                                  ORDER BY campus_name ASC');
+    'SELECT campus_id, campus_name FROM W01143557.Campus ORDER BY campus_name ASC');
 $selectCampi->execute();
 $result = $selectCampi->fetchAll();
 foreach($result as $campus){
-    $body.= "<option value=".$campus['campus_id'].">".$campus['campus_name']."</option>";
+    //declare campus id and name for cleaner code and better readability
+    $campusID = $campus['campus_id'];
+    $campusName = $campus['campus_name'];
+    $body.= "<option value=\"$campusID\">$campusName</option>";
 }
+
 $body .= "
                 </select>
             </div>

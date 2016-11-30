@@ -1,5 +1,5 @@
 <?php
-require_once "Database.php";
+//require_once "Database.php";
 
 $database = new Database();
 
@@ -24,12 +24,13 @@ $body = "
                             $selectCourse->execute();
                             $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
 
-                            foreach($result as $row){
-                                $body .= '<option value=\''.$row['course_id']
-                                    .'\'>'.$row['course_prefix']
-                                    .' '.$row['course_number']
-                                    .' '.$row['course_title']
-                                    .'</option>';
+                            foreach($result as $course){
+                                //declare variables for cleaner code and better readability
+                                $courseID = $course['course_id'];
+                                $coursePrefix = $course['course_prefix'];
+                                $courseNumber = $course['course_number'];
+                                $courseTitle = $course['course_title'];
+                                $body .= "<option value=\"$courseID\">$coursePrefix $courseNumber $courseTitle</option>";
                             }
                         $body .= "</select>
                     </div>
@@ -45,11 +46,11 @@ $body = "
                             $selectProf->execute();
                             $result = $selectProf->fetchAll();
 
-                            foreach($result as $row){
-                                $body .= "<option value=\"".$row["prof_id"]
-                                    ."\">"
-                                    .$row["prof_last"].", ".$row["prof_first"]
-                                    ."</option>";
+                            foreach($result as $prof){
+                                $profID = $prof['prof_id'];
+                                $profLast = $prof['prof_last'];
+                                $profFirst = $prof['prof_first'];
+                                $body .= "<option value=\"$profID\">$profLast, $profFirst</option>";
                             }
 
                         $body .= "</select>
@@ -58,7 +59,7 @@ $body = "
                         <label for='sectionClassroom'>Classroom</label>
                         <select class='form-control' id='sectionClassroom'  >
                             <option value='-1'>Please Select...</option>
-                            <option value='0'>Online</option>";
+                           <!--<option value='0'>Online</option>-->";
                             $selectRoom = $database->getdbh()->prepare(
                                 "SELECT classroom_id, campus_name, building_name, classroom_number
                                   FROM W01143557.Campus c JOIN W01143557.Building b
@@ -69,13 +70,12 @@ $body = "
                             $selectRoom->execute();
                             $result = $selectRoom->fetchAll(PDO::FETCH_ASSOC);
 
-                            foreach($result as $row){
-                                $body .= "<option value=\""
-                                .$row["classroom_id"]."\">"
-                                    .$row["campus_name"].", "
-                                    .$row["building_name"].": "
-                                    .$row["classroom_number"]
-                                    ."</option>";
+                            foreach($result as $classroom){
+                                $classroomID = $classroom['classroom_id'];
+                                $classroomCampus = $classroom['campus_name'];
+                                $classroomBuilding = $classroom['building_name'];
+                                $classroomNumber = $classroom['classroom_number'];
+                                $body .= "<option value=\"$classroomID\">$classroomCampus, $classroomBuilding: $classroomNumber</option>";
                             }
         $body .= "
                         </select>
@@ -122,17 +122,17 @@ $body = "
                             $selectSem->execute();
                             $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
 
-                            foreach($result as $row){
-                                $body .= "<option value=\"".$row['sem_id']."\">"
-                                .$row['sem_year']." "
-                                .$row['sem_season']
-                                ."</option>";
+                            foreach($result as $semester){
+                                $semID = $semester['sem_id'];
+                                $semYear = $semester['sem_year'];
+                                $semSeason = $semester['sem_season'];
+                                $body .= "<option value=\"$semID\">$semYear $semSeason</option>";
                             }
                             $body .= "
                         </select>
                     </div>
 
-                    <div class='col-xs-2'>
+                    <div class='col-xs-2' style='padding-left: 0'>
                         <label for='sectionBlock'>Block</label>
                         <select class='form-control' id='sectionBlock'>
                             <option value='0'>Full</option>

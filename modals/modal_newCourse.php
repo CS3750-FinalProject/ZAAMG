@@ -1,5 +1,5 @@
 <?php
-echo '
+$body = '
 <!-- Modal -->
 <div class="modal fade" id="newCourseModal" tabindex="-1" role="dialog" aria-labelledby="course-label">
     <div class="modal-dialog" role="document">
@@ -43,11 +43,14 @@ echo '
                             $selectDepts->execute();
                             $result = $selectDepts->fetchAll();
 
-                            foreach($result as $row) {
-                                echo "<option value=\"" . $row['dept_id'] . "\">"
-                                    . $row['dept_name'] . " (" . $row['dept_code'] . ")" . "</option>";
+                            foreach($result as $department) {
+                                //declare variables for cleaner code and better readability
+                                $departmentID = $department['dept_id'];
+                                $departmentName = $department['dept_name'];
+                                $departmentCode = $department['dept_code'];
+                                $body .= "<option value=\"$departmentID\">$departmentName ($departmentCode) </option>";
                             }
-echo '
+$body .= '
                         </select>
                     </div>
                 </div>
@@ -61,3 +64,5 @@ echo '
         </div>
     </div>
 </div>';
+
+echo $body;

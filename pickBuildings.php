@@ -16,7 +16,7 @@ $campusId = isset($_POST['campusId']) ? $_POST['campusId'] : "not entered";
 
 $selectBuilding = $database->getdbh()->prepare(
     'SELECT building_name, building_id
-                            FROM ZAAMG.Building WHERE campus_id = '.$dbh->quote($campusId).'
+                            FROM W01143557.Building WHERE campus_id = '.$dbh->quote($campusId).'
                             ORDER BY building_name ASC');
 $selectBuilding->execute();
 $result = $selectBuilding->fetchAll();

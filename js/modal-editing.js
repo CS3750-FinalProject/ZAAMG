@@ -19,7 +19,7 @@ var ModalEditing = function() {
         });
 
 
-    }
+    };
     toggleHideClass_modal();
 
     //reset the modal when it gets shown/hidden
@@ -36,7 +36,7 @@ var ModalEditing = function() {
     });
 
     var loadSemesterFields = function(){
-        var pickedSemId = $('#pick_editSemester :selected').val();
+        var pickedSemId = $('#pick_editSemester').find(':selected').val();
 
         $.ajax({
             type: 'POST',
@@ -46,7 +46,7 @@ var ModalEditing = function() {
             success: function(data)          //on receive of reply
             {
                 $('#editModal_semesterYear').val(data.year);
-                $('#editModal_semesterSeason option[value=' + data.season+']').attr('selected', 'selected');
+                $('#editModal_semesterSeason').find('option[value=' + data.season+']').attr('selected', 'selected');
                 $('#editModal_semesterStartDate').val(data.start.slice(0,10));
                 $('#editModal_semesterNumberWeeks').val(data.weeks);
                 $('#editModal_firstBlockStart').val(data.firstBlock.slice(0,10));
@@ -56,10 +56,10 @@ var ModalEditing = function() {
                 console.log(data.responseText);
             }
         });
-    }
+    };
 
     var loadCampusFields = function(){
-        var pickedCampusId = $('#pick_editCampus :selected').val();
+        var pickedCampusId = $('#pick_editCampus').find(':selected').val();
 
         $.ajax({
             type: 'POST',
@@ -76,4 +76,4 @@ var ModalEditing = function() {
         });
     }
 
-}
+};

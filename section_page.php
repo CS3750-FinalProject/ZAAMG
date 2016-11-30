@@ -49,7 +49,7 @@ echo $body;
 //<img> (save disc)         id = save_sect<#>
 
 
-function addSection(Section $section, $database){
+function addSection(Section $section, Database $database){
 
       $row = "<tr id='record_sectiont{$section->getSectionID()}'>
             <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}</td>"
@@ -89,7 +89,7 @@ function addSection(Section $section, $database){
                         <select class='form-control' id='inlineEdit_sectCourse{$section->getSectionID()}' style='margin-bottom: 10px'>";
 
                             $selectCourse = $database->getdbh()->prepare(
-                                'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
+                                'SELECT course_id, course_prefix, course_number, course_title FROM W01143557.Course
                                   ORDER BY course_prefix, course_number');
                             $selectCourse->execute();
                             $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
@@ -113,7 +113,7 @@ function addSection(Section $section, $database){
                         <select  class='form-control' id='inlineEdit_sectProf{$section->getSectionID()}' style='margin-bottom: 10px'>";
 
                             $selectProf = $database->getdbh()->prepare(
-                                'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
+                                'SELECT prof_id, prof_first, prof_last FROM W01143557.Professor
                                   ORDER BY prof_last ASC');
                             $selectProf->execute();
                             $result = $selectProf->fetchAll();
@@ -138,9 +138,9 @@ function addSection(Section $section, $database){
 
                             $selectRoom = $database->getdbh()->prepare(
                                 "SELECT classroom_id, campus_name, building_name, classroom_number
-                                  FROM ZAAMG.Campus c JOIN ZAAMG.Building b
+                                  FROM W01143557.Campus c JOIN W01143557.Building b
                                   ON c.campus_id = b.campus_id
-                                  JOIN ZAAMG.Classroom r
+                                  JOIN W01143557.Classroom r
                                   ON b.building_id = r.building_id
                                   ORDER BY campus_name ASC");
                             $selectRoom->execute();
@@ -185,7 +185,7 @@ function addSection(Section $section, $database){
 
                             $selectSem = $database->getdbh()->prepare(
                                 'SELECT sem_id, sem_season, sem_year, sem_start_date
-                                  FROM ZAAMG.Semester
+                                  FROM W01143557.Semester
                                   ORDER BY sem_start_date DESC');
                             $selectSem->execute();
                             $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);

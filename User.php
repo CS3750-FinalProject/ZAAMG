@@ -13,7 +13,7 @@ class User {
     can see everything, but can't change it.*/
     private $userType;
     
-    public function __construct($username, $password, $userType = 2) {
+    public function __construct($username, $password, $userType = -1) {
         $this->username = $username;
         $this->password = $password;
         if($userType < 0 || $userType > 3) {

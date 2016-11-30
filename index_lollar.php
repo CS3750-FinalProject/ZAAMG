@@ -2,16 +2,7 @@
 
 #http://stackoverflow.com/questions/27139963/bootstrap-multiple-pages-divs-and-navbar
 require_once 'Database.php';
-require_once 'modals/modal_newSection.php';
-require_once 'modals/modal_newCourse.php';
-require_once 'modals/modal_newProfessor.php';
-require_once 'modals/modal_newClassroom.php';
-require_once 'modals/modal_newSemester.php';
-require_once 'modals/modal_editSemester.php';
-require_once 'modals/modal_newBuilding.php';
-require_once 'modals/modal_newCampus.php';
-require_once 'modals/modal_editCampus.php';
-require_once 'modals/modal_newDepartment.php';
+
 $database = new Database();
 $body = "
 <!DOCTYPE html>
@@ -21,19 +12,17 @@ $body = "
     <link href='css/application.css' rel='stylesheet' />
    <!-- <link href='css/fullcalendar.css' rel='stylesheet' />-->
     <link href='css/fullcalendar_custom.css' rel='stylesheet' />
-
     <script src='js/jquery.min.js' charset='utf-8'></script>
     <script src='js/jquery-3.1.1.min.js' charset='utf-8'></script>
     <script src='js/bootstrap.min.js' charset='utf-8'></script>
     <script src='js/moment.min.js' charset='utf-8'></script>
     <script src='js/fullcalendar.min.js' charset='utf-8'></script>
-
     <script src='js/inline-editing.js' charset='utf-8'></script>
     <script src='js/modal-editing.js' charset='utf-8'></script>
     <script src='js/professorSet.js' charset='utf-8'></script>
     <script src='js/processForm.js' charset='utf-8'></script>
     <script src='js/calendar.js' charset='utf-8'></script>
-    <script src='js/classroomCalendar.js' charset='utf-8'></script>
+    <script src='js/ClassroomCalendar.js' charset='utf-8'></script>
     <script src='js/classroomSet.js' charset='utf-8'></script>
     <script>
 
@@ -86,7 +75,7 @@ $body = "
                 <li><a href='#' data-toggle='modal' data-target='#newCourseModal'
                        class='newResourceLink' id='newCourseLink'>Course</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newProfessorModal'
-                       class='newResourceLink'id='newProfLink'>Professor</a></li>
+                       class='newResourceLink' id='newProfLink'>Professor</a></li>
                 <li><a href='#' data-toggle='modal' data-target='#newClassroomModal'
                        class='newResourceLink' id='newClassroomLink'>Classroom</a></li>
                 <li role='separator' class='divider'></li>
@@ -123,30 +112,22 @@ $body = "
           </ul>
         </div>
       </div>
-    </nav>";
-
-$body .= "
-
-
-
-
-<div class='container' id='main_container'>";
-echo $body;
-
-
-
-
-
-$body = "</div>";  //should close div#main_container
-
-
-
-
-$body .= "
+    </nav>
+    <div class='container' id='main_container'> 
+    </div>
   </body>
 </html>
 ";
 
 echo $body;
 
-
+require_once 'modals/modal_newSection.php';
+require_once 'modals/modal_newCourse.php';
+require_once 'modals/modal_newProfessor.php';
+require_once 'modals/modal_newClassroom.php';
+require_once 'modals/modal_newSemester.php';
+require_once 'modals/modal_editSemester.php';
+require_once 'modals/modal_newBuilding.php';
+require_once 'modals/modal_newCampus.php';
+require_once 'modals/modal_editCampus.php';
+require_once 'modals/modal_newDepartment.php';

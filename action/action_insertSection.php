@@ -1,6 +1,6 @@
 <?php
 
-include '../Section.php';
+require_once '../Section.php';
 
 $sectionCourse = isset($_POST['sectionCourse']) ? $_POST['sectionCourse'] : "not entered";
 $sectionProfessor = isset($_POST['sectionProfessor']) ? $_POST['sectionProfessor'] : "not entered";
@@ -26,6 +26,7 @@ $result = $section->sectionExists($sectionCourse, $sectionProfessor, $sectionCla
     $sectionSemester, $sectionDays, $sectionStartTime);
 
 if ($result == "does not exist"){
+    echo "<script>console.log('about to Insert');</script>";
     $section->insertNewSection();
 }
 

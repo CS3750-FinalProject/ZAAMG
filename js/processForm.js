@@ -4,14 +4,31 @@
 
 $(function() {
 
+
     $("#btn_insertCourse").click(function() {
         // validate and process form here
-        //var courseCode = $("input#courseCode").val();
-        var coursePrefix = $("input#coursePrefix").val();
-        var courseNumber = $("input#courseNumber").val();
+        var courseCode = $("input#courseCode").val();
+        //var coursePrefix = $("input#coursePrefix").val();
+        //var courseNumber = $("input#courseNumber").val();
         var courseTitle = $("input#courseTitle").val();
         var courseCredits = $("input#courseCredits").val();
         var deptId = $("#courseDepartment").val();
+
+        var coursePattern = /[A-Z]?[A-Z]?[A-Z][A-Z] [0-9]?[0-9][0-9][0-9]/;
+
+        if (!coursePattern.test(courseCode)) {
+            window.alert("Invalid Course format! Enter the course in this fashion:\nPREF ####");
+            this.modal('show');
+        }
+        courseCode = coursePattern.exec(courseCode);
+        var space = courseCode.indexOf(" ");
+        try {
+            var coursePrefix = courseCode.slice(0, space);
+            var courseNumber = courseCode.slice(space);
+        }catch (err) {
+            window.alert("Undefined Error");
+            this.modal('show');
+        }
 
         /*if (courseCode.length == 0){
             $("span.error-message").text("A course code is required.");
@@ -52,10 +69,10 @@ $(function() {
         var profEmail = $("input#profEmail").val();
         var profReqHours = $("input#profHours").val();
         var profRelHours = $("input#profRelease").val();
-        var deptId = $("#profDepartment").val()
+        var deptId = $("#profDepartment").val();
 
         if (profEmail.length == 0){
-            $("span.error-message").text("An email address is required.")
+            $("span.error-message").text("An email address is required.");
             return false;
         }
 
@@ -92,11 +109,11 @@ $(function() {
         var buildId = $("select#classroomBuilding").val();
 
         if (classNum.length == 0){
-            $("span.error-message").text("A room number is required.")
+            $("span.error-message").text("A room number is required.");
             return false;
         }
         if (buildId == 0){
-            $("span.error-message").text("Please select a building.")
+            $("span.error-message").text("Please select a building.");
             return false;
         }
 
@@ -113,7 +130,7 @@ $(function() {
                 //alert(msg); return false; use for debugging
                 if (msg.indexOf("does exist") != -1){
                     window.classroomExists = true;
-                    $("span.error-message").text("This Classroom already exists.")
+                    $("span.error-message").text("This Classroom already exists.");
                 }
                 if (!window.classroomExists) {
                     location.reload();//reloads window so that new Database is refreshed
@@ -135,7 +152,7 @@ $(function() {
         var firstBlockStart = $("input#firstBlockStart").val();
         var secondBlockStart = $("input#secondBlockStart").val();
         if (semSeason == 0){
-            $("span.error-message").text("Please select a season.")
+            $("span.error-message").text("Please select a season.");
             return false;
         }
 
@@ -152,7 +169,7 @@ $(function() {
             success: function(msg) {
                 if (msg.indexOf("does exist") != -1){
                     window.semesterExists = true;
-                    $("span.error-message").text("This Semester already exists.")
+                    $("span.error-message").text("This Semester already exists.");
                 }
                 if (!window.semesterExists) {
                     $('#newSemesterModal').modal('hide');
@@ -172,11 +189,11 @@ $(function() {
         var buildName = $("input#buildingName").val();
 
         if (buildCode.length == 0){
-         $("span.error-message").text("A building code is required.")
+         $("span.error-message").text("A building code is required.");
          return false;
          }
         if (buildName.length == 0){
-            $("span.error-message").text("A building name is required.")
+            $("span.error-message").text("A building name is required.");
             return false;
         }
 
@@ -208,7 +225,7 @@ $(function() {
         var campusName = $("input#campusName").val();
 
         if (campusName.length == 0){
-            $("span.error-message").text("A campus name is required.")
+            $("span.error-message").text("A campus name is required.");
             return false;
         }
 
@@ -268,32 +285,44 @@ $(function() {
         var sectionProfessor = $("#sectionProfessor").val();
         var sectionClassroom = $("#sectionClassroom").val();
         var sectionDays = $("select#sectionDays").val();
-        var daysString = "";
-        if (sectionDays != "online"){
-            $.each(sectionDays, function(index, value){
-                daysString += value;
-            });
-        }else
-            daysString = "online";
-        //alert(daysInt);
-        //alert( $("#sectionStartTime").val());
-         var timePattern = /[0-1][0-9]:[0-5][0-9] [AP]M/i;
         var sectionStartTime = $("#sectionStartTime").val();
         var sectionEndTime = $("#sectionEndTime").val();
-        if (!timePattern.test(sectionStartTime)){
-            window.alert("Invalid start time entered! Please enter a valid time in this format:\n 00:00 AM");
-            this.modal("show");
-        }
-            //sectionStartTime = '00:00:00';
-        if (!timePattern.test(sectionEndTime)){
-            window.alert("Invalid end time entered! Please enter a valid time in this format:\n 00:00 AM");
-            this.modal("show");
-        }
-            //sectionEndTime = '00:00:00';
         var sectionIsOnline = $("#sectionOnline:checkbox:checked").length > 0 ? 1 : 0;
         var sectionBlock = $("#sectionBlock").val();
         var sectionSemester = $("#sectionSemester").val();
         var sectionCapacity = $("#sectionCapacity").val();
+        var daysString = "";
+        if (sectionDays != "online" || sectionClassroom != 0){
+            $.each(sectionDays, function(index, value){
+                daysString += value;
+            });
+            //only tests if not online
+            var timePattern = /[0-1][0-9]:[0-5][0-9] [AP]M/i;
+            if (!timePattern.test(sectionStartTime)){
+                window.alert("Invalid start time entered! Please enter a valid time in this format:\n00:00 AM");
+                this.modal("show");
+            }
+            if(timePattern.exec(sectionStartTime).length < sectionStartTime.length){
+                sectionStartTime = timePattern.exec(sectionStartTime);
+            }
+            if (!timePattern.test(sectionEndTime)){
+                window.alert("Invalid end time entered! Please enter a valid time in this format:\n00:00 AM");
+                this.modal("show");
+            }
+            if(timePattern.exec(sectionEndTime).length < sectionEndTime.length){
+                sectionEndTime = timePattern.exec(sectionEndTime);
+            }
+        }else {
+
+            daysString = "online";
+            sectionIsOnline = 1;
+            sectionStartTime = '00:00:00';
+            sectionEndTime = '00:00:00';
+        }
+        //alert(daysInt);
+        //alert( $("#sectionStartTime").val());
+
+
 
 
         sectionExists = false;
@@ -310,7 +339,7 @@ $(function() {
             url: "action/action_insertSection.php",
             data: dataString,
             success: function(msg) {
-                //console.log(msg); return false;
+                console.log(msg); //return false;
                 //alert(msg.substr(0, msg.length/3));  //use this to debug
                 if (msg.indexOf("does exist") != -1){
                     window.sectionExists = true;

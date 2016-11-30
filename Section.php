@@ -51,7 +51,7 @@ class Section
 
     public function insertNewSection(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO zaamg.Section VALUES
+        $stmtInsert = $dbh->prepare("INSERT INTO W01143557.Section VALUES
         (:secID, :courseID, :profID, :classID, :semester, :days, :startTime,
         :endTime, :online, :block, :capacity)");
         $stmtInsert->bindValue(":secID", NULL);
@@ -65,7 +65,14 @@ class Section
         $stmtInsert->bindValue(":online", $this->isOnline);
         $stmtInsert->bindValue(":capacity", $this->capacity);
         $stmtInsert->bindValue(":semester", $this->semester);
-        $stmtInsert->execute();
+        try {
+            $stmtInsert->execute();
+            if($dbh->lastInsertId() < 0) throw Exception::class;
+            echo "<script>console.log('Success executing Insert');</script>";
+        } catch (Exception $e) {
+            echo "<script>console.log(".$e->getMessage().");</script>";
+            echo $e->getMessage();
+        }
         $this->sectionID = (int) $dbh->lastInsertId();
     }
 
@@ -90,6 +97,7 @@ class Section
             }
         } catch (Exception $e) {
             echo "sectionExists(): ".$e->getMessage();
+            return "Error in sectionExists";
         }
     }
 
@@ -117,6 +125,7 @@ class Section
             return $result[0];
         }catch (Exception $e){
             echo "getSectionProperty: ".$e->getMessage();
+            return "Error in getSectionProperty";
         }
     }
 
@@ -151,6 +160,7 @@ class Section
             return $result[0];
         }catch (Exception $e){
             echo "getSectionProperty: ".$e->getMessage();
+            return "Error in getSectionProperty";
         }
     }
 
@@ -190,6 +200,7 @@ class Section
             return $result[0];
         }catch (Exception $e){
             echo "getSectionProperty: ".$e->getMessage();
+            return "Error in getSectionProperty";
         }
     }
 

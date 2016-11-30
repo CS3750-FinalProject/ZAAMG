@@ -1,9 +1,9 @@
 <?php
 
-//include 'Database.php';
+require_once 'Database.php';
 
 class Semester {
-    //private $database;
+    private $database;
 
     private $semId;
     private $semYear;
@@ -24,7 +24,7 @@ class Semester {
         $this->semFirstBlockStartDate = $semFirstBlockStartDate;
         $this->semSecondBlockStartDate = $semSecondBlockStartDate;
 
-        //$this->database = new Database();
+        $this->database = new Database();
     }
 
 
@@ -107,6 +107,7 @@ class Semester {
             }
         } catch (Exception $e) {
             echo "Here's what went wrong: ".$e->getMessage();
+            return "Error in semesterExists";
         }
     }
 }

@@ -46,9 +46,8 @@ class Building {
         $stmtInsert->bindValue(":buildName", $this->buildName);
         $stmtInsert->bindValue(":campusID", $this->campusID);
 
-            try {
-                $stmtInsert->execute();
-
+        try {
+            $stmtInsert->execute();
             echo "Success executing Insert";
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -73,6 +72,7 @@ class Building {
             }
         } catch (Exception $e) {
             echo "Here's what went wrong: ".$e->getMessage();
+            return "buildingExists failed!";
         }
     }
 }
