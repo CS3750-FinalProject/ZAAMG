@@ -68,11 +68,12 @@ var InlineEditing = function() {
                     $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Friday").text("Friday"));
                     $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Saturday").text("Saturday"));
 
-                    var days = section.days.match(/[A-Z][a-z]+/g); //split the day string by Capitalized Day Names
+
+                    var days = section.days == "online" ? ["Online"]
+                        : section.days.match(/[A-Z][a-z]+/g); //split the day string by Capitalized Day Names
                     $('#' + 'inlineEdit_sectDays' + secId +'> option').each(function() {
                         if (  jQuery.inArray(this.innerHTML, days) > -1){
-                            console.log(this.innerHTML + ": " + days);
-                            console.log("inArray: " + jQuery.inArray(this.innerHTML, days));
+                            //console.log("inArray: " + jQuery.inArray(this.innerHTML, days));
                             $('#' + 'inlineEdit_sectDays' + secId +' option[value=' + this.innerHTML + ']').attr('selected', 'true');
                         }
                     });
@@ -87,7 +88,9 @@ var InlineEditing = function() {
                             $('#' + 'inlineEdit_sectDays' + secId +' option[value=' + this.value + ']').attr('selected', 'true');
                         }
                     });
-
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
             $.ajax({
@@ -102,6 +105,9 @@ var InlineEditing = function() {
                         if (obj.id == courseId)
                             $('#' + 'inlineEdit_sectCourse' + secId +' option[value=' + courseId + ']').attr('selected','selected');
                     });
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
             $.ajax({
@@ -116,6 +122,9 @@ var InlineEditing = function() {
                         if (obj.id == profId)
                             $('#' + 'inlineEdit_sectProf' + secId +' option[value=' + profId + ']').attr('selected','selected');
                     });
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
             $.ajax({
@@ -130,6 +139,9 @@ var InlineEditing = function() {
                         if (obj.id == roomId)
                             $('#' + 'inlineEdit_sectRoom' + secId +' option[value=' + roomId + ']').attr('selected','selected');
                     });
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
             $.ajax({
@@ -144,10 +156,11 @@ var InlineEditing = function() {
                         if (obj.id == semId)
                             $('#' + 'inlineEdit_sectSem' + secId +' option[value=' + semId + ']').attr('selected','selected');
                     });
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
-
-
         });
     }
 
@@ -173,6 +186,9 @@ var InlineEditing = function() {
                     $('#' + 'inlineEdit_roomCap' + roomId).val(room.cap);
                     $('#' + 'inlineEdit_roomComputers' + roomId).val(room.computers);
                     buildId = room.building;
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
             $.ajax({
@@ -187,6 +203,9 @@ var InlineEditing = function() {
                         if (obj.building_id == buildId)
                             $('#' + 'inlineEdit_roomBuilding' + roomId +' option[value=' + buildId + ']').attr('selected','selected');
                     });
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
         });
@@ -214,6 +233,9 @@ var InlineEditing = function() {
                     $('#' + 'inlineEdit_profReqHours' + profId).val(prof.req);
                     $('#' + 'inlineEdit_profRelHours' + profId).val(prof.rel);
                     deptId = prof.dept;
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
             $.ajax({
@@ -228,6 +250,9 @@ var InlineEditing = function() {
                         if (obj.id == deptId)
                             $('#' + 'inlineEdit_profDept' + profId +' option[value=' + deptId + ']').attr('selected','selected');
                     });
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
                 }
             });
         });
@@ -247,7 +272,7 @@ var InlineEditing = function() {
         cap         = $('#' + 'inlineEdit_sectCap' + secId).val();
         online      = $('#' + 'inlineEdit_sectOnline' + secId).is(':checked') ? 1 : 0;
 
-        console.log(
+        /*console.log(
             "secId: " + secId + "\n" +
                 "courseId: " + courseId +  "\n" +
                 "profId: " + profId + "\n" +
@@ -258,7 +283,7 @@ var InlineEditing = function() {
                 "semester: " + semester + "\n" +
                 "block: " + block + "\n" +
                 "cap: " + cap + "\n" +
-                "online: " + online);
+                "online: " + online);*/
 
         $.ajax({
             type: "POST",
@@ -274,10 +299,13 @@ var InlineEditing = function() {
                     "&sectionBlock="        + block +
                     "&sectionCapacity="     + cap +
                     "&sectionSemester="     + semester +
-                    "&action="              + "update",
+                    "&action=update",
+            dataType: "json",
             success: function(msg) {
-                console.log("message from updateSection: " + msg);
                 loadPhpPage("section_page.php");
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
         });
 
@@ -295,14 +323,14 @@ var InlineEditing = function() {
         reqHrs      = $('#' + 'inlineEdit_profReqHours' + profId).val();
         relHrs      = $('#' + 'inlineEdit_profRelHours' + profId).val();
 
-        console.log(
+        /*console.log(
             "profId: " + profId + "\n" +
             "first: " + first +  "\n" +
             "last: " + last + "\n" +
             "email: " + email +  "\n" +
             "dept: " + dept + "\n" +
             "reqHrs: " + reqHrs + "\n" +
-            "relHrs: " + relHrs + "\n");
+            "relHrs: " + relHrs + "\n");*/
 
         $.ajax({
             type: "POST",
@@ -318,8 +346,11 @@ var InlineEditing = function() {
             "&action="      + "update",
             dataType:  'json',
             success: function(profObjects) {
-                console.log("message from updateProfessor: " + profObjects);
+                //console.log("message from updateProfessor: " + profObjects);
                 loadPhpPage("prof_page.php");
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
         });
 
@@ -354,6 +385,9 @@ var InlineEditing = function() {
             success: function(msg) {
                 console.log("message from updateClassroom: " + msg);
                 loadPhpPage("classroom_page.php");
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
         });
 
@@ -368,8 +402,11 @@ var InlineEditing = function() {
             data:   "sectionId=" + secId +
                     "&action=delete",
             success: function(msg) {
-                console.log("message from deleteSection: " + msg);
+               // console.log("message from deleteSection: " + msg);
                 loadPhpPage("section_page.php");
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
         });
     });
@@ -384,9 +421,12 @@ var InlineEditing = function() {
                     "&action=" + "delete",
             dataType: 'json',
             success: function(professorObjects) {
-                console.log("message from deleteProfessor: " + professorObjects);
+                //console.log("message from deleteProfessor: " + professorObjects);
                 //refreshModals_prof(professorObjects);
                 loadPhpPage("prof_page.php");
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
         });
     });
@@ -401,8 +441,11 @@ var InlineEditing = function() {
             data:   "roomId="    + roomId +
             "&action=" + "delete",
             success: function(msg) {
-                console.log("message from deleteClassroom: " + msg);
+               // console.log("message from deleteClassroom: " + msg);
                 loadPhpPage("classroom_page.php");
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
         });
     });
@@ -429,12 +472,7 @@ var InlineEditing = function() {
 }
 
 
-function refreshModals_prof(profObjects){
-    $('#sectionProfessor').empty();
-    profObjects.forEach(function(prof){
-        $('#sectionProfessor').append($('<option />').val(prof.id).text(prof.last +' '+ prof.first));
-    });
-}
+
 
 
 

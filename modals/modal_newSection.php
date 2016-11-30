@@ -16,72 +16,16 @@ $body = "
                 <label for='sectionCourse' class='col-sm-3 control-label'>Course</label>
                     <div class='col-xs-8'>
 
-                        <select style='margin-bottom: 10px' class='form-control' id='sectionCourse'  >
-                            <option value='0'>Please Select...</option>";
-
-                            $selectCourse = $database->getdbh()->prepare(
-                                'SELECT course_id, course_prefix, course_number, course_title FROM ZAAMG.Course
-                                  ORDER BY course_prefix, course_number');
-                            $selectCourse->execute();
-                            $result = $selectCourse->fetchAll(PDO::FETCH_ASSOC);
-
-                            foreach($result as $row){
-                                $body .= '<option value=\''.$row['course_id']
-                                    .'\'>'.$row['course_prefix']
-                                    .' '.$row['course_number']
-                                    .' '.$row['course_title']
-                                    .'</option>';
-                            }
-                        $body .= "</select>
+                        <select style='margin-bottom: 10px' class='form-control' id='sectionCourse'  ></select>
                     </div>
                     <label for='sectionProfessor' class='col-sm-3 control-label'>Professor</label>
                     <div class='col-xs-8'>
 
-                        <select style='margin-bottom: 10px' class='form-control' id='sectionProfessor' >
-
-                            <option value='0'>Please Select...</option>";
-
-                            $selectProf = $database->getdbh()->prepare(
-                                'SELECT prof_id, prof_first, prof_last FROM ZAAMG.Professor
-                                  ORDER BY prof_last ASC');
-                            $selectProf->execute();
-                            $result = $selectProf->fetchAll();
-
-                            foreach($result as $row){
-                                $body .= "<option value=\"".$row["prof_id"]
-                                    ."\">"
-                                    .$row["prof_last"].", ".$row["prof_first"]
-                                    ."</option>";
-                            }
-
-                        $body .= "</select>
+                        <select style='margin-bottom: 10px' class='form-control' id='sectionProfessor' ></select>
                     </div>
                     <label for='sectionClassroom' class='col-sm-3 control-label'>Classroom</label>
                     <div class='col-xs-8'>
-
-                        <select class='form-control' id='sectionClassroom'  >
-                            <option value='-1'>Please Select...</option>
-                            <option value='0'>Online</option>";
-                            $selectRoom = $database->getdbh()->prepare(
-                                "SELECT classroom_id, campus_name, building_name, classroom_number
-                                  FROM ZAAMG.Campus c JOIN ZAAMG.Building b
-                                  ON c.campus_id = b.campus_id
-                                  JOIN ZAAMG.Classroom r
-                                  ON b.building_id = r.building_id
-                                  ORDER BY campus_name ASC");
-                            $selectRoom->execute();
-                            $result = $selectRoom->fetchAll(PDO::FETCH_ASSOC);
-
-                            foreach($result as $row){
-                                $body .= "<option value=\""
-                                .$row["classroom_id"]."\">"
-                                    .$row["campus_name"].", "
-                                    .$row["building_name"].": "
-                                    .$row["classroom_number"]
-                                    ."</option>";
-                            }
-        $body .= "
-                        </select>
+                        <select class='form-control' id='sectionClassroom'></select>
                     </div>
 
                 </div>
@@ -114,24 +58,7 @@ $body = "
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionSemester'>Semester</label>
-                        <select  class='form-control' id='sectionSemester'  >
-                            <option value='0'>Please Select...</option>";
-
-                            $selectSem = $database->getdbh()->prepare(
-                                'SELECT sem_id, sem_season, sem_year, sem_start_date
-                                  FROM ZAAMG.Semester
-                                  ORDER BY sem_start_date DESC');
-                            $selectSem->execute();
-                            $result = $selectSem->fetchAll(PDO::FETCH_ASSOC);
-
-                            foreach($result as $row){
-                                $body .= "<option value=\"".$row['sem_id']."\">"
-                                .$row['sem_year']." "
-                                .$row['sem_season']
-                                ."</option>";
-                            }
-                            $body .= "
-                        </select>
+                        <select  class='form-control' id='sectionSemester'> </select>
                     </div>
 
                     <div class='col-xs-4'>

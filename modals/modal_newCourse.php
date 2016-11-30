@@ -33,21 +33,6 @@ echo '
                     <div class="col-xs-8">
                         <label for="courseDepartment">Department</label>
                         <select class="form-control" id="courseDepartment" >
-                            <option value="0" >Please Select...</option>';
-
-
-                            $database = new Database();
-                            $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name, dept_code FROM ZAAMG.Department
-                            ORDER BY dept_code ASC');
-                            $selectDepts->execute();
-                            $result = $selectDepts->fetchAll();
-
-                            foreach($result as $row) {
-                                echo "<option value=\"" . $row['dept_id'] . "\">"
-                                    . $row['dept_name'] . " (" . $row['dept_code'] . ")" . "</option>";
-                            }
-echo '
                         </select>
                     </div>
                 </div>

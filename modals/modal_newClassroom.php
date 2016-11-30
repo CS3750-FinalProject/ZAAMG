@@ -15,30 +15,13 @@ echo '
 
                     <div class="col-xs-7">
                         <label for="classroomBuilding">Campus/Building</label>
-                        <select type="text" class="form-control" id="classroomBuilding" >
-
-                            <option value="0">Please Select...</option>
-                            <option value="-1">None</option>';
-
-                            $selectBuilding = $database->getdbh()->prepare(
-                                'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
-                                  FROM ZAAMG.Campus JOIN ZAAMG.Building
-                                  ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
-                                  ORDER BY campus_name ASC');
-                            $selectBuilding->execute();
-                            $result = $selectBuilding->fetchAll();
-
-                            foreach($result as $row){
-                                echo "<option value=\"".$row['building_id']."\">"
-                                    .$row['campus_name'].": ".$row['building_name']."</option>";
-                            }
-echo '
+                        <select type="text" class="form-control" id="classroomBuilding">
                         </select>
                     </div>
                     <div class="col-xs-1"></div> <!-- spacer div -->
                     <div class="col-xs-3">
                         <label for="classroomNumber">Room Number</label>
-                        <input type="text" class="form-control" id="classroomNumber" >
+                        <input type="text" class="form-control" id="classroomNumber">
                     </div>
                     <div class="col-xs-12"><hr style="border-width: 2px"></div>
                     <div class="col-xs-3">

@@ -22,8 +22,7 @@ $message = "";
 if ($action == 'update'){
     $updateStmt = $dbh->prepare(
         "  UPDATE ZAAMG.Professor
-        SET prof_id           = $profId,
-            prof_first        = '$first',
+        SET prof_first        = '$first',
             prof_last         = '$last',
             prof_email        = '$email',
             dept_id           = $dept,
@@ -35,6 +34,7 @@ if ($action == 'update'){
         $message = "success";
     }catch(Exception $e){
         $message = "action_updateProfessor: ".$e->getMessage();
+        echo $message;
     }
 }else if ($action == 'delete'){
     $deleteStmt = $dbh->prepare(

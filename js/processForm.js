@@ -150,6 +150,7 @@ $(function() {
             url: "action/action_insertSemester.php",
             data: dataString,
             success: function(msg) {
+                //alert(msg); return false;
                 if (msg.indexOf("does exist") != -1){
                     window.semesterExists = true;
                     $("span.error-message").text("This Semester already exists.")
@@ -221,6 +222,7 @@ $(function() {
             url: "action/action_insertCampus.php",
             data: dataString,
             success: function(msg) {
+                //alert("insertCampus: " + msg); return false;
                 if (msg.indexOf("does exist") != -1){
                     window.campusExists = true;
                     $("span.error-message").text("This Campus already exists.")

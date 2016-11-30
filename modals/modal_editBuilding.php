@@ -16,22 +16,7 @@ $body = "
 
             <div class='col-xs-8'>
                 <label for='pick_editBuilding'>Building</label>
-                    <select size='5' class='form-control'  id='pick_editBuilding'>";
-
-                    $selectBuilding = $database->getdbh()->prepare(
-                        'SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
-                                                      FROM ZAAMG.Campus JOIN ZAAMG.Building
-                                                      ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
-                                                      ORDER BY campus_name ASC');
-                    $selectBuilding->execute();
-                    $result = $selectBuilding->fetchAll();
-
-                    foreach($result as $building){
-                        $body.= "<option value=".$building['building_id'].">"
-                            .$building['campus_name'].": ".$building['building_name']."</option>";
-                    }
-$body.= "
-                    </select>
+                    <select size='5' class='form-control'  id='pick_editBuilding'></select>
             </div>
 
             <div class='col-xs-4' style='padding-top: 5%'>
@@ -55,20 +40,7 @@ $body.= "
 
                 <div class='col-xs-6'>
                         <label for='editModal_buildingCampus'>Campus</label>
-                        <select type='text' class='form-control' id='editModal_buildingCampus' >";
-
-                            $selectCampi = $database->getdbh()->prepare(
-                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
-                                  ORDER BY campus_name ASC');
-                            $selectCampi->execute();
-                            $result = $selectCampi->fetchAll();
-
-                            foreach($result as $campus){
-                                $body.= "<option value = ".$campus['campus_id'].">"
-                                .$campus['campus_name']."</option>";
-                            }
-$body.="
-                        </select>
+                        <select type='text' class='form-control' id='editModal_buildingCampus' ></select>
                 </div>
 
                 <div class='col-xs-9'>

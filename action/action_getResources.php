@@ -27,9 +27,22 @@ switch($resource){
             );
         }
     break;
+    case "campus":
+        $selectStmt = $dbh->prepare("
+          SELECT * FROM ZAAMG.Campus
+            ORDER BY campus_name");
+        $selectStmt->execute();
+        $resources = $selectStmt->fetchAll();
+        foreach($resources as $resource){
+            $resource_json[] = array(
+                'id'=>$resource['campus_id'],
+                'name'=>$resource['campus_name']
+            );
+        }
+    break;
     case "campus_buildings":
         $selectBuilding = $database->getdbh()->prepare(
-            "SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id
+            "SELECT ZAAMG.Campus.campus_id, campus_name, building_name, building_id, building_code
                                   FROM ZAAMG.Campus JOIN ZAAMG.Building
                                   ON ZAAMG.Campus.campus_id = ZAAMG.Building.campus_id
                                   ORDER BY campus_name ASC");
@@ -39,7 +52,9 @@ switch($resource){
             $resource_json[] = array(
                 'building_id'=>$resource['building_id'],
                 'campus'=>$resource['campus_name'],
-                'building_name'=>$resource['building_name']
+                'campusId'=>$resource['campus_id'],
+                'building_name'=>$resource['building_name'],
+                'building_code'=>$resource['building_code']
             );
         }
     break;
@@ -98,7 +113,8 @@ switch($resource){
     case "semesters":
 
         $selectSem = $database->getdbh()->prepare(
-        'SELECT sem_id, sem_season, sem_year, sem_start_date
+        'SELECT sem_id, sem_season, sem_year, sem_start_date, sem_num_weeks,
+          sem_first_block_start_date, sem_second_block_start_date
                                   FROM ZAAMG.Semester
                                   ORDER BY sem_start_date DESC');
         $selectSem->execute();
@@ -108,7 +124,11 @@ switch($resource){
             $resource_json[] = array(
                 'id'=>$sem['sem_id'],
                 'year'=>$sem['sem_year'],
-                'season'=>$sem['sem_season']
+                'season'=>$sem['sem_season'],
+                'start'=>$sem['sem_start_date'],
+                'weeks'=>$sem['sem_num_weeks'],
+                'firstStart'=>$sem['sem_first_block_start_date'],
+                'secondStart'=>$sem['sem_second_block_start_date']
             );
         }
     break;

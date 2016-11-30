@@ -1,6 +1,6 @@
 <?php
 
-//include 'Database.php';
+require_once 'Database.php';
 
 class Semester {
     //private $database;
@@ -24,7 +24,7 @@ class Semester {
         $this->semFirstBlockStartDate = $semFirstBlockStartDate;
         $this->semSecondBlockStartDate = $semSecondBlockStartDate;
 
-        //$this->database = new Database();
+        $this->database = new Database();
     }
 
 

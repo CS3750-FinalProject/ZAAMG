@@ -17,6 +17,8 @@ $sectionCapacity = isset($_POST['sectionCapacity']) ? $_POST['sectionCapacity'] 
 $sectionSemester = isset($_POST['sectionSemester']) ? $_POST['sectionSemester'] : "not entered";
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+$sectionStartTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionStartTime;
+$sectionEndTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionEndTime;
 
 $database = new Database();
 $dbh = $database->getdbh();
@@ -43,6 +45,7 @@ if ($action == "update"){
         $message = "success";
     }catch(Exception $e){
         $message = "action_updateSection: ".$e->getMessage();
+        echo $message;
     }
 }else if ($action == "delete"){
     $deleteStmt = $dbh->prepare(

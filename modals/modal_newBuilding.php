@@ -17,25 +17,8 @@ echo '<div class="modal fade" id="newBuildingModal" tabindex="-1" role="dialog" 
                     </div>
                     <div class="col-xs-6">
                         <label for="buildingCampus">Campus</label>
-                        <select style="margin-bottom:10px" type="text" class="form-control" id="buildingCampus" >
-
-                            <option value="">Please Select...</option>';
-
-                            $selectCampi = $database->getdbh()->prepare(
-                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
-                                  ORDER BY campus_name ASC');
-                            $selectCampi->execute();
-                            $result = $selectCampi->fetchAll();
-
-                            foreach($result as $row){
-                                echo "<option value=".$row['campus_id'].">".$row['campus_name']."</option>";
-                            }
-echo '
-
-                        </select>
-
-
-                    </div>
+                        <select style="margin-bottom:10px" type="text" class="form-control" id="buildingCampus" ></select>
+                </div>
 
                 </div>
                 <div class="form-group" >

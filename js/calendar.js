@@ -1,6 +1,5 @@
 $(document).ready(function(){
     InlineEditing();
-    ModalEditing();
 
     $(window).resize(function() {
         // without rerendering, the event blocks get jacked when the window changes size

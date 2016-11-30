@@ -15,20 +15,8 @@ $body = "
         <div class='modal-body' style='margin-bottom: 240px;'>
 
             <div class='col-xs-8'>
-                <label for='pick_editCampus'>Campus</label>
-                     <select size='5' class='form-control'  id='pick_editCampus'>";
-
-                        $selectCampi = $database->getdbh()->prepare(
-                                'SELECT campus_id, campus_name FROM ZAAMG.Campus
-                              ORDER BY campus_name ASC');
-                            $selectCampi->execute();
-                            $result = $selectCampi->fetchAll();
-
-                        foreach($result as $campus){
-                            $body.= "<option value=".$campus['campus_id'].">".$campus['campus_name']."</option>";
-                        }
-$body .= "
-                </select>
+                <label for='pick_editCampus'>Select Campus to Edit</label>
+                     <select size='5' class='form-control'  id='pick_editCampus'></select>
             </div>
 
             <div class='col-xs-4' style='padding-top: 5%'>

@@ -28,21 +28,7 @@ echo '
                     </div>
                     <div class="col-xs-6">
                         <label for="profDepartment">Department</label>
-                        <select class="form-control" id="profDepartment" >
-                            <option value="">Please Select...</option>';
-
-                            $selectDepts = $database->getdbh()->prepare(
-                                'SELECT dept_id, dept_name FROM ZAAMG.Department
-                                  ORDER BY dept_name ASC');
-                            $selectDepts->execute();
-                            $result = $selectDepts->fetchAll();
-
-                            foreach($result as $row){
-                                echo "<option value=\"".$row['dept_id']."\">".$row['dept_name']."</option>";
-                            }
-echo '
-
-                        </select>
+                        <select class="form-control" id="profDepartment"> </select>
                     </div>
                     <div class=\'col-xs-12\'>
                     <hr style=\'border-width: 2px\'>

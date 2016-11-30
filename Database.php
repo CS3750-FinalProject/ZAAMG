@@ -3,6 +3,7 @@ require_once 'Section.php';
 require_once 'Course.php';
 require_once 'Semester.php';
 require_once 'Classroom.php';
+require_once 'Campus.php';
 
 class Database
 {
@@ -312,11 +313,12 @@ class Database
     public function getCampus($id){
         $theCampus = null;
         $dbh = $this->getdbh();
-        $stmtSelect = $dbh->prepare("SELECT * FROM `ZAAMG`.`Campus`
-                                      WHERE `campus_id` = {$dbh->quote($id)}");
+        $stmtSelect = $dbh->prepare("SELECT * FROM ZAAMG.Campus
+                                      WHERE campus_id = {$dbh->quote($id)}");
         try{
             $stmtSelect->execute();
-            $result = $stmtSelect->fetchAll()[0];
+            $result = $stmtSelect->fetch();
+
             $theCampus = new Campus(
                 $result['campus_id'],
                 $result['campus_name']);

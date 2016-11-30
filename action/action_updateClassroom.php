@@ -20,8 +20,7 @@ $message = "";
 if ($action == "update"){
     $updateStmt = $dbh->prepare(
         "  UPDATE ZAAMG.Classroom
-        SET classroom_id            = $roomId,
-            classroom_number        = $number,
+        SET classroom_number        = $number,
             classroom_capacity      = $cap,
             classroom_workstations  = $computers,
             building_id             = $building
@@ -33,6 +32,7 @@ if ($action == "update"){
         $message = "success";
     }catch(Exception $e){
         $message = "action_updateClassroom: ".$e->getMessage();
+        echo $message;
     }
 }else if ($action == 'delete'){
     $deleteStmt = $dbh->prepare(

@@ -424,6 +424,7 @@ function createClassroomEventsSet(classroomSet){
         });
 
         classroom.nonStandardCourses.forEach(function(course, m){
+
             theCourseStart = momentGenerator_test(course.startTime, course.courseDays, theStart.clone());
             var courseDuration = moment.duration(
                 moment(course.endTime,'h:mm A').diff(moment(course.startTime, 'h:mm A'))
