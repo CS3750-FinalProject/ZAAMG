@@ -82,7 +82,7 @@ $row .= "<small><em>{$section->getBlock()}</em></small></td>
             'classroom_id', 'building_id', 'campus_id', 'classroomID')}
             </small></td>
         <td>
-            <img src='img/pencil.png' class='action-edit' id='pencil_sect{$secId}' />
+            <img src='img/pencil_green.png' class='action-edit pencil' id='pencil_sect{$secId}' />
         </td>
    </tr>
 
