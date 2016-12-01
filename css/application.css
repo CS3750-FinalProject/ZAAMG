@@ -109,7 +109,7 @@ img.pencil{
   margin-left: 15%
 }
 
-.glyphicon-calendar{
+span.glyphicon-calendar, span.glyphicon-menu-up{
   color: #492365;
   font-size: 1.2em;
 }

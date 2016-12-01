@@ -61,8 +61,7 @@ $body .= "<div class='form-group' style=   'padding-left: 10px;
             <div class='col-xs-3'>
 
             <select type='text' class='form-control' id='pickCampus' >
-                <option value='-1'>Campus...</option>
-                <option value='0'>Online</option>";
+                <option value='-1'>Campus...</option>";
             $selectCampus = $database->getdbh()->prepare(
                             'SELECT campus_name, campus_id
                             FROM W01143557.Campus
@@ -75,6 +74,11 @@ $body .= "<div class='form-group' style=   'padding-left: 10px;
                     .$row['campus_name']."</option>";
             }
  $body .= " </select>
+            <script>
+            //console.log($('#pickCampus option[value=0]').text());
+            //$('#pickCampus option[value=0]').prependTo($('#pickCampus'));
+            $('#pickCampus option[value=0]').detach().insertAfter($('#pickCampus option[value=-1]'));
+            </script>
             </div>
 
             <div class='col-xs-3'>
@@ -97,7 +101,7 @@ $body .= "
 
         if ($('#pickCampus').val() == 0){           // 0 is the 'online' campus
             $('#pickBuilding').empty();
-            $('#pickBuilding').append($('<option />').val(0).text('Online'));
+            //$('#pickBuilding').append($('<option />').val(0).text('Online'));
             $('#pickBuilding').attr('disabled', 'true');
             $('#pickCampus:focus').blur();
             load_onlineSections();
