@@ -27,7 +27,7 @@ $body = "
     <script>
 
     $(document).ready(function() {
-        $(\"#main_container\").load(\"section_page.php\");
+        $('#main_container').load('section_page.php');
     });
 
     </script>
@@ -133,3 +133,4 @@ require_once 'modals/modal_editCampus.php';
 require_once 'modals/modal_newDepartment.php';
 require_once 'modals/modal_editBuilding.php';
 require_once 'modals/modal_editDepartment.php';
+

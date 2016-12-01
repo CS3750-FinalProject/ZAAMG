@@ -1,6 +1,6 @@
 //.unbind() tip from https://stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
 
-
+function ModalEditing(){
 
     $("[id^='new'][id$='Modal']").unbind().on("shown.bs.modal", function () {
         var whichThing = $(this).attr('id').split('new').pop().split('Modal').shift();
@@ -12,6 +12,7 @@
     //preload edit modal fields when it gets shown/hidden
 
     $("[id^='edit'][id$='Modal']").unbind().on("shown.bs.modal", function () {
+        console.log('got here');
         var whichThing = $(this).attr('id').split('edit').pop().split('Modal').shift();
         loadFields(whichThing);
     });
@@ -208,6 +209,7 @@
     }
 
     var loadSemesterFields = function(){
+        console.log('got here');
         $('#editModal_semesterSeason').empty();
         $('#editModal_semesterSeason').append($('<option />').val("Spring").text("Spring"));
         $('#editModal_semesterSeason').append($('<option />').val("Summer").text("Summer"));
@@ -683,7 +685,7 @@ $('#btn_deleteDepartment').click(function(){
 
 
 
-
+}
 
 
 
