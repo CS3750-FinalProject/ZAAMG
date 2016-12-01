@@ -104,3 +104,12 @@ div#profOverviewSchedule, div#sectionIndex table, div#profIndex table, div#roomI
   border-right: 2px solid black;
 }
 
+img.pencil{
+  margin-bottom: 8px;
+  margin-left: 15%
+}
+
+.glyphicon-calendar{
+  color: #492365;
+  font-size: 1.2em;
+}
