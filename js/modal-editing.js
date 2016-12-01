@@ -12,7 +12,6 @@ function ModalEditing(){
     //preload edit modal fields when it gets shown/hidden
 
     $("[id^='edit'][id$='Modal']").unbind().on("shown.bs.modal", function () {
-        console.log('got here');
         var whichThing = $(this).attr('id').split('edit').pop().split('Modal').shift();
         loadFields(whichThing);
     });
@@ -282,11 +281,16 @@ function ModalEditing(){
             success: function (campi) {
                 $('#pick_editCampus').empty();
                 campi.forEach(function (obj, i) {
-                    $('#pick_editCampus').append($('<option />').val(obj.id).text(obj.name));
-                    if (i == 0){
-                        $('#pick_editCampus').val(obj.id).attr('selected', 'selected');
-                        $('#editModal_campusName').val(obj.name);
+                    console.log(obj.id);
+                    //Don't append the "Online" campus to the campi to edit
+                    if (obj.id != 0){
+                        $('#pick_editCampus').append($('<option />').val(obj.id).text(obj.name));
+                        if (i == 0){
+                            $('#pick_editCampus').val(obj.id).attr('selected', 'selected');
+                            $('#editModal_campusName').val(obj.name);
+                        }
                     }
+
                 });
             },
             error: function (msg) {
