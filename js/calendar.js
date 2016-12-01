@@ -6,6 +6,27 @@ $(document).ready(function(){
         // without rerendering, the event blocks get jacked when the window changes size
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
+
+    $('#main_semester_dropdown').on('click',function(){
+        //add list items (semesters)
+        $.ajax({
+            type: "POST",
+            url: "action/action_getResources.php",
+            data: "resource=semesters",
+            dataType:  'json',
+            success: function(sems) {
+                $('#main_semester_menu').empty();
+                sems.forEach(function(obj){
+                    $('#main_semester_menu').append('<li><a href="#"><span class="main_sem">'+obj.year + ' ' + obj.season+'</span></a></li>');
+                });
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
+            }
+        });
+
+
+    });
 });
 
 

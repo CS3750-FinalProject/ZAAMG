@@ -113,3 +113,8 @@ span.glyphicon-calendar, span.glyphicon-menu-up{
   color: #492365;
   font-size: 1.2em;
 }
+
+#main_semester_dropdown{
+  background-color: #938E96;
+  color: white;
+}

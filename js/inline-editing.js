@@ -1,4 +1,6 @@
 var InlineEditing = function() {
+
+
     var toggleHideClass = function() {
         $('.action-edit, .action-save, .action-delete').click(function() {
 
@@ -449,6 +451,12 @@ var InlineEditing = function() {
             }
         });
     });
+
+
+
+
+
+
 
 
     function formatTime(time){

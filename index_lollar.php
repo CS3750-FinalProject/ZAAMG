@@ -50,18 +50,37 @@ $body = "
           </button>
           <a class='navbar-brand' href='#'>LOLLAR &#9829; PHP</a>
         </div>
+
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+
+
+
           <ul class='nav navbar-nav'>
             <li id='navbar_sec' class='active'><a  onclick='changePage(this)'>Section <span class='sr-only'>(current)</span></a></li>
             <li id='navbar_prof'><a onclick='changePage(this)'>Professor</a></li>
             <li id='navbar_room'><a onclick='changePage(this)'>Classroom</a></li>
           </ul>
+
+          <ul style='display:inline' class='dropdown nav navbar-form navbar-left'>
+              <button id='main_semester_dropdown' class='btn  dropdown-toggle'
+              type='button' data-toggle='dropdown'>Semester
+              <span class='caret'></span></button>
+              <ul class='dropdown-menu' id='main_semester_menu'>
+           <!--     <li><a href='#'>HTML</a></li>
+                <li><a href='#'>CSS</a></li>
+                <li><a href='#'>JavaScript</a></li>-->
+              </ul>
+            </ul>
+
           <form class='navbar-form navbar-left'>
             <div class='form-group'>
               <input type='text' class='form-control' placeholder='Search'>
             </div>
             <button type='submit' class='btn btn-default'>Submit</button>
           </form>
+
+
+
 
 
           <ul class='nav navbar-nav navbar-right'>
@@ -113,6 +132,7 @@ $body = "
         </div>
       </div>
     </nav>
+
     <div class='container' id='main_container'> 
     </div>
   </body>
