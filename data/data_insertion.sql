@@ -12,3 +12,4 @@
 
 
 #  Uncomment whatever you need as you need it
+#  Modify file paths also as needed
