@@ -18,7 +18,8 @@ $(function() {
 
         if (!coursePattern.test(courseCode)) {
             window.alert("Invalid Course format! Enter the course in this fashion:\nPREF ####");
-            this.modal('show');
+            //this.modal('show');   console logs an error saying this.modal() is not a function.
+            return false;     //I think this is the desired outcome
         }
         courseCode = coursePattern.exec(courseCode);
         var space = courseCode.indexOf(" ");
