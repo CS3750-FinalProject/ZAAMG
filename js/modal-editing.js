@@ -63,8 +63,9 @@ function ModalEditing(){
                 $('#classroomBuilding').empty();
                 $('#classroomBuilding').append($('<option />').val("").text("Please Select..."));
                 buildings.forEach(function(obj){
-                    $('#classroomBuilding').append($('<option />').val(obj.id).text(obj.campus + ": " + obj.building_name));
+                    $('#classroomBuilding').append($('<option />').val(obj.building_id).text(obj.campus + ": " + obj.building_name));
                 });
+                $('#classroomBuilding option[value=0]').detach() //remove "online" building
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -160,6 +161,7 @@ function ModalEditing(){
                 rooms.forEach(function(obj){
                     $('#sectionClassroom').append($('<option />').val(obj.id).text(obj.campus + ", " + obj.building + ": " + obj.number));
                 });
+                $('#sectionClassroom option[value=0]').detach()//remove the Online Classroom from the list
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -282,15 +284,12 @@ function ModalEditing(){
                 $('#pick_editCampus').empty();
                 campi.forEach(function (obj, i) {
                     console.log(obj.id);
-                    //Don't append the "Online" campus to the campi to edit
-                    if (obj.id != 0){
-                        $('#pick_editCampus').append($('<option />').val(obj.id).text(obj.name));
-                        if (i == 0){
-                            $('#pick_editCampus').val(obj.id).attr('selected', 'selected');
-                            $('#editModal_campusName').val(obj.name);
-                        }
+                    $('#pick_editCampus').append($('<option />').val(obj.id).text(obj.name));
+                    if (i == 0){
+                        $('#pick_editCampus').val(obj.id).attr('selected', 'selected');
+                        $('#editModal_campusName').val(obj.name);
                     }
-
+                    $('#pick_editCampus option[value=0]').detach() //remove "Online" Campus
                 });
             },
             error: function (msg) {
@@ -328,6 +327,7 @@ function ModalEditing(){
                 $('#editModal_buildingCampus').empty();
                 campi.forEach(function (obj, i) {
                     $('#editModal_buildingCampus').append($('<option />').val(obj.id).text(obj.name));
+                    console.log(obj.id);
                 });
             },
             error: function (msg) {
@@ -351,6 +351,7 @@ function ModalEditing(){
                         $('#editModal_buildingName').val(obj.building_name);
                     }
                 });
+                $('#pick_editBuilding option[value=0]').detach() //remove "Online" Building
             },
             error: function (msg) {
                 console.log("error: " + JSON.stringify(msg));

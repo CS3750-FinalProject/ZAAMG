@@ -42,7 +42,10 @@ $body = "
 
 $allClassrooms = $database->getAllClassrooms(null);
 foreach ($allClassrooms as $classroom){
-    $body .= addClassroom($classroom, $database);
+    //don't add the "Online' classroom to this index
+    if ($classroom->getClassroomID() != 0){
+        $body .= addClassroom($classroom, $database);
+    }
     //function addClassroom is defined in this file (classroom_page.php)
     //it produces each row of individual classrooms.
 }
@@ -75,8 +78,6 @@ $body .= "<div class='form-group' style=   'padding-left: 10px;
             }
  $body .= " </select>
             <script>
-            //console.log($('#pickCampus option[value=0]').text());
-            //$('#pickCampus option[value=0]').prependTo($('#pickCampus'));
             $('#pickCampus option[value=0]').detach().insertAfter($('#pickCampus option[value=-1]'));
             </script>
             </div>
