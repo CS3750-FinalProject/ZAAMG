@@ -336,10 +336,10 @@ $(function() {
             if(timePattern.exec(sectionEndTime).length < sectionEndTime.length){
                 sectionEndTime = timePattern.exec(sectionEndTime);
             }
-            startMoment = moment(sectionStartTime, 'hh:mm A');
-            endMoment = moment(sectionEndTime, 'hh:mm A');
-            sectionStartTime = startMoment.format('hh:mm:ss');
-            sectionEndTime = endMoment.format('hh:mm:ss');
+            startMoment = moment(sectionStartTime, 'HH:mm A');
+            endMoment = moment(sectionEndTime, 'HH:mm A');
+            sectionStartTime = startMoment.format('HH:mm:ss');
+            sectionEndTime = endMoment.format('HH:mm:ss');
         }else {
             daysString = "Online";
             sectionIsOnline = 1;
