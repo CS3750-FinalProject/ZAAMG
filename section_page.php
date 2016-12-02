@@ -1,6 +1,7 @@
 <?php
 require_once 'Database.php';
 $database = new Database();
+session_start();
 
 $body = "
 
@@ -10,7 +11,7 @@ $body = "
 
 <div class='col-xs-12'>
         <div class='page-header'>
-          <h1>Sections <small>for <span class='main_semester_span'>Spring 2017</span></small></h1>
+          <h1>Sections <small>for <span class='main_semester_span'>{$_SESSION['mainSemesterLabel']}</span></small></h1>
         </div>
      </div>
 </div>
@@ -29,7 +30,7 @@ $body = "
 
 
 
-$allSections = $database->getAllSections(null);
+$allSections = $database->getAllSections($_SESSION['mainSemesterId']);
 foreach ($allSections as $section){
     $body .= addSection($section, $database);
 }

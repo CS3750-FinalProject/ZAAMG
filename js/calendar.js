@@ -449,9 +449,10 @@ function createEventsSet_test(theSet){
             ).asMinutes();
             var overPageBreak = isOverPageBreak(course.startTime, courseDuration);
             if (!overPageBreak){
+                console.log("courseTitle: " + course.courseTitle + ", startTime: " + course.startTime);
                 var startMoment = moment(course.startTime, 'h:mm A').format('h:mm A');
                 var endMoment = moment(course.endTime, 'h:mm A').format('h:mm A');
-                if (theCourseStart == undefined)
+                //if (theCourseStart == undefined)
                 events.push(
                     {
                         title: course.courseTitle + '\n' + startMoment + ' - ' + endMoment,

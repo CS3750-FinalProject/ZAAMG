@@ -1,5 +1,7 @@
 <?php
+session_start();
 
-$mainSemester = isset($_POST['mainSemester']) ? $_POST['mainSemester'] : "";
+$_SESSION['mainSemesterId'] = $_POST['mainSemesterId'];
+$_SESSION['mainSemesterLabel'] = $_POST['mainSemesterLabel'];
 
-echo $mainSemester;
+echo $_SESSION['mainSemesterId'];

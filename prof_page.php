@@ -2,6 +2,7 @@
 require_once 'Professor.php';
 
 $database = new Database();
+session_start();
 
 $body = "
 <script src='js/calendar.js' charset='utf-8'></script>
@@ -11,11 +12,10 @@ $body .= "
 <div class='col-xs-12' >
         <div class='page-header'>
 
-          <h1 style='display:inline'>Professors <small>for Spring 2017</small></h1>
+          <h1 style='display:inline'>Professors <small>for {$_SESSION['mainSemesterLabel']}</small></h1>
 
           <img src='img/ajax-loader.gif'  id='prof_ajax-loader'
           style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>
-
         </div>
 </div>
 
@@ -96,7 +96,7 @@ function load_ProfSet($allTheProfs, $db){
     foreach($allTheProfs as $professor){
         $onlineCourses = [];
         $timedCourses = [];
-        $sections = $db->getProfSections($professor, null);
+        $sections = $db->getProfSections($professor, $_SESSION['mainSemesterId']);
 
         foreach($sections as $section){
             if (!$section->getIsOnline()){                  //not online
@@ -153,7 +153,7 @@ function addProfessor(Professor $professor, Database $db){
     $daysToDates = array("Mon"=>"2016-11-07", "Tues" => "2016-11-08", "Wednes" => "2016-11-09",
         "Thurs" => "2016-11-10", "Fri" => "2016-11-11", "Satur" => "2016-11-12" , "online"=> "2016-11-13");
 
-    $profSections = $db->getProfSections($professor, null);
+    $profSections = $db->getProfSections($professor, $_SESSION['mainSemesterId']);
     foreach($profSections as $section){
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');

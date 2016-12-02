@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Database.php';
+session_start();
 
 $database = new Database();
 $dbh = $database->getdbh();
@@ -13,7 +14,7 @@ $classrooms_json = [];
 
 
 foreach($classrooms as $index=>$classroom){
-    $sections = $database->getClassroomSections($classroom);
+    $sections = $database->getClassroomSections($classroom, $_SESSION['mainSemesterId']);
     $sections_json = [];
     foreach($sections as $section){
         array_push($sections_json,array(

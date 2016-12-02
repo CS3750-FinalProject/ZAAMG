@@ -30,14 +30,14 @@ class Database
      *  Args:
      *      $orderBy:   might need this for sorting the Sections different ways
      */
-    public function getAllSections($orderBy){
+    public function getAllSections($semesterId){
         $allSections = [];
         $dbh = $this->getdbh();
         //$stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section");
         $stmtSelect = $dbh->prepare("
             SELECT s.*, c.course_prefix, c.course_number
             FROM W01143557.Section s JOIN W01143557.Course c
-            ON s.course_id = c.course_id
+            ON s.course_id = c.course_id and s.sem_id = $semesterId
             ORDER BY c.course_prefix, c.course_number
         ");
         try{
@@ -112,7 +112,7 @@ class Database
 
 
 
-    public function getAllClassrooms($orderBy){
+    public function getAllClassrooms(){
         $allClassrooms = [];
         $dbh = $this->getdbh();
         $stmtSelect = $dbh->prepare("SELECT classroom_id, classroom_number, classroom_capacity, classroom_workstations,
@@ -138,11 +138,12 @@ class Database
         }
     }
 
-    public function getProfSections($prof, $orderBy){
+    public function getProfSections($prof, $semesterId){
         $profSections = [];
         $dbh = $this->getdbh();
         $stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section
-                                      WHERE prof_id = {$prof->getProfId()}");
+                                      WHERE prof_id = {$prof->getProfId()}
+                                      AND sem_id = {$semesterId}");
         try{
             $stmtSelect->execute();
 
@@ -169,11 +170,12 @@ class Database
 
 
 
-    public function getClassroomSections($classroom){
+    public function getClassroomSections($classroom, $semesterId){
         $classroomSections = [];
         $dbh = $this->getdbh();
         $stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section
-                                      WHERE classroom_id = {$classroom->getClassroomID()}");
+                                      WHERE classroom_id = {$classroom->getClassroomID()}
+                                      AND sem_id = {$semesterId}");
         try{
             $stmtSelect->execute();
 
@@ -199,7 +201,7 @@ class Database
     }
 
 
-    public function getOnlineSections(){
+    public function getOnlineSections($semesterId){
         $onlineSections = [];
         $dbh = $this->getdbh();
         $stmtSelect = $dbh->prepare("
@@ -209,6 +211,7 @@ class Database
             FROM    W01143557.Section s JOIN W01143557.Course c
             ON      s.course_id = c.course_id
             AND     section_is_online = 1
+            AND     sem_id = {$semesterId}
             ORDER BY  course_prefix, course_number");
 
         try{

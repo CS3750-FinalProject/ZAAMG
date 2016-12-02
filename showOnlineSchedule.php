@@ -3,8 +3,9 @@
 
 require_once 'Database.php';
 $database = new Database();
+session_start();
 
-$onlineSections = $database->getOnlineSections();
+$onlineSections = $database->getOnlineSections($_SESSION['mainSemesterId']);
 $onlineSections_json = [];
 
 foreach($onlineSections as $section){

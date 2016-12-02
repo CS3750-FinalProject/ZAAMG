@@ -4,6 +4,8 @@ require_once 'Classroom.php';
 $database = new Database();
 $dbh = $database->getdbh();
 
+session_start();
+
 $body = "
 
 <script src='js/ClassroomCalendar.js' charset='utf-8'></script>
@@ -11,7 +13,7 @@ $body = "
 
 <div class='col-xs-12'>
     <div class='page-header'>
-          <h1 style='display:inline'>Classrooms <small>for Spring 2017</small></h1>
+          <h1 style='display:inline'>Classrooms <small>for {$_SESSION['mainSemesterLabel']}</small></h1>
 
           <img src='img/ajax-loader.gif'  id='rooms_ajax-loader'
           style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>
@@ -40,7 +42,7 @@ $body = "
 
 
 
-$allClassrooms = $database->getAllClassrooms(null);
+$allClassrooms = $database->getAllClassrooms();
 foreach ($allClassrooms as $classroom){
     //don't add the "Online' classroom to this index
     if ($classroom->getClassroomID() != 0){
@@ -102,7 +104,6 @@ $body .= "
 
         if ($('#pickCampus').val() == 0){           // 0 is the 'online' campus
             $('#pickBuilding').empty();
-            //$('#pickBuilding').append($('<option />').val(0).text('Online'));
             $('#pickBuilding').attr('disabled', 'true');
             $('#pickCampus:focus').blur();
             load_onlineSections();
@@ -182,7 +183,7 @@ function addClassroom(Classroom $classroom, Database $db){
     $daysToDates = array("Mon"=>"2016-11-07", "Tues" => "2016-11-08", "Wednes" => "2016-11-09",
         "Thurs" => "2016-11-10", "Fri" => "2016-11-11", "Satur" => "2016-11-12" , "online"=> "2016-11-13");
 
-    $classroomSections = $db->getClassroomSections($classroom, null);
+    $classroomSections = $db->getClassroomSections($classroom, $_SESSION['mainSemesterId']);
     foreach($classroomSections as $section){
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');

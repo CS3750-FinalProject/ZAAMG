@@ -20,7 +20,6 @@ function load_onlineSections(){
         dataType: 'json',
         success: function(data)
         {
-
             var theOnlineSet = [];
             //add_toOnlineSet(theOnlineSet, data);
             displayClassroomSchedule(data, true);

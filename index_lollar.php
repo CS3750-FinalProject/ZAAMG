@@ -4,6 +4,16 @@
 require_once 'Database.php';
 
 $database = new Database();
+
+session_start();
+
+if (!isset($_SESSION['mainSemesterId'])) {
+    $_SESSION['mainSemesterId'] = 2;
+}
+if (!isset($_SESSION['mainSemesterLabel'])) {
+    $_SESSION['mainSemesterLabel'] = "Spring 2017";
+}
+
 $body = "
 <!DOCTYPE html>
 <html>
@@ -49,6 +59,7 @@ $body = "
             <span class='icon-bar'></span>
           </button>
           <a class='navbar-brand' href='#'>LOLLAR &#9829; PHP</a>
+
         </div>
 
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
@@ -141,7 +152,6 @@ $body = "
 
 echo $body;
 
-require_once 'action/action_storeMainSemester.php';
 require_once 'modals/modal_newSection.php';
 require_once 'modals/modal_newCourse.php';
 require_once 'modals/modal_newProfessor.php';

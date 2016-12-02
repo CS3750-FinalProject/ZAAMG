@@ -42,15 +42,17 @@ var InlineEditing = function() {
                 });
                 $('[id^=' + 'a_mainSem_'+']').on('click', function(){
                     var semText = $(this).find("span").text().split(' ');
+                    var semLabel = semText[1] + ' ' + semText[0];
                     var semId = $(this).attr('id').split('a_mainSem_').pop();
-                    $('span.main_semester_span').text(semText[1] + ' ' + semText[0]);
 
                     $.ajax({
                         type: "POST",
                         url: "action/action_storeMainSemester.php",
-                        data: "mainSemester=" + semId,
+                        data:   "mainSemesterId=" + semId +
+                                "&mainSemesterLabel=" + semLabel,
                         success: function(value) {
-                            alert("$mainSemester = " + value + "!");
+                           // alert("$mainSemester = " + value);
+                            loadPhpPage("section_page.php");
                         },
                         error: function(msg) {
                             console.log("storeMainSemester: " + JSON.stringify(msg));
