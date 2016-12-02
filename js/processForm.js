@@ -369,6 +369,7 @@ $(function() {
                     $("span.error-message").text("This Section already exists.")
                 }
                 if (!window.sectionExists) {
+
                     $("#newSectionModal").modal('hide');
                     $("#newSectionModal").on('hidden.bs.modal', function(){
                         console.log("modal hidden");

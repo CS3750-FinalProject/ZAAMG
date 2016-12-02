@@ -17,7 +17,7 @@ $body = "
 </div>
 
     <div class='container'>
-      <div class='col-xs-12' id='sectionIndex' >
+      <div class='col-xs-12' id='sectionIndex' style='margin-bottom: 20%;'>
         <table class='list-data'>
           <tr>
             <th colspan='3'>Course</th>
@@ -84,6 +84,7 @@ $row .= "<small><em>{$section->getBlock()}</em></small></td>
             </small></td>
         <td>
             <img src='img/pencil_green.png' class='action-edit pencil' id='pencil_sect{$secId}' />
+            <span style='color: orangered; margin-left: 10%' class='glyphicon glyphicon-alert hide'></span>
         </td>
    </tr>
 

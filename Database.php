@@ -26,9 +26,15 @@ class Database
     }
 
 
-    /*  Returns:        an array of Section objects, one per Section record in database
+   /* public function getProfessorConflicts(){
+
+    }*/
+
+
+    /*  Returns:            an array of Section objects, one per Section record in database
+                            with sem_id matching the $semesterId
      *  Args:
-     *      $orderBy:   might need this for sorting the Sections different ways
+     *      $semesterId:   the semester for which Sections should be retrieved
      */
     public function getAllSections($semesterId){
         $allSections = [];

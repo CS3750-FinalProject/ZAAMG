@@ -7,7 +7,48 @@ $(document).ready(function(){
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
 
-$('#record_professorf2').find('span.glyphicon-alert').removeClass('hide');
+    //check for professor conflicts here:
+    $.ajax({
+        type: "POST",
+        url: "action/action_checkConflicts_professor.php",
+        dataType: 'json',
+        success: function(conflicts) {
+            if (Object.keys(conflicts).length > 0){
+                var secIds = [];
+                var profIds = [];
+
+                for (var key in conflicts){
+                    if (profIds.indexOf(conflicts[key].profId) == -1){
+                        profIds.push(conflicts[key].profId);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_1) == -1){
+                        secIds.push(conflicts[key].secId_1);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_2) == -1){
+                        secIds.push(conflicts[key].secId_2);
+                    }
+                }
+
+                secIds.forEach(function(id) {
+                    $('#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
+                        .attr('title', 'Professor Conflict');
+                    console.log("secId: " + id);
+                });
+
+                profIds.forEach(function(id) {
+                    $('#' + 'record_professorf' + id).find('span.glyphicon-alert').removeClass('hide');
+                    console.log("profId: " + id);
+                });
+
+            }
+        },
+        error: function(msg){
+            console.log("checkConflicts ajax error: " +  JSON.stringify(msg));
+        }
+    });
+
+// just to see what it looks like to unhide the alert glyphicon
+//$('#record_professorf2').find('span.glyphicon-alert').removeClass('hide');
 
 });
 
@@ -36,6 +77,45 @@ function loadPhpPage(page){
             $('#navbar_sec').addClass('active');
             $('#navbar_prof').removeClass('active');
             $('#navbar_room').removeClass('active');
+
+            //check for professor conflicts here:
+            /*$.ajax({
+            type: "POST",
+            url: "action/action_checkConflicts_professor.php",
+            dataType: 'json',
+            success: function(conflicts) {
+                if (Object.keys(conflicts).length > 0){
+                    var secIds = [];
+                    var profIds = [];
+
+                    for (var key in conflicts){
+                        if (profIds.indexOf(conflicts[key].profId) == -1){
+                            profIds.push(conflicts[key].profId);
+                        }
+                        if (secIds.indexOf(conflicts[key].secId_1) == -1){
+                            secIds.push(conflicts[key].secId_1);
+                        }
+                        if (secIds.indexOf(conflicts[key].secId_2) == -1){
+                            secIds.push(conflicts[key].secId_2);
+                        }
+                    }
+
+                    secIds.forEach(function(id) {
+                        $('#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide');
+                        console.log("secId: " + id);
+                    });
+
+                    profIds.forEach(function(id) {
+                        $('#' + 'record_professorf' + id).find('span.glyphicon-alert').removeClass('hide');
+                        console.log("profId: " + id);
+                    });
+
+                }
+            },
+            error: function(msg){
+                console.log("checkConflicts ajax error: " +  JSON.stringify(msg));
+            }
+        });*/
             break;
         case "pro":
             $('#navbar_sec').removeClass('active');
