@@ -52,7 +52,7 @@ var InlineEditing = function() {
                                 "&mainSemesterLabel=" + semLabel,
                         success: function(value) {
                            // alert("$mainSemester = " + value);
-                            loadPhpPage("section_page.php");
+                            refresh_activePage();
                         },
                         error: function(msg) {
                             console.log("storeMainSemester: " + JSON.stringify(msg));

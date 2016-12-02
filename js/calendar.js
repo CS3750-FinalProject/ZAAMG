@@ -7,6 +7,8 @@ $(document).ready(function(){
         $('#profOverviewSchedule').fullCalendar('rerenderEvents');
     });
 
+$('#record_professorf2').find('span.glyphicon-alert').removeClass('hide');
+
 });
 
 
@@ -29,6 +31,22 @@ $(document).ready(function(){
 
 function loadPhpPage(page){
     $("#main_container").load(page);
+    switch(page.slice(0,3)){
+        case "sec":
+            $('#navbar_sec').addClass('active');
+            $('#navbar_prof').removeClass('active');
+            $('#navbar_room').removeClass('active');
+            break;
+        case "pro":
+            $('#navbar_sec').removeClass('active');
+            $('#navbar_prof').addClass('active');
+            $('#navbar_room').removeClass('active');
+            break;
+        case "cla":
+            $('#navbar_sec').removeClass('active');
+            $('#navbar_prof').removeClass('active');
+            $('#navbar_room').addClass('active');
+    }
 }
 
 /* changePage(anchor) is what changes the shading on the Navbar and also loads the correct php content
@@ -42,21 +60,21 @@ function changePage(anchor){
     switch (navbar_item.getAttribute('id')){
         case 'navbar_sec':
             loadPhpPage("section_page.php");
-            $('#navbar_sec').addClass('active');
+            /*$('#navbar_sec').addClass('active');
             $('#navbar_prof').removeClass('active');
-            $('#navbar_room').removeClass('active');
+            $('#navbar_room').removeClass('active');*/
             break;
         case 'navbar_prof':
             loadPhpPage("prof_page.php");
-            $('#navbar_sec').removeClass('active');
+            /*$('#navbar_sec').removeClass('active');
             $('#navbar_prof').addClass('active');
-            $('#navbar_room').removeClass('active');
+            $('#navbar_room').removeClass('active');*/
             break;
         case 'navbar_room':
             loadPhpPage("classroom_page.php");
-            $('#navbar_sec').removeClass('active');
+            /*$('#navbar_sec').removeClass('active');
             $('#navbar_prof').removeClass('active');
-            $('#navbar_room').addClass('active');
+            $('#navbar_room').addClass('active');*/
             break;
     }
 }

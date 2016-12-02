@@ -1,7 +1,7 @@
 //http://stackoverflow.com/questions/11519660/twitter-bootstrap-modal-backdrop-doesnt-disappear
 //I just spent way too long on this problem :)
 
-function closeAndRefresh(){
+function refresh_activePage(){
     var activePage;
     $('[id^=' + 'navbar_' +']').each(function(){
         if ($(this).hasClass('active')){
@@ -66,7 +66,8 @@ $(function() {
                     $("span.error-message").text("This Course already exists.")
                 }
                 if (!window.courseExists) {
-                    $('#newCourseModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newCourseModal').modal('hide');
+                    $('#newCourseModal').on('hidden.bs.modal', refresh_activePage());
                 }
 
             }
@@ -106,7 +107,8 @@ $(function() {
                     $("span.error-message").text("A Professor with this email address already exists.")
                 }
                 if (!window.profExists){
-                    $('#newProfessorModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newProfessorModal').modal('hide');
+                    $('#newProfessorModal').on('hidden.bs.modal', refresh_activePage());
                 }
             }
         });
@@ -145,7 +147,8 @@ $(function() {
                     $("span.error-message").text("This Classroom already exists.");
                 }
                 if (!window.classroomExists) {
-                    $('#newClassroomModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newClassroomModal').modal('hide');
+                    $('#newClassroomModal').on('hidden.bs.modal', refresh_activePage());
                 }
 
             }
@@ -184,7 +187,8 @@ $(function() {
                     $("span.error-message").text("This Semester already exists.");
                 }
                 if (!window.semesterExists) {
-                    $('#newSemesterModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newSemesterModal').modal('hide');
+                    $('#newSemesterModal').on('hidden.bs.modal', refresh_activePage());
                 }
             }
         });
@@ -223,7 +227,8 @@ $(function() {
                     $("span.error-message").text("This Building already exists.")
                 }
                 if (!window.buildingExists) {
-                    $('#newBuildingModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newBuildingModal').modal('hide');
+                    $('#newBuildingModal').on('hidden.bs.modal', refresh_activePage());
                 }
             }
         });
@@ -254,7 +259,8 @@ $(function() {
                     $("span.error-message").text("This Campus already exists.")
                 }
                 if (!window.campusExists) {
-                    $('#newCampusModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newCampusModal').modal('hide');
+                    $('#newCampusModal').on('hidden.bs.modal', refresh_activePage());
                 }
             }
         });
@@ -280,7 +286,8 @@ $(function() {
                     $("span.error-message").text("This Department already exists.")
                 }
                 if (!window.departmentExists) {
-                    $('#newDepartmentModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $('#newDepartmentModal').modal('hide');
+                    $('#newDepartmentModal').on('hidden.bs.modal', refresh_activePage());
                 }
 
             }
@@ -362,7 +369,11 @@ $(function() {
                     $("span.error-message").text("This Section already exists.")
                 }
                 if (!window.sectionExists) {
-                    $("#newSectionModal").modal('hide').on('hidden.bs.modal', closeAndRefresh());
+                    $("#newSectionModal").modal('hide');
+                    $("#newSectionModal").on('hidden.bs.modal', function(){
+                        console.log("modal hidden");
+                        refresh_activePage()
+                    });
                 }
             },
             error: function(msg){
