@@ -10,7 +10,7 @@ $body = "
 
 <div class='col-xs-12'>
         <div class='page-header'>
-          <h1>Sections <small>for Spring 2017</small></h1>
+          <h1>Sections <small>for <span class='main_semester_span'>Spring 2017</span></small></h1>
         </div>
      </div>
 </div>

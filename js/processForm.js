@@ -295,12 +295,19 @@ $(function() {
         var sectionSemester = $("#sectionSemester").val();
         var sectionCapacity = $("#sectionCapacity").val();
         var daysString = "";
-        if (sectionDays != "online" || sectionClassroom != 0){
+        if (sectionDays != "Online" ){  // || sectionClassroom != 0  don't need this ?
             $.each(sectionDays, function(index, value){
                 daysString += value;
             });
             //only tests if not online
-            var timePattern = /[0-1][0-9]:[0-5][0-9] [AP]M/i;
+            /*if (sectionStartTime.indexOf('M') == -1){
+                sectionStartTime += parseInt(sectionStartTime.slice(0,2)) < 12 ? ' AM' : ' PM';
+            }
+            if (sectionEndTime.indexOf('M') == -1){
+                sectionEndTime += parseInt(sectionEndTime.slice(0,2)) < 12 ? ' AM' : ' PM';
+            }*/
+            console.log("sectionStartTime: " + sectionStartTime);
+            var timePattern = /[0-1][0-9]:[0-5][0-9]/i;//[AP]M
             if (!timePattern.test(sectionStartTime)){
                 window.alert("Invalid start time entered! Please enter a valid time in this format:\n00:00 AM");
                 this.modal("show");
@@ -315,18 +322,18 @@ $(function() {
             if(timePattern.exec(sectionEndTime).length < sectionEndTime.length){
                 sectionEndTime = timePattern.exec(sectionEndTime);
             }
+            startMoment = moment(sectionStartTime, 'hh:mm A');
+            endMoment = moment(sectionEndTime, 'hh:mm A');
+            sectionStartTime = startMoment.format('hh:mm:ss');
+            sectionEndTime = endMoment.format('hh:mm:ss');
         }else {
-
-            daysString = "online";
+            daysString = "Online";
             sectionIsOnline = 1;
             sectionStartTime = '00:00:00';
             sectionEndTime = '00:00:00';
         }
         //alert(daysInt);
         //alert( $("#sectionStartTime").val());
-
-
-
 
         sectionExists = false;
 
@@ -342,8 +349,7 @@ $(function() {
             url: "action/action_insertSection.php",
             data: dataString,
             success: function(msg) {
-                console.log(msg); //return false;
-                //alert(msg.substr(0, msg.length/3));  //use this to debug
+               // console.log(msg);
                 if (msg.indexOf("does exist") != -1){
                     window.sectionExists = true;
                     $("span.error-message").text("This Section already exists.")
@@ -352,7 +358,10 @@ $(function() {
                     $('#newSectionModal').modal('hide');
                     location.reload();//reloads window so that new Database is refreshed
                 }
-
+            },
+            error: function(msg){
+                console.log(msg);
+                return false;
             }
         });
     }); //end of function for btn_insertSection

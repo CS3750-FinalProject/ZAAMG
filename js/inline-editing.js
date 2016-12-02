@@ -24,6 +24,50 @@ var InlineEditing = function() {
     }
 
     toggleHideClass();
+
+
+    $('#main_semester_dropdown').on('click',function(){
+        //add list items (semesters)
+        $.ajax({
+            type: "POST",
+            url: "action/action_getResources.php",
+            data: "resource=semesters",
+            dataType:  'json',
+            success: function(sems) {
+                $('#main_semester_menu').empty();
+                sems.forEach(function(obj){
+                    $('#main_semester_menu')
+                        .append('<li><a href="#" class="a_mainSem" id="a_mainSem_'+ obj.id+'"' +'>' +
+                            '<span class="main_sem">'+obj.year + ' ' + obj.season+'</span></a></li>');
+                });
+                $('[id^=' + 'a_mainSem_'+']').on('click', function(){
+                    var semText = $(this).find("span").text().split(' ');
+                    var semId = $(this).attr('id').split('a_mainSem_').pop();
+                    $('span.main_semester_span').text(semText[1] + ' ' + semText[0]);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "action/action_storeMainSemester.php",
+                        data: "mainSemester=" + semId,
+                        success: function(value) {
+                            alert("$mainSemester = " + value + "!");
+                        },
+                        error: function(msg) {
+                            console.log("storeMainSemester: " + JSON.stringify(msg));
+                        }
+                    });
+
+                });
+            },
+            error: function(msg) {
+                console.log("semester dropdown: " + JSON.stringify(msg));
+            }
+        });
+    });
+
+
+
+
     fill_editFields_prof();
     fill_editFields_room();
     fill_editFields_section();

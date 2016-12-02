@@ -15,7 +15,7 @@ $sectionSemester = isset($_POST['sectionSemester']) ? $_POST['sectionSemester'] 
 
 $sectionStartTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionStartTime;
 $sectionEndTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionEndTime;
-$sectionDays = $sectionIsOnline == 1 ? "Online" : $sectionEndTime;
+$sectionDays = $sectionIsOnline == 1 ? "Online" : $sectionDays;
 
 $section = new Section(NULL, $sectionCourse, $sectionProfessor, $sectionClassroom,
     $sectionBlock, $sectionDays, $sectionStartTime, $sectionEndTime, $sectionIsOnline,
@@ -29,7 +29,11 @@ $result = $section->sectionExists($sectionCourse, $sectionProfessor, $sectionCla
 
 if ($result == "does not exist"){
     echo "<script>console.log('about to Insert');</script>";
-    $section->insertNewSection();
+    try{
+        $section->insertNewSection();
+    }catch(Exception $e){
+        echo $e->getMessage();
+    }
 }
 
 

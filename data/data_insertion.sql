@@ -10,9 +10,9 @@
 #INTO TABLE Professor
 #FIELDS TERMINATED BY '|';
 
-LOAD DATA LOCAL INFILE '\/home\/gc67781\/public_html\/zaamg\/data\/classroom_data.txt'
-INTO TABLE Classroom
-FIELDS TERMINATED BY '|';
+#LOAD DATA LOCAL INFILE '\/home\/gc67781\/public_html\/zaamg\/data\/classroom_data.txt'
+#INTO TABLE Classroom
+#FIELDS TERMINATED BY '|';
 
 
 #  Uncomment whatever you need as you need it

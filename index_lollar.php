@@ -141,6 +141,7 @@ $body = "
 
 echo $body;
 
+require_once 'action/action_storeMainSemester.php';
 require_once 'modals/modal_newSection.php';
 require_once 'modals/modal_newCourse.php';
 require_once 'modals/modal_newProfessor.php';
