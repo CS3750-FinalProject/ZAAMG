@@ -106,7 +106,7 @@ div#profOverviewSchedule, div#sectionIndex table, div#profIndex table, div#roomI
 
 img.pencil{
   margin-bottom: 8px;
-  margin-left: 15%
+  /* margin-left: 15%*/
 }
 
 span.glyphicon-calendar, span.glyphicon-menu-up{

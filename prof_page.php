@@ -215,7 +215,7 @@ function addProfessor(Professor $professor, Database $db){
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
-			    <span id='seeCal_prof{$id}'
+			    <span id='seeCal_prof{$id}' style='padding-right: 2%; margin-right: 7%'
 			    onclick='on_profRowClick({$id}, [";
 
             /*function 'on_profRowClick()' is defined in calendar.js
@@ -228,7 +228,8 @@ function addProfessor(Professor $professor, Database $db){
 
     // finish giving attributes to the <span> and close it...
     $row .= "])' class='glyphicon glyphicon-calendar' aria-hidden='true' style='margin-left: 15%'></span>
-<img src='img/pencil_green.png' class='action-edit pencil'  id='pencil_prof{$id}'/>
+<img src='img/pencil_green.png' class='action-edit pencil'  id='pencil_prof{$id}' style='margin-right: 8%'/>
+<span style='color: orangered; ' class='glyphicon glyphicon-alert hide'></span>
 			</td>
 		  </tr>";
 

@@ -37,6 +37,7 @@ function loadPhpPage(page){
 function changePage(anchor){
     phpPages = {"sec":"section_page.php", "prof":"prof_page.php", "room":"room_page.php"};
     navbar_item = anchor.parentElement;
+    //alert("got here");
 
     switch (navbar_item.getAttribute('id')){
         case 'navbar_sec':

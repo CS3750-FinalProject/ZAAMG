@@ -30,7 +30,7 @@ $body = "
             overflow-y: auto;
             '>
 
-        <table class='list-data'>
+        <table class='list-data' id='classroom_table'>
         <tr>
             <th>Campus</th>
             <th>Building</th>
@@ -257,7 +257,7 @@ function addClassroom(Classroom $classroom, Database $db){
     // finish giving attributes to the <span> and close it...
     $row .= "])' class=' glyphicon glyphicon-calendar' style='margin-left: 15%; ' aria-hidden='true'></span>
         <img src='img/pencil_green.png' class='action-edit pencil' style='margin-left: 10%' id='pencil_room{$roomId}'/>
-        <span style='color: orangered; margin-left: 5%' class='glyphicon glyphicon-alert'></span>
+        <span style='color: orangered; margin-left: 5%' class='glyphicon glyphicon-alert hide'></span>
 			</td>
 		  </tr>";
 

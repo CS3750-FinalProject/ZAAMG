@@ -1,9 +1,22 @@
-/**
- * Created by Gisela on 10/31/2016.
- */
+//http://stackoverflow.com/questions/11519660/twitter-bootstrap-modal-backdrop-doesnt-disappear
+//I just spent way too long on this problem :)
+
+function closeAndRefresh(){
+    var activePage;
+    $('[id^=' + 'navbar_' +']').each(function(){
+        if ($(this).hasClass('active')){
+            activePage = $(this).attr('id').split('navbar_').pop();
+            switch(activePage){
+                case "sec": loadPhpPage('section_page.php'); break;
+                case "prof": loadPhpPage('prof_page.php'); break;
+                case "room": loadPhpPage('classroom_page.php'); break;
+            }
+        }
+    });
+}
+
 
 $(function() {
-
 
     $("#btn_insertCourse").click(function() {
         // validate and process form here
@@ -53,8 +66,7 @@ $(function() {
                     $("span.error-message").text("This Course already exists.")
                 }
                 if (!window.courseExists) {
-                    $('#newCourseModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $('#newCourseModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
 
             }
@@ -94,8 +106,7 @@ $(function() {
                     $("span.error-message").text("A Professor with this email address already exists.")
                 }
                 if (!window.profExists){
-                    $('#newProfessorModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $('#newProfessorModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
             }
         });
@@ -134,8 +145,7 @@ $(function() {
                     $("span.error-message").text("This Classroom already exists.");
                 }
                 if (!window.classroomExists) {
-                    location.reload();//reloads window so that new Database is refreshed
-                    $('#newClassroomModal').modal('hide');
+                    $('#newClassroomModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
 
             }
@@ -174,8 +184,7 @@ $(function() {
                     $("span.error-message").text("This Semester already exists.");
                 }
                 if (!window.semesterExists) {
-                    $('#newSemesterModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $('#newSemesterModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
             }
         });
@@ -214,8 +223,7 @@ $(function() {
                     $("span.error-message").text("This Building already exists.")
                 }
                 if (!window.buildingExists) {
-                    $('#newBuildingModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $('#newBuildingModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
             }
         });
@@ -246,8 +254,7 @@ $(function() {
                     $("span.error-message").text("This Campus already exists.")
                 }
                 if (!window.campusExists) {
-                    $('#newCampusModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $('#newCampusModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
             }
         });
@@ -273,8 +280,7 @@ $(function() {
                     $("span.error-message").text("This Department already exists.")
                 }
                 if (!window.departmentExists) {
-                    $('#newDepartmentModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $('#newDepartmentModal').modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
 
             }
@@ -283,6 +289,7 @@ $(function() {
 
 
     $("#btn_insertSection").click(function() {
+
         // validate and process form here
         var sectionCourse = $("#sectionCourse").val();
         var sectionProfessor = $("#sectionProfessor").val();
@@ -349,14 +356,13 @@ $(function() {
             url: "action/action_insertSection.php",
             data: dataString,
             success: function(msg) {
-               // console.log(msg);
+                //console.log(msg); return false;
                 if (msg.indexOf("does exist") != -1){
                     window.sectionExists = true;
                     $("span.error-message").text("This Section already exists.")
                 }
                 if (!window.sectionExists) {
-                    $('#newSectionModal').modal('hide');
-                    location.reload();//reloads window so that new Database is refreshed
+                    $("#newSectionModal").modal('hide').on('hidden.bs.modal', closeAndRefresh());
                 }
             },
             error: function(msg){
