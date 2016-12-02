@@ -90,8 +90,9 @@ $body .= "<script>  displayTest(theProfSet)  </script>";
 
 echo $body;
 
-function load_ProfSet($allTheProfs, $db){
+function load_ProfSet($allTheProfs, Database $db){
     $body = "<script> ";
+
 
     foreach($allTheProfs as $professor){
         $onlineCourses = [];
@@ -99,6 +100,7 @@ function load_ProfSet($allTheProfs, $db){
         $sections = $db->getProfSections($professor, $_SESSION['mainSemesterId']);
 
         foreach($sections as $section){
+            if($section instanceof Section)
             if (!$section->getIsOnline()){                  //not online
                 array_push($timedCourses, array(
                     'pref'=>$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID'),
@@ -155,6 +157,7 @@ function addProfessor(Professor $professor, Database $db){
 
     $profSections = $db->getProfSections($professor, $_SESSION['mainSemesterId']);
     foreach($profSections as $section){
+        if($section instanceof Section)
         $prefix = $section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID');
         $number = $section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID');
         $name = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
@@ -199,6 +202,11 @@ function addProfessor(Professor $professor, Database $db){
     //<div> (contains cal)      id = cal_prof<#>
     //<tr>  (editing div)       id = edit_prof<#>
     //<img> (disc)              id = save_prof<#>
+    $overHours = ($professor->getProfRequiredHours() + $professor->getProfRelease()) - 12;
+    if($overHours < 0){
+        $overHours = 0;
+    }
+
 
     //Here's where we create the table of Professors on the "Professor Page".
     $row = "<tr id='record_professorf{$id}' >   <!-- NOT A TYPO (f)  -->
@@ -209,14 +217,14 @@ function addProfessor(Professor $professor, Database $db){
 			<td> {$professor->getProfessorProperty('dept_name', 'Department', 'dept_id', 'deptId')}</td>
 			<td>{$professor->getProfRequiredHours()}</td>
 			<td>{$professor->getProfRelease()}</td>
-			<td>to be calc...</td>
+			<td>{$overHours}</td>
 			<td>
 
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
 			    <span id='seeCal_prof{$id}' style='padding-right: 2%; margin-right: 7%'
-			    onclick='on_profRowClick({$id}, [";
+			    onclick='on_profRowClick({$id});//, [";
 
             /*function 'on_profRowClick()' is defined in calendar.js
             on_profRowClick(profRowId (int), sectionObjects (array of objects from top of this function)*/

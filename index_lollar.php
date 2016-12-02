@@ -2,7 +2,30 @@
 
 #http://stackoverflow.com/questions/27139963/bootstrap-multiple-pages-divs-and-navbar
 require_once 'Database.php';
+require_once 'Token.php';
+require_once 'User.php';
+require_once 'vendor/autoload.php';
 
+$username = $_POST['username'] ?? 'invalid';
+$password = $_POST['password'] ?? 'invalid';
+
+//strip html code from user input to keep from hacking
+strip_tags($username);
+strip_tags($password);
+
+$user = new User($username, $password, User::$ADMIN_FLAG);
+if(!$user->validateUser($username,$password)){
+    echo "<h3>Invalid user! Please Try again</h3>";
+    echo "<p><a href='index.html'>Click Here</a> to login</p>";
+    die();
+}
+$token = new Token();
+$token = $token->buildToken(Token::ROLE_ADMIN, $username);
+
+/*if(Token::getRoleFromToken() != Token::ROLE_ADMIN){
+    echo "<h3>Please login.</h3>";
+    die();
+}*/
 $database = new Database();
 
 session_start();
@@ -59,13 +82,8 @@ $body = "
             <span class='icon-bar'></span>
           </button>
           <a class='navbar-brand' href='#'>LOLLAR &#9829; PHP</a>
-
         </div>
-
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
-
-
-
           <ul class='nav navbar-nav'>
             <li id='navbar_sec' class='active'><a  onclick='changePage(this)'>Section <span class='sr-only'>(current)</span></a></li>
             <li id='navbar_prof'><a onclick='changePage(this)'>Professor</a></li>
@@ -89,9 +107,6 @@ $body = "
             </div>
             <button type='submit' class='btn btn-default'>Submit</button>
           </form>
-
-
-
 
 
           <ul class='nav navbar-nav navbar-right'>
@@ -143,7 +158,6 @@ $body = "
         </div>
       </div>
     </nav>
-
     <div class='container' id='main_container'> 
     </div>
   </body>
@@ -164,4 +178,3 @@ require_once 'modals/modal_editCampus.php';
 require_once 'modals/modal_newDepartment.php';
 require_once 'modals/modal_editBuilding.php';
 require_once 'modals/modal_editDepartment.php';
-
