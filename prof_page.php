@@ -202,6 +202,11 @@ function addProfessor(Professor $professor, Database $db){
     //<div> (contains cal)      id = cal_prof<#>
     //<tr>  (editing div)       id = edit_prof<#>
     //<img> (disc)              id = save_prof<#>
+    $overHours = ($professor->getProfRequiredHours() + $professor->getProfRelease()) - 12;
+    if($overHours < 0){
+        $overHours = 0;
+    }
+
 
     //Here's where we create the table of Professors on the "Professor Page".
     $row = "<tr id='record_professorf{$id}' >   <!-- NOT A TYPO (f)  -->
@@ -212,7 +217,7 @@ function addProfessor(Professor $professor, Database $db){
 			<td> {$professor->getProfessorProperty('dept_name', 'Department', 'dept_id', 'deptId')}</td>
 			<td>{$professor->getProfRequiredHours()}</td>
 			<td>{$professor->getProfRelease()}</td>
-			<td>to be calc...</td>
+			<td>{$overHours}</td>
 			<td>
 
 
