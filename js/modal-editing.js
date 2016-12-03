@@ -161,7 +161,7 @@ function ModalEditing(){
                 rooms.forEach(function(obj){
                     $('#sectionClassroom').append($('<option />').val(obj.id).text(obj.campus + ", " + obj.building + ": " + obj.number));
                 });
-                $('#sectionClassroom option[value=0]').detach()//remove the Online Classroom from the list
+                //$('#sectionClassroom option[value=0]').detach()//remove the Online Classroom from the list
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));

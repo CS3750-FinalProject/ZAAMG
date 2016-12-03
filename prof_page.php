@@ -9,9 +9,7 @@ $body = "
 <script>
     //check for professor conflicts here:
     $.ajax({
-        type: \"POST\",
-        url: \"action/action_checkConflicts.php\",
-        data: \"resource=professor\",
+        url: \"action/action_checkConflicts_professor.php\",
         dataType: 'json',
         success: function(conflicts) {
             if (Object.keys(conflicts).length > 0){
@@ -38,7 +36,6 @@ $body = "
                 profIds.forEach(function(id) {
                     $('#' + 'record_professorf' + id)
                         .find('span.glyphicon-alert').removeClass('hide').css('color','#ef0946');
-                    console.log(\"PROFtr: \" + $('tr#' + 'record_professorf' + id).attr('id'));
 
                 });
 
