@@ -11,7 +11,8 @@ $dbh = $database->getdbh();
           s2.section_id id_2,
           s2.section_start_time start_2, s2.section_end_time end_2
     FROM W01143557.Section s1 LEFT JOIN W01143557.Section s2
-    ON s1.section_days = s2.section_days
+    ON (s2.section_days LIKE CONCAT('%',s1.section_days,'%')
+        or s1.section_days LIKE CONCAT('%',s2.section_days,'%'))
     AND s1.sem_id = s2.sem_id
     AND s1.classroom_id = s2.classroom_id
     AND s1.section_start_time BETWEEN s2.section_start_time AND s2.section_end_time
