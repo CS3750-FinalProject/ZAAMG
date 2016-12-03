@@ -6,6 +6,50 @@ session_start();
 
 $body = "
 <script src='js/calendar.js' charset='utf-8'></script>
+<script>
+    //check for professor conflicts here:
+    $.ajax({
+        type: \"POST\",
+        url: \"action/action_checkConflicts.php\",
+        data: \"resource=professor\",
+        dataType: 'json',
+        success: function(conflicts) {
+            if (Object.keys(conflicts).length > 0){
+                var secIds = [];
+                var profIds = [];
+
+                for (var key in conflicts){
+                    if (profIds.indexOf(conflicts[key].profId) == -1){
+                        profIds.push(conflicts[key].profId);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_1) == -1){
+                        secIds.push(conflicts[key].secId_1);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_2) == -1){
+                        secIds.push(conflicts[key].secId_2);
+                    }
+                }
+
+                /*secIds.forEach(function(id) {
+                    $('#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
+                        .attr('title', 'Professor Conflict');
+                });*/
+
+                profIds.forEach(function(id) {
+                    $('#' + 'record_professorf' + id)
+                        .find('span.glyphicon-alert').removeClass('hide').css('color','#ef0946');
+                    console.log(\"PROFtr: \" + $('tr#' + 'record_professorf' + id).attr('id'));
+
+                });
+
+            }
+        },
+        error: function(msg){
+            console.log(\"checkConflicts ajax error: \" +  JSON.stringify(msg));
+        }
+    });
+
+</script>
 ";
 
 $body .= "
@@ -27,16 +71,25 @@ $body .= "
             max-height: 440px;
             overflow-y: auto;  '>
 
-        <table class='list-data'>
+        <table class='list-data' id='table_pr_Index'>
           <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>E-Mail</th>
-            <th>Department</th>
-            <th>Req Hours</th>
-			<th>Rel Hours</th>
-			<th>Over Hours</th>
-			<th>Actions</th>
+            <th class='prof_table'>Last Name</th>
+            <th class='prof_table'>First Name</th>
+            <th class='prof_table'>E-Mail</th>
+            <th class='prof_table'>Department</th>
+            <th><div>
+                <span style='font-size:.8em; '>Hours:</span><br>Required
+                </div>
+            </th>
+			<th><div>
+                <span style='font-size:.8em; '>&nbsp;</span><br>Release
+                </div>
+            </th>
+            <th><div>
+                <span style='font-size:.8em; '>&nbsp;</span><br>Overload
+                </div>
+            </th>
+			<th class='prof_table'>Actions</th>
           </tr>";
 
 
@@ -217,14 +270,18 @@ function addProfessor(Professor $professor, Database $db){
 			<td> {$professor->getProfessorProperty('dept_name', 'Department', 'dept_id', 'deptId')}</td>
 			<td>{$professor->getProfRequiredHours()}</td>
 			<td>{$professor->getProfRelease()}</td>
-			<td>{$overHours}</td>
+			<td id='td_overHours{$id}' class='over_hours'>{$overHours}
+			    <span   class='glyphicon glyphicon-info-sign hide'
+			            style='color:blue; font-size: 1.2em; margin-right: 10%; float:right'>
+                </span></td>
 			<td>
 
 
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
 			    <span id='seeCal_prof{$id}' style='padding-right: 2%; margin-right: 7%'
-			    onclick='on_profRowClick({$id});//, [";
+
+			    onclick='on_profRowClick({$id}, [";
 
             /*function 'on_profRowClick()' is defined in calendar.js
             on_profRowClick(profRowId (int), sectionObjects (array of objects from top of this function)*/

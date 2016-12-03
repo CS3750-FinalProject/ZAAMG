@@ -7,8 +7,52 @@ $dbh = $database->getdbh();
 session_start();
 
 $body = "
-
 <script src='js/ClassroomCalendar.js' charset='utf-8'></script>
+<script>
+    //check for classroom conflicts here:
+    $.ajax({
+        type: \"POST\",
+        url: \"action/action_checkConflicts.php\",
+        data: \"resource=classroom\",
+        dataType: 'json',
+        success: function(conflicts) {
+            if (Object.keys(conflicts).length > 0){
+                var secIds = [];
+                var roomIds = [];
+
+                for (var key in conflicts){
+                    if (roomIds.indexOf(conflicts[key].roomId) == -1){
+                        roomIds.push(conflicts[key].roomId);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_1) == -1){
+                        secIds.push(conflicts[key].secId_1);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_2) == -1){
+                        secIds.push(conflicts[key].secId_2);
+                    }
+                }
+
+               /* secIds.forEach(function(id) {
+                    $('tr#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
+                        .attr('title', 'Classroom Conflict');
+                    console.log(\"secId: \" + id);
+                });*/
+
+                roomIds.forEach(function(id) {
+                    $('tr#' + 'record_classRoom' + id).find('span.glyphicon-alert').removeClass('hide');
+                    console.log(\"ROOMtr: \" + $('tr#' + 'record_classRoom' + id).attr('id'));
+                    console.log(\"roomId: \" + id);
+                });
+
+            }
+        },
+        error: function(msg){
+            console.log(\"checkConflicts ajax error: \" +  JSON.stringify(msg));
+        }
+    });
+</script>
+
+
 
 
 <div class='col-xs-12'>
@@ -36,7 +80,7 @@ $body = "
             <th>Building</th>
             <th>Room Number</th>
             <th>Capacity</th>
-			<th>Number of Computers</th>
+			<th>Computers</th>
 			<th>Actions</th>
          </tr>";
 

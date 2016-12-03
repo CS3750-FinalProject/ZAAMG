@@ -558,6 +558,7 @@ function displayClassroomSchedule(theClassroomSet, isOnline) {
         minTime: '02:00:00',
         scrollTime: '02:00:00',
         eventOrder: 'order_by',
+        eventOverlap: true,
         events: theEvents,
         eventRender: function(event, element){
             var theTitle = event.online ? event.title : event.courseTitle;

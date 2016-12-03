@@ -5,9 +5,94 @@ session_start();
 
 $body = "
 
-
-
 <script src='js/calendar.js' charset='utf-8'></script>
+<script>
+    //check for classroom conflicts here:
+    $.ajax({
+        type: \"POST\",
+        url: \"action/action_checkConflicts.php\",
+        data: \"resource=classroom\",
+        dataType: 'json',
+        success: function(conflicts) {
+            if (Object.keys(conflicts).length > 0){
+                var secIds = [];
+                var roomIds = [];
+
+                for (var key in conflicts){
+                    if (roomIds.indexOf(conflicts[key].roomId) == -1){
+                        roomIds.push(conflicts[key].roomId);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_1) == -1){
+                        secIds.push(conflicts[key].secId_1);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_2) == -1){
+                        secIds.push(conflicts[key].secId_2);
+                    }
+                }
+
+                secIds.forEach(function(id) {
+                    $('tr#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
+                        .attr('title', 'Classroom Conflict');
+                    console.log(\"secId: \" + id);
+                });
+
+                roomIds.forEach(function(id) {
+                    $('tr#' + 'record_classRoom' + id).find('span.glyphicon-alert').removeClass('hide');
+                    console.log(\"ROOMtr: \" + $('tr#' + 'record_classRoom' + id).attr('id'));
+                    console.log(\"roomId: \" + id);
+                });
+
+            }
+        },
+        error: function(msg){
+            console.log(\"checkConflicts ajax error: \" +  JSON.stringify(msg));
+        }
+    });
+
+
+    //check for professor conflicts here:
+    $.ajax({
+        type: \"POST\",
+        url: \"action/action_checkConflicts.php\",
+        data: \"resource=professor\",
+        dataType: 'json',
+        success: function(conflicts) {
+            if (Object.keys(conflicts).length > 0){
+                var secIds = [];
+                var profIds = [];
+
+                for (var key in conflicts){
+                    if (profIds.indexOf(conflicts[key].profId) == -1){
+                        profIds.push(conflicts[key].profId);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_1) == -1){
+                        secIds.push(conflicts[key].secId_1);
+                    }
+                    if (secIds.indexOf(conflicts[key].secId_2) == -1){
+                        secIds.push(conflicts[key].secId_2);
+                    }
+                }
+
+                secIds.forEach(function(id) {
+                    $('#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
+                        .attr('title', 'Professor Conflict').css('color','#ef0946');
+                });
+
+                /*profIds.forEach(function(id) {
+                    $('#' + 'record_professorf' + id)
+                        .find('span.glyphicon-alert').removeClass('hide');
+                    console.log(\"PROFtr: \" + $('tr#' + 'record_professorf' + id).attr('id'));
+                });*/
+
+            }
+        },
+        error: function(msg){
+            console.log(\"checkConflicts ajax error: \" +  JSON.stringify(msg));
+        }
+    });
+
+</script>
+
 
 <div class='col-xs-12'>
         <div class='page-header'>
@@ -18,7 +103,7 @@ $body = "
 
     <div class='container'>
       <div class='col-xs-12' id='sectionIndex' style='margin-bottom: 20%;'>
-        <table class='list-data'>
+        <table class='list-data' id='table_sectionIndex'>
           <tr>
             <th colspan='3'>Course</th>
             <th>Professor</th>

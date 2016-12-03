@@ -118,3 +118,11 @@ span.glyphicon-calendar, span.glyphicon-menu-up, span.glyphicon-alert{
   background-color: #938E96;
   color: white;
 }
+
+th.prof_table, #table_sectionIndex th, #classroom_table th{
+  padding-top: 20px;
+}
+
+#table_pr_Index tr th div{
+  margin: -8px 0 0 0 !important;
+}
