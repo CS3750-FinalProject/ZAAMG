@@ -212,7 +212,7 @@ function addProfessor(Professor $professor, Database $db){
         $name = $section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID');
         $title = $prefix . " " . $number;
         $dayString = $section->getDayString();
-        if ($dayString != "online"){
+        if (strtoupper($dayString) != "O"){
             $days = explode('day', $section->getDays()); //converts a string like TuesdayThursday into ['Tues','Thurs']
             array_pop($days); // last element is useless and breaks things, pop it off.
         }

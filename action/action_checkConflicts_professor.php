@@ -17,6 +17,7 @@ $dbh = $database->getdbh();
     AND s1.section_start_time BETWEEN s2.section_start_time AND s2.section_end_time
     WHERE NOT s1.section_id = s2.section_id
     AND s1.sem_id = {$_SESSION['mainSemesterId']}
+    AND s1.section_is_online = 0
     ORDER BY s1.section_id;");
     try{
         $checkConflicts->execute();

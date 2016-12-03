@@ -113,7 +113,6 @@ function on_profRowClick(profRowId, sectionObjects){
     //this is what initializes and creates the individual calendar.
     //it's defined in this file (calendar.js)
     displayCalendar(profRowId, theEvents);
-    console.log(theEvents);
 
     //here the table row containing the calendar is shown or hidden:
     if ($('span#' + 'seeCal_prof' + profRowId).attr('class').includes("menu-up")){
@@ -147,7 +146,6 @@ function load_indProfRowEvents(sectionObjects){
         addNewEvent(section.title, section.name, section.start, section.end, section.location, section.classroom, section.professor,
             '#137c33', section.online, events)
     });
-
     return events;
 }
 
@@ -478,7 +476,6 @@ function createEventsSet_test(theSet){
             ).asMinutes();
             var overPageBreak = isOverPageBreak(course.startTime, courseDuration);
             if (!overPageBreak){
-                console.log("courseTitle: " + course.courseTitle + ", startTime: " + course.startTime);
                 var startMoment = moment(course.startTime, 'h:mm A').format('h:mm A');
                 var endMoment = moment(course.endTime, 'h:mm A').format('h:mm A');
                 //if (theCourseStart == undefined)
