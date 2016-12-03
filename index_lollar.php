@@ -62,10 +62,6 @@ $body = "
 
     $(document).ready(function() {
         $('#main_container').load('section_page.php');
-
-        var options = { valueNames: ['section-course-number', 'section-course-title', 'section-professor', 'section-location'] };
-        var searchableList = new List('section-data', options);
-        console.log(searchableList);
       });
     </script>
 
