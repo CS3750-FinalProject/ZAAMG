@@ -63,8 +63,8 @@ $body = "
     $(document).ready(function() {
         $('#main_container').load('section_page.php');
 
-        var options = { valueNames: ['section-course-number', 'section-course-title', 'section-professor', 'section-location'] }
-        var searchableList = new List('page-data', options)
+        var options = { valueNames: ['section-course-number', 'section-course-title', 'section-professor', 'section-location'] };
+        var searchableList = new List('section-data', options);
       });
     </script>
 
@@ -103,12 +103,6 @@ $body = "
                 <li><a href='#'>JavaScript</a></li>-->
               </ul>
             </ul>
-
-          <form class='navbar-form'>
-
-            <button type='submit' class='btn btn-default'>Submit</button>
-          </form>
-
 
           <ul class='nav navbar-nav navbar-right'>
               <li class='dropdown'>
@@ -159,7 +153,7 @@ $body = "
         </div>
       </div>
     </nav>
-    <div class='container page-data' id='main_container'>
+    <div class='container' id='main_container'>
     </div>
   </body>
 </html>
