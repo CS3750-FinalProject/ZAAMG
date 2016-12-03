@@ -1,0 +1,4 @@
+sec_id|course_id|prof_id|room_id|sem_id|days|start|end|online|block|cap
+
+1|2|3|5|2|MondayWednesday|11:30:00|13:20:00|0|0|30
+

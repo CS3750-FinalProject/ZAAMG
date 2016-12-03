@@ -219,7 +219,7 @@ function addNewEvent(title, name, eventstart, eventend, location, classroom, pro
         var starttime = '2016-11-13T';
         if (adj_minHour < 10) starttime += '0';
         starttime += adj_minHour + minCourseTime.substr(minCourseTime.indexOf(':'));
-        var startMoment = moment(starttime, 'YYYY-MM-DDThh:mm:ss');
+        var startMoment = moment(starttime, 'YYYY-MM-DDTHH:mm:ss');
 
        /* var endtime = '2016-11-13T';
         if (adj_minHour + 1 < 10) endtime += '0';
@@ -230,8 +230,8 @@ function addNewEvent(title, name, eventstart, eventend, location, classroom, pro
         eventsArray.push({
             title: title,
             name: name,
-            start: formatTime_fullCalendar(startMoment.format('YYYY-MM-DDThh:mm:ss')),
-            end: formatTime_fullCalendar(endMoment.format('YYYY-MM-DDThh:mm:ss')),
+            start: formatTime_fullCalendar(startMoment.format('YYYY-MM-DDTHH:mm:ss')),
+            end: formatTime_fullCalendar(endMoment.format('YYYY-MM-DDTHH:mm:ss')),
             color: color,
             location: "Online",
             professor: professor,

@@ -117,6 +117,9 @@ function ModalEditing(){
 
 
     var loadNewSectionFields = function(){
+        $('#sectionOnline').attr('checked', true);
+        $('#sectionOnline').removeAttr('disabled');
+
         $.ajax({
             type: "POST",
             url: "action/action_getResources.php",
@@ -189,13 +192,14 @@ function ModalEditing(){
             if ($('#sectionDays').find(":selected").val() != "Online"){
                 $('#sectionStartTime').removeAttr('disabled');
                 $('#sectionEndTime').removeAttr('disabled');
+                $('#sectionOnline').attr('checked', false);
                 $('#sectionOnline').removeAttr('checked');
                 $('#sectionOnline').prop('disabled', true);
             }else{
                 $('#sectionStartTime').prop('disabled', 'true');
                 $('#sectionEndTime').prop('disabled', 'true');
-                $('#sectionOnline').removeAttr('disabled');
                 $('#sectionOnline').attr('checked', 'true');
+                $('#sectionOnline').removeAttr('disabled');
             }
         })
     };

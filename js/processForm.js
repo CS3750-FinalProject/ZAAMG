@@ -296,7 +296,7 @@ $(function() {
 
 
     $("#btn_insertSection").click(function() {
-
+        //alert("yo mama!");
         // validate and process form here
         var sectionCourse = $("#sectionCourse").val();
         var sectionProfessor = $("#sectionProfessor").val();
@@ -314,9 +314,10 @@ $(function() {
                 daysString += value;
             });
             //only tests if not online
-
+            //alert(sectionStartTime);
             //console.log("sectionStartTime: " + sectionStartTime);
-            var timePattern = /[0-1][0-9]:[0-5][0-9]/i;//[AP]M
+            //var timePattern = /[0-1][0-9]:[0-5][0-9]/i;//[AP]M
+            var timePattern = /\d\d:\d\d( [AP]M)?/i;//[AP]M
             if (!timePattern.test(sectionStartTime)){
                 window.alert("Invalid start time entered! Please enter a valid time in this format:\n00:00 AM");
                 this.modal("show");
@@ -365,7 +366,6 @@ $(function() {
                     $("span.error-message").text("This Section already exists.")
                 }
                 if (!window.sectionExists) {
-
                     $("#newSectionModal").modal('hide');
                     $("#newSectionModal").on('hidden.bs.modal', function(){
                         console.log("modal hidden");
