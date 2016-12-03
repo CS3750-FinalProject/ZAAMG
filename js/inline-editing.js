@@ -12,10 +12,10 @@ var InlineEditing = function() {
 
             theRecordIDwChar = theRecordID.substr(theRecordID.indexOf(theNum)-1);
 
-            console.log("parentID: " + theRecordID);
+            /*console.log("parentID: " + theRecordID);
             console.log("theID: " + theID);
             console.log("theRecordIDwChar: " + theRecordIDwChar);
-            console.log("theNum: " + theNum);
+            console.log("theNum: " + theNum);*/
 
             $('[id$=' + theID + ']').toggleClass('hide');
             $('[id^=' + 'record_' +'][id$=' + theRecordIDwChar + ']').toggleClass('inline_editing_record');

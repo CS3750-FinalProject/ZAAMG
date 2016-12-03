@@ -9,9 +9,7 @@ $body = "
 <script>
     //check for classroom conflicts here:
     $.ajax({
-        type: \"POST\",
-        url: \"action/action_checkConflicts.php\",
-        data: \"resource=classroom\",
+        url: \"action/action_checkConflicts_classroom.php\",
         dataType: 'json',
         success: function(conflicts) {
             if (Object.keys(conflicts).length > 0){
@@ -52,9 +50,7 @@ $body = "
 
     //check for professor conflicts here:
     $.ajax({
-        type: \"POST\",
-        url: \"action/action_checkConflicts.php\",
-        data: \"resource=professor\",
+        url: \"action/action_checkConflicts_professor.php\",
         dataType: 'json',
         success: function(conflicts) {
             if (Object.keys(conflicts).length > 0){
