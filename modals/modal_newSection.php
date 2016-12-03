@@ -43,17 +43,16 @@ $body = "
                             <option value='Thursday'>Thursday</option>
                             <option value='Friday'>Friday</option>
                             <option value='Saturday'>Saturday</option>
-                            <option value='Sunday'>Sunday</option> //are there ever Sunday classes?
                         </select>
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionStartTime'>Start Time</label>
-                        <input style='margin-bottom: 10px' type='time' class='form-control' id='sectionStartTime'
+                        <input disabled style='margin-bottom: 10px' type='time' class='form-control' id='sectionStartTime'
                             placeholder='09:30 AM' value='00:00:00' >
                     </div>
                     <div class='col-xs-4'>
                         <label for='sectionEndTime'>End Time</label>
-                        <input style='margin-bottom: 10px' type='time' class='form-control' id='sectionEndTime'
+                        <input disabled style='margin-bottom: 10px' type='time' class='form-control' id='sectionEndTime'
                             placeholder='11:20 AM' value='00:00:00'  >
                     </div>
                     <div class='col-xs-4'>
@@ -77,7 +76,7 @@ $body = "
                     <div class='col-xs-1'></div>
                     <div class='col-xs-4'>
                         <label style='margin-top: 30px; font-weight:bold' class='checkbox-inline' for='sectionOnline'>
-                        <input type='checkbox' id='sectionOnline' value='1'>Online</label>
+                        <input checked type='checkbox' id='sectionOnline' value='1'>Online</label>
                     </div>
 
 

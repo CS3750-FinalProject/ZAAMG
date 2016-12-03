@@ -3,6 +3,11 @@ require_once 'Database.php';
 $database = new Database();
 session_start();
 
+$mainSemesterLabel= 'Spring 2017';
+if (isset($_SESSION['mainSemesterLabel'])){
+    $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
+}
+
 $body = "
 
 <script src='js/calendar.js' charset='utf-8'></script>
@@ -33,13 +38,6 @@ $body = "
                         .attr('title', 'Classroom Conflict');
                     console.log(\"secId: \" + id);
                 });
-
-                roomIds.forEach(function(id) {
-                    $('tr#' + 'record_classRoom' + id).find('span.glyphicon-alert').removeClass('hide');
-                    console.log(\"ROOMtr: \" + $('tr#' + 'record_classRoom' + id).attr('id'));
-                    console.log(\"roomId: \" + id);
-                });
-
             }
         },
         error: function(msg){
@@ -73,13 +71,6 @@ $body = "
                     $('#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
                         .attr('title', 'Professor Conflict').css('color','#ef0946');
                 });
-
-                /*profIds.forEach(function(id) {
-                    $('#' + 'record_professorf' + id)
-                        .find('span.glyphicon-alert').removeClass('hide');
-                    console.log(\"PROFtr: \" + $('tr#' + 'record_professorf' + id).attr('id'));
-                });*/
-
             }
         },
         error: function(msg){
@@ -92,7 +83,7 @@ $body = "
 
 <div class='col-xs-12'>
         <div class='page-header'>
-          <h1>Sections <small>for <span class='main_semester_span'>{$_SESSION['mainSemesterLabel']}</span></small></h1>
+          <h1>Sections <small>for <span class='main_semester_span'>{$mainSemesterLabel}</span></small></h1>
         </div>
      </div>
 </div>
@@ -145,7 +136,7 @@ $row = "
                 <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}
                 </em></small></td>";
 
-        if ($section->getDayString() == 'online'){
+        if (strtoupper($section->getDayString()) === "O"){
             $row .= "<td><strong>Online</strong><br/>";
         }else{
             $row .= "<td><strong>{$section->getDayString_toUpper()}:</strong>"."
@@ -196,7 +187,7 @@ $row .= "<small><em>{$section->getBlock()}</em></small></td>
 $row .= "</select>
 
         <label for='inlineEdit_sectProf{$secId}'>Professor</label>
-        <select  class='form-control' id='inlineEdit_sectProf{$secId}' style='margin-bottom: 10px'></select>
+        <select class='form-control' id='inlineEdit_sectProf{$secId}' style='margin-bottom: 10px'></select>
 
         <label for='inlineEdit_sectRoom{$secId}'>Classroom</label>
         <select class='form-control' style='margin-bottom: 10px' id='inlineEdit_sectRoom{$secId}'></select>
@@ -205,12 +196,19 @@ $row .= "</select>
         <td  style='padding-left: 1%'>
 
         <label for='inlineEdit_sectDays{$secId}'>Days</label>
-        <select multiple  class='form-control' style='margin-bottom: 10px'
+        <select multiple class='form-control' style='margin-bottom: 10px'
              id='inlineEdit_sectDays{$secId}'>";
 
     $days = explode("day", $section->getDays());
-    $row.= "<option "; $row.= in_array("online", $days)
+    //$days = $section->getDays();
+
+    /*$row.= "<option "; $row.= ($days == 'Online' || $days == 'online')
             ? "selected value='online'>Online</option>" : "value='online'>Online</option>";
+    $row.= "<option "; $row.= $days == 'MondayWednesday'
+            ? "selected value='MondayWednesday'>MW</option>" : "value='MondayWednesday'>MW</option>";*/
+
+    $row.= "<option "; $row.= in_array("Online", $days)
+            ? "selected value='Online'>Online</option>" : "value='Online'>Online</option>";
     $row.= "<option "; $row.= in_array("Mon", $days)
             ? "selected value='Monday'>Monday</option>" : "value='Monday'>Monday</option>";
     $row.= "<option "; $row.= in_array("Tues", $days)
@@ -226,12 +224,14 @@ $row .= "</select>
 
 $row.="</select>
 
-
-     <label  for='inlineEdit_sectStartTime{$secId}'>Start Time</label>
-       <input type='time' id='inlineEdit_sectStartTime{$secId}'
+     <label  for='inlineEdit_sectStartTime{$secId}'>Start Time</label>";
+$row.=     $section->getIsOnline() ? "<input disabled " : "<input ";
+$row.=     "type='time' id='inlineEdit_sectStartTime{$secId}'
                     style='margin-bottom: 10px' class='form-control'>
-      <label for='inlineEdit_sectEndTime{$secId}'>End Time</label><input type='time'
-                id='inlineEdit_sectEndTime{$secId}'  class='form-control'>
+
+      <label for='inlineEdit_sectEndTime{$secId}'>End Time</label>";
+$row.=     $section->getIsOnline() ? "<input disabled " : "<input ";
+$row.=     "type='time' id='inlineEdit_sectEndTime{$secId}'  class='form-control'>
     </td>
 
 
@@ -254,8 +254,9 @@ $row.="</select>
                     id='inlineEdit_sectCap{$secId}' min='1' value='{$section->getCapacity()}' >
 
             <div style='width: 55%; margin-left: 2%'>
-            <label class='checkbox-inline' for='inlineEdit_sectOnline{$secId}' style='font-weight: bold;'>
-            <input type='checkbox'  id='inlineEdit_sectOnline{$secId}'
+            <label class='checkbox-inline' for='inlineEdit_sectOnline{$secId}' style='font-weight: bold;'>";
+$row.=     $section->getIsOnline() ? "<input checked " : "<input ";
+$row.=     "type='checkbox'  id='inlineEdit_sectOnline{$secId}'
                             value='1' style='transform: scale(1.5); '>
                             &nbsp;&nbsp;&nbsp;Online</label>
                         </div>

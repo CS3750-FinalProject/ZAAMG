@@ -4,6 +4,11 @@ require_once 'Professor.php';
 $database = new Database();
 session_start();
 
+$mainSemesterLabel= 'Spring 2017';
+if (isset($_SESSION['mainSemesterLabel'])){
+    $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
+}
+
 $body = "
 <script src='js/calendar.js' charset='utf-8'></script>
 <script>
@@ -28,17 +33,11 @@ $body = "
                     }
                 }
 
-                /*secIds.forEach(function(id) {
-                    $('#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
-                        .attr('title', 'Professor Conflict');
-                });*/
-
                 profIds.forEach(function(id) {
                     $('#' + 'record_professorf' + id)
                         .find('span.glyphicon-alert').removeClass('hide').css('color','#ef0946');
 
                 });
-
             }
         },
         error: function(msg){
@@ -53,7 +52,7 @@ $body .= "
 <div class='col-xs-12' >
         <div class='page-header'>
 
-          <h1 style='display:inline'>Professors <small>for {$_SESSION['mainSemesterLabel']}</small></h1>
+          <h1 style='display:inline'>Professors <small>for {$mainSemesterLabel}</small></h1>
 
           <img src='img/ajax-loader.gif'  id='prof_ajax-loader'
           style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>

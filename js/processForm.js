@@ -310,7 +310,6 @@ $(function() {
         var sectionCapacity = $("#sectionCapacity").val();
         var daysString = "";
         if (sectionDays != "Online"   || sectionClassroom != 0 ){
-            alert("got here");
             $.each(sectionDays, function(index, value){
                 daysString += value;
             });

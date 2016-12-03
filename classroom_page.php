@@ -6,6 +6,11 @@ $dbh = $database->getdbh();
 
 session_start();
 
+$mainSemesterLabel= 'Spring 2017';
+if (isset($_SESSION['mainSemesterLabel'])){
+ $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
+}
+
 $body = "
 <script src='js/ClassroomCalendar.js' charset='utf-8'></script>
 <script>
@@ -30,12 +35,6 @@ $body = "
                     }
                 }
 
-               /* secIds.forEach(function(id) {
-                    $('tr#' + 'record_sectiont' + id).find('span.glyphicon-alert').removeClass('hide')
-                        .attr('title', 'Classroom Conflict');
-                    console.log(\"secId: \" + id);
-                });*/
-
                 roomIds.forEach(function(id) {
                     $('tr#' + 'record_classRoom' + id).find('span.glyphicon-alert').removeClass('hide');
                     console.log(\"ROOMtr: \" + $('tr#' + 'record_classRoom' + id).attr('id'));
@@ -52,10 +51,9 @@ $body = "
 
 
 
-
 <div class='col-xs-12'>
     <div class='page-header'>
-          <h1 style='display:inline'>Classrooms <small>for {$_SESSION['mainSemesterLabel']}</small></h1>
+          <h1 style='display:inline'>Classrooms <small>for {$mainSemesterLabel}</small></h1>
 
           <img src='img/ajax-loader.gif'  id='rooms_ajax-loader'
           style='display:inline-block; padding-left: 3%; padding-bottom: 8px'/>

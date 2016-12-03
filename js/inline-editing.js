@@ -99,6 +99,19 @@ var InlineEditing = function() {
                     roomId = section.room;
                     semId = section.sem;
 
+                    $('#' + 'inlineEdit_sectDays' + secId).change(function(){
+                        if ($('#' + 'inlineEdit_sectDays' + secId).find(":selected").val() != "Online"){
+                            $('#' + 'inlineEdit_sectStartTime' + secId).removeAttr('disabled');
+                            $('#' + 'inlineEdit_sectEndTime' + secId).removeAttr('disabled');
+                            $('#' + 'inlineEdit_sectOnline' + secId).removeAttr('checked');
+                        }else{
+                            $('#' + 'inlineEdit_sectStartTime' + secId).prop('disabled', 'true');
+                            $('#' + 'inlineEdit_sectEndTime' + secId).prop('disabled', 'true');
+                            $('#' + 'inlineEdit_sectOnline' + secId).attr('checked', 'true');
+                        }
+                    })
+
+
                     $('#' + 'inlineEdit_sectCap' + secId).val(section.cap);
 
                     $('#' + 'inlineEdit_sectStartTime' + secId).val(section.start);
@@ -121,7 +134,7 @@ var InlineEditing = function() {
                     $('#' + 'inlineEdit_sectDays' + secId).append($('<option />').val("Saturday").text("Saturday"));
 
 
-                    var days = section.days == "online" ? ["Online"]
+                    var days = section.days.toUpperCase() === "ONLINE" ? ["Online"]
                         : section.days.match(/[A-Z][a-z]+/g); //split the day string by Capitalized Day Names
                     $('#' + 'inlineEdit_sectDays' + secId +'> option').each(function() {
                         if (  jQuery.inArray(this.innerHTML, days) > -1){

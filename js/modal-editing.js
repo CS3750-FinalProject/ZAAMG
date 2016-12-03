@@ -185,6 +185,17 @@ function ModalEditing(){
                 console.log("error: " + JSON.stringify(msg));
             }
         });
+        $('#sectionDays').change(function(){
+            if ($('#sectionDays').find(":selected").val() != "Online"){
+                $('#sectionStartTime').removeAttr('disabled');
+                $('#sectionEndTime').removeAttr('disabled');
+                $('#sectionOnline').removeAttr('checked');
+            }else{
+                $('#sectionStartTime').prop('disabled', 'true');
+                $('#sectionEndTime').prop('disabled', 'true');
+                $('#sectionOnline').attr('checked', 'true');
+            }
+        })
     };
 
 
