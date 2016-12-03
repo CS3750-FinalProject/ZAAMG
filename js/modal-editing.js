@@ -157,10 +157,12 @@ function ModalEditing(){
             dataType:  'json',
             success: function(rooms) {
                 $('#sectionClassroom').empty();
-                $('#sectionClassroom').append($('<option />').val("").text("Please Select..."));
+                $('#sectionClassroom').append($('<option />').val(-1).text("Please Select..."));
                 rooms.forEach(function(obj){
                     $('#sectionClassroom').append($('<option />').val(obj.id).text(obj.campus + ", " + obj.building + ": " + obj.number));
                 });
+                $('#sectionClassroom option[value=0]').detach().insertAfter($('#sectionClassroom option[value=-1]'));
+
                 //$('#sectionClassroom option[value=0]').detach()//remove the Online Classroom from the list
             },
             error: function(msg) {
