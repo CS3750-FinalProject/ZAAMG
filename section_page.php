@@ -226,12 +226,12 @@ $row.="</select>
 
      <label  for='inlineEdit_sectStartTime{$secId}'>Start Time</label>";
 $row.=     $section->getIsOnline() ? "<input disabled " : "<input ";
-$row.=     "type='time' id='inlineEdit_sectStartTime{$secId}'
+$row.=     "type='time' placeholder='09:30 AM' id='inlineEdit_sectStartTime{$secId}'
                     style='margin-bottom: 10px' class='form-control'>
 
       <label for='inlineEdit_sectEndTime{$secId}'>End Time</label>";
 $row.=     $section->getIsOnline() ? "<input disabled " : "<input ";
-$row.=     "type='time' id='inlineEdit_sectEndTime{$secId}'  class='form-control'>
+$row.=     "type='time' placeholder='11:20 AM' id='inlineEdit_sectEndTime{$secId}'  class='form-control'>
     </td>
 
 

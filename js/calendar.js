@@ -706,6 +706,17 @@ function displayTest(theProfSet) {
                 $(element).css('background-color', '#840b38');
                 $(element).css('border-color', '#840b38');
             }
+            var combos = ['MW','TTH','MWF', undefined];
+            if (combos.indexOf(event.days) == -1){
+                if (event.days != "S")
+                    $(element).css('opacity', '0.55');
+            }
+
+            if (event.days == "S"){//Saturday class
+                $(element).css('background-color', '#eb4312');
+                $(element).css('border-color', '#eb4312');
+            }
+
 
         },
         eventAfterAllRender: function(event, element, view){

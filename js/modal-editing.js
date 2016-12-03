@@ -190,9 +190,11 @@ function ModalEditing(){
                 $('#sectionStartTime').removeAttr('disabled');
                 $('#sectionEndTime').removeAttr('disabled');
                 $('#sectionOnline').removeAttr('checked');
+                $('#sectionOnline').prop('disabled', true);
             }else{
                 $('#sectionStartTime').prop('disabled', 'true');
                 $('#sectionEndTime').prop('disabled', 'true');
+                $('#sectionOnline').removeAttr('disabled');
                 $('#sectionOnline').attr('checked', 'true');
             }
         })
@@ -578,125 +580,135 @@ $('#btn_updateSemester').click(function(){
     });
 
 
-
-$('#btn_deleteCampus').click(function(){
-    var activePage;
-    var campusId            = $('#pick_editCampus :selected').val();
-    $('[id^=' + 'navbar_' +']').each(function(){
-        if ($(this).hasClass('active')){
-            activePage = $(this).attr('id').split('navbar_').pop();
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "action/action_updateCampus.php",
-        data:
-        "campusId="           + campusId +
-        "&action=delete",
-        success: function(msg) {
-            $('#editCampusModal').modal('hide');
-            switch(activePage){
-                case "sec": loadPhpPage('section_page.php'); break;
-                case "prof": loadPhpPage('prof_page.php'); break;
-                case "room": loadPhpPage('classroom_page.php'); break;
+//might not need those unbinds
+$('#btn_deleteCampus').unbind().click(function(){
+    if (confirm("Are you sure you want to delete this campus?")){
+        var activePage;
+        var campusId            = $('#pick_editCampus :selected').val();
+        $('[id^=' + 'navbar_' +']').each(function(){
+            if ($(this).hasClass('active')){
+                activePage = $(this).attr('id').split('navbar_').pop();
             }
-        },
-        error: function(msg) {
-            console.log("error: " + JSON.stringify(msg));
-        }
-    });
+        });
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateCampus.php",
+            data:
+            "campusId="           + campusId +
+            "&action=delete",
+            success: function(msg) {
+                $('#editCampusModal').modal('hide');
+                switch(activePage){
+                    case "sec": loadPhpPage('section_page.php'); break;
+                    case "prof": loadPhpPage('prof_page.php'); break;
+                    case "room": loadPhpPage('classroom_page.php'); break;
+                }
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
+            }
+        });
+    }
+});
+
+$('#btn_deleteBuilding').unbind().click(function(){
+    if (confirm("Are you sure you want to delete this building?")){
+        var activePage;
+        var buildingId              = $('#pick_editBuilding :selected').val();
+
+        $('[id^=' + 'navbar_' +']').each(function(){
+            if ($(this).hasClass('active')){
+                activePage = $(this).attr('id').split('navbar_').pop();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateBuilding.php",
+            data:
+            "buildingId="           + buildingId +
+            "&action=delete",
+            success: function(msg) {
+                $('#editBuildingModal').modal('hide');
+                switch(activePage){
+                    case "sec": loadPhpPage('section_page.php'); break;
+                    case "prof": loadPhpPage('prof_page.php'); break;
+                    case "room": loadPhpPage('classroom_page.php'); break;
+                }
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
+            }
+        });
+
+    }
 
 });
 
-$('#btn_deleteBuilding').click(function(){
-    var activePage;
-    var buildingId              = $('#pick_editBuilding :selected').val();
+$('#btn_deleteSemester').unbind().click(function(){
+    if (confirm("Are you sure you want to delete this semester?")){
+        var activePage;
+        var semId                   = $('#pick_editSemester :selected').val();
 
-    $('[id^=' + 'navbar_' +']').each(function(){
-        if ($(this).hasClass('active')){
-            activePage = $(this).attr('id').split('navbar_').pop();
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "action/action_updateBuilding.php",
-        data:
-        "buildingId="           + buildingId +
-        "&action=delete",
-        success: function(msg) {
-            $('#editBuildingModal').modal('hide');
-            switch(activePage){
-                case "sec": loadPhpPage('section_page.php'); break;
-                case "prof": loadPhpPage('prof_page.php'); break;
-                case "room": loadPhpPage('classroom_page.php'); break;
+
+        $('[id^=' + 'navbar_' +']').each(function(){
+            if ($(this).hasClass('active')){
+                activePage = $(this).attr('id').split('navbar_').pop();
             }
-        },
-        error: function(msg) {
-            console.log("error: " + JSON.stringify(msg));
-        }
-    });
+        });
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateSemester.php",
+            data:
+            "semId="           + semId +
+            "&action=delete",
+            success: function(msg) {
+                console.log(JSON.stringify(msg));
+                $('#editSemesterModal').modal('hide');
+                switch(activePage){
+                    case "sec": loadPhpPage('section_page.php'); break;
+                    case "prof": loadPhpPage('prof_page.php'); break;
+                    case "room": loadPhpPage('classroom_page.php'); break;
+                }
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
+            }
+        });
+
+    }
 
 });
 
-$('#btn_deleteSemester').click(function(){
-    var activePage;
-    var semId                   = $('#pick_editSemester :selected').val();
-
-
-    $('[id^=' + 'navbar_' +']').each(function(){
-        if ($(this).hasClass('active')){
-            activePage = $(this).attr('id').split('navbar_').pop();
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "action/action_updateSemester.php",
-        data:
-        "semId="           + semId +
-        "&action=delete",
-        success: function(msg) {
-            console.log(JSON.stringify(msg));
-            $('#editSemesterModal').modal('hide');
-            switch(activePage){
-                case "sec": loadPhpPage('section_page.php'); break;
-                case "prof": loadPhpPage('prof_page.php'); break;
-                case "room": loadPhpPage('classroom_page.php'); break;
+$('#btn_deleteDepartment').unbind().click(function(){
+    if (confirm("Are you sure you want to delete this department?")){
+        var activePage;
+        var deptId            = $('#pick_editDepartment :selected').val();
+        $('[id^=' + 'navbar_' +']').each(function(){
+            if ($(this).hasClass('active')){
+                activePage = $(this).attr('id').split('navbar_').pop();
             }
-        },
-        error: function(msg) {
-            console.log("error: " + JSON.stringify(msg));
-        }
-    });
-
-});
-
-$('#btn_deleteDepartment').click(function(){
-    var activePage;
-    var deptId            = $('#pick_editDepartment :selected').val();
-    $('[id^=' + 'navbar_' +']').each(function(){
-        if ($(this).hasClass('active')){
-            activePage = $(this).attr('id').split('navbar_').pop();
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "action/action_updateDepartment.php",
-        data:
-        "deptId="           + deptId +
-        "&action=delete",
-        success: function(msg) {
-            console.log("dept: " + JSON.stringify(msg));
-            $('#editDepartmentModal').modal('hide');
-            switch(activePage){
-                case "sec": loadPhpPage('section_page.php'); break;
-                case "prof": loadPhpPage('prof_page.php'); break;
-                case "room": loadPhpPage('classroom_page.php'); break;
+        });
+        $.ajax({
+            type: "POST",
+            url: "action/action_updateDepartment.php",
+            data:
+            "deptId="           + deptId +
+            "&action=delete",
+            success: function(msg) {
+                console.log("dept: " + JSON.stringify(msg));
+                $('#editDepartmentModal').modal('hide');
+                switch(activePage){
+                    case "sec": loadPhpPage('section_page.php'); break;
+                    case "prof": loadPhpPage('prof_page.php'); break;
+                    case "room": loadPhpPage('classroom_page.php'); break;
+                }
+            },
+            error: function(msg) {
+                console.log("error: " + JSON.stringify(msg));
             }
-        },
-        error: function(msg) {
-            console.log("error: " + JSON.stringify(msg));
-        }
-    });
+        });
+
+    }
 
 });
 

@@ -104,21 +104,38 @@ var InlineEditing = function() {
                             $('#' + 'inlineEdit_sectStartTime' + secId).removeAttr('disabled');
                             $('#' + 'inlineEdit_sectEndTime' + secId).removeAttr('disabled');
                             $('#' + 'inlineEdit_sectOnline' + secId).removeAttr('checked');
+                            $('#' + 'inlineEdit_sectOnline' + secId).prop('disabled', true);
                         }else{
                             $('#' + 'inlineEdit_sectStartTime' + secId).prop('disabled', 'true');
                             $('#' + 'inlineEdit_sectEndTime' + secId).prop('disabled', 'true');
                             $('#' + 'inlineEdit_sectOnline' + secId).attr('checked', 'true');
+                            $('#' + 'inlineEdit_sectOnline' + secId).removeAttr('disabled');
                         }
                     })
 
 
                     $('#' + 'inlineEdit_sectCap' + secId).val(section.cap);
 
-                    $('#' + 'inlineEdit_sectStartTime' + secId).val(section.start);
+                    if (section.online == 0){
+                        $('#' + 'inlineEdit_sectOnline' + secId).prop('disabled', 'true');
 
-                    $('#' + 'inlineEdit_sectEndTime' + secId).val();
+                        var startMoment = moment(section.start, 'HH:mm:ss').format('HH:mm:ss');
+                        var endMoment = moment(section.end, 'HH:mm:ss').format('HH:mm:ss');
+                        $('#' + 'inlineEdit_sectStartTime' + secId).val(startMoment);
+                        $('#' + 'inlineEdit_sectEndTime' + secId).val(endMoment);
 
-                    alert("section.start: " + $('#' + 'inlineEdit_sectStartTime' + secId).val()); return false;
+                        //for Firefox...
+                        if (isNaN($('#' + 'inlineEdit_sectStartTime' + secId).prop('valueAsNumber'))){
+                            var ffStartTime = $('#' + 'inlineEdit_sectStartTime' + secId).val();
+                            var ffEndTime = $('#' + 'inlineEdit_sectEndTime' + secId).val();
+
+                            var ffStartMoment = moment(ffStartTime, 'HH:mm:ss').format('hh:mm A');
+                            var ffEndMoment = moment(ffEndTime, 'HH:mm:ss').format('hh:mm A');
+
+                            $('#' + 'inlineEdit_sectStartTime' + secId).val(ffStartMoment);
+                            $('#' + 'inlineEdit_sectEndTime' + secId).val(ffEndMoment);
+                        }
+                    }
 
                     if(section.online == 1){
                         $('#' + 'inlineEdit_sectOnline' + secId).attr('checked', 'checked');
