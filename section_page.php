@@ -168,7 +168,7 @@ $row .= "<small><em>{$section->getBlock()}</em></small></td>
             'classroom_id', 'building_id', 'campus_id', 'classroomID')}
             </small></td>
         <td>
-            <img src='img/pencil_green.png' class='action-edit pencil' id='pencil_sect{$secId}' />
+            <img src='img/pencil_green.png' class='action-edit pencil pointer' id='pencil_sect{$secId}' />
             <span style='color: orangered; margin-left: 10%' class='glyphicon glyphicon-alert hide'></span>
         </td>
    </tr>

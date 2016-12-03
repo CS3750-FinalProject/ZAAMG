@@ -292,8 +292,8 @@ function addProfessor(Professor $professor, Database $db){
     }
 
     // finish giving attributes to the <span> and close it...
-    $row .= "])' class='glyphicon glyphicon-calendar' aria-hidden='true' style='margin-left: 15%'></span>
-<img src='img/pencil_green.png' class='action-edit pencil'  id='pencil_prof{$id}' style='margin-right: 8%'/>
+    $row .= "])' class='glyphicon glyphicon-calendar pointer' aria-hidden='true' style='margin-left: 15%'></span>
+<img src='img/pencil_green.png' class='action-edit pencil pointer'  id='pencil_prof{$id}' style='margin-right: 8%'/>
 <span style='color: orangered; ' class='glyphicon glyphicon-alert hide'></span>
 			</td>
 		  </tr>";

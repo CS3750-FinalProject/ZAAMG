@@ -85,9 +85,9 @@ $body = "
         </div>
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
           <ul class='nav navbar-nav'>
-            <li id='navbar_sec' class='active'><a  onclick='changePage(this)'>Section <span class='sr-only'>(current)</span></a></li>
-            <li id='navbar_prof'><a onclick='changePage(this)'>Professor</a></li>
-            <li id='navbar_room'><a onclick='changePage(this)'>Classroom</a></li>
+            <li id='navbar_sec' class='pointer active'><a  onclick='changePage(this)'>Section <span class='sr-only'>(current)</span></a></li>
+            <li id='navbar_prof' class='pointer'><a onclick='changePage(this)'>Professor</a></li>
+            <li id='navbar_room' class='pointer'><a onclick='changePage(this)'>Classroom</a></li>
           </ul>
 
           <ul style='display:inline' class='dropdown nav navbar-form navbar-left'>

@@ -126,3 +126,7 @@ th.prof_table, #table_sectionIndex th, #classroom_table th{
 #table_pr_Index tr th div{
   margin: -8px 0 0 0 !important;
 }
+
+.pointer{
+  cursor: pointer;
+}
