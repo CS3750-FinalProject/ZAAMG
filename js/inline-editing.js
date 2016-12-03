@@ -443,59 +443,67 @@ var InlineEditing = function() {
 
 
     $('[id^=' + 'sect_delete' +']').click(function(){
-        var secId  = $(this).attr('id').split('sect_delete').pop();
-        $.ajax({
-            type: "POST",
-            url: "action/action_deleteSection.php",
-            data:   "sectionId=" + secId +
-                    "&action=delete",
-            success: function(msg) {
-               // console.log("message from deleteSection: " + msg);
-                loadPhpPage("section_page.php");
-            },
-            error: function(msg) {
-                console.log("error: " + JSON.stringify(msg));
-            }
-        });
+        if (confirm("Are you sure you want to delete this section?")){
+
+            var secId  = $(this).attr('id').split('sect_delete').pop();
+            $.ajax({
+                type: "POST",
+                url: "action/action_deleteSection.php",
+                data:   "sectionId=" + secId +
+                "&action=delete",
+                success: function(msg) {
+                    // console.log("message from deleteSection: " + msg);
+                    loadPhpPage("section_page.php");
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
+                }
+            });
+        }
     });
 
 
     $('[id^=' + 'prof_delete' +']').click(function(){
-        var profId = $(this).attr('id').split('prof_delete').pop();
-        $.ajax({
-            type: "POST",
-            url: "action/action_deleteProfessor.php",
-            data:   "profId=" + profId +
-                    "&action=" + "delete",
-            dataType: 'json',
-            success: function(professorObjects) {
-                //console.log("message from deleteProfessor: " + professorObjects);
-                //refreshModals_prof(professorObjects);
-                loadPhpPage("prof_page.php");
-            },
-            error: function(msg) {
-                console.log("error: " + JSON.stringify(msg));
-            }
-        });
+        if (confirm("Are you sure you want to delete this professor?")){
+            var profId = $(this).attr('id').split('prof_delete').pop();
+            $.ajax({
+                type: "POST",
+                url: "action/action_deleteProfessor.php",
+                data:   "profId=" + profId +
+                "&action=" + "delete",
+                dataType: 'json',
+                success: function(professorObjects) {
+                    //console.log("message from deleteProfessor: " + professorObjects);
+                    //refreshModals_prof(professorObjects);
+                    loadPhpPage("prof_page.php");
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
+                }
+            });
+        }
     });
 
 
 
     $('[id^=' + 'room_delete' +']').click(function(){
-        var roomId = $(this).attr('id').split('room_delete').pop();
-        $.ajax({
-            type: "POST",
-            url: "action/action_deleteClassroom.php",
-            data:   "roomId="    + roomId +
-            "&action=" + "delete",
-            success: function(msg) {
-               // console.log("message from deleteClassroom: " + msg);
-                loadPhpPage("classroom_page.php");
-            },
-            error: function(msg) {
-                console.log("error: " + JSON.stringify(msg));
-            }
-        });
+        if (confirm("Are you sure you want to delete this classroom?")){
+            var roomId = $(this).attr('id').split('room_delete').pop();
+            $.ajax({
+                type: "POST",
+                url: "action/action_deleteClassroom.php",
+                data:   "roomId="    + roomId +
+                "&action=" + "delete",
+                success: function(msg) {
+                    // console.log("message from deleteClassroom: " + msg);
+                    loadPhpPage("classroom_page.php");
+                },
+                error: function(msg) {
+                    console.log("error: " + JSON.stringify(msg));
+                }
+            });
+        }
+
     });
 
 
