@@ -309,18 +309,14 @@ $(function() {
         var sectionSemester = $("#sectionSemester").val();
         var sectionCapacity = $("#sectionCapacity").val();
         var daysString = "";
-        if (sectionDays != "Online" ){  // || sectionClassroom != 0  don't need this ?
+        if (sectionDays != "Online"   || sectionClassroom != 0 ){
+            alert("got here");
             $.each(sectionDays, function(index, value){
                 daysString += value;
             });
             //only tests if not online
-            /*if (sectionStartTime.indexOf('M') == -1){
-                sectionStartTime += parseInt(sectionStartTime.slice(0,2)) < 12 ? ' AM' : ' PM';
-            }
-            if (sectionEndTime.indexOf('M') == -1){
-                sectionEndTime += parseInt(sectionEndTime.slice(0,2)) < 12 ? ' AM' : ' PM';
-            }*/
-            console.log("sectionStartTime: " + sectionStartTime);
+
+            //console.log("sectionStartTime: " + sectionStartTime);
             var timePattern = /[0-1][0-9]:[0-5][0-9]/i;//[AP]M
             if (!timePattern.test(sectionStartTime)){
                 window.alert("Invalid start time entered! Please enter a valid time in this format:\n00:00 AM");
@@ -336,7 +332,7 @@ $(function() {
             if(timePattern.exec(sectionEndTime).length < sectionEndTime.length){
                 sectionEndTime = timePattern.exec(sectionEndTime);
             }
-            alert(sectionStartTime);
+            //alert(sectionStartTime);
             startMoment = moment(sectionStartTime, 'HH:mm A');
             endMoment = moment(sectionEndTime, 'HH:mm A');
             sectionStartTime = startMoment.format('HH:mm:ss');

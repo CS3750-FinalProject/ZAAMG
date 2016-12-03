@@ -26,9 +26,7 @@ class Database
     }
 
 
-   /* public function getProfessorConflicts(){
 
-    }*/
 
 
     /*  Returns:            an array of Section objects, one per Section record in database
@@ -114,6 +112,23 @@ class Database
         }catch(Exception $e){
             echo "getClassroomsOnCampus: ".$e->getMessage();
         }
+    }
+
+
+    public function getSumScheduledCredits($profId){
+        $dbh = $this->getdbh();
+        $stmtSum = $dbh->prepare("SELECT SUM(c.course_credits)
+                                FROM W01143557.Section s JOIN W01143557.Course c
+                                ON s.course_id = c.course_id
+                                WHERE s.prof_id = :profId
+                                AND sem_id = :semId");
+        $stmtSum->bindValue(":profId", $profId);
+        $stmtSum->bindValue(":semId", $_SESSION['mainSemesterId']);
+
+        $stmtSum->execute();
+        $sumResult = $stmtSum->fetchAll()[0];
+        $sum = $sumResult[0];
+        return $sum;
     }
 
 

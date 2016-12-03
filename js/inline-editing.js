@@ -100,8 +100,12 @@ var InlineEditing = function() {
                     semId = section.sem;
 
                     $('#' + 'inlineEdit_sectCap' + secId).val(section.cap);
-                    $('#' + 'inlineEdit_sectStartTime' + secId).val();
+
+                    $('#' + 'inlineEdit_sectStartTime' + secId).val(section.start);
+
                     $('#' + 'inlineEdit_sectEndTime' + secId).val();
+
+                    alert("section.start: " + $('#' + 'inlineEdit_sectStartTime' + secId).val()); return false;
 
                     if(section.online == 1){
                         $('#' + 'inlineEdit_sectOnline' + secId).attr('checked', 'checked');

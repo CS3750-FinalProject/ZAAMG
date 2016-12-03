@@ -252,10 +252,10 @@ function addProfessor(Professor $professor, Database $db){
     //<div> (contains cal)      id = cal_prof<#>
     //<tr>  (editing div)       id = edit_prof<#>
     //<img> (disc)              id = save_prof<#>
-    $overHours = ($professor->getProfRequiredHours() + $professor->getProfRelease()) - 12;
-    if($overHours < 0){
-        $overHours = 0;
-    }
+
+    $scheduledHours = $db->getSumScheduledCredits($id);
+    $overHours =  $scheduledHours - $professor->getProfRequiredHours() + $professor->getProfRelease();
+    $overHours = ($overHours < 0) ? 0 : $overHours;
 
 
     //Here's where we create the table of Professors on the "Professor Page".
@@ -269,7 +269,7 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfRelease()}</td>
 			<td id='td_overHours{$id}' class='over_hours'>{$overHours}
 			    <span   class='glyphicon glyphicon-info-sign hide'
-			            style='color:blue; font-size: 1.2em; margin-right: 10%; float:right'>
+			            style='color: #7b92b0 ; font-size: 1.2em; margin-right: 10%; float:right'>
                 </span></td>
 			<td>
 

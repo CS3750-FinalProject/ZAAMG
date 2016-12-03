@@ -22,13 +22,17 @@ $message = "";
 if ($action == 'update'){
     $updateStmt = $dbh->prepare(
         "  UPDATE W01143557.Professor
-        SET prof_first        = '$first',
-            prof_last         = '$last',
-            prof_email        = '$email',
+        SET prof_first        = :first,
+            prof_last         = :last,
+            prof_email        = :email,
             dept_id           = $dept,
             prof_req_hours    = $reqHrs,
             prof_rel_hours    = $relHrs
         WHERE prof_id = $profId");
+    $updateStmt->bindValue(":first", $first);
+    $updateStmt->bindValue(":last", $last);
+    $updateStmt->bindValue(":email", $email);
+
     try{
         $updateStmt->execute();
         $message = "success";
