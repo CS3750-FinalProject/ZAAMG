@@ -65,6 +65,7 @@ $body = "
 
         var options = { valueNames: ['section-course-number', 'section-course-title', 'section-professor', 'section-location'] }
         var searchableList = new List('page-data', options)
+      });
     </script>
 
   <title>Project LOLLAR &#9829; PHP</title>
