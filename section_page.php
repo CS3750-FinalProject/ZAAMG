@@ -102,13 +102,16 @@ $body = "
 </div>
 
     <div class='container'>
+      <div class='form-group pull-right'>
+        <input type='text' class='form-control search' placeholder='Search'>
+      </div>
       <div class='col-xs-12' id='sectionIndex' style='margin-bottom: 20%;'>
         <table class='list-data' id='table_sectionIndex'>
           <tr>
             <th colspan='3'>Course</th>
-            <th>Professor</th>
+            <th class='sort' data-sort='section-professor'>Professor</th>
             <th>Scheduled Time</th>
-            <th>Location</th>
+            <th class='sort' data-sort='section-location'>Location</th>
             <th>Actions</th>
           </tr>";
 
@@ -142,9 +145,9 @@ $row = "
 
     <tr id='record_sectiont{$secId}'>
         <td>{$section->getSectionProperty('course_prefix', 'Course', 'course_id', 'courseID')}</td>"
-        ."<td>{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}</td>"
-        ."<td> <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
-        <td>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"."
+        ."<td class='section-course-number'>{$section->getSectionProperty('course_number', 'Course', 'course_id', 'courseID')}</td>"
+        ."<td class='section-course-title'> <i>{$section->getSectionProperty('course_title', 'Course', 'course_id', 'courseID')}</i></td>
+        <td class='section-professor pointer'>{$section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID')}"."
                 {$section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID')}<br>
                 <small><em>{$section->getSectionProperty('prof_email', 'Professor', 'prof_id', 'profID')}
                 </em></small></td>";
@@ -158,7 +161,7 @@ $row = "
 
 $row .= "<small><em>{$section->getBlock()}</em></small></td>
 
-        <td><strong>
+        <td class='section-location pointer'><strong>
             {$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
             'classroom_id', 'building_id', 'classroomID')}"."
             {$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID')}

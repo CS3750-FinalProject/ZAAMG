@@ -57,12 +57,14 @@ $body = "
     <script src='js/calendar.js' charset='utf-8'></script>
     <script src='js/ClassroomCalendar.js' charset='utf-8'></script>
     <script src='js/classroomSet.js' charset='utf-8'></script>
+    <script src='js/list.js' charset='utf-8'></script>
     <script>
 
     $(document).ready(function() {
         $('#main_container').load('section_page.php');
-    });
 
+        var options = { valueNames: ['section-course-number', 'section-course-title', 'section-professor', 'section-location'] }
+        var searchableList = new List('page-data', options)
     </script>
 
   <title>Project LOLLAR &#9829; PHP</title>
@@ -101,10 +103,8 @@ $body = "
               </ul>
             </ul>
 
-          <form class='navbar-form navbar-left'>
-            <div class='form-group'>
-              <input type='text' class='form-control' placeholder='Search'>
-            </div>
+          <form class='navbar-form'>
+
             <button type='submit' class='btn btn-default'>Submit</button>
           </form>
 
@@ -158,7 +158,7 @@ $body = "
         </div>
       </div>
     </nav>
-    <div class='container' id='main_container'> 
+    <div class='container page-data' id='main_container'>
     </div>
   </body>
 </html>
