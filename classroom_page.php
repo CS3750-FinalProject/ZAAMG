@@ -245,7 +245,6 @@ function addClassroom(Classroom $classroom, Database $db){
         $eventEnd = $section->getEndTime();
         $location = $section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
             'classroom_id', 'building_id', 'campus_id', 'classroomID');
-        //$classroom = $section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID');
         $profFirst = $section->getSectionProperty('prof_first', 'Professor', 'prof_id', 'profID');
         $profLast = $section->getSectionProperty('prof_last', 'Professor', 'prof_id', 'profID');
         $prof = $profFirst . " " . $profLast;

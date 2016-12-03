@@ -336,6 +336,7 @@ $(function() {
             if(timePattern.exec(sectionEndTime).length < sectionEndTime.length){
                 sectionEndTime = timePattern.exec(sectionEndTime);
             }
+            alert(sectionStartTime);
             startMoment = moment(sectionStartTime, 'HH:mm A');
             endMoment = moment(sectionEndTime, 'HH:mm A');
             sectionStartTime = startMoment.format('HH:mm:ss');
