@@ -34,16 +34,35 @@ class Database
      *  Args:
      *      $semesterId:   the semester for which Sections should be retrieved
      */
-    public function getAllSections($semesterId){
+    public function getAllSections($semesterId, $orderBy){
         $allSections = [];
         $dbh = $this->getdbh();
-        //$stmtSelect = $dbh->prepare("SELECT * FROM W01143557.Section");
-        $stmtSelect = $dbh->prepare("
-            SELECT s.*, c.course_prefix, c.course_number
-            FROM W01143557.Section s JOIN W01143557.Course c
-            ON s.course_id = c.course_id and s.sem_id = $semesterId
-            ORDER BY c.course_prefix, c.course_number
-        ");
+        switch($orderBy){
+            case "course":
+                $stmtSelect = $dbh->prepare("
+                SELECT s.*, c.course_prefix, c.course_number
+                FROM W01143557.Section s JOIN W01143557.Course c
+                ON s.course_id = c.course_id and s.sem_id = $semesterId
+                ORDER BY course_prefix, course_number");
+            break;
+            case "prof":
+                $stmtSelect = $dbh->prepare("
+                SELECT s.*, p.prof_first, p.prof_last
+                FROM W01143557.Section s JOIN W01143557.Professor p
+                ON s.prof_id = p.prof_id and s.sem_id = $semesterId
+                ORDER BY prof_last, prof_first");
+                break;
+            case "room":
+                $stmtSelect = $dbh->prepare("
+                SELECT s.*, r.classroom_number, b.building_code, c.campus_name
+                FROM W01143557.Section s JOIN W01143557.Classroom r
+                ON s.classroom_id = r.classroom_id and s.sem_id = $semesterId
+                JOIN W01143557.Building b ON r.building_id = b.building_id
+                JOIN W01143557.Campus c ON b.campus_id = c.campus_id
+                ORDER BY campus_name, building_code, classroom_number");
+                break;
+        }
+
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();

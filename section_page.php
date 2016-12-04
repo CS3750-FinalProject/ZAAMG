@@ -3,18 +3,43 @@ require_once 'Database.php';
 $database = new Database();
 session_start();
 
+$mainSemesterId = 2;
 $mainSemesterLabel= 'Spring 2017';
+$orderBy = "course";
+
+if (isset($_SESSION['mainSemesterId'])){
+    $mainSemesterId = $_SESSION['mainSemesterId'];
+}
 if (isset($_SESSION['mainSemesterLabel'])){
     $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
+}
+
+if (isset($_SESSION['sectionIndex_orderBy'])){
+    $orderBy = $_SESSION['sectionIndex_orderBy'];
 }
 
 $body = "
 
 <script src='js/calendar.js' charset='utf-8'></script>
 <script>
+var ajax_orderBy = function(orderBy){
+    $.ajax({
+        type: 'POST',
+        url: 'action/action_storeSectionOrderBy.php',
+        data: 'sectionIndex_orderBy=' + orderBy,
+        success: function(data){
+            console.log(data);
+            loadPhpPage('section_page.php');
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+}
+
     //check for classroom conflicts here:
     $.ajax({
-        url: \"action/action_checkConflicts_classroom.php\",
+        url: 'action/action_checkConflicts_classroom.php',
         dataType: 'json',
         success: function(conflicts) {
             if (Object.keys(conflicts).length > 0){
@@ -109,17 +134,17 @@ $body = "
       <div class='col-xs-12' id='sectionIndex' style='margin-bottom: 20%;'>
         <table class='list-data' id='table_sectionIndex'>
           <tr>
-            <th colspan='3'>Course</th>
-            <th>Professor</th>
+            <th colspan='3'><a href='#' class='pointer a_secHeader' onclick='ajax_orderBy(\"course\")'>Course</a></th>
+            <th><a href='#' class='pointer a_secHeader' onclick='ajax_orderBy(\"prof\")'>Professor</a></th>
             <th>Scheduled Time</th>
-            <th>Location</th>
+            <th><a href='#' class='pointer a_secHeader' onclick='ajax_orderBy(\"room\")'>Location</a></th>
             <th>Actions</th>
           </tr>";
 
 
 
-
-$allSections = $database->getAllSections($_SESSION['mainSemesterId']);
+//"c.course_prefix, c.course_number"
+$allSections = $database->getAllSections($mainSemesterId, $orderBy);
 foreach ($allSections as $section){
     $body .= addSection($section, $database);
 }

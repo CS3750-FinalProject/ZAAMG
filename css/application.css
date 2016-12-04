@@ -159,3 +159,12 @@ th.prof_table, #table_sectionIndex th, #classroom_table th{
 .pointer{
   cursor: pointer;
 }
+
+.a_secHeader, .a_secHeader:hover, .a_secHeader:visited{
+  color: #68348F;
+  text-decoration: none;
+}
+
+.a_secHeader:hover{
+  color: #AA53EA;
+}
