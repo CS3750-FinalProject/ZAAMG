@@ -289,9 +289,9 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfFirst()}</td>
 			<td><small><em>{$professor->getProfEmail()}</em></small></td>
 			<td> {$professor->getProfessorProperty('dept_name', 'Department', 'dept_id', 'deptId')}</td>
-			<td>{$professor->getProfRequiredHours()}</td>
-			<td>{$professor->getProfRelease()}</td>
-			<td id='td_overHours{$id}' class='over_hours'>{$overHours}
+			<td title='Scheduled: {$scheduledHours}'>{$professor->getProfRequiredHours()}</td>
+			<td title='Scheduled: {$scheduledHours}'>{$professor->getProfRelease()}</td>
+			<td id='td_overHours{$id}' class='over_hours context-menu' title='Scheduled: {$scheduledHours}'>{$overHours}
 			    <span   class='glyphicon glyphicon-bell hide'
 			            title='Scheduled Hours: {$scheduledHours}'
 			            style='color: #2e86c1 ; font-size: 1.1em; margin-right: 10%; padding-top: 2%; float:right'>

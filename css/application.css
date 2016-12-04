@@ -160,6 +160,10 @@ th.prof_table, #table_sectionIndex th, #classroom_table th{
   cursor: pointer;
 }
 
+.context-menu{
+  cursor: context-menu;
+}
+
 .a_indexHeader, .a_indexHeader:hover, .a_indexHeader:visited{
   color: #68348F;
   text-decoration: none;
@@ -167,4 +171,8 @@ th.prof_table, #table_sectionIndex th, #classroom_table th{
 
 .a_indexHeader:hover{
   color: #AA53EA;
+}
+
+.navbar-brand{
+  color: #492365 !important;
 }

@@ -65,7 +65,7 @@ $body = "
       });
     </script>
 
-  <title>Project ZAAMG &#9829;</title>
+  <title>ZAAMG &#9829;</title>
   </head>
 
   <body>
