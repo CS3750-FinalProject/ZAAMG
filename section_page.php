@@ -134,10 +134,10 @@ var ajax_orderBy = function(orderBy){
       <div class='col-xs-12' id='sectionIndex' style='margin-bottom: 20%;'>
         <table class='list-data' id='table_sectionIndex'>
           <tr>
-            <th colspan='3'><a href='#' class='pointer a_secHeader' onclick='ajax_orderBy(\"course\")'>Course</a></th>
-            <th><a href='#' class='pointer a_secHeader' onclick='ajax_orderBy(\"prof\")'>Professor</a></th>
+            <th colspan='3'><a href='#' class='pointer a_indexHeader' onclick='ajax_orderBy(\"course\")'>Course</a></th>
+            <th><a href='#' class='pointer a_indexHeader' onclick='ajax_orderBy(\"prof\")'>Professor</a></th>
             <th>Scheduled Time</th>
-            <th><a href='#' class='pointer a_secHeader' onclick='ajax_orderBy(\"room\")'>Location</a></th>
+            <th><a href='#' class='pointer a_indexHeader' onclick='ajax_orderBy(\"room\")'>Location</a></th>
             <th>Actions</th>
           </tr>";
 

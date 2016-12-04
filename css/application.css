@@ -160,11 +160,11 @@ th.prof_table, #table_sectionIndex th, #classroom_table th{
   cursor: pointer;
 }
 
-.a_secHeader, .a_secHeader:hover, .a_secHeader:visited{
+.a_indexHeader, .a_indexHeader:hover, .a_indexHeader:visited{
   color: #68348F;
   text-decoration: none;
 }
 
-.a_secHeader:hover{
+.a_indexHeader:hover{
   color: #AA53EA;
 }

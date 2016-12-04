@@ -91,9 +91,10 @@ class Database
     public function getAllProfessors($orderBy){
         $allProfessors = [];
         $dbh = $this->getdbh();
-        //$prepString = 'SELECT * FROM W01143557.Professor'.
-          //  $orderBy != null ? ' ORDER BY '.$orderBy : '';
-        $stmtSelect = $dbh->prepare('SELECT * FROM W01143557.Professor ORDER BY '.$orderBy);
+
+        $stmtSelect = $dbh->prepare(
+            'SELECT * FROM W01143557.Professor
+             ORDER BY '.$orderBy);
         try{
             $stmtSelect->execute();
             $result = $stmtSelect->fetchAll();

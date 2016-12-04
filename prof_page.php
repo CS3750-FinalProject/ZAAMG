@@ -5,13 +5,34 @@ $database = new Database();
 session_start();
 
 $mainSemesterLabel= 'Spring 2017';
+$orderBy = 'prof_last';
+
+
 if (isset($_SESSION['mainSemesterLabel'])){
     $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
+}
+if (isset($_SESSION['profIndex_orderBy'])){
+    $orderBy = $_SESSION['profIndex_orderBy'];
 }
 
 $body = "
 <script src='js/calendar.js' charset='utf-8'></script>
 <script>
+var ajax_orderBy = function(orderBy){
+    $.ajax({
+        type: 'POST',
+        url: 'action/action_storeProfessorOrderBy.php',
+        data: 'profIndex_orderBy=' + orderBy,
+        success: function(data){
+            console.log(data);
+            loadPhpPage('prof_page.php');
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+}
+
     //check for professor conflicts here:
     $.ajax({
         url: \"action/action_checkConflicts_professor.php\",
@@ -69,10 +90,13 @@ $body .= "
 
         <table class='list-data' id='table_pr_Index'>
           <tr>
-            <th class='prof_table'>Last Name</th>
-            <th class='prof_table'>First Name</th>
+            <th class='prof_table'>
+                <a href='#' class='pointer a_indexHeader' onclick='ajax_orderBy(\"prof_last\")'>Last Name</a></th>
+            <th class='prof_table'>
+                <a href='#' class='pointer a_indexHeader' onclick='ajax_orderBy(\"prof_first\")'>First Name</a></th>
             <th class='prof_table'>E-Mail</th>
-            <th class='prof_table'>Department</th>
+            <th class='prof_table'>
+                <a href='#' class='pointer a_indexHeader' onclick='ajax_orderBy(\"dept_id, prof_last\")'>Department</a></th>
             <th><div>
                 <span style='font-size:.8em; '>Hours:</span><br>Required
                 </div>
@@ -89,7 +113,7 @@ $body .= "
           </tr>";
 
 
-$allProfessors = $database->getAllProfessors('prof_last');//argument is the field to ORDER BY
+$allProfessors = $database->getAllProfessors($orderBy);//argument is the field to ORDER BY
 foreach ($allProfessors as $professor){
     $body .= addProfessor($professor, $database);
     //function addProfessor is defined in this file (prof_page.php)
