@@ -44,7 +44,7 @@
 
 
 #table_allProfsSchedule tr:nth-child(even){
-  background-color: ededed;
+  background-color: #ededed;
 }
 
 .error-message{
@@ -109,9 +109,38 @@ img.pencil{
   /* margin-left: 15%*/
 }
 
-span.glyphicon-calendar, span.glyphicon-menu-up, span.glyphicon-alert{
+span.glyphicon-calendar, span.glyphicon-menu-up{
   color: #492365;
   font-size: 1.2em;
+}
+
+span.glyphicon-alert {
+  font-size: 1.2em;
+}
+
+
+span.glyphicon-pencil{
+  color: #0b750e;
+  font-size: 1.3em;
+}
+
+.capIcon_divNeighbor{
+  float:left;
+}
+.capIcon_div{
+  float:right;
+  padding-top: 6%;
+  padding-right: 12%;
+}
+
+span.glyphicon-user{
+  color: #2e86c1;
+}
+
+span.roomCapGlyph{
+  float: right;
+  padding-top: 1%;
+  padding-right: 7%;
 }
 
 #main_semester_dropdown{

@@ -47,6 +47,23 @@ $body = "
             console.log(\"checkConflicts ajax error: \" +  JSON.stringify(msg));
         }
     });
+
+        //check for capacity exceedance here:
+    $.ajax({
+        url: 'action/action_checkCapacity.php',
+        dataType: 'json',
+        success: function(capOvers) {
+        console.log(JSON.stringify(capOvers));
+            capOvers.forEach(function(capOver){
+                $('#' + 'room_capGlyph' + capOver.roomId).removeClass('hide')
+                        .attr('title', 'Room Cap: ' + capOver.roomCap + ', Section Cap: ' + capOver.secCap);
+            });
+        },
+        error: function(msg){
+            console.log('checkCapacity ajax error: ' +  JSON.stringify(msg));
+        }
+    });
+
 </script>
 
 
@@ -262,7 +279,7 @@ function addClassroom(Classroom $classroom, Database $db){
     }
 
     //<tr> (room record)        id = record_classRoom<#>  //if it doesn't end in _room# then it won't toggle 'hide'
-    //<img> (pencil)            id = pencil_room<#>
+    //<span> (pencil)            id = pencil_room<#>
     //<span> (little arrow):    id = seeCal_room<#>
     //<tr> (contains cal div):  id = calRow_room<#>
     //<div> (contains cal)      id = cal_room<#>
@@ -277,7 +294,9 @@ function addClassroom(Classroom $classroom, Database $db){
                 'building_id', 'campus_id', 'buildId')}</td>
 			<td>{$classroom->getClassroomProperty('building_name', 'Building', 'building_id', 'buildId')}</td>
 			<td><small><em>{$classroom->getClassroomNum()}</em></small></td>
-			<td> {$classroom->getClassroomCap()}</td>
+			<td> {$classroom->getClassroomCap()}
+                <span class='glyphicon glyphicon-user roomCapGlyph hide' id='room_capGlyph{$roomId}' </span>
+			</td>
 			<td>{$classroom->getNumWorkstations()}</td>
 			<td>
 
@@ -295,7 +314,7 @@ function addClassroom(Classroom $classroom, Database $db){
 
     // finish giving attributes to the <span> and close it...
     $row .= "])' class=' glyphicon glyphicon-calendar pointer' style='margin-left: 15%; ' aria-hidden='true'></span>
-        <img src='img/pencil_green.png' class='action-edit pencil pointer' style='margin-left: 10%' id='pencil_room{$roomId}'/>
+        <span class='action-edit pencil pointer glyphicon glyphicon-pencil' style='margin-left: 10%' id='pencil_room{$roomId}'></span>
         <span style='color: orangered; margin-left: 5%' class='glyphicon glyphicon-alert hide'></span>
 			</td>
 		  </tr>";

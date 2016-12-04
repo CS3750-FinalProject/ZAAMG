@@ -11,10 +11,12 @@ $body = '
             <div class="modal-body" id="id_form-group" style="margin-bottom: 150px;">
 
                 <div class="form-group" >
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         <label for="courseCode">Code</label>
                         <input style="margin-bottom:20px" type="text" class="form-control" id="courseCode" placeholder="CS 1010" >
                     </div>
+                    <div class="col-xs-1"></div>
+
                     <div class="col-xs-8">
                         <label for="courseTitle">Title</label>
                         <input style="margin-bottom:20px" type="text" class="form-control" id="courseTitle" placeholder="Course Title Here..." >
@@ -22,14 +24,12 @@ $body = '
 
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-2">
-                        <label for="courseCapacity">Capacity</label>
-                        <input type="number" class="form-control" id="courseCapacity" value=30 min=1>
-                    </div>
-                    <div class="col-xs-2">
+
+                    <div class="col-xs-3">
                         <label for="courseCredits">Credits</label>
                         <input type="number" class="form-control" id="courseCredits" value=4 min=1>
                     </div>
+                    <div class="col-xs-1"></div>
                     <div class="col-xs-8">
                         <label for="courseDepartment">Department</label>
                         <select class="form-control" id="courseDepartment" >

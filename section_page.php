@@ -48,7 +48,7 @@ $body = "
 
     //check for professor conflicts here:
     $.ajax({
-        url: \"action/action_checkConflicts_professor.php\",
+        url: 'action/action_checkConflicts_professor.php',
         dataType: 'json',
         success: function(conflicts) {
             if (Object.keys(conflicts).length > 0){
@@ -77,6 +77,23 @@ $body = "
             console.log(\"checkConflicts ajax error: \" +  JSON.stringify(msg));
         }
     });
+
+    //check for capacity exceedance here:
+    $.ajax({
+        url: 'action/action_checkCapacity.php',
+        dataType: 'json',
+        success: function(capOvers) {
+        console.log(JSON.stringify(capOvers));
+            capOvers.forEach(function(capOver){
+                $('#' + 'sect_capGlyph' + capOver.secId).removeClass('hide')
+                        .attr('title', 'Room Cap: ' + capOver.roomCap + ', Section Cap: ' + capOver.secCap);
+            });
+        },
+        error: function(msg){
+            console.log('checkCapacity ajax error: ' +  JSON.stringify(msg));
+        }
+    });
+
 
 </script>
 
@@ -116,7 +133,7 @@ echo $body;
 
 //<tr> (section record)     id = record_sectiont<#>  //if it doesn't end in _sect# then it won't toggle 'hide'
                                                      //also 'sectiont' is correct, the t is there on purpose to match last letter of 'sect'
-//<img> (pencil)            id = pencil_sect<#>
+//<span> (pencil)            id = pencil_sect<#>
 //<span> (little arrow):    id = seeCal_sect<#>
 //<tr>  (editing div)       id = edit_sect<#>
 //<img> (save disc)         id = save_sect<#>
@@ -145,17 +162,27 @@ $row = "
 
 $row .= "<small><em>{$section->getBlock()}</em></small></td>
 
-        <td><strong>
+        <td>
+        <div class='capIcon_divNeighbor'>
+            <strong>
             {$section->getSectionProperty_Join_3('building_code', 'Classroom', 'Building',
             'classroom_id', 'building_id', 'classroomID')}"."
             {$section->getSectionProperty('classroom_number', 'Classroom', 'classroom_id', 'classroomID')}
-            </strong><br/>
+            </strong>
+            <br/>
             <small>
             {$section->getSectionProperty_Join_4('campus_name', 'Classroom', 'Building', 'Campus',
             'classroom_id', 'building_id', 'campus_id', 'classroomID')}
-            </small></td>
+            </small>
+        </div>
+        <div class='capIcon_div'>
+            <span class='glyphicon glyphicon-user hide' id='sect_capGlyph{$secId}' </span>
+        <div>
+
+        </td>
         <td>
-            <img src='img/pencil_green.png' class='action-edit pencil pointer' id='pencil_sect{$secId}' />
+            <span class='action-edit pencil pointer glyphicon glyphicon-pencil' id='pencil_sect{$secId}'></span>
+
             <span style='color: orangered; margin-left: 10%' class='glyphicon glyphicon-alert hide'></span>
         </td>
    </tr>

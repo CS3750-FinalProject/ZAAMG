@@ -245,7 +245,7 @@ function addProfessor(Professor $professor, Database $db){
 
     //<tr> (prof record)        id = record_professorf<#>   //if it doesn't end in _prof# then it won't toggle 'hide'
                                 //also 'professorf' is correct, the f is there on purpose to match last letter of 'prof'
-    //<img> (pencil)            id = pencil_prof<#>
+    //<span> (pencil)            id = pencil_prof<#>
     //<span> (little arrow):    id = seeCal_prof<#>
     //<tr> (contains cal div):  id = calRow_prof<#>
     //<div> (contains cal)      id = cal_prof<#>
@@ -253,6 +253,7 @@ function addProfessor(Professor $professor, Database $db){
     //<img> (disc)              id = save_prof<#>
 
     $scheduledHours = $db->getSumScheduledCredits($id);
+    $scheduledHours = $scheduledHours != null ? $scheduledHours : 0;
     $overHours =  $scheduledHours - $professor->getProfRequiredHours() + $professor->getProfRelease();
     $overHours = ($overHours < 0) ? 0 : $overHours;
 
@@ -267,8 +268,9 @@ function addProfessor(Professor $professor, Database $db){
 			<td>{$professor->getProfRequiredHours()}</td>
 			<td>{$professor->getProfRelease()}</td>
 			<td id='td_overHours{$id}' class='over_hours'>{$overHours}
-			    <span   class='glyphicon glyphicon-info-sign hide'
-			            style='color: #7b92b0 ; font-size: 1.2em; margin-right: 10%; float:right'>
+			    <span   class='glyphicon glyphicon-bell hide'
+			            title='Scheduled Hours: {$scheduledHours}'
+			            style='color: #2e86c1 ; font-size: 1.1em; margin-right: 10%; padding-top: 2%; float:right'>
                 </span></td>
 			<td>
 
@@ -289,7 +291,7 @@ function addProfessor(Professor $professor, Database $db){
 
     // finish giving attributes to the <span> and close it...
     $row .= "])' class='glyphicon glyphicon-calendar pointer' aria-hidden='true' style='margin-left: 15%'></span>
-<img src='img/pencil_green.png' class='action-edit pencil pointer'  id='pencil_prof{$id}' style='margin-right: 8%'/>
+<span  class='action-edit pencil pointer glyphicon glyphicon-pencil'  id='pencil_prof{$id}' style='margin-right: 8%'></span>
 <span style='color: orangered; ' class='glyphicon glyphicon-alert hide'></span>
 			</td>
 		  </tr>";
@@ -341,7 +343,7 @@ function addProfessor(Professor $professor, Database $db){
                 <input type='number' class='form-control' id='inlineEdit_profRelHours{$id}'
                     style='margin-bottom: 10px'>
             </td>
-            <td></td>
+            <td style='vertical-align:top'><div style='text-align: center; font-weight: bold'>Scheduled Hours: </br> {$scheduledHours}</div></td>
             <td>
                 <div style='padding-bottom: 20%;' class='action-save hide' id='save_prof{$id}'>
                 <button type=button class='btn btn-xs btn-success'>Update&nbsp;&nbsp;

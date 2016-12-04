@@ -65,7 +65,7 @@ $body = "
       });
     </script>
 
-  <title>Project LOLLAR &#9829; PHP</title>
+  <title>Project ZAAMG &#9829;</title>
   </head>
 
   <body>
@@ -81,7 +81,7 @@ $body = "
             <span class='icon-bar'></span>
             <span class='icon-bar'></span>
           </button>
-          <a class='navbar-brand' href='#'>LOLLAR &#9829; PHP</a>
+          <a class='navbar-brand' href='#'>ZAAMG &#9829;</a>
         </div>
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
           <ul class='nav navbar-nav'>
