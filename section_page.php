@@ -125,8 +125,17 @@ var ajax_orderBy = function(orderBy){
 
 <div class='col-xs-12'>
         <div class='page-header'>
-          <h1>Sections <small>for <span class='main_semester_span'>{$mainSemesterLabel}</span></small></h1>
+          <h1>Sections <small>for <span class='main_semester_span'>{$mainSemesterLabel}</span></small>
+          <span class='glyphicon glyphicon-cloud-download pointer'
+                title='Download .csv file'></span>
+          </h1>
+
+          <span class='glypicon glyphicon-plus quick-add pointer'
+
+                data-toggle='modal' data-target='#newSectionModal'
+                 id='newSectionPlus'></span>
         </div>
+
      </div>
 </div>
 

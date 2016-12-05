@@ -176,3 +176,18 @@ th.prof_table, #table_sectionIndex th, #classroom_table th{
 .navbar-brand{
   color: #492365 !important;
 }
+
+.quick-add{
+  float:right;
+}
+
+span.glyphicon-plus{
+  color: #68348F;
+  font-size: 2.5em;
+  padding-top: 1%;
+}
+
+span.glyphicon-cloud-download{
+  font-size: 0.5em;
+  color: #938E96;
+}
