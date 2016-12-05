@@ -189,13 +189,21 @@ function ModalEditing(){
             }
         });
         $('#sectionDays').change(function(){
-            if ($('#sectionDays').find(":selected").val() != "Online"){
+            if ($('#sectionDays').find(":selected").val().toUpperCase() != "ONLINE"){
                 $('#sectionStartTime').removeAttr('disabled');
                 $('#sectionEndTime').removeAttr('disabled');
                 $('#sectionOnline').attr('checked', false);
                 $('#sectionOnline').removeAttr('checked');
                 $('#sectionOnline').prop('disabled', true);
             }else{
+                $('#sectionStartTime').prop('disabled', 'true');
+                $('#sectionEndTime').prop('disabled', 'true');
+                $('#sectionOnline').attr('checked', 'true');
+                $('#sectionOnline').removeAttr('disabled');
+            }
+        })
+        $('#sectionDays').focus(function() {
+            if ($('#sectionDays').find(":selected").val().toUpperCase() == "ONLINE"){
                 $('#sectionStartTime').prop('disabled', 'true');
                 $('#sectionEndTime').prop('disabled', 'true');
                 $('#sectionOnline').attr('checked', 'true');
