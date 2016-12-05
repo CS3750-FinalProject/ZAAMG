@@ -6,6 +6,9 @@ require_once '../Professor.php';
 
 $profId = isset($_POST['profId']) ? $_POST['profId'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

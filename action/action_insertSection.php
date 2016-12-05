@@ -17,6 +17,10 @@ $sectionStartTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionStartTime;
 $sectionEndTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionEndTime;
 $sectionDays = $sectionIsOnline == 1 ? "Online" : $sectionDays;
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
+
 $section = new Section(NULL, $sectionCourse, $sectionProfessor, $sectionClassroom,
     $sectionBlock, $sectionDays, $sectionStartTime, $sectionEndTime, $sectionIsOnline,
     $sectionSemester, $sectionCapacity);

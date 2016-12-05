@@ -13,6 +13,9 @@ $reqHrs = isset($_POST['reqHrs']) ? $_POST['reqHrs'] : "not entered";
 $relHrs = isset($_POST['relHrs']) ? $_POST['relHrs'] : "not entered";
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();
@@ -22,17 +25,13 @@ $message = "";
 if ($action == 'update'){
     $updateStmt = $dbh->prepare(
         "  UPDATE W01143557.Professor
-        SET prof_first        = :first,
-            prof_last         = :last,
-            prof_email        = :email,
+        SET prof_first        = '$first',
+            prof_last         = '$last',
+            prof_email        = '$email',
             dept_id           = $dept,
             prof_req_hours    = $reqHrs,
             prof_rel_hours    = $relHrs
         WHERE prof_id = $profId");
-    $updateStmt->bindValue(":first", $first);
-    $updateStmt->bindValue(":last", $last);
-    $updateStmt->bindValue(":email", $email);
-
     try{
         $updateStmt->execute();
         $message = "success";

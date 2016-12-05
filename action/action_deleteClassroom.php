@@ -6,6 +6,9 @@ require_once '../Classroom.php';
 
 $roomId = isset($_POST['roomId']) ? $_POST['roomId'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

@@ -11,6 +11,10 @@ $cap = isset($_POST['cap']) ? $_POST['cap'] : "not entered";
 $computers = isset($_POST['computers']) ? $_POST['computers'] : "not entered";
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
+
 $database = new Database();
 $dbh = $database->getdbh();
 

@@ -17,6 +17,10 @@ $sectionCapacity = isset($_POST['sectionCapacity']) ? $_POST['sectionCapacity'] 
 $sectionSemester = isset($_POST['sectionSemester']) ? $_POST['sectionSemester'] : "not entered";
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
+
 $sectionStartTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionStartTime;
 $sectionEndTime = $sectionIsOnline == 1 ? "00:00:00" : $sectionEndTime;
 

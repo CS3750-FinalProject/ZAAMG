@@ -9,7 +9,9 @@ $campusName = isset($_POST['campusName']) ? $_POST['campusName'] : "not entered"
 
 $campus = new Campus(NULL, $campusName);
 
-
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $result = $campus->campusExists($campusName);
 echo $result;

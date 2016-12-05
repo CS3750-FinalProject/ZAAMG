@@ -6,6 +6,9 @@ require_once '../Department.php';
 
 $resource = isset($_POST['resource']) ? $_POST['resource'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

@@ -11,6 +11,9 @@ $campusId = isset($_POST['campusId']) ? $_POST['campusId'] : "not entered";
 
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

@@ -9,6 +9,9 @@ $deptCode = isset($_POST['deptCode']) ? $_POST['deptCode'] : "not entered";
 $deptName = isset($_POST['deptName']) ? $_POST['deptName'] : "not entered";
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

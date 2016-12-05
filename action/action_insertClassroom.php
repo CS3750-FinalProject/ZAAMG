@@ -11,7 +11,9 @@ $buildId = isset($_POST['buildId']) ? $_POST['buildId'] : "not entered";
 $classroom = new Classroom(NULL, $classNum, $classCapacity, $numWorkstations, $buildId);
 
 
-
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $result = $classroom->classroomExists($classNum, $buildId);
 echo $result;

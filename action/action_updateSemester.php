@@ -14,6 +14,9 @@ $semSecondStart = isset($_POST['semSecondStart']) ? $_POST['semSecondStart'] : "
 
 $action = isset($_POST['action']) ? $_POST['action'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

@@ -6,6 +6,9 @@ require_once '../Section.php';
 
 $sectionId = isset($_POST['sectionId']) ? $_POST['sectionId'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $database = new Database();
 $dbh = $database->getdbh();

@@ -10,6 +10,9 @@ $courseTitle = isset($_POST['courseTitle']) ? $_POST['courseTitle'] : "not enter
 $courseCred = isset($_POST['courseCred']) ? $_POST['courseCred'] : "not entered";
 $deptId = isset($_POST['deptId']) ? $_POST['deptId'] : "not entered";
 
+foreach ($_POST as $item){
+    strip_tags($item);
+}
 
 $course = new Course(NULL, $coursePrefix, $courseNumber, $courseTitle,  $courseCred, $deptId);
 
