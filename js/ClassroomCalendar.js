@@ -634,6 +634,16 @@ function displayClassroomSchedule(theClassroomSet, isOnline) {
                 $(element).css('background-color', '#840b38');
                 $(element).css('border-color', '#840b38');
             }
+            var combos = ['MW','TTH','MWF', undefined];
+            if (combos.indexOf(event.courseDays) == -1){
+                if (event.courseDays != "S")
+                    $(element).css('opacity', '0.6');
+            }
+
+            if (event.courseDays == "S"){//Saturday class
+                $(element).css('background-color', '#eb4312');
+                $(element).css('border-color', '#eb4312');
+            }
 
         },
         eventAfterAllRender: function(event, element, view){

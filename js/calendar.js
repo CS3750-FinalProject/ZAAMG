@@ -709,7 +709,7 @@ function displayTest(theProfSet) {
             var combos = ['MW','TTH','MWF', undefined];
             if (combos.indexOf(event.days) == -1){
                 if (event.days != "S")
-                    $(element).css('opacity', '0.55');
+                    $(element).css('opacity', '0.6');
             }
 
             if (event.days == "S"){//Saturday class
