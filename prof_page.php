@@ -5,9 +5,12 @@ $database = new Database();
 session_start();
 
 $mainSemesterLabel= 'Spring 2017';
+$mainSemesterId = 2;
 $orderBy = 'prof_last';
 
-
+if (isset($_SESSION['mainSemesterId'])){
+    $mainSemesterId = $_SESSION['mainSemesterId'];
+}
 if (isset($_SESSION['mainSemesterLabel'])){
     $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
 }
@@ -296,9 +299,11 @@ function addProfessor(Professor $professor, Database $db){
 			            title='Scheduled Hours: {$scheduledHours}'
 			            style='color: #2e86c1 ; font-size: 1.1em; margin-right: 10%; padding-top: 2%; float:right'>
                 </span></td>
-			<td>
+			<td>";
 
 
+
+    $row.="
 			<!--this span *is* the little up/down arrow that shows/hides individual prof calendar-->
 			<!--so the span itself has a onClick() set on it -->
 			    <span id='seeCal_prof{$id}' style='padding-right: 2%; margin-right: 7%'
@@ -315,8 +320,10 @@ function addProfessor(Professor $professor, Database $db){
 
     // finish giving attributes to the <span> and close it...
     $row .= "])' class='glyphicon glyphicon-calendar pointer' aria-hidden='true' style='margin-left: 15%'></span>
-<span  class='action-edit pencil pointer glyphicon glyphicon-pencil'  id='pencil_prof{$id}' style='margin-right: 8%'></span>
-<span style='color: orangered; ' class='glyphicon glyphicon-alert hide'></span>
+
+                <span  class='action-edit pencil pointer glyphicon glyphicon-pencil'
+                id='pencil_prof{$id}' style='margin-right: 8%'></span>
+                <span style='color: orangered; ' class='glyphicon glyphicon-alert hide'></span>
 			</td>
 		  </tr>";
 
@@ -344,7 +351,6 @@ function addProfessor(Professor $professor, Database $db){
 
                 <input type='text' class='form-control' id='inlineEdit_profLast{$id}'
                  style='margin-bottom: 10px' >
-
             </td>
 
             <td colspan='2'>

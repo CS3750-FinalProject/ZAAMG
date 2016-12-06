@@ -8,7 +8,6 @@ function ModalEditing(){
     });
 
 
-
     //preload edit modal fields when it gets shown/hidden
 
     $("[id^='edit'][id$='Modal']").unbind().on("shown.bs.modal", function () {
@@ -117,6 +116,13 @@ function ModalEditing(){
 
 
     var loadNewSectionFields = function(){
+        $('#sectionCourse').focus();
+        ///next 4 lines are here for correct functioning when using quick-add plus sign
+        $('#sectionDays option:selected').prop('selected', false);
+        $('#sectionDays option[value="Online"]').prop('selected', true);
+        $('#sectionStartTime').val('');
+        $('#sectionEndTime').val('');
+
         $('#sectionOnline').attr('checked', true);
         $('#sectionOnline').removeAttr('disabled');
 

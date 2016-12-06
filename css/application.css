@@ -187,7 +187,7 @@ span.glyphicon-plus{
   padding-top: 1%;
 }
 
-span.glyphicon-cloud-download{
+span.glyphicon-cloud-download, span.glyphicon-save-file{
   font-size: 0.5em;
   color: #938E96;
 }

@@ -22,6 +22,19 @@ $body = "
 
 <script src='js/calendar.js' charset='utf-8'></script>
 <script>
+function getExcelDoc(){
+$.ajax({
+    url : 'action/action_getExcelDoc.php',
+    success : function(data) {
+        window.open('action/action_getExcelDoc.php','_blank' );
+    },
+    error : function(error)
+    {
+        alert('Error: ' + JSON.stringify(error));
+    }
+});
+}
+
 var ajax_orderBy = function(orderBy){
     $.ajax({
         type: 'POST',
@@ -128,6 +141,8 @@ var ajax_orderBy = function(orderBy){
           <h1>Sections <small>for <span class='main_semester_span'>{$mainSemesterLabel}</span></small>
           <span class='glyphicon glyphicon-cloud-download pointer'
                 title='Download .csv file'></span>
+          <span class='glyphicon glyphicon-save-file pointer'
+                title='Download .xlsx file' onclick='getExcelDoc()'></span>
           </h1>
 
           <span class='glypicon glyphicon-plus quick-add pointer'

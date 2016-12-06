@@ -7,7 +7,12 @@ $dbh = $database->getdbh();
 session_start();
 
 $mainSemesterLabel= 'Spring 2017';
-if (isset($_SESSION['mainSemesterLabel'])){
+$mainSemesterId = 2;
+
+ if (isset($_SESSION['mainSemesterId'])){
+     $mainSemesterId = $_SESSION['mainSemesterId'];
+ }
+ if (isset($_SESSION['mainSemesterLabel'])){
  $mainSemesterLabel = $_SESSION['mainSemesterLabel'];
 }
 
