@@ -11,4 +11,5 @@ fullcalendar.io</a> agendaWeek view.</li>
 <li>Much time/date manipulation is done with 
 <a href='http://momentjs.com/docs/'> moment.js</a></li>
 <li>If this PHP error message appears: "Undefined index: mainSemesterId..." then refresh the page</li>
+<li>At present, Chrome is safer to use (than Firefox) for editing time fields correctly</li>
 </ul>
