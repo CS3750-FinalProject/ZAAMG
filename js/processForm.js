@@ -1,7 +1,7 @@
 //http://stackoverflow.com/questions/11519660/twitter-bootstrap-modal-backdrop-doesnt-disappear
 //I just spent way too long on this problem :)
 
-function refresh_activePage(){
+var refresh_activePage = function(){
     var activePage;
     $('[id^=' + 'navbar_' +']').each(function(){
         if ($(this).hasClass('active')){
@@ -67,7 +67,8 @@ $(function() {
                 }
                 if (!window.courseExists) {
                     $('#newCourseModal').modal('hide');
-                    $('#newCourseModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newCourseModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
 
             }
@@ -108,7 +109,8 @@ $(function() {
                 }
                 if (!window.profExists){
                     $('#newProfessorModal').modal('hide');
-                    $('#newProfessorModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newProfessorModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
             }
         });
@@ -148,7 +150,8 @@ $(function() {
                 }
                 if (!window.classroomExists) {
                     $('#newClassroomModal').modal('hide');
-                    $('#newClassroomModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newClassroomModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
 
             }
@@ -188,7 +191,8 @@ $(function() {
                 }
                 if (!window.semesterExists) {
                     $('#newSemesterModal').modal('hide');
-                    $('#newSemesterModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newSemesterModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
             }
         });
@@ -228,7 +232,8 @@ $(function() {
                 }
                 if (!window.buildingExists) {
                     $('#newBuildingModal').modal('hide');
-                    $('#newBuildingModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newBuildingModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
             }
         });
@@ -260,7 +265,8 @@ $(function() {
                 }
                 if (!window.campusExists) {
                     $('#newCampusModal').modal('hide');
-                    $('#newCampusModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newCampusModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
             }
         });
@@ -287,7 +293,8 @@ $(function() {
                 }
                 if (!window.departmentExists) {
                     $('#newDepartmentModal').modal('hide');
-                    $('#newDepartmentModal').on('hidden.bs.modal', refresh_activePage());
+                    $('#newDepartmentModal').on('hidden.bs.modal', function(){
+                        refresh_activePage();});
                 }
 
             }
@@ -368,8 +375,7 @@ $(function() {
                 if (!window.sectionExists) {
                     $("#newSectionModal").modal('hide');
                     $("#newSectionModal").on('hidden.bs.modal', function(){
-                        console.log("modal hidden");
-                        refresh_activePage()
+                        refresh_activePage();
                     });
                 }
             },

@@ -1,5 +1,6 @@
 //.unbind() tip from https://stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
 
+
 function ModalEditing(){
 
     $("[id^='new'][id$='Modal']").unbind().on("shown.bs.modal", function () {
@@ -471,11 +472,8 @@ $('#btn_updateCampus').click(function(){
             success: function(msg) {
                 console.log(JSON.stringify(msg));
                 $('#editCampusModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editCampusModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -505,11 +503,8 @@ $('#btn_updateDepartment').click(function(){
         success: function(msg) {
             console.log("dept: " + JSON.stringify(msg));
             $('#editDepartmentModal').modal('hide');
-            switch(activePage){
-                case "sec": loadPhpPage('section_page.php'); break;
-                case "prof": loadPhpPage('prof_page.php'); break;
-                case "room": loadPhpPage('classroom_page.php'); break;
-            }
+            $('#editDepartmentModal').on('hidden.bs.modal', function(){
+                refresh_activePage();});
         },
         error: function(msg) {
             console.log("error: " + JSON.stringify(msg));
@@ -541,11 +536,8 @@ $('#btn_updateDepartment').click(function(){
             "&action=update",
             success: function(msg) {
                 $('#editBuildingModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editBuildingModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -584,11 +576,8 @@ $('#btn_updateSemester').click(function(){
             success: function(msg) {
                 console.log(JSON.stringify(msg));
                 $('#editSemesterModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editSemesterModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -616,11 +605,8 @@ $('#btn_deleteCampus').unbind().click(function(){
             "&action=delete",
             success: function(msg) {
                 $('#editCampusModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editCampusModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -647,11 +633,8 @@ $('#btn_deleteBuilding').unbind().click(function(){
             "&action=delete",
             success: function(msg) {
                 $('#editBuildingModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editBuildingModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -682,11 +665,8 @@ $('#btn_deleteSemester').unbind().click(function(){
             success: function(msg) {
                 console.log(JSON.stringify(msg));
                 $('#editSemesterModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editSemesterModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
@@ -715,11 +695,8 @@ $('#btn_deleteDepartment').unbind().click(function(){
             success: function(msg) {
                 console.log("dept: " + JSON.stringify(msg));
                 $('#editDepartmentModal').modal('hide');
-                switch(activePage){
-                    case "sec": loadPhpPage('section_page.php'); break;
-                    case "prof": loadPhpPage('prof_page.php'); break;
-                    case "room": loadPhpPage('classroom_page.php'); break;
-                }
+                $('#editDepartmentModal').on('hidden.bs.modal', function(){
+                    refresh_activePage();});
             },
             error: function(msg) {
                 console.log("error: " + JSON.stringify(msg));
