@@ -10,4 +10,5 @@ Things to know about this project:
 fullcalendar.io</a> agendaWeek view.</li>
 <li>Much time/date manipulation is done with 
 <a href='http://momentjs.com/docs/'> moment.js</a></li>
+<li>If a PHP error message appears saying variable $mainSemesterId is undefined, then refresh the page</li>
 </ul>
