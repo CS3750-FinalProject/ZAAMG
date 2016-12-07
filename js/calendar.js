@@ -289,7 +289,7 @@ var displayCalendar = function(profRowId, eventsArray){
                     title: "<strong>" + event.title + "<br>" + event.name + "</strong>",  //some html has to be in the title or it won't work
                     content: event.professor + "<br>" + event.location + " " + room + "<br>" + timeString,
                     trigger: 'hover click',
-                    placement: "right",
+                    placement: event.online? "left" : "right",
                     selector: event,
                     container: 'body'  //  THIS NEEDS TO BE HERE SO tooltip is on top of everything
                 }

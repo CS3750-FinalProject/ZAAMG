@@ -126,10 +126,10 @@ $body = "
                     <li><a href='#' data-toggle='modal' data-target='#newClassroomModal'
                            class='newResourceLink' id='newClassroomLink'>Classroom</a></li>
                     <li role='separator' class='divider'></li>
-                    <li><a href='#' data-toggle='modal' data-target='#newCampusModal'
-                           class='newResourceLink' id='newCampusLink'>Campus</a></li>
                     <li><a href='#' data-toggle='modal' data-target='#newBuildingModal'
                            class='newResourceLink' id='newBuildingLink'>Building</a></li>
+                           <li><a href='#' data-toggle='modal' data-target='#newCampusModal'
+                           class='newResourceLink' id='newCampusLink'>Campus</a></li>
                     <li><a href='#' data-toggle='modal' data-target='#newSemesterModal'
                            class='newResourceLink' id='newSemesterLink'>Semester</a></li>
                     <li role='separator' class='divider'></li>
