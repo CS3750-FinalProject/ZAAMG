@@ -140,7 +140,7 @@ var ajax_orderBy = function(orderBy){
         <div class='page-header'>
           <h1>Sections <small>for <span class='main_semester_span'>{$mainSemesterLabel}</span></small>
           <a href='create_csv.php' class='glyphicon glyphicon-cloud-download pointer'
-                title='Download .csv file' style='text-decoration: none; font-size: 16px'></a></h1>
+                title='Download .csv file' style='text-decoration: none; font-size: 16px; color: #777'></a></h1>
           <span class='glyphicon glyphicon-save-file pointer'
                 title=' Download .xlsx ' onclick='getExcelDoc()'></span>
           </h1>
