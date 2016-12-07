@@ -22,7 +22,7 @@ $body = "
 
 <script src='js/calendar.js' charset='utf-8'></script>
 <script>
-function getExcelDoc(){
+/*function getExcelDoc(){
 $.ajax({
     url : 'action/action_getExcelDoc.php',
     success : function(data) {
@@ -33,7 +33,7 @@ $.ajax({
         alert('Error: ' + JSON.stringify(error));
     }
 });
-}
+}*/
 
 var ajax_orderBy = function(orderBy){
     $.ajax({
@@ -140,9 +140,12 @@ var ajax_orderBy = function(orderBy){
         <div class='page-header'>
           <h1>Sections <small>for <span class='main_semester_span'>{$mainSemesterLabel}</span></small>
           <a href='create_csv.php' class='glyphicon glyphicon-cloud-download pointer'
-                title='Download .csv file' style='text-decoration: none; font-size: 16px; color: #777'></a></h1>
+                title='Download .csv file' style='text-decoration: none; font-size: 16px; color: #777'></a>
+
+
+          <a href='action/action_getExcelDoc.php' style='text-decoration: none'>
           <span class='glyphicon glyphicon-save-file pointer'
-                title=' Download .xlsx ' onclick='getExcelDoc()'></span>
+                title=' Download .xlsx ' ></span></a>
           </h1>
 
           <span class='glypicon glyphicon-plus quick-add pointer'
