@@ -24,10 +24,12 @@ CREATE TABLE `Section`
 `prof_id` SMALLINT NOT NULL ,
 `classroom_id` INT NOT NULL ,
 `sem_id` INT NOT NULL,
-`section_days` CHAR(5) NOT NULL ,
-`section_start_time` DATETIME NOT NULL ,
-`section_end_time` DATETIME NOT NULL,
-`section_block` VARCHAR(6) NOT NULL, 
+`section_days` VARCHAR(40) ,
+`section_start_time` TIME,
+`section_end_time` TIME,
+`section_is_online` SMALLINT,
+`section_block` INT NOT NULL, 
+`section_capacity` INT NOT NULL,
 PRIMARY KEY (`section_id`) );
 
 
@@ -55,9 +57,10 @@ PRIMARY KEY  (`schedule_id`, `section_id`));
 
 CREATE TABLE `Course` 
 ( `course_id` INT NOT NULL AUTO_INCREMENT , 
-`course_code` CHAR(10) NOT NULL UNIQUE,
+#`course_code` CHAR(10) NOT NULL ,
+`course_prefix` VARCHAR(5) NOT NULL ,
+`course_number` VARCHAR(10) NOT NULL ,
 `course_title` VARCHAR(50) NOT NULL ,
-`course_capacity` SMALLINT ,
 `course_credits` SMALLINT NOT NULL,
 `dept_id` INT NOT NULL, 
 PRIMARY KEY (`course_id`) );
@@ -68,6 +71,8 @@ CREATE TABLE `Professor`
 `prof_first` VARCHAR(30) NOT NULL ,
 `prof_last` VARCHAR(30) NOT NULL ,
 `prof_email` VARCHAR(50) NOT NULL UNIQUE,
+`prof_req_hours` SMALLINT,
+`prof_rel_hours` SMALLINT,
 `dept_id` INT NOT NULL,
 PRIMARY KEY (`prof_id`) );
 
@@ -76,6 +81,7 @@ CREATE TABLE `Classroom`
 ( `classroom_id` INT NOT NULL AUTO_INCREMENT , 
 `classroom_number` CHAR(10) NOT NULL ,
 `classroom_capacity` SMALLINT NOT NULL ,
+`classroom_workstations` SMALLINT,
 `building_id` INT NOT NULL,
 PRIMARY KEY (`classroom_id`) );
 
@@ -114,28 +120,28 @@ ADD CONSTRAINT fk_course_id_1
 FOREIGN KEY (`course_id`)
 REFERENCES Course(`course_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 ALTER TABLE `Section`
 ADD CONSTRAINT fk_prof_id_1
 FOREIGN KEY (`prof_id`)
 REFERENCES Professor(`prof_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 ALTER TABLE `Section`
 ADD CONSTRAINT fk_classroom_id_1
 FOREIGN KEY (`classroom_id`)
 REFERENCES Classroom(`classroom_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 ALTER TABLE `Section`
 ADD CONSTRAINT fk_sem_id_1
 FOREIGN KEY (`sem_id`)
 REFERENCES Semester(`sem_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 ALTER TABLE `Schedule_Section`
 ADD CONSTRAINT fk_schedule_id_1
@@ -157,7 +163,7 @@ ADD CONSTRAINT fk_dept_id_1
 FOREIGN KEY (`dept_id`)
 REFERENCES Department(`dept_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 
 ALTER TABLE `Professor`
@@ -165,7 +171,7 @@ ADD CONSTRAINT fk_dept_id_2
 FOREIGN KEY (`dept_id`)
 REFERENCES Department(`dept_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 
 ALTER TABLE `Classroom`
@@ -173,7 +179,7 @@ ADD CONSTRAINT fk_building_id_1
 FOREIGN KEY (`building_id`)
 REFERENCES Building(`building_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 
 ALTER TABLE `User`
@@ -181,7 +187,7 @@ ADD CONSTRAINT fk_dept_id_2
 FOREIGN KEY (`dept_id`)
 REFERENCES Department(`dept_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 
 ALTER TABLE `Building`
@@ -189,6 +195,6 @@ ADD CONSTRAINT fk_campus_id_1
 FOREIGN KEY (`campus_id`)
 REFERENCES Campus(`campus_id`)
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE RESTRICT;
 
 

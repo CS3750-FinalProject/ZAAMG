@@ -1,5 +1,5 @@
 <?php
-include 'Database.php';
+require_once 'Database.php';
 
 class Campus {
     private $database;
@@ -25,10 +25,31 @@ class Campus {
 
     public function insertNewCampus(){
         $dbh = $this->database->getdbh();
-        $stmtInsert = $dbh->prepare("INSERT INTO ZAAMG.Campus VALUES (:id, :name)");
+        $stmtInsert = $dbh->prepare("INSERT INTO W01143557.Campus VALUES (:id, :name)");
         # send NULL for campus_id because the database auto-increments it
         $stmtInsert->bindValue(":id", NULL);
         $stmtInsert->bindValue(":name", $this->campusName);
         $stmtInsert->execute();
     }
+
+
+    public function campusExists($campusName){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT campus_id FROM W01143557.Campus
+              WHERE campus_name = ".$dbh->quote($campusName));
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+        }
+    }
+
+
 }
