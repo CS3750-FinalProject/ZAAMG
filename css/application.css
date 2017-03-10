@@ -1,0 +1,193 @@
+.page-top-banner{
+  background-color: #492365;
+  height: auto;
+  width: 100%;
+  margin: 0;
+}
+
+.banner-logo {
+  max-width: 100px;
+  margin: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+.list-data {
+  width: 100%;
+}
+
+.action-edit{
+  max-width: 20px;
+  margin-right: 2px;
+}
+
+.action-delete{
+  max-width: 15px;
+  margin-left: 2px;
+}
+
+.list-data, td, th {
+  border: 1px solid #ededed;
+  text-align: left;
+  padding: 8px;
+}
+
+.list-data tr:nth-child(even) {
+  background-color: #ededed;
+}
+
+/*
+.list-data tr:nth-child(odd) {
+  background-color: #F8F8F8;
+}
+*/
+
+
+#table_allProfsSchedule tr:nth-child(even){
+  background-color: #ededed;
+}
+
+.error-message{
+  float:left;
+  margin-left: 16px;
+  color: #8a6d3b;
+}
+
+#table_allProfsSchedule tr:first-child, .td_days{
+  background-color: #492365;
+  color: white;
+  font-weight: normal;
+}
+
+.td_colorBlock{
+  background-color: #bfbfbf;
+}
+
+#table_allProfsSchedule tr.tr_divider td{
+  background-color: #492365;
+  padding: 1px;
+}
+
+td.profDivider {
+  background-color: #e5deea;
+}
+
+body {
+  /*background-image: url('../img/sayagata-400px.png');
+  background-image: url('../img/pw_maze_white_@2X.png');
+  background-image: url('../img/dimension.png');*/
+}
+
+div#profOverviewSchedule, div#sectionIndex table, div#profIndex table, div#roomIndex table{
+  background-color: #f8f8f8
+}
+
+.inline_editing_record td{
+  background-color: #d0e5bd;
+  border-right-color: #d0e5bd;
+  border-left-color: #d0e5bd;
+  border-top: 2px solid black;
+}
+
+.inline_editing_edit_box td{
+  background-color: #edfce0;
+  border-right-color: #edfce0;
+  border-left-color: #edfce0;
+  border-bottom: 2px solid black;
+}
+
+.inline_editing_record td:first-child, .inline_editing_edit_box td:first-child{
+  border-left: 2px solid black;
+}
+
+.inline_editing_record td:last-child, .inline_editing_edit_box td:last-child{
+  border-right: 2px solid black;
+}
+
+img.pencil{
+  margin-bottom: 8px;
+  /* margin-left: 15%*/
+}
+
+span.glyphicon-calendar, span.glyphicon-menu-up{
+  color: #492365;
+  font-size: 1.2em;
+}
+
+span.glyphicon-alert {
+  font-size: 1.2em;
+}
+
+
+span.glyphicon-pencil{
+  color: #0b750e;
+  font-size: 1.3em;
+}
+
+.capIcon_divNeighbor{
+  float:left;
+}
+.capIcon_div{
+  float:right;
+  padding-top: 6%;
+  padding-right: 12%;
+}
+
+span.glyphicon-user{
+  color: #2e86c1;
+}
+
+span.roomCapGlyph{
+  float: right;
+  padding-top: 1%;
+  padding-right: 7%;
+}
+
+#main_semester_dropdown{
+  background-color: #938E96;
+  color: white;
+}
+
+th.prof_table, #table_sectionIndex th, #classroom_table th{
+  padding-top: 20px;
+}
+
+#table_pr_Index tr th div{
+  margin: -8px 0 0 0 !important;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.context-menu{
+  cursor: context-menu;
+}
+
+.a_indexHeader, .a_indexHeader:hover, .a_indexHeader:visited{
+  color: #68348F;
+  text-decoration: none;
+}
+
+.a_indexHeader:hover{
+  color: #AA53EA;
+}
+
+.navbar-brand{
+  color: #492365 !important;
+}
+
+.quick-add{
+  float:right;
+}
+
+span.glyphicon-plus{
+  color: #68348F;
+  font-size: 2.5em;
+  padding-top: 1%;
+}
+
+.glyphicon-cloud-download, .glyphicon-save-file{
+  font-size: 0.42em;
+  color: #777;
+}

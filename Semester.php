@@ -1,6 +1,6 @@
 <?php
 
-include 'Database.php';
+require_once 'Database.php';
 
 class Semester {
     private $database;
@@ -26,35 +26,54 @@ class Semester {
 
         $this->database = new Database();
     }
-/*     ------   FIX   ----------
-    public function getCourseId(){
-        return $this->courseId;
+
+
+    public function getSemId()
+    {
+        return $this->semId;
     }
 
-    public function getCourseCode(){
-        return $this->courseCode;
+
+    public function getSemYear()
+    {
+        return $this->semYear;
     }
 
-    public function getCourseTitle(){
-        return $this->courseTitle;
+
+    public function getSemSeason()
+    {
+        return $this->semSeason;
     }
 
-    public function getCourseCapacity(){
-        return $this->courseCapacity;
+
+    public function getSemNumWeeks()
+    {
+        return $this->semNumWeeks;
     }
 
-    public function getCourseCredits(){
-        return $this->courseCredits;
+
+    public function getSemStartDate()
+    {
+        return $this->semStartDate;
     }
 
-    public function getDeptId(){
-        return $this->deptId;
+    public function getSemFirstBlockStartDate()
+    {
+        return $this->semFirstBlockStartDate;
     }
-*/
+
+    public function getSemSecondBlockStartDate()
+    {
+        return $this->semSecondBlockStartDate;
+    }
+
+
+
+
     public function insertNewSemester(){
-
-        $stmtInsert = $this->database->dbh->prepare(
-            "INSERT INTO ZAAMG.Semester VALUES (
+        $dbh = $this->database->getdbh();
+        $stmtInsert = $dbh->prepare(
+            "INSERT INTO W01143557.Semester VALUES (
               :id, :year, :season, :weeks, :start, :first_block, :second_block)");
         # send NULL for course_id because the database auto-increments it
         $stmtInsert->bindValue("id", NULL);
@@ -70,6 +89,25 @@ class Semester {
             echo "Success executing Insert";
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function semesterExists($semYear, $semSeason){
+        $dbh = $this->database->getdbh();
+        $stmtSelect = $dbh->prepare(
+            "SELECT sem_id FROM W01143557.Semester
+              WHERE sem_year = {$dbh->quote($semYear)} AND sem_season = {$dbh->quote($semSeason)}");
+        try {
+            $stmtSelect->execute();
+            $result = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+            if ($result != NULL) {
+                return "does exist";
+            }else{
+                return "does not exist";
+            }
+        } catch (Exception $e) {
+            echo "Here's what went wrong: ".$e->getMessage();
+            return "Error in semesterExists";
         }
     }
 }
