@@ -22,8 +22,10 @@ ZAAMG.iml
 .idea/misc.xml
 .idea/php.xml
 .idea/compiler.xml
+
 .idea/uiDesigner.xml
 .idea/encodings.xml
 *.xml
 .idea/workspace.xml
 *.swp
+
